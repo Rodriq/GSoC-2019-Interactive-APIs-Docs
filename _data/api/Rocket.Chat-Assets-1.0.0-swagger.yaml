@@ -1,0 +1,105 @@
+openapi: 3.0.1
+info:
+  title: defaultTitle
+  description: defaultDescription
+  version: "1.0.0"
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /api/v1/assets.setAsset:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: bszJr4E8EHAtLqfX4
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: V7503jm6uI4r7dTD0kHkWK6_NKV4NfgydJagYlfNmNw
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: string
+            examples:
+              '0':
+                value: '"logo=talentals.png"'
+      responses:
+        '401':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status:
+                    type: string
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "status": "error",
+                      "message": "You must be logged in to do this."
+                    }
+      servers:
+        - url: 'http://localhost:3000'
+    servers:
+      - url: 'http://localhost:3000'
+  /api/v1/assets.unsetAsset:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: bszJr4E8EHAtLqfX4
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: zLK-ryssnND2u8duZTv9Dy9_-6_IJVncpvUPKtzGrvn
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refreshAllClients:
+                  type: boolean
+                assetName:
+                  type: string
+            examples:
+              '0':
+                value: '{ "assetName": "logo", "refreshAllClients": true}'
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "success": true
+                    }
+      servers:
+        - url: 'http://localhost:3000'
+    servers:
+      - url: 'http://localhost:3000'
+components:
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic

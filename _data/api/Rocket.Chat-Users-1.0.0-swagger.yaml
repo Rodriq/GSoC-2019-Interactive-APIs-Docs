@@ -1,0 +1,455 @@
+openapi: 3.0.1
+info:
+  title: defaultTitle
+  description: defaultDescription
+  version: "1.0.0"
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /api/v1/users.deleteOwnAccount:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: yNjPFcrnZCZ8cpBRF
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: ' oStmbioP7AayxaPk-wWnnx3_-92yRuD8dwWsOvDh_fe'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+            examples:
+              '0':
+                value: |-
+                  {
+                      "password": "62ad5ff252c9923f316ed035a51df0201c24c239b79a02d2c1e126efbc16e730"
+                  }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "success": true
+                    }
+      servers:
+        - url: 'http://localhost:3000'
+    servers:
+      - url: 'http://localhost:3000'
+  /api/v1/users.presence:
+    get:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: from
+          in: query
+          schema:
+            type: string
+          example: 2019-05-27T12%3A11%3A45.392Z
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: umbrXA5KrhaXawT8v
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: 6dNLs0m8pDPWDaVWvRyBVvf_8v2J9StoE8wg9a3KYSd
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  users:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        utcOffset:
+                          type: integer
+                        name:
+                          type: string
+                        _id:
+                          type: string
+                        status:
+                          type: string
+                        username:
+                          type: string
+                  full:
+                    type: boolean
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "users": [
+                        {
+                          "_id": "MERRYtT6iA9ZghsdK",
+                          "status": "away",
+                          "name": "Jaro",
+                          "username": "Jaro",
+                          "utcOffset": 1
+                        },
+                        {
+                          "_id": "rocket.cat",
+                          "name": "Rocket.Cat",
+                          "username": "rocket.cat",
+                          "status": "online",
+                          "utcOffset": 0
+                        }
+                      ],
+                      "full": true,
+                      "success": true
+                    }
+      servers:
+        - url: 'http://localhost:3000'
+    servers:
+      - url: 'http://localhost:3000'
+  /api/v1/users.generatePersonalAccessToken:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: umbrXA5KrhaXawT8v
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: SIwfPj6jbEsK8acxIqmRrdiSi2orPaNtVgbqJNP0Jf5
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tokenName:
+                  type: string
+            examples:
+              '0':
+                value: |-
+                  {
+                      "tokenName": "myPersonalToken"
+                  }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  token:
+                    type: string
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "token": "_7Niri4mlkzfAEdTj2PptdsXMcHztlhhRD4z0g8lb1w",
+                      "success": true
+                    }
+      servers:
+        - url: 'http://localhost:3000'
+    servers:
+      - url: 'http://localhost:3000'
+  /api/v1/users.createToken:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: umbrXA5KrhaXawT8v
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: 6dNLs0m8pDPWDaVWvRyBVvf_8v2J9StoE8wg9a3KYSd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+            examples:
+              '0':
+                value: |-
+                  {
+                      "username": "uniqueusername"
+                  }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      authToken:
+                        type: string
+                      userId:
+                        type: string
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "data": {
+                        "userId": "qru7y5nNTuXuZCDJk",
+                        "authToken": "RfOdGhjepmPgsQhrM49jvBSogDAQvZLJqE5GYQsf56o"
+                      },
+                      "success": true
+                    }
+      servers:
+        - url: 'http://localhost:3000'
+    servers:
+      - url: 'http://localhost:3000'
+  /api/v1/users.forgotPassword:
+    post:
+      description: Auto generated using Swagger Inspector
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+            examples:
+              '0':
+                value: |-
+                  {
+                      "email": "user@mail.com"
+                  }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "success": true
+                    }
+      servers:
+        - url: 'http://localhost:3000'
+    servers:
+      - url: 'http://localhost:3000'
+  /api/v1/users.delete:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: umbrXA5KrhaXawT8v
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: 6dNLs0m8pDPWDaVWvRyBVvf_8v2J9StoE8wg9a3KYSd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+            examples:
+              '0':
+                value: |-
+                  {
+                      "username": "new.user2"
+                  }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "success": true
+                    }
+      servers:
+        - url: 'http://localhost:3000'
+    servers:
+      - url: 'http://localhost:3000'
+  /api/v1/users.create:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: umbrXA5KrhaXawT8v
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: 6dNLs0m8pDPWDaVWvRyBVvf_8v2J9StoE8wg9a3KYSd
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                name:
+                  type: string
+                email:
+                  type: string
+                username:
+                  type: string
+            examples:
+              '0':
+                value: |-
+                  {
+                      "name": "name",
+                      "email": "email@user.tld",
+                      "password": "anypassyouwant",
+                      "username": "uniqueusername"
+                      
+                  }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  user:
+                    type: object
+                    properties:
+                      emails:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            address:
+                              type: string
+                            verified:
+                              type: boolean
+                      createdAt:
+                        type: string
+                      settings:
+                        type: object
+                        properties: {}
+                      roles:
+                        type: array
+                        items:
+                          type: string
+                      name:
+                        type: string
+                      active:
+                        type: boolean
+                      _id:
+                        type: string
+                      services:
+                        type: object
+                        properties:
+                          password:
+                            type: object
+                            properties:
+                              bcrypt:
+                                type: string
+                      type:
+                        type: string
+                      _updatedAt:
+                        type: string
+                      username:
+                        type: string
+                      status:
+                        type: string
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "user": {
+                        "_id": "qru7y5nNTuXuZCDJk",
+                        "createdAt": "2019-05-28T22:49:23.049Z",
+                        "services": {
+                          "password": {
+                            "bcrypt": "$2b$10$19Zn6sNxEqWTU8RxBBNO8eGPPcZcFsmxgHZMOE/iLe6vn/ppxsKA2"
+                          }
+                        },
+                        "username": "uniqueusername",
+                        "emails": [
+                          {
+                            "address": "email@user.tld",
+                            "verified": false
+                          }
+                        ],
+                        "type": "user",
+                        "status": "offline",
+                        "active": true,
+                        "_updatedAt": "2019-05-28T22:49:24.878Z",
+                        "roles": [
+                          "user"
+                        ],
+                        "name": "name",
+                        "settings": {}
+                      },
+                      "success": true
+                    }
+      servers:
+        - url: 'http://localhost:3000'
+    servers:
+      - url: 'http://localhost:3000'
+components:
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
