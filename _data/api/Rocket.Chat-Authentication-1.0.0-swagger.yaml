@@ -1,0 +1,521 @@
+openapi: 3.0.1
+info:
+  title: defaultTitle
+  description: defaultDescription
+  version: "1.0.0"
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /api/v1/login:
+    post:
+      description: Auto generated using Swagger Inspector
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                expiresIn:
+                  type: integer
+                password:
+                  type: string
+                code:
+                  type: string
+                appId:
+                  type: string
+                scope:
+                  type: string
+                idToken:
+                  type: string
+                appSecret:
+                  type: string
+                secret:
+                  type: string
+                serviceName:
+                  type: string
+                accessToken:
+                  type: string
+                user:
+                  type: string
+                accessTokenSecret:
+                  type: string
+            examples:
+              '0':
+                value: |-
+                  {
+                      "serviceName": "twitter", 
+                      "accessToken": "hash",
+                      "accessTokenSecret": "hash",
+                        "appSecret": "hash", 
+                        "appId": "hash",
+                        "expiresIn": 200
+                      
+                  }
+              '1':
+                value: |-
+                  { "serviceName": "google", "accessToken": "hash",
+                        "idToken": "hash", "expiresIn": 200, "scope": "profile" }
+              '2':
+                value: |-
+                  { 
+                      "serviceName": "facebook",
+                      "accessToken": "hash",
+                      "secret": "hash",
+                      "expiresIn": 200 
+                      
+                  }
+              '3':
+                value: |-
+                  {
+                      "user": "test.user",
+                      "password": "password1234",
+                      "code": ""
+                      
+                  }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      authToken:
+                        type: string
+                      me:
+                        type: object
+                        properties:
+                          emails:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                address:
+                                  type: string
+                                verified:
+                                  type: boolean
+                          settings:
+                            type: object
+                            properties:
+                              preferences:
+                                type: object
+                                properties:
+                                  sendOnEnter:
+                                    type: string
+                                  notificationsSoundVolume:
+                                    type: integer
+                                  mobileNotifications:
+                                    type: string
+                                  sidebarShowFavorites:
+                                    type: boolean
+                                  desktopNotificationDuration:
+                                    type: integer
+                                  roomCounterSidebar:
+                                    type: boolean
+                                  newMessageNotification:
+                                    type: string
+                                  idleTimeLimit:
+                                    type: integer
+                                  autoImageLoad:
+                                    type: boolean
+                                  enableAutoAway:
+                                    type: boolean
+                                  hideFlexTab:
+                                    type: boolean
+                                  hideUsernames:
+                                    type: boolean
+                                  desktopNotifications:
+                                    type: string
+                                  sidebarGroupByType:
+                                    type: boolean
+                                  collapseMediaByDefault:
+                                    type: boolean
+                                  hideAvatars:
+                                    type: boolean
+                                  unreadAlert:
+                                    type: boolean
+                                  useEmojis:
+                                    type: boolean
+                                  sidebarViewMode:
+                                    type: string
+                                  sidebarShowDiscussion:
+                                    type: boolean
+                                  saveMobileBandwidth:
+                                    type: boolean
+                                  messageViewMode:
+                                    type: integer
+                                  audioNotifications:
+                                    type: string
+                                  hideRoles:
+                                    type: boolean
+                                  sidebarHideAvatar:
+                                    type: boolean
+                                  sidebarShowUnread:
+                                    type: boolean
+                                  emailNotificationMode:
+                                    type: string
+                                  newRoomNotification:
+                                    type: string
+                                  muteFocusedConversations:
+                                    type: boolean
+                                  convertAsciiEmoji:
+                                    type: boolean
+                          utcOffset:
+                            type: integer
+                          avatarUrl:
+                            type: string
+                          roles:
+                            type: array
+                            items:
+                              type: string
+                          name:
+                            type: string
+                          active:
+                            type: boolean
+                          language:
+                            type: string
+                          _id:
+                            type: string
+                          statusConnection:
+                            type: string
+                          status:
+                            type: string
+                          username:
+                            type: string
+                      userId:
+                        type: string
+                  status:
+                    type: string
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "status": "success",
+                      "data": {
+                        "userId": "bszJr4E8EHAtLqfX4",
+                        "authToken": "8OVGMokrapBo4M1VdSlIfxAF-_OcwPe2zmdIcaijr3W",
+                        "me": {
+                          "_id": "bszJr4E8EHAtLqfX4",
+                          "name": "Test User",
+                          "emails": [
+                            {
+                              "address": "testuser@mail.com",
+                              "verified": false
+                            }
+                          ],
+                          "status": "offline",
+                          "statusConnection": "offline",
+                          "username": "test.user",
+                          "utcOffset": 1,
+                          "active": true,
+                          "language": "en",
+                          "roles": [
+                            "user",
+                            "admin"
+                          ],
+                          "settings": {
+                            "preferences": {
+                              "enableAutoAway": true,
+                              "idleTimeLimit": 300,
+                              "desktopNotificationDuration": 0,
+                              "audioNotifications": "mentions",
+                              "desktopNotifications": "default",
+                              "mobileNotifications": "default",
+                              "unreadAlert": true,
+                              "useEmojis": true,
+                              "convertAsciiEmoji": true,
+                              "autoImageLoad": true,
+                              "saveMobileBandwidth": true,
+                              "collapseMediaByDefault": false,
+                              "hideUsernames": false,
+                              "hideRoles": false,
+                              "hideFlexTab": false,
+                              "hideAvatars": false,
+                              "sidebarGroupByType": true,
+                              "sidebarViewMode": "medium",
+                              "sidebarHideAvatar": false,
+                              "sidebarShowUnread": false,
+                              "sidebarShowFavorites": true,
+                              "sendOnEnter": "normal",
+                              "messageViewMode": 0,
+                              "emailNotificationMode": "mentions",
+                              "roomCounterSidebar": false,
+                              "newRoomNotification": "door",
+                              "newMessageNotification": "chime",
+                              "muteFocusedConversations": true,
+                              "notificationsSoundVolume": 100,
+                              "sidebarShowDiscussion": true
+                            }
+                          },
+                          "avatarUrl": "http://localhost:3000/avatar/test.user"
+                        }
+                      }
+                    }
+        '401':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status:
+                    type: string
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "status": "error",
+                      "message": "Service not configured"
+                    }
+                '1':
+                  value: |-
+                    {
+                      "status": "error",
+                      "message": "Service not configured"
+                    }
+                '2':
+                  value: |-
+                    {
+                      "status": "error",
+                      "message": "Service not configured"
+                    }
+      servers:
+        - url: 'http://localhost:3000'
+    servers:
+      - url: 'http://localhost:3000'
+  /api/v1/logout:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: bszJr4E8EHAtLqfX4
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: Ge9erAk9_E83RRaYti2WT-6-lbxVu_Ll9iV0AdMtGI6
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      message:
+                        type: string
+                  status:
+                    type: string
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "status": "success",
+                      "data": {
+                        "message": "You've been logged out!"
+                      }
+                    }
+      servers:
+        - url: 'http://localhost:3000'
+    servers:
+      - url: 'http://localhost:3000'
+  /api/v1/me:
+    get:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: bszJr4E8EHAtLqfX4
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: TdYcM_4SP8R1no0-pytKAfyiKUih24DswM6AMoYeqS7
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  settings:
+                    type: object
+                    properties:
+                      preferences:
+                        type: object
+                        properties:
+                          sendOnEnter:
+                            type: string
+                          notificationsSoundVolume:
+                            type: integer
+                          mobileNotifications:
+                            type: string
+                          sidebarShowFavorites:
+                            type: boolean
+                          desktopNotificationDuration:
+                            type: integer
+                          roomCounterSidebar:
+                            type: boolean
+                          newMessageNotification:
+                            type: string
+                          idleTimeLimit:
+                            type: integer
+                          autoImageLoad:
+                            type: boolean
+                          enableAutoAway:
+                            type: boolean
+                          hideFlexTab:
+                            type: boolean
+                          hideUsernames:
+                            type: boolean
+                          desktopNotifications:
+                            type: string
+                          sidebarGroupByType:
+                            type: boolean
+                          collapseMediaByDefault:
+                            type: boolean
+                          hideAvatars:
+                            type: boolean
+                          unreadAlert:
+                            type: boolean
+                          useEmojis:
+                            type: boolean
+                          sidebarViewMode:
+                            type: string
+                          sidebarShowDiscussion:
+                            type: boolean
+                          saveMobileBandwidth:
+                            type: boolean
+                          messageViewMode:
+                            type: integer
+                          audioNotifications:
+                            type: string
+                          hideRoles:
+                            type: boolean
+                          sidebarHideAvatar:
+                            type: boolean
+                          sidebarShowUnread:
+                            type: boolean
+                          emailNotificationMode:
+                            type: string
+                          newRoomNotification:
+                            type: string
+                          muteFocusedConversations:
+                            type: boolean
+                          convertAsciiEmoji:
+                            type: boolean
+                  utcOffset:
+                    type: integer
+                  avatarUrl:
+                    type: string
+                  roles:
+                    type: array
+                    items:
+                      type: string
+                  active:
+                    type: boolean
+                  language:
+                    type: string
+                  statusConnection:
+                    type: string
+                  emails:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        address:
+                          type: string
+                        verified:
+                          type: boolean
+                  success:
+                    type: boolean
+                  name:
+                    type: string
+                  _id:
+                    type: string
+                  status:
+                    type: string
+                  username:
+                    type: string
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "_id": "bszJr4E8EHAtLqfX4",
+                      "name": "Test User",
+                      "emails": [
+                        {
+                          "address": "testuser@mail.com",
+                          "verified": false
+                        }
+                      ],
+                      "status": "offline",
+                      "statusConnection": "offline",
+                      "username": "test.user",
+                      "utcOffset": 1,
+                      "active": true,
+                      "language": "en",
+                      "roles": [
+                        "user",
+                        "admin"
+                      ],
+                      "settings": {
+                        "preferences": {
+                          "enableAutoAway": true,
+                          "idleTimeLimit": 300,
+                          "desktopNotificationDuration": 0,
+                          "audioNotifications": "mentions",
+                          "desktopNotifications": "default",
+                          "mobileNotifications": "default",
+                          "unreadAlert": true,
+                          "useEmojis": true,
+                          "convertAsciiEmoji": true,
+                          "autoImageLoad": true,
+                          "saveMobileBandwidth": true,
+                          "collapseMediaByDefault": false,
+                          "hideUsernames": false,
+                          "hideRoles": false,
+                          "hideFlexTab": false,
+                          "hideAvatars": false,
+                          "sidebarGroupByType": true,
+                          "sidebarViewMode": "medium",
+                          "sidebarHideAvatar": false,
+                          "sidebarShowUnread": false,
+                          "sidebarShowFavorites": true,
+                          "sendOnEnter": "normal",
+                          "messageViewMode": 0,
+                          "emailNotificationMode": "mentions",
+                          "roomCounterSidebar": false,
+                          "newRoomNotification": "door",
+                          "newMessageNotification": "chime",
+                          "muteFocusedConversations": true,
+                          "notificationsSoundVolume": 100,
+                          "sidebarShowDiscussion": true
+                        }
+                      },
+                      "avatarUrl": "http://localhost:3000/avatar/test.user",
+                      "success": true
+                    }
+      servers:
+        - url: 'http://localhost:3000'
+    servers:
+      - url: 'http://localhost:3000'
+components:
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
