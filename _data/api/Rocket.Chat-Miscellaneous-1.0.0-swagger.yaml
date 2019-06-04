@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
-  title: defaultTitle
-  description: defaultDescription
+  title: Miscellaneous Information
+  description: Just some generic information, such as information about the server and authenticated user.
   version: "1.0.0"
 servers:
   - url: 'http://localhost:3000'
@@ -12,6 +12,8 @@ paths:
       parameters:
         - name: query
           in: query
+          required: true
+          description: When `type` is `users` you can send an additional `workspace` field, that can be `local` (default) or `all`. `workspace=all` will work only if [Federation](../../../../administrator-guides/federation) is enabled.
           schema:
             type: string
           example: >-
@@ -28,7 +30,10 @@ paths:
           example: ItYC6vCdugENsn2v8roajraPD55VisDDWcjD8Ya5C6t
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: A method, that searches by users or channels on all users and channels available on server. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with [Query and Fields Query Parameters](../../query-and-fields-info/).
+          schema:
+            type: string
+          example: 'll'
           content:
             application/json:
               schema:
@@ -79,9 +84,38 @@ paths:
   /api/v1/shield.svg:
     get:
       description: Gets the shield svg(badge) to add in your website.
+      parameters:
+        - name: type
+          in: query
+          required: false
+          description: Can be one of `online`, `user`, `channel`
+          schema:
+            type: string
+          example: online
+        - name: icon
+          in: query
+          required: false
+          description: 
+          schema:
+            type: boolean
+          example: false
+        - name: channel
+          in: query
+          required: false
+          description: Name of the channel
+          schema:
+            type: string
+          example: general
+        - name: name
+          in: query
+          required: false
+          description: Name to show
+          schema:
+            type: string
+          example: Rocket.Chat
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: A simple method, requires no authentication, that returns the shield svg(badge) to add in your website. It must have `API_Enable_Shields` enabled.
           content:
             image/svg+xml;charset=utf-8:
               schema:
@@ -123,6 +157,8 @@ paths:
       parameters:
         - name: query
           in: query
+          required: true
+          description: The term to be searched. Supports '#' for channels and '@' for users
           schema:
             type: string
           example: '%40test.user'
@@ -138,7 +174,8 @@ paths:
           example: ItYC6vCdugENsn2v8roajraPD55VisDDWcjD8Ya5C6t
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: "Searches for users or rooms that are visible to the user. 
+          WARNING: It will only return rooms that user didn't join yet."
           content:
             application/json:
               schema:
@@ -188,9 +225,40 @@ paths:
       parameters:
         - name: query
           in: query
+          required: true
+          description: See [Query Parameter](../../query-and-fields-info/)
           schema:
             type: string
           example: '%7B%22_id%22%3A%22j3rw9bKLktWtgmmiA%22%7D'
+        - name: offset
+          in: query
+          required: false
+          description: See [Offset Parameter](../../offset-and-count-and-sort-info/)
+          schema:
+            type: integer
+          example: 0
+        - name: count
+          in: query
+          required: false
+          description: See [Count Parameter](../../offset-and-count-and-sort-info/)
+          schema:
+            type: integer
+          example: 1
+        - name: fields
+          in: query
+          required: false
+          description: See [Fields Parameters](../../query-and-fields-info/)
+          schema:
+            type: string
+          example: '{"os":0,"migration":0,"deploy":0,"process":0}'
+        - name: sort
+          in: query
+          required: false
+          description: See [Sort Query Parameters](../../offset-and-count-and-sort-info/)
+          schema:
+            type: string
+          example: '{"_id":1}'
+
         - name: X-User-Id
           in: header
           schema:
@@ -203,7 +271,8 @@ paths:
           example: uhvKflfBEDN4jDDvIMVK1qVzEwSO2oWRAMAELlY2SeK
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: 'Selectable statistics about the Rocket.Chat server. It supports the [Offset, Count and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with just the [Fields and Query Parameters](../../query-and-fields-info/).
+Requires `view-statistics` permission.'
           content:
             application/json:
               schema:
@@ -561,6 +630,13 @@ paths:
     get:
       description: Statistics about the Rocket.Chat server.
       parameters:
+        - name: refresh
+          in: query
+          required: false
+          description: Need to refresh statistics
+          schema:
+            type: boolean
+          example: true
         - name: X-User-Id
           in: header
           schema:
@@ -573,7 +649,7 @@ paths:
           example: uhvKflfBEDN4jDDvIMVK1qVzEwSO2oWRAMAELlY2SeK
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Statistics about the Rocket.Chat server. Requires `view-statistics` permission.
           content:
             application/json:
               schema:
