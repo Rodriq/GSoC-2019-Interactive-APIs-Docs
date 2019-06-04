@@ -31,9 +31,6 @@ paths:
       responses:
         '200':
           description: A method, that searches by users or channels on all users and channels available on server. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with [Query and Fields Query Parameters](../../query-and-fields-info/).
-          schema:
-            type: string
-          example: 'll'
           content:
             application/json:
               schema:
@@ -95,7 +92,7 @@ paths:
         - name: icon
           in: query
           required: false
-          description: 
+          description: ''
           schema:
             type: boolean
           example: false
@@ -271,8 +268,7 @@ paths:
           example: uhvKflfBEDN4jDDvIMVK1qVzEwSO2oWRAMAELlY2SeK
       responses:
         '200':
-          description: 'Selectable statistics about the Rocket.Chat server. It supports the [Offset, Count and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with just the [Fields and Query Parameters](../../query-and-fields-info/).
-Requires `view-statistics` permission.'
+          description: 'Selectable statistics about the Rocket.Chat server. It supports the [Offset, Count and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with just the [Fields and Query Parameters](../../query-and-fields-info/). Requires `view-statistics` permission.'
           content:
             application/json:
               schema:
