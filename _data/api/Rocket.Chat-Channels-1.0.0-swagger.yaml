@@ -1,0 +1,534 @@
+openapi: 3.0.1
+info:
+  title: defaultTitle
+  description: defaultDescription
+  version: "1.0.0"
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /api/v1/channels.list:
+    get:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: bszJr4E8EHAtLqfX4
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: ' DOfIj7aeuaHosNoFEnujGNQAW16tOtvEbQSMYz-BIdn'
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  channels:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msgs:
+                          type: integer
+                        lm:
+                          type: string
+                        archived:
+                          type: boolean
+                        default:
+                          type: boolean
+                        t:
+                          type: string
+                        name:
+                          type: string
+                        lastMessage:
+                          type: object
+                          properties:
+                            msg:
+                              type: string
+                            file:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                _id:
+                                  type: string
+                                type:
+                                  type: string
+                            attachments:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  title_link_download:
+                                    type: boolean
+                                  image_size:
+                                    type: integer
+                                  image_url:
+                                    type: string
+                                  title_link:
+                                    type: string
+                                  image_dimensions:
+                                    type: object
+                                    properties:
+                                      width:
+                                        type: integer
+                                      height:
+                                        type: integer
+                                  image_preview:
+                                    type: string
+                                  description:
+                                    type: string
+                                  title:
+                                    type: string
+                                  type:
+                                    type: string
+                                  ts:
+                                    type: string
+                                  image_type:
+                                    type: string
+                            channels:
+                              type: array
+                              items:
+                                type: string
+                            u:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                _id:
+                                  type: string
+                                username:
+                                  type: string
+                            mentions:
+                              type: array
+                              items:
+                                type: string
+                            groupable:
+                              type: boolean
+                            _id:
+                              type: string
+                            rid:
+                              type: string
+                            _updatedAt:
+                              type: string
+                            ts:
+                              type: string
+                        usernames:
+                          type: array
+                          items:
+                            type: string
+                        usersCount:
+                          type: integer
+                        _id:
+                          type: string
+                        _updatedAt:
+                          type: string
+                        ts:
+                          type: string
+                  offset:
+                    type: integer
+                  success:
+                    type: boolean
+                  count:
+                    type: integer
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "channels": [
+                        {
+                          "_id": "GENERAL",
+                          "ts": "2019-02-22T18:02:33.623Z",
+                          "t": "c",
+                          "name": "general",
+                          "usernames": [],
+                          "msgs": 64,
+                          "usersCount": 13,
+                          "default": true,
+                          "_updatedAt": "2019-05-29T16:50:21.921Z",
+                          "lastMessage": {
+                            "_id": "sRgMu8XdexqBorF4T",
+                            "rid": "GENERAL",
+                            "ts": "2019-05-20T04:44:57.538Z",
+                            "msg": "",
+                            "file": {
+                              "_id": "RHcKDyjD4ty3tXXQ5",
+                              "name": "Clipboard - May 20, 2019 5:40 AM",
+                              "type": "image/png"
+                            },
+                            "groupable": false,
+                            "attachments": [
+                              {
+                                "ts": "1970-01-01T00:00:00.000Z",
+                                "title": "Clipboard - May 20, 2019 5:40 AM",
+                                "title_link": "/file-upload/RHcKDyjD4ty3tXXQ5/Clipboard%20-%20May%2020,%202019%205:40%20AM",
+                                "title_link_download": true,
+                                "image_dimensions": {
+                                  "width": 538,
+                                  "height": 272
+                                },
+                                "image_preview": "/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAQACADASIAAhEBAxEB/8QAGAAAAgMAAAAAAAAAAAAAAAAAAwQAAQj/xAAkEAACAgEDAgcAAAAAAAAAAAABAgADBAUREhQxISMyQlFhcf/EABUBAQEAAAAAAAAAAAAAAAAAAAEC/8QAFhEBAQEAAAAAAAAAAAAAAAAAAAEh/9oADAMBAAIRAxEAPwDSeo5JWwoLWT8kp1OtKwrFnPyZediC28uW2+ov0C7+vaMicNjVaT7WhsbKXKfy+QC94CjS6l8WJYGN0UJjjjUNge8C/9k=",
+                                "image_url": "/file-upload/RHcKDyjD4ty3tXXQ5/Clipboard%20-%20May%2020,%202019%205:40%20AM",
+                                "image_type": "image/png",
+                                "image_size": 35309,
+                                "type": "file",
+                                "description": ""
+                              }
+                            ],
+                            "u": {
+                              "_id": "MERRYtT6iA9ZghsdK",
+                              "username": "Jaro",
+                              "name": "Jaro"
+                            },
+                            "_updatedAt": "2019-05-20T04:44:58.313Z",
+                            "mentions": [],
+                            "channels": []
+                          },
+                          "lm": "2019-05-20T04:44:57.538Z",
+                          "archived": false
+                        },
+                        {
+                          "_id": "7fA2KwaTMz3ssAT9s",
+                          "name": "tech",
+                          "fname": "tech",
+                          "t": "c",
+                          "msgs": 10,
+                          "usersCount": 2,
+                          "u": {
+                            "_id": "sJXjC2gYStSnkmG3B",
+                            "username": "jarorodriq"
+                          },
+                          "ts": "2019-04-12T17:09:15.600Z",
+                          "ro": false,
+                          "sysMes": true,
+                          "default": false,
+                          "_updatedAt": "2019-04-12T17:58:36.993Z",
+                          "lastMessage": {
+                            "msg": "ehhh]",
+                            "rid": "7fA2KwaTMz3ssAT9s",
+                            "u": {
+                              "_id": "sJXjC2gYStSnkmG3B",
+                              "username": "jarorodriq",
+                              "name": "jarorodriq"
+                            },
+                            "ts": "2019-04-12T17:58:36.000Z",
+                            "_updatedAt": "2019-04-12T17:58:36.802Z",
+                            "mentions": [],
+                            "channels": [],
+                            "_id": "slack-CHY4HQMB9-1555091916-000400"
+                          },
+                          "lm": "2019-04-12T17:58:36.000Z"
+                        }
+                      ],
+                      "count": 2,
+                      "offset": 0,
+                      "total": 2,
+                      "success": true
+                    }
+      servers:
+        - url: 'http://localhost:3000'
+    servers:
+      - url: 'http://localhost:3000'
+  /api/v1/channels.addAll:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: umbrXA5KrhaXawT8v
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: gxxwJq96lhenMstxdJs5GfoSjNxGKyEYGigZhEwRytS
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: |-
+                  {
+                      "roomId": "7fA2KwaTMz3ssAT9s"
+                  }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  channel:
+                    type: object
+                    properties:
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      lm:
+                        type: string
+                      lastMessage:
+                        type: object
+                        properties:
+                          msg:
+                            type: string
+                          channels:
+                            type: array
+                            items:
+                              type: string
+                          u:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              username:
+                                type: string
+                          mentions:
+                            type: array
+                            items:
+                              type: string
+                          _id:
+                            type: string
+                          rid:
+                            type: string
+                          _updatedAt:
+                            type: string
+                          ts:
+                            type: string
+                      usersCount:
+                        type: integer
+                      default:
+                        type: boolean
+                      t:
+                        type: string
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "channel": {
+                        "_id": "7fA2KwaTMz3ssAT9s",
+                        "name": "tech",
+                        "fname": "tech",
+                        "t": "c",
+                        "msgs": 21,
+                        "usersCount": 13,
+                        "u": {
+                          "_id": "sJXjC2gYStSnkmG3B",
+                          "username": "jarorodriq"
+                        },
+                        "ts": "2019-04-12T17:09:15.600Z",
+                        "ro": false,
+                        "sysMes": true,
+                        "default": false,
+                        "_updatedAt": "2019-05-30T21:16:30.397Z",
+                        "lastMessage": {
+                          "msg": "ehhh]",
+                          "rid": "7fA2KwaTMz3ssAT9s",
+                          "u": {
+                            "_id": "sJXjC2gYStSnkmG3B",
+                            "username": "jarorodriq",
+                            "name": "jarorodriq"
+                          },
+                          "ts": "2019-04-12T17:58:36.000Z",
+                          "_updatedAt": "2019-04-12T17:58:36.802Z",
+                          "mentions": [],
+                          "channels": [],
+                          "_id": "slack-CHY4HQMB9-1555091916-000400"
+                        },
+                        "lm": "2019-04-12T17:58:36.000Z"
+                      },
+                      "success": true
+                    }
+      servers:
+        - url: 'http://localhost:3000'
+    servers:
+      - url: 'http://localhost:3000'
+  /api/v1/channels.unarchive:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: umbrXA5KrhaXawT8v
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: gxxwJq96lhenMstxdJs5GfoSjNxGKyEYGigZhEwRytS
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: |-
+                  {
+                      "roomId": "7fA2KwaTMz3ssAT9s"
+                  }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "success": true
+                    }
+      servers:
+        - url: 'http://localhost:3000'
+    servers:
+      - url: 'http://localhost:3000'
+  /api/v1/channels.archive:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: umbrXA5KrhaXawT8v
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: gxxwJq96lhenMstxdJs5GfoSjNxGKyEYGigZhEwRytS
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: |-
+                  {
+                      "roomId": "7fA2KwaTMz3ssAT9s"
+                  }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "success": true
+                    }
+      servers:
+        - url: 'http://localhost:3000'
+    servers:
+      - url: 'http://localhost:3000'
+  /api/v1/channels.addLeader:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: umbrXA5KrhaXawT8v
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: gxxwJq96lhenMstxdJs5GfoSjNxGKyEYGigZhEwRytS
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: |-
+                  {
+                      "roomId": "7fA2KwaTMz3ssAT9s",
+                      "userId": "umbrXA5KrhaXawT8v"
+                  }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "success": true
+                    }
+      servers:
+        - url: 'http://localhost:3000'
+    servers:
+      - url: 'http://localhost:3000'
+components:
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
