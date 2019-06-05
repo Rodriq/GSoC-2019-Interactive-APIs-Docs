@@ -1,14 +1,14 @@
 openapi: 3.0.1
 info:
-  title: defaultTitle
-  description: defaultDescription
+  title: Assets Methods
+  description: Set and unset assets by name
   version: "1.0.0"
 servers:
   - url: 'http://localhost:3000'
 paths:
   /api/v1/assets.setAsset:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Set an asset image by name.
       parameters:
         - name: X-User-Id
           in: header
@@ -25,27 +25,35 @@ paths:
           multipart/form-data:
             schema:
               type: string
-            examples:
-              '0':
-                value: '"logo=talentals.png"'
+              required:
+                - assetName
+              properties:
+                assetName:
+                  type: string
+                  example: myLogo
+                  description: Asset File to upload.
+                refreshAllClients:
+                  type: boolean
+                  example: false
+                  description: If needs refresh all clients to apply changes immediately.
+            # examples:
+            #   '0':
+            #     value: '"logo=talentals.png"'
       responses:
-        '401':
-          description: Auto generated using Swagger Inspector
+        '200':
+          description: If needs refresh all clients to apply changes immediately.
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  message:
-                    type: string
-                  status:
-                    type: string
+                  success:
+                    type: boolean
               examples:
                 '0':
                   value: |-
                     {
-                      "status": "error",
-                      "message": "You must be logged in to do this."
+                      "success": true
                     }
       servers:
         - url: 'http://localhost:3000'
@@ -53,7 +61,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/assets.unsetAsset:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Unset an asset by name.
       parameters:
         - name: X-User-Id
           in: header
@@ -70,17 +78,23 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - assetName
               properties:
                 refreshAllClients:
                   type: boolean
+                  example: true
+                  description: If needs refresh all clients to apply changes immediately.
                 assetName:
                   type: string
-            examples:
-              '0':
-                value: '{ "assetName": "logo", "refreshAllClients": true}'
+                  example: "logo"
+                  description: Asset name to unset.
+            # examples:
+            #   '0':
+            #     value: '{ "assetName": "logo", "refreshAllClients": true}'
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Unset an asset by name. Requires `manage-assets` permission.
           content:
             application/json:
               schema:
