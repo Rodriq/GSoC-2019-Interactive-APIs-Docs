@@ -1,14 +1,14 @@
 openapi: 3.0.1
 info:
-  title: defaultTitle
-  description: defaultDescription
+  title: Channel Methods
+  description: These methods apply to public channels only. Use `groups.*` methods for private channels.
   version: "1.0.0"
 servers:
   - url: 'http://localhost:3000'
 paths:
   /api/v1/channels.list:
     get:
-      description: Auto generated using Swagger Inspector
+      description: Retrieves all of the channels from the server.
       parameters:
         - name: X-User-Id
           in: header
@@ -22,7 +22,7 @@ paths:
           example: ' DOfIj7aeuaHosNoFEnujGNQAW16tOtvEbQSMYz-BIdn'
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Lists all of the channels on the server. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with [Query and Fields Query Parameters](../../query-and-fields-info/).
           content:
             application/json:
               schema:
@@ -238,7 +238,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/channels.addAll:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Adds all of the users on the server to a channel.
       parameters:
         - name: X-User-Id
           in: header
@@ -255,18 +255,26 @@ paths:
           application/json:
             schema:
               type: object
+              required: 
+                - roomId
               properties:
                 roomId:
                   type: string
-            examples:
-              '0':
-                value: |-
-                  {
-                      "roomId": "7fA2KwaTMz3ssAT9s"
-                  }
+                  example: 7fA2KwaTMz3ssAT9s
+                  description: The channel’s id
+                activeUsersOnly:
+                  type: boolean
+                  example: true
+                  description: Add active users only
+            # examples:
+            #   '0':
+            #     value: |-
+            #       {
+            #           "roomId": "7fA2KwaTMz3ssAT9s"
+            #       }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Adds all of the users of the Rocket.Chat server to the channel.
           content:
             application/json:
               schema:
@@ -382,7 +390,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/channels.unarchive:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Unarchives a channel.
       parameters:
         - name: X-User-Id
           in: header
@@ -399,18 +407,22 @@ paths:
           application/json:
             schema:
               type: object
+              required: 
+                - roomId
               properties:
                 roomId:
                   type: string
-            examples:
-              '0':
-                value: |-
-                  {
-                      "roomId": "7fA2KwaTMz3ssAT9s"
-                  }
+                  example: 7fA2KwaTMz3ssAT9s
+                  description: The channel’s id
+            # examples:
+            #   '0':
+            #     value: |-
+            #       {
+            #           "roomId": "7fA2KwaTMz3ssAT9s"
+            #       }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Unarchives a channel.
           content:
             application/json:
               schema:
@@ -430,7 +442,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/channels.archive:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Archives a channel.
       parameters:
         - name: X-User-Id
           in: header
@@ -447,15 +459,19 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - roomId
               properties:
                 roomId:
                   type: string
-            examples:
-              '0':
-                value: |-
-                  {
-                      "roomId": "7fA2KwaTMz3ssAT9s"
-                  }
+                  example: 7fA2KwaTMz3ssAT9s
+                  description: The channel’s id
+            # examples:
+            #   '0':
+            #     value: |-
+            #       {
+            #           "roomId": "7fA2KwaTMz3ssAT9s"
+            #       }
       responses:
         '200':
           description: Auto generated using Swagger Inspector
@@ -478,7 +494,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/channels.addLeader:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Gives the role of Leader for a user in the current channe
       parameters:
         - name: X-User-Id
           in: header
@@ -495,21 +511,28 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - roomId
+                - userId
               properties:
                 userId:
                   type: string
+                  example: umbrXA5KrhaXawT8v
+                  description: The user’s id
                 roomId:
                   type: string
-            examples:
-              '0':
-                value: |-
-                  {
-                      "roomId": "7fA2KwaTMz3ssAT9s",
-                      "userId": "umbrXA5KrhaXawT8v"
-                  }
+                  example: 7fA2KwaTMz3ssAT9s
+                  description: The channel’s id
+            # examples:
+            #   '0':
+            #     value: |-
+            #       {
+            #           "roomId": "7fA2KwaTMz3ssAT9s",
+            #           "userId": "umbrXA5KrhaXawT8v"
+            #       }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Gives the role of Leader for a user in the current channel.
           content:
             application/json:
               schema:
