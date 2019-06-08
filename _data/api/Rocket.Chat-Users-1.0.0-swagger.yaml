@@ -1,14 +1,14 @@
 openapi: 3.0.1
 info:
-  title: defaultTitle
-  description: defaultDescription
+  title: User Methods
+  description: ""
   version: "1.0.0"
 servers:
   - url: 'http://localhost:3000'
 paths:
   /api/v1/users.deleteOwnAccount:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Deletes your own user.
       parameters:
         - name: X-User-Id
           in: header
@@ -25,18 +25,22 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - password
               properties:
                 password:
                   type: string
-            examples:
-              '0':
-                value: |-
-                  {
-                      "password": "62ad5ff252c9923f316ed035a51df0201c24c239b79a02d2c1e126efbc16e730"
-                  }
+                  example: BsNr28znDkG8aeo7W
+                  description: The password of user (encrypted in SHA256).
+            # examples:
+            #   '0':
+            #     value: |-
+            #       {
+            #           "password": "62ad5ff252c9923f316ed035a51df0201c24c239b79a02d2c1e126efbc16e730"
+            #       }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Deletes your own user. Requires `Allow Users to Delete Own Account` enabled. Accessible from Administration -> Accounts.
           content:
             application/json:
               schema:
@@ -126,7 +130,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/users.getUsernameSuggestion:
     get:
-      description: Auto generated using Swagger Inspector
+      description: Gets a suggestion a new username to user.
       parameters:
         - name: X-User-Id
           in: header
@@ -140,7 +144,7 @@ paths:
           example: NMgQTRs2pkFlY6vmKXinMwEz8x66OYt91G1JfSj-U4_
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Gets a suggestion a new username to user.
           content:
             application/json:
               schema:
@@ -163,13 +167,15 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/users.presence:
     get:
-      description: Auto generated using Swagger Inspector
+      description: Gets all connected users presence.
       parameters:
         - name: from
           in: query
+          required: false
           schema:
             type: string
           example: 2019-05-27T12%3A11%3A45.392Z
+          description: The last date you got a status change
         - name: X-User-Id
           in: header
           schema:
@@ -182,7 +188,7 @@ paths:
           example: 6dNLs0m8pDPWDaVWvRyBVvf_8v2J9StoE8wg9a3KYSd
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Gets all connected users presence.
           content:
             application/json:
               schema:
@@ -236,7 +242,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/users.generatePersonalAccessToken:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Generate Personal Access Token.
       parameters:
         - name: X-User-Id
           in: header
@@ -253,18 +259,22 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - tokenName
               properties:
                 tokenName:
                   type: string
-            examples:
-              '0':
-                value: |-
-                  {
-                      "tokenName": "myPersonalToken"
-                  }
+                  example: "myPersonalToken"
+                  description: The name of the token.
+            # examples:
+            #   '0':
+            #     value: |-
+            #       {
+            #           "tokenName": "myPersonalToken"
+            #       }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Generate Personal Access Token. Requires `create-personal-access-tokens` permission.
           content:
             application/json:
               schema:
@@ -287,13 +297,15 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/users.getPresence:
     get:
-      description: Auto generated using Swagger Inspector
+      description: Gets the online presence of a user.
       parameters:
-        - name: username
+        - name: userId or username
           in: query
+          required: true
           schema:
             type: string
           example: test.user
+          description: The id or username of the user. If not provided, the auth user is updated.
         - name: X-User-Id
           in: header
           schema:
@@ -306,7 +318,7 @@ paths:
           example: NMgQTRs2pkFlY6vmKXinMwEz8x66OYt91G1JfSj-U4_
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Gets a user's presence if the query string `userId` or `username` is provided, otherwise it gets the callee's.
           content:
             application/json:
               schema:
@@ -381,16 +393,18 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/users.getAvatar:
     get:
-      description: Auto generated using Swagger Inspector
+      description: Gets the URL for a user’s avatar.
       parameters:
-        - name: userId
+        - name: userId or username
           in: query
+          required: true
           schema:
             type: string
           example: umbrXA5KrhaXawT8v
+          description: The id or username of the user.
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Gets the URL for a user’s avatar.
           content:
             image/svg+xml:
               schema:
