@@ -1,80 +1,123 @@
 openapi: 3.0.1
 info:
-  title: defaultTitle
-  description: defaultDescription
+  title: REST API Authentication
+  description: 'The authentication with the REST API is a two step process.
+
+1. Passing your username and password to the `/api/v1/login`
+2. Using the `authToken` and `userId` provided back on every method'
   version: "1.0.0"
 servers:
   - url: 'http://localhost:3000'
 paths:
   /api/v1/login:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Authenticate with the REST API and other services.
       requestBody:
         content:
           application/json:
             schema:
               type: object
+              required:
+                - user
+                - password
+                - serviceName
+                - accessToken
+                - secret
+                - idToken
+                - scope
+                - expiresIn
+                - accessTokenSecret
+                - appSecret
+                - appId
               properties:
-                expiresIn:
-                  type: integer
-                password:
-                  type: string
-                code:
-                  type: string
-                appId:
-                  type: string
-                scope:
-                  type: string
-                idToken:
-                  type: string
-                appSecret:
-                  type: string
-                secret:
-                  type: string
-                serviceName:
-                  type: string
-                accessToken:
-                  type: string
                 user:
                   type: string
+                  example: foo@bar.com OR myusername
+                  description: Your username or email
+                password:
+                  type: string
+                  example: password1234
+                  description: Your password
+                code:
+                  type: string
+                  example: 1234
+                  description: Your two factor authentication code
+                serviceName:
+                  type: string
+                  example: google, facebook, twitter
+                  description: The desired OAuth service name
+                accessToken:
+                  type: string
+                  example: hash
+                  description: Access token provided by the service
+                expiresIn:
+                  type: integer
+                  example: 200
+                  description: Lifetime of token (in seconds)
+                secret:
+                  type: string
+                  example: hash
+                  description: The secret provided by facebook for app
+                idToken:
+                  type: string
+                  example: hash
+                  description: Id token provided by google auth
+                scope:
+                  type: string
+                  example: profile
+                  description: Google scopes for API
                 accessTokenSecret:
                   type: string
-            examples:
-              '0':
-                value: |-
-                  {
-                      "serviceName": "twitter", 
-                      "accessToken": "hash",
-                      "accessTokenSecret": "hash",
-                        "appSecret": "hash", 
-                        "appId": "hash",
-                        "expiresIn": 200
+                  example: hash
+                  description: Access token secret provided by twitter oauth
+                appSecret:
+                  type: string
+                  example: hash
+                  description: The secret provided by twitter for app
+                appId:
+                  type: string
+                  example: hash
+                  description: The id provided by twitter for app
+                identity:
+                  type: string
+                  example: "{id: '1', name: 'rocket.cat'}"
+                  description: Service user identity
+            # examples:
+            #   '0':
+            #     value: |-
+            #       {
+            #           "serviceName": "twitter", 
+            #           "accessToken": "hash",
+            #           "accessTokenSecret": "hash",
+            #             "appSecret": "hash", 
+            #             "appId": "hash",
+            #             "expiresIn": 200
                       
-                  }
-              '1':
-                value: |-
-                  { "serviceName": "google", "accessToken": "hash",
-                        "idToken": "hash", "expiresIn": 200, "scope": "profile" }
-              '2':
-                value: |-
-                  { 
-                      "serviceName": "facebook",
-                      "accessToken": "hash",
-                      "secret": "hash",
-                      "expiresIn": 200 
+            #       }
+            #   '1':
+            #     value: |-
+            #       { "serviceName": "google", "accessToken": "hash",
+            #             "idToken": "hash", "expiresIn": 200, "scope": "profile" }
+            #   '2':
+            #     value: |-
+            #       { 
+            #           "serviceName": "facebook",
+            #           "accessToken": "hash",
+            #           "secret": "hash",
+            #           "expiresIn": 200 
                       
-                  }
-              '3':
-                value: |-
-                  {
-                      "user": "test.user",
-                      "password": "password1234",
-                      "code": ""
+            #       }
+            #   '3':
+            #     value: |-
+            #       {
+            #           "user": "test.user",
+            #           "password": "password1234",
+            #           "code": ""
                       
-                  }
+            #       }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Authenticate with REST API(user and password), two-factor(2FA) authentication, Google, Facebook and Twitter.
           content:
             application/json:
               schema:
@@ -254,43 +297,13 @@ paths:
                         }
                       }
                     }
-        '401':
-          description: Auto generated using Swagger Inspector
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                  status:
-                    type: string
-              examples:
-                '0':
-                  value: |-
-                    {
-                      "status": "error",
-                      "message": "Service not configured"
-                    }
-                '1':
-                  value: |-
-                    {
-                      "status": "error",
-                      "message": "Service not configured"
-                    }
-                '2':
-                  value: |-
-                    {
-                      "status": "error",
-                      "message": "Service not configured"
-                    }
       servers:
         - url: 'http://localhost:3000'
     servers:
       - url: 'http://localhost:3000'
   /api/v1/logout:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Invalidate your REST API authentication token.
       parameters:
         - name: X-User-Id
           in: header
@@ -304,7 +317,7 @@ paths:
           example: Ge9erAk9_E83RRaYti2WT-6-lbxVu_Ll9iV0AdMtGI6
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Invalidate your REST API authentication token.
           content:
             application/json:
               schema:
@@ -332,7 +345,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/me:
     get:
-      description: Auto generated using Swagger Inspector
+      description: Displays information about the authenticated user.
       parameters:
         - name: X-User-Id
           in: header
@@ -346,7 +359,7 @@ paths:
           example: TdYcM_4SP8R1no0-pytKAfyiKUih24DswM6AMoYeqS7
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Quick information about the authenticated user.
           content:
             application/json:
               schema:
