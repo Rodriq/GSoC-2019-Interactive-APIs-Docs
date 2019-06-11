@@ -14,4 +14,4 @@ The authentication with the REST API is a two step process.
 | `/api/v1/logout`          | Invalidate your REST API authentication token.     | [Link](logout/)          |
 | `/api/v1/me`              | Displays information about the authenticated user. | [Link](me/)              | -->
 
-{% include api/render_endpoints.html category="assets" %}
+{% include api/render_endpoints.html category="authentication" %}

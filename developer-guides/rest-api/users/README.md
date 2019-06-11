@@ -1,6 +1,6 @@
 # User Methods
 
-| Url | Short Description | Details Page |
+<!-- | Url | Short Description | Details Page |
 | :--- | :--- | :--- |
 | `/api/v1/users.presence` | Gets all connected users presence. | [Link](presence/) |
 | `/api/v1/users.create` | Create a new user. | [Link](create/) |
@@ -24,4 +24,6 @@
 | `/api/v1/users.setPreferences` | Set a user's preferences | [Link](set-preferences/) |
 | `/api/v1/users.setActiveStatus` | Set a user's active status. | [Link](setactivestatus/) |
 | `/api/v1/users.update` | Update an existing user. | [Link](update/) |
-| `/api/v1/users.updateOwnBasicInfo` | Update basic information of own user.| [Link](updateownbasicinfo/)               |
+| `/api/v1/users.updateOwnBasicInfo` | Update basic information of own user.| [Link](updateownbasicinfo/)               | -->
+
+{% include api/render_endpoints.html category="users" %}
