@@ -1,3 +1,12 @@
+---
+method: get
+parameters: true
+endpoint: directory
+authentication: false
+category: miscellaneous
+permalink: /developer-guides/rest-api/miscellaneous/directory/
+--- 
+
 # Directory
 
 A method, that searches by users or channels on all users and channels available on server.
@@ -7,6 +16,7 @@ along with [Query and Fields Query Parameters](../../query-and-fields-info/).
 | URL | Requires Auth | HTTP Method |
 | :--- | :--- | :--- |
 | `/api/v1/directory` | `yes` | `GET` |
+
 
 ## Payload
 

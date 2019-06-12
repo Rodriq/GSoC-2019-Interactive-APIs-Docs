@@ -1,12 +1,18 @@
 <div>
 
+	{% if include.entry %}
+
+	{% else %}
+	<h1>{{ site.data.api[include.category].info.title }}</h1>
+	<p>{{ site.data.api[include.category].info.description }}</p>
+
+	{% endif %}
+
 <!--
 {% assign apiCategory = side.data[include.category] %}
 <h3>{{ [apiCategory]info.title }}</h3>
 -->
 
-<h1>{{ site.data.api[include.category].info.title }}</h1>
-<p>{{ site.data.api[include.category].info.description }}</p>
 
 <table>
 	<thead>
@@ -14,19 +20,31 @@
 			<th>URL</th><th>Short Description</th><th>Detials Page</th>
 		</tr>
 	</thead>
-	{% for endpoint in site.data.api[include.category].paths | sort: endpoint %}
-	{% capture url %}{{ endpoint[0] | remove: "/api/v1/" | replace: ".","-" }}{% endcapture %}
-	<tr>
-		<!--{{ List endpoints, description and links about them }}-->
 
+	{% for endpoint in site.data.api[include.category].paths | sort: endpoint %}
+
+	{% if include.entry %}
+	{% capture url %}{{ include.category | append: endpoint[0] | remove: "api/v1/" | replace: "[include.category].","" }}{% endcapture %}
+	{% else %}
+	{% capture url %}{{ endpoint[0] | remove: "/api/v1/" | replace: ".","" }}{% endcapture %}
+	{% endif %}
+
+	<!-- List endpoints, description and links about them -->
+	<tr>
+		
 		<td><code>{{ endpoint[0] }}</code></td>
 
 		{% for props in endpoint[1] %}
+		{% if props[1]description %}
+
 		<td>{{ props[1]description }}</td>
+
+		{% endif %}
 		{% endfor %}
 
 		<td><a href="{{ url }}">Link</a></td>
 	</tr>
+	
 	{% endfor %}
 </table>
 </div>
