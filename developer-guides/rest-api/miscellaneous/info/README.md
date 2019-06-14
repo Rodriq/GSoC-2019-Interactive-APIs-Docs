@@ -1,10 +1,22 @@
+---
+method: get
+parameters: false
+endpoint: info
+authentication: false
+category: miscellaneous
+permalink: /developer-guides/rest-api/miscellaneous/info/
+--- 
+
 # Info
 
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath="/api/info" %}
+
+<!-- 
 A simple method, requires no authentication, that returns information about the server including version information.
 
 | URL | Requires Auth | HTTP Method |
 | :--- | :--- | :--- | :--- |
-| `/api/info` | `no` | `GET` |
+| `/api/info` | `no` | `GET` | -->
 
 ## Example Call
 

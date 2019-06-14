@@ -4,7 +4,7 @@
 
 	{% else %}
 	<h1>{{ site.data.api[include.category].info.title }}</h1>
-	<p>{{ site.data.api[include.category].info.description }}</p>
+	<p>{{ site.data.api[include.category].info.description | markdownify }}</p>
 
 	{% endif %}
 
@@ -24,9 +24,9 @@
 	{% for endpoint in site.data.api[include.category].paths | sort: endpoint %}
 
 	{% if include.entry %}
-	{% capture url %}{{ include.category | append: endpoint[0] | remove: "api/v1/" | replace: "[include.category].","" }}{% endcapture %}
+	{% capture url %}{{ include.category | append: endpoint[0] | remove: "api/v1/" | replace: ".","-" }}{% endcapture %}
 	{% else %}
-	{% capture url %}{{ endpoint[0] | remove: "/api/v1/" | replace: ".","" }}{% endcapture %}
+	{% capture url %}{{ endpoint[0] | remove: "/api/v1/" | replace: ".","-" }}{% endcapture %}
 	{% endif %}
 
 	<!-- List endpoints, description and links about them -->
@@ -37,7 +37,7 @@
 		{% for props in endpoint[1] %}
 		{% if props[1]description %}
 
-		<td>{{ props[1]description }}</td>
+		<td>{{ props[1]description | markdownify }}</td>
 
 		{% endif %}
 		{% endfor %}

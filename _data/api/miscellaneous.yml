@@ -171,8 +171,10 @@ paths:
           example: ItYC6vCdugENsn2v8roajraPD55VisDDWcjD8Ya5C6t
       responses:
         '200':
-          description: "Searches for users or rooms that are visible to the user. 
-          WARNING: It will only return rooms that user didn't join yet."
+          description: |-
+             Searches for users or rooms that are visible to the user.
+
+             'WARNING: It will only return rooms that user didn't join yet.'
           content:
             application/json:
               schema:
@@ -216,7 +218,7 @@ paths:
         - url: 'http://localhost:3000'
     servers:
       - url: 'http://localhost:3000'
-  /api/v1/statistics.list/:
+  /api/v1/statistics.list:
     get:
       description: Selectable statistics about the Rocket.Chat server.
       parameters:
@@ -268,7 +270,7 @@ paths:
           example: uhvKflfBEDN4jDDvIMVK1qVzEwSO2oWRAMAELlY2SeK
       responses:
         '200':
-          description: 'Selectable statistics about the Rocket.Chat server. It supports the [Offset, Count and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with just the [Fields and Query Parameters](../../query-and-fields-info/). Requires `view-statistics` permission.'
+          description: Selectable statistics about the Rocket.Chat server. It supports the [Offset, Count and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with just the [Fields and Query Parameters](../../query-and-fields-info/). Requires `view-statistics` permission.
           content:
             application/json:
               schema:

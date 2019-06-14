@@ -1,11 +1,24 @@
+---
+method: get
+parameters: true
+endpoint: statistics.list
+authentication: true
+category: miscellaneous
+permalink: /developer-guides/rest-api/miscellaneous/statistics-list/
+--- 
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Statistics List
 
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+<!-- 
 Selectable statistics about the Rocket.Chat server. It supports the [Offset, Count and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with just the [Fields and Query Parameters](../../query-and-fields-info/).
 Requires `view-statistics` permission.
 
 | URL | Requires Auth | HTTP Method |
 | :--- | :--- | :--- |
-| `/api/v1/statistics.list` | `yes` | `GET` |
+| `/api/v1/statistics.list` | `yes` | `GET` | -->
 
 ## Query Parameters
 

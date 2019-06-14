@@ -1,10 +1,23 @@
+---
+method: get
+parameters: true
+endpoint: shield.svg
+authentication: false
+category: miscellaneous
+permalink: /developer-guides/rest-api/miscellaneous/shield-svg/
+--- 
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Shield SVG
 
-A simple method, requires no authentication, that returns the shield svg(badge) to add in your website. It must have `API_Enable_Shields` enabled.
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+
+<!-- A simple method, requires no authentication, that returns the shield svg(badge) to add in your website. It must have `API_Enable_Shields` enabled.
 
 | URL | Requires Auth | HTTP Method |
 | :--- | :--- | :--- | :--- |
-| `/api/v1/shield.svg` | `no` | `GET` |
+| `/api/v1/shield.svg` | `no` | `GET` | -->
 
 ## Query Parameters
 

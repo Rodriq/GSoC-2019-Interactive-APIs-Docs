@@ -1,10 +1,23 @@
+---
+method: get
+parameters: true
+endpoint: statistics
+authentication: true
+category: miscellaneous
+permalink: /developer-guides/rest-api/miscellaneous/statistics/
+--- 
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Statistics
 
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+<!-- 
 Statistics about the Rocket.Chat server. Requires `view-statistics` permission.
 
 | URL | Requires Auth | HTTP Method |
 | :--- | :--- | :--- |
-| `/api/v1/statistics` | `yes` | `GET` |
+| `/api/v1/statistics` | `yes` | `GET` | -->
 
 ## Query Parameters
 

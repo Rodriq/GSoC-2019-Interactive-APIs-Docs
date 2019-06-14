@@ -1,10 +1,24 @@
+---
+method: post
+parameters: true
+endpoint: assets.unsetAsset
+authentication: true
+category: assets
+permalink: /developer-guides/rest-api/assets/unsetasset/
+--- 
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
+
 # Unset Asset
 
-Unset an asset by name. Requires `manage-assets` permission.
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+
+<!-- Unset an asset by name. Requires `manage-assets` permission.
 
 | URL | Requires Auth | HTTP Method |
 | :--- | :--- | :--- |
-| `/api/v1/assets.unsetAsset` | `yes` | `POST` |
+| `/api/v1/assets.unsetAsset` | `yes` | `POST` | -->
 
 ## Payload
 

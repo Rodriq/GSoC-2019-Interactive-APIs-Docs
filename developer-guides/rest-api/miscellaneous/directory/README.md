@@ -2,21 +2,24 @@
 method: get
 parameters: true
 endpoint: directory
-authentication: false
+authentication: true
 category: miscellaneous
 permalink: /developer-guides/rest-api/miscellaneous/directory/
 --- 
 
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Directory
 
-A method, that searches by users or channels on all users and channels available on server.
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+
+<!-- A method, that searches by users or channels on all users and channels available on server.
 It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/)
 along with [Query and Fields Query Parameters](../../query-and-fields-info/).
 
 | URL | Requires Auth | HTTP Method |
 | :--- | :--- | :--- |
-| `/api/v1/directory` | `yes` | `GET` |
-
+| `/api/v1/directory` | `yes` | `GET` | -->
 
 ## Payload
 

@@ -1,11 +1,24 @@
+---
+method: post
+parameters: true
+endpoint: assets.setAsset
+authentication: true
+category: assets
+permalink: /developer-guides/rest-api/assets/setasset/
+--- 
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Set Asset
 
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+<!-- 
 Set an asset by name. Requires `manage-assets` permission.
 
 | URL | Requires Auth | HTTP Method |
 | :--- | :--- | :--- |
 | `/api/v1/assets.setAsset` | `yes` | `POST` |
-
+ -->
 ## Payload
 
 | Argument | Example | Required | Description |

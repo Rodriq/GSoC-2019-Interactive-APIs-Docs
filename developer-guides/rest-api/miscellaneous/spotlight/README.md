@@ -1,19 +1,28 @@
 ---
-    permalink: /developer-guides/rest-api/miscellaneous/spotlight/
-    redirect_from:
-      - /developer-guides/rest-api/spotlight
-      - /developer-guides/rest-api/spotlight/
+method: get
+parameters: true
+endpoint: spotlight
+authentication: true
+category: miscellaneous
+permalink: /developer-guides/rest-api/miscellaneous/spotlight/
+redirect_from:
+  - /developer-guides/rest-api/spotlight
+  - /developer-guides/rest-api/spotlight/
 ---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
 
 # Spotlight
 
-Searches for users or rooms that are visible to the user.
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+
+<!-- Searches for users or rooms that are visible to the user.
 
 WARNING: It will only return rooms that user didn't join yet.
 
 | URL | Requires Auth | HTTP Method |
 | :--- | :--- | :--- |
-| `/api/v1/spotlight` | `yes` | `GET` |
+| `/api/v1/spotlight` | `yes` | `GET` | -->
 
 ## Example Call
 
