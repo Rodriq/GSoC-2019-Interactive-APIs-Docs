@@ -1,10 +1,23 @@
+---
+method: post
+parameters: true
+endpoint: logout
+authentication: true
+category: authentication
+permalink: /developer-guides/rest-api/authentication/logout/
+--- 
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Logout
 
-Invalidate your REST API authentication token.
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+
+<!-- Invalidate your REST API authentication token.
 
 | URL | Requires Auth | HTTP Method |
 | :--- | :--- | :--- | :--- |
-| `/api/v1/logout` | `yes` | `POST` |
+| `/api/v1/logout` | `yes` | `POST` | -->
 
 ## Example Call
 

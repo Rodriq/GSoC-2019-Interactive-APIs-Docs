@@ -26,6 +26,8 @@ curl http://localhost:3000/api/info
 
 ## Example Result
 
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath="/api/info" %}
+
 ```json
 {
   "success": true,

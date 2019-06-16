@@ -21,9 +21,11 @@ Statistics about the Rocket.Chat server. Requires `view-statistics` permission.
 
 ## Query Parameters
 
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method fullPath=fullPath %}
+<!-- 
 | Argument | Example | Required | Description |
 | :--- | :--- | :--- | :--- |
-| `refresh` | `true` | Optional | Need to refresh statistics |
+| `refresh` | `true` | Optional | Need to refresh statistics | -->
 
 ## Example Call
 
@@ -34,6 +36,8 @@ curl -H "X-Auth-Token: 8h2mKAwxB3AQrFSjLVKMooJyjdCFaA7W45sWlHP8IzO" \
 ```
 
 ## Example Result
+
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ```json
 {

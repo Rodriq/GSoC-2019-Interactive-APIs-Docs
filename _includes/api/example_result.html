@@ -1,0 +1,14 @@
+<div>
+	{% capture path %} {{ "/api/v1/"| append: include.endpoint }}{% endcapture %}
+	{% assign endpoint = site.data.api.[include.category].paths[include.fullPath][include.method].responses %}
+
+    <!--
+    {{ endpoint.'200'.content }}
+    <h3>{{ res[0] }}</h3>
+    -->
+    {% for res in endpoint.'200'.content %}
+    {% highlight json-doc %}
+    {{ res[1].examples.'0'.value | newline_to_br | replace: '<br />', ' ' }}
+    {% endhighlight %}
+    {% endfor %}
+</div>

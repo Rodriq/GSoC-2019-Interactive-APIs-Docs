@@ -1,11 +1,11 @@
 
 <div>
-{% capture path %} {{ "/api/v1/"| append: include.endpoint }}{% endcapture %}
-{% assign endpoint = site.data.api.[include.category].paths[include.fullPath] %}
+	{% capture path %} {{ "/api/v1/"| append: include.endpoint }}{% endcapture %}
+	{% assign endpoint = site.data.api.[include.category].paths[include.fullPath] %}
 
-{% if endpoint.[include.method].responses."200".description %}
-<p>{{ endpoint.[include.method].responses."200".description | markdownify }}</p>
-{% endif %}
+	{% if endpoint.[include.method].responses."200".description %}
+	<p>{{ endpoint.[include.method].responses."200".description | markdownify }}</p>
+	{% endif %}
 
 <!--
 <h1>{{ site.data.api[include.category].info.title }}</h1>
@@ -15,11 +15,11 @@
 {{ include.category }}
 {{ include.endpoint }}-->
 <table>
-    <thead>
-        <tr>
-        <th>URL</th><th>Requires Auth</th><th>HTTP Method</th>
-        </tr>
-    </thead>
+	<thead>
+		<tr>
+			<th>URL</th><th>Requires Auth</th><th>HTTP Method</th>
+		</tr>
+	</thead>
 	<tr>
 		<td><code>{{ path }}</code></td>
 
@@ -27,13 +27,13 @@
 
 		<td><code>{{ "yes" }}</code></td>
 
-        {% else %}
+		{% else %}
 
-        <td><code>{{ "no" }}</code></td>
+		<td><code>{{ "no" }}</code></td>
 
 		{% endif %}
 
 		<td><code>{{ include.method | upcase }}</code></td>
 	</tr>
-	</table>
+</table>
 </div>

@@ -30,7 +30,7 @@ paths:
               properties:
                 assetName:
                   type: string
-                  example: myLogo
+                  example: myLogo.png
                   description: Asset File to upload.
                 refreshAllClients:
                   type: boolean

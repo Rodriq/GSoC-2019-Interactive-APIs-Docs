@@ -1,50 +1,49 @@
 <div>
-
 	{% if include.entry %}
 
 	{% else %}
-	<h1>{{ site.data.api[include.category].info.title }}</h1>
-	<p>{{ site.data.api[include.category].info.description | markdownify }}</p>
-
+		<h1>{{ site.data.api[include.category].info.title }}</h1>
+		<p>{{ site.data.api[include.category].info.description | markdownify }}</p>
 	{% endif %}
+	<table>
+		<thead>
+			<tr>
+				<th>URL</th><th>Short Description</th><th>Detials Page</th>
+			</tr>
+		</thead>
 
-<!--
-{% assign apiCategory = side.data[include.category] %}
-<h3>{{ [apiCategory]info.title }}</h3>
--->
+		{% for endpoint in site.data.api[include.category].paths | sort: endpoint %}
 
+			{% if include.entry %}
+				{% capture editedPath %}{{ include.category | append: endpoint[0] | replace: include.category, "" | remove: "api/v1/." | downcase }}{% endcapture %}
+				{% if include.category == "miscellaneous" %}
+					{% capture url %}{{ include.category | append: endpoint[0] | remove: "api/v1/" | replace: ".","-" }}{% endcapture %}
+				{% else %}
+					{% capture url %}{{ include.category | append: editedPath }}{% endcapture %}
+				{% endif %}
+			{% else %}
+				{% capture editedPath %}{{ include.category | append: endpoint[0] | replace: include.category, "" | remove: "/api/v1/." | downcase }}{% endcapture %}
+				{% if include.category == "miscellaneous" %}
+					{% capture url %}{{ endpoint[0] | remove: "/api/v1/" | replace: ".","-" }}{% endcapture %}
+				{% else %}
+					{% capture url %}{{ editedPath |  }}{% endcapture %}
+				{% endif %}
+			{% endif %}
 
-<table>
-	<thead>
+		<!-- List endpoints, description and links about them -->
 		<tr>
-			<th>URL</th><th>Short Description</th><th>Detials Page</th>
+			<td><code>{{ endpoint[0] }}</code></td>
+
+			{% for props in endpoint[1] %}
+				{% if props[1]description %}
+					<td>{{ props[1]description | markdownify }}</td>
+
+				{% endif %}
+			{% endfor %}
+
+			<td><a href="{{ url }}">Link</a></td>
 		</tr>
-	</thead>
 
-	{% for endpoint in site.data.api[include.category].paths | sort: endpoint %}
-
-	{% if include.entry %}
-	{% capture url %}{{ include.category | append: endpoint[0] | remove: "api/v1/" | replace: ".","-" }}{% endcapture %}
-	{% else %}
-	{% capture url %}{{ endpoint[0] | remove: "/api/v1/" | replace: ".","-" }}{% endcapture %}
-	{% endif %}
-
-	<!-- List endpoints, description and links about them -->
-	<tr>
-		
-		<td><code>{{ endpoint[0] }}</code></td>
-
-		{% for props in endpoint[1] %}
-		{% if props[1]description %}
-
-		<td>{{ props[1]description | markdownify }}</td>
-
-		{% endif %}
-		{% endfor %}
-
-		<td><a href="{{ url }}">Link</a></td>
-	</tr>
-	
-	{% endfor %}
+			{% endfor %}
 </table>
 </div>

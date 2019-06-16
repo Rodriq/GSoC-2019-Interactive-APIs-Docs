@@ -1,10 +1,23 @@
+---
+method: get
+parameters: false
+endpoint: me
+authentication: true
+category: authentication
+permalink: /developer-guides/rest-api/authentication/me/
+--- 
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Me
 
-Quick information about the authenticated user.
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+
+<!-- Quick information about the authenticated user.
 
 | URL | Requires Auth | HTTP Method |
 | :--- | :--- | :--- | :--- |
-| `/api/v1/me` | `yes` | `GET` |
+| `/api/v1/me` | `yes` | `GET` | -->
 
 ## Example Call
 

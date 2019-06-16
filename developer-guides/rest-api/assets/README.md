@@ -1,5 +1,6 @@
-# Assets Methods
 <!-- 
+# Assets Methods
+
 | Url                         | Short Description                                  | Details Page                               |
 | :-------------------------- | :------------------------------------------------- | :----------------------------------------- |
 | `/api/v1/assets.setAsset`   | Set an asset image by name.                        | [Link](setasset/)                          |

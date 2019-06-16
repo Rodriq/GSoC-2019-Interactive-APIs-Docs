@@ -24,6 +24,14 @@ WARNING: It will only return rooms that user didn't join yet.
 | :--- | :--- | :--- |
 | `/api/v1/spotlight` | `yes` | `GET` | -->
 
+## Query Parameters
+
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method fullPath=fullPath %}
+<!-- 
+| Argument | Example | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `query` | `john` | Required | The term to be searched. Supports '#' for channels and '@' for users | -->
+
 ## Example Call
 
 ```bash
@@ -48,13 +56,9 @@ curl -H "X-Auth-Token: 6eWs4ECxUITYYoZ_bAYK5OE2srkxAepQqQA1cGGv3jK" \
      http://localhost:3000/api/v1/spotlight?query=#foobar
 ```
 
-## Query Parameters
-
-| Argument | Example | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `query` | `john` | Required | The term to be searched. Supports '#' for channels and '@' for users |
-
 ## Example Result
+
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ```json
 {

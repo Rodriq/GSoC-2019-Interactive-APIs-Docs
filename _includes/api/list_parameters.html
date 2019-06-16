@@ -1,0 +1,58 @@
+<div>
+	{% capture path %} {{ "/api/v1/"| append: include.endpoint }}{% endcapture %}
+	{% assign parameters = site.data.api.[include.category].paths[include.fullPath][include.method].parameters %}
+	{% assign payloads = site.data.api.[include.category].paths[include.fullPath][include.method].requestBody.content %}
+
+	{% if payloads %}
+    {% for payload in payloads %}
+    <table>
+		<thead>
+			<tr>
+				<th>Argument</th><th>Example</th><th>Required?</th><th>Description</th>
+			</tr>
+		</thead>
+		<!-- For each parameter, get the information from the Swagger file -->
+		{% for parameter in payload[1].schema.properties %}
+		<tr>
+			<td><code>{{ parameter[0] }}</code></td>
+			<td><code>{{ parameter[1].example }}</code></td>
+
+            {% for req in payload[1].schema.required %}
+            {% if req == parameter[0] %}
+			<td>{{ "Required" }}</td>
+            {% break %}
+            {% endif %}
+            {% endfor %}
+			<td>{{ parameter[1].description | markdownify }}</td>
+		</tr>
+        {% endfor %}
+	</table>
+    {% endfor %}
+
+	{% elsif parameters %}
+	<table>
+		<thead>
+			<tr>
+				<th>Argument</th><th>Example</th><th>Required?</th><th>Description</th>
+			</tr>
+		</thead>
+		<!-- For each parameter, get the information from the Swagger file -->
+		{% for parameter in parameters%}
+		{% if parameter.name == "X-User-Id" or parameter.name == "X-Auth-Token" %}
+
+		{% else %}
+		<tr>
+			<td><code>{{ parameter.name }}</code></td>
+			<td><code>{{ parameter.example }}</code></td>
+			{% if parameter.required %}
+			<td>{{ "Required" }}</td>
+			{% else %}
+			<td>{{ "Optional" }}</td>
+			{% endif %}
+			<td>{{ parameter.description | markdownify }}</td>
+		</tr>
+		{% endif %}
+		{% endfor %}
+	</table>
+	{% endif %}
+</div>

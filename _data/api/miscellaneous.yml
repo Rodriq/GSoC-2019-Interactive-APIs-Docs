@@ -92,7 +92,7 @@ paths:
         - name: icon
           in: query
           required: false
-          description: ''
+          description: ' '
           schema:
             type: boolean
           example: false
@@ -117,7 +117,7 @@ paths:
             image/svg+xml;charset=utf-8:
               schema:
                 type: string
-              examples: {}
+              examples: { }
       servers:
         - url: 'http://localhost:3000'
     servers:

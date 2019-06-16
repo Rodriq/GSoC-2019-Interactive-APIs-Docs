@@ -21,12 +21,14 @@ permalink: /developer-guides/rest-api/miscellaneous/shield-svg/
 
 ## Query Parameters
 
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method fullPath=fullPath %}
+<!-- 
 | Argument | Example | Required | Description |
 | :--- | :--- | :--- | :--- |
 | `type` | `online` | Optional | Can be one of `online`, `user`, `channel`
 | `icon` | `false` | Optional |
 | `channel` | `general` | Optional | Name of the channel
-| `name` | `Rocket.Chat` | Optional | Name to show
+| `name` | `Rocket.Chat` | Optional | Name to show -->
 
 ## Example Call
 
@@ -41,6 +43,8 @@ curl http://localhost:3000/api/v1/shield.svg
 `Content-Type`: `image/svg+xml;charset=utf-8`
 
 ### Body
+
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ```
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141" height="20">
