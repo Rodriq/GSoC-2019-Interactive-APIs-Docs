@@ -1,16 +1,31 @@
+---
+method: get
+parameters: true
+endpoint: statistics
+authentication: true
+category: miscellaneous
+permalink: /developer-guides/rest-api/miscellaneous/statistics/
+--- 
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Statistics
 
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+<!-- 
 Statistics about the Rocket.Chat server. Requires `view-statistics` permission.
 
 | URL | Requires Auth | HTTP Method |
 | :--- | :--- | :--- |
-| `/api/v1/statistics` | `yes` | `GET` |
+| `/api/v1/statistics` | `yes` | `GET` | -->
 
 ## Query Parameters
 
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method fullPath=fullPath %}
+<!-- 
 | Argument | Example | Required | Description |
 | :--- | :--- | :--- | :--- |
-| `refresh` | `true` | Optional | Need to refresh statistics |
+| `refresh` | `true` | Optional | Need to refresh statistics | -->
 
 ## Example Call
 
@@ -21,6 +36,8 @@ curl -H "X-Auth-Token: 8h2mKAwxB3AQrFSjLVKMooJyjdCFaA7W45sWlHP8IzO" \
 ```
 
 ## Example Result
+
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ```json
 {

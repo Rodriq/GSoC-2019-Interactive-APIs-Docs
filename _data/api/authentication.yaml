@@ -1,10 +1,11 @@
 openapi: 3.0.1
 info:
   title: REST API Authentication
-  description: 'The authentication with the REST API is a two step process.
-
-1. Passing your username and password to the `/api/v1/login`
-2. Using the `authToken` and `userId` provided back on every method'
+  description: |- 
+    The authentication with the REST API is a two step process.
+    
+    1. Passing your username and password to the `/api/v1/login`
+    2. Using the `authToken` and `userId` provided back on every method
   version: "1.0.0"
 servers:
   - url: 'http://localhost:3000'

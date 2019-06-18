@@ -30,7 +30,7 @@ paths:
               properties:
                 assetName:
                   type: string
-                  example: myLogo
+                  example: myLogo.png
                   description: Asset File to upload.
                 refreshAllClients:
                   type: boolean
@@ -41,7 +41,7 @@ paths:
             #     value: '"logo=talentals.png"'
       responses:
         '200':
-          description: If needs refresh all clients to apply changes immediately.
+          description: Set an asset by name. Requires `manage-assets` permission.
           content:
             application/json:
               schema:

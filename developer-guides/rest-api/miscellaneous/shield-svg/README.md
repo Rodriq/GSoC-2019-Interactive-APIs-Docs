@@ -1,19 +1,34 @@
+---
+method: get
+parameters: true
+endpoint: shield.svg
+authentication: false
+category: miscellaneous
+permalink: /developer-guides/rest-api/miscellaneous/shield-svg/
+--- 
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Shield SVG
 
-A simple method, requires no authentication, that returns the shield svg(badge) to add in your website. It must have `API_Enable_Shields` enabled.
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+
+<!-- A simple method, requires no authentication, that returns the shield svg(badge) to add in your website. It must have `API_Enable_Shields` enabled.
 
 | URL | Requires Auth | HTTP Method |
 | :--- | :--- | :--- | :--- |
-| `/api/v1/shield.svg` | `no` | `GET` |
+| `/api/v1/shield.svg` | `no` | `GET` | -->
 
 ## Query Parameters
 
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method fullPath=fullPath %}
+<!-- 
 | Argument | Example | Required | Description |
 | :--- | :--- | :--- | :--- |
 | `type` | `online` | Optional | Can be one of `online`, `user`, `channel`
 | `icon` | `false` | Optional |
 | `channel` | `general` | Optional | Name of the channel
-| `name` | `Rocket.Chat` | Optional | Name to show
+| `name` | `Rocket.Chat` | Optional | Name to show -->
 
 ## Example Call
 
@@ -28,6 +43,8 @@ curl http://localhost:3000/api/v1/shield.svg
 `Content-Type`: `image/svg+xml;charset=utf-8`
 
 ### Body
+
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ```
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="141" height="20">

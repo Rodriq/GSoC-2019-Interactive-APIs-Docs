@@ -1,7 +1,7 @@
+<!-- 
 # Miscellaneous Information
 
 Just some generic information, such as information about the server and authenticated user.
-<!-- 
 | Url | Short Description | Details Page |
 | :--- | :--- | :--- |
 | `/api/v1/directory` | Search by users or channels on all server. | [Link](directory/) |

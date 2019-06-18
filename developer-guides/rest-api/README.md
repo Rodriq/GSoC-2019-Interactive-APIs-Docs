@@ -19,38 +19,45 @@ When calling a production Rocket.Chat server, ensure it is running via HTTPS and
 
 ### Miscellaneous Information
 
-{% include api/render_endpoints.html category="miscellaneous" %}
+{% include api/render_endpoints.html category="miscellaneous" entry=true %}
 
-| Url                       | Short Description                                         | Details Page                           |
+<!-- | Url                       | Short Description                                         | Details Page                           |
 | :------------------------ | :-------------------------------------------------------- | :------------------------------------- |
 | `/api/info`               | Information about the Rocket.Chat server.                 | [Link](miscellaneous/info/)            |
 | `/api/v1/directory`       | Search by users or channels on all server.                | [Link](miscellaneous/directory/)       |
 | `/api/v1/shield.svg`      | Gets the shield svg(badge) to add in your website.        | [Link](miscellaneous/shield-svg/)      |
 | `/api/v1/spotlight`       | Searches for users or rooms that are visible to the user. | [Link](miscellaneous/spotlight/)       |
 | `/api/v1/statistics`      | Statistics about the Rocket.Chat server.                  | [Link](miscellaneous/statistics/)      |
-| `/api/v1/statistics.list` | Selectable statistics about the Rocket.Chat server.       | [Link](miscellaneous/statistics-list/) |
+| `/api/v1/statistics.list` | Selectable statistics about the Rocket.Chat server.       | [Link](miscellaneous/statistics-list/) | -->
 
 ### Assets
 
-| Url                         | Short Description                                  | Details Page                               |
+{% include api/render_endpoints.html category="assets" entry=true %}
+
+<!-- | Url                         | Short Description                                  | Details Page                               |
 | :-------------------------- | :------------------------------------------------- | :----------------------------------------- |
 | `/api/v1/assets.setAsset`   | Set an asset image by name.                        | [Link](assets/setasset/)                   |
-| `/api/v1/assets.unsetAsset` | Unset an asset by name                             | [Link](assets/unsetasset/)                 |
+| `/api/v1/assets.unsetAsset` | Unset an asset by name                             | [Link](assets/unsetasset/)                 | -->
 
 ### Authentication
 
-| Url                       | Short Description                                  | Details Page                               |
+{% include api/render_endpoints.html category="authentication" entry=true %}
+
+<!-- | Url                       | Short Description                                  | Details Page                               |
 | :------------------------ | :------------------------------------------------- | :----------------------------------------- |
 | `/api/v1/login`           | Authenticate with the REST API.                    | [Link](authentication/login/)              |
 | `/api/v1/login`           | Authenticate with google.                          | [Link](authentication/google/)             |
 | `/api/v1/login`           | Authenticate with facebook.                        | [Link](authentication/facebook/)           |
 | `/api/v1/login`           | Authenticate with twitter.                         | [Link](authentication/twitter/)            |
 | `/api/v1/logout`          | Invalidate your REST API authentication token.     | [Link](authentication/logout/)             |
-| `/api/v1/me`              | Displays information about the authenticated user. | [Link](authentication/me/)                 |
+| `/api/v1/me`              | Displays information about the authenticated user. | [Link](authentication/me/)                 | -->
 
 ### Users
 
-| Url                                           | Short Description                                               | Details Page                                 |
+{% include api/render_endpoints.html category="users" entry=true %}
+
+
+<!-- | Url                                           | Short Description                                               | Details Page                                 |
 | :-------------------------------------------- | :-------------------------------------------------------------- | :------------------------------------------- |
 | `/api/v1/users.presence`                        | Gets all connected users presence.                                          | [Link](users/presence/)                        |
 | `/api/v1/users.create`                        | Create a new user.                                              | [Link](users/create/)                        |
@@ -74,11 +81,13 @@ When calling a production Rocket.Chat server, ensure it is running via HTTPS and
 | `/api/v1/users.setPreferences`                | Set user's preferences                                          | [Link](users/set-preferences/)               |
 | `/api/v1/users.setActiveStatus`               | Set a user's active status.                                     | [Link](users/setactivestatus/)               |
 | `/api/v1/users.update`                        | Update an existing user.                                        | [Link](users/update/)                        |
-| `/api/v1/users.updateOwnBasicInfo`            | Update basic information of own user.                           | [Link](users/updateownbasicinfo/)            |
+| `/api/v1/users.updateOwnBasicInfo`            | Update basic information of own user.                           | [Link](users/updateownbasicinfo/)            | -->
 
 ### Channels
 
-| Url                                           | Short Description                                           | Details Page                                    |
+{% include api/render_endpoints.html category="channels" entry=true %}
+
+<!-- | Url                                           | Short Description                                           | Details Page                                    |
 | :-------------------------------------------- | :---------------------------------------------------------- | :---------------------------------------------- |
 | `/api/v1/channels.addAll`                     | Adds all of the users on the server to a channel.           | [Link](channels/addall/)                        |
 | `/api/v1/channels.addLeader` | Gives the role of Leader for a user in the current channel. | [Link](channels/addleader/) |
@@ -116,11 +125,13 @@ When calling a production Rocket.Chat server, ensure it is running via HTTPS and
 | `/api/v1/channels.setReadOnly`                | Sets whether a channel is read only or not.                 | [Link](channels/setreadonly/)                   |
 | `/api/v1/channels.setTopic`                   | Sets a channel's topic.                                     | [Link](channels/settopic/)                      |
 | `/api/v1/channels.setType`                    | Sets the type of room the channel should be.                | [Link](channels/settype/)                       |
-| `/api/v1/channels.unarchive`                  | Unarchives a channel.                                       | [Link](channels/unarchive/)                     |
+| `/api/v1/channels.unarchive`                  | Unarchives a channel.                                       | [Link](channels/unarchive/)                     | -->
 
 ### Groups
 
-| Url                              | Short Description                                  | Details Page                   |
+{% include api/render_endpoints.html category="groups" entry=true %}
+
+<!-- | Url                              | Short Description                                  | Details Page                   |
 | :------------------------------- | :------------------------------------------------- | :----------------------------- |
 | `/api/v1/groups.archive`         | Archives a private group.                          | [Link](groups/archive/)        |
 | `/api/v1/groups.addLeader`       | Gives the role of Leader for a user in the current group. | [Link](groups/addleader/) |
@@ -150,7 +161,7 @@ When calling a production Rocket.Chat server, ensure it is running via HTTPS and
 | `/api/v1/groups.setReadOnly`     | Sets whether the room is read only or not.         | [Link](groups/setreadonly/)    |
 | `/api/v1/groups.setTopic`        | Sets a private group's topic.                      | [Link](groups/settopic/)       |
 | `/api/v1/groups.setType`         | Sets the type of room this group will be.          | [Link](groups/settype/)        |
-| `/api/v1/groups.unarchive`       | Unarchives a private group.                        | [Link](groups/unarchive/)      |
+| `/api/v1/groups.unarchive`       | Unarchives a private group.                        | [Link](groups/unarchive/)      | -->
 
 ### Chat
 

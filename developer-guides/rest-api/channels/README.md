@@ -1,8 +1,9 @@
+<!--
 # Channel Methods
 
 These methods apply to public channels only. Use `groups.*` methods for private channels.
 
-<!-- | Url | Short Description | Details Page |
+| Url | Short Description | Details Page |
 | :--- | :--- | :--- |
 | `/api/v1/channels.addAll` | Adds all of the users on the server to a channel. | [Link](addall/) |
 | `/api/v1/channels.addLeader` | Gives the role of Leader for a user in the current channel. | [Link](addleader/) |
