@@ -1,3 +1,4 @@
+
 # Rocket.Chat REST API
 
 The REST API allows you to control and extend Rocket.Chat with ease.
@@ -17,6 +18,8 @@ When calling a production Rocket.Chat server, ensure it is running via HTTPS and
 - Ensure the calling user only has permissions for what they are calling and no more
 
 ### Miscellaneous Information
+
+{% include api/render_endpoints.html category="miscellaneous" %}
 
 | Url                       | Short Description                                         | Details Page                           |
 | :------------------------ | :-------------------------------------------------------- | :------------------------------------- |

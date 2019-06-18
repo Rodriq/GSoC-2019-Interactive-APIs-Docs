@@ -1,6 +1,6 @@
 # Group Methods
 
-| Url | Short Description | Details Page |
+<!-- | Url | Short Description | Details Page |
 | :--- | :--- | :--- |
 | `/api/v1/groups.addAll` | Adds all of the users on the server to a private group. | [Link](addall/) |
 | `/api/v1/groups.addLeader` | Gives the role of Leader for a user in the current group. | [Link](addleader/) |
@@ -36,4 +36,6 @@
 | `/api/v1/groups.setReadOnly` | Sets whether the room is read only or not. | [Link](setreadonly/) |
 | `/api/v1/groups.setTopic` | Sets a private group's topic. | [Link](settopic/) |
 | `/api/v1/groups.setType` | Sets the type of room this group will be. | [Link](settype/) |
-| `/api/v1/groups.unarchive` | Unarchives a private group. | [Link](unarchive/) |
+| `/api/v1/groups.unarchive` | Unarchives a private group. | [Link](unarchive/) | -->
+
+{% include api/render_endpoints.html category="groups" %}

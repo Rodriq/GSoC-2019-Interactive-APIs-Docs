@@ -2,7 +2,7 @@
 
 These methods apply to public channels only. Use `groups.*` methods for private channels.
 
-| Url | Short Description | Details Page |
+<!-- | Url | Short Description | Details Page |
 | :--- | :--- | :--- |
 | `/api/v1/channels.addAll` | Adds all of the users on the server to a channel. | [Link](addall/) |
 | `/api/v1/channels.addLeader` | Gives the role of Leader for a user in the current channel. | [Link](addleader/) |
@@ -43,4 +43,6 @@ These methods apply to public channels only. Use `groups.*` methods for private 
 | `/api/v1/channels.setReadOnly` | Sets whether a channel is read only or not. | [Link](setreadonly/) |
 | `/api/v1/channels.setTopic` | Sets a channel's topic. | [Link](settopic/) |
 | `/api/v1/channels.setType` | Sets the type of room the channel should be. | [Link](settype/) |
-| `/api/v1/channels.unarchive` | Unarchives a channel. | [Link](unarchive/) |
+| `/api/v1/channels.unarchive` | Unarchives a channel. | [Link](unarchive/) | -->
+
+{% include api/render_endpoints.html category="channels" %}
