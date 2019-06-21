@@ -1,14 +1,89 @@
 <div>
-	{% capture path %} {{ "/api/v1/"| append: include.endpoint }}{% endcapture %}
-	{% assign endpoint = site.data.api.[include.category].paths[include.fullPath][include.method].responses %}
-
-    <!--
-    {{ endpoint.'200'.content }}
-    <h3>{{ res[0] }}</h3>
-    -->
+    {% capture path %} {{ "/api/v1/"| append: include.endpoint }}{% endcapture %}
+    {% assign endpoint = site.data.api.[include.category].paths[include.fullPath][include.method].responses %}
     {% for res in endpoint.'200'.content %}
-    {% highlight json-doc %}
-    {{ res[1].examples.'0'.value | newline_to_br | replace: '<br />', ' ' }}
-    {% endhighlight %}
+    <div id="response-position">
+        {% highlight json %}
+        {{ res[1].examples.'0'.value | newline_to_br | replace: '<br />', ' ' }}
+        {% endhighlight %}
+    </div>
     {% endfor %}
+    <button id="initiateButton" onclick="showPanels()" class="button--full button--dark" style="
+    position:fixed;
+    width: 20%;
+    /*height:60px;*/
+    bottom: 0%;
+    float: right !important;
+    /*right:40px;*/
+    border-radius:20px;
+    text-align:center;
+    box-shadow: 2px 2px 3px #999;
+    ">
+        Try it
+    </button>
+    <div id="play-ground">
+        <h3>Playground</h3> &nbsp;
+        {% if include.authentication %}
+        <input type="text" id="Auth-Token" class="space" placeholder="Auth-Token">
+        <input type="text" id="UserId" placeholder="UserId">
+        <button class="button--dark" onclick="addHeaders()">Add Auth</button>
+        {% endif %}
+        <br>
+        example <code>{ "key1": "value1", "key2": "value2" }</code> <br>
+        <textarea class="select--theme-light container" name="play-position" id="play-position" cols="65" rows="10">
+    </textarea> &nbsp;
+        <button id="sendParameters" onclick="getParameters()" class="button">Send</button>
+    </div>
 </div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+$("#play-ground").hide();
+var method = `{{ include.method }}`;
+var url = `https://graphql.rocket.chat{{path}}`.replace(/ /g, '');
+console.log(url)
+
+function showPanels() {
+    $("#play-ground").show()
+    $("#play-position").focus()
+    $("#initiateButton").hide(200);
+}
+
+function addHeaders() {
+    // $("#Auth-Token").attr('disabled', true);
+    var authToken = $("#Auth-Token").val();
+    var userId = $("#UserId").val();
+    // console.log({ "X-Auth-Token": authToken, "X-User-Id": userId })
+    return ({ "X-Auth-Token": authToken, "X-User-Id": userId })
+}
+
+function getParameters() {
+    var parameters = $("#play-position").val().trim();
+    console.log(parameters);
+    if (parameters == '') {
+        data = ''
+    } else {
+        data = JSON.parse(parameters)
+    }
+    sendRequest(data)
+}
+
+function sendRequest(data = '') {
+    axios({
+            method,
+            url,
+            data,
+            headers: addHeaders()
+        })
+        .then((response) => {
+            console.log(response)
+            console.log(response.status);
+            if (response.status == 200) {
+                $('#response-position').html(`<pre> ${JSON.stringify(response.data, undefined, 4)} </pre>`)
+            }
+        })
+        .catch((error) => {
+            $('#response-position').html(`<h3>Something's Wrong</h3>`)
+            console.log(error.status);
+        })
+}
+</script>

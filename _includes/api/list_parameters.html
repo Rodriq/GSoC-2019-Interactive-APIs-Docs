@@ -15,8 +15,11 @@
 		{% for parameter in payload[1].schema.properties %}
 		<tr>
 			<td><code>{{ parameter[0] }}</code></td>
-			<td><code>{{ parameter[1].example }}</code></td>
-
+			{% if parameter.example contains "%" %}
+         	<td><code>{{ parameter.example | url_decode }}</code></td>
+         	{% else %}
+         	<td><code>{{ parameter.example }}</code></td>
+         	{% endif %}
             {% for req in payload[1].schema.required %}
             {% if req == parameter[0] %}
 			<td>{{ "Required" }}</td>
@@ -43,7 +46,11 @@
 		{% else %}
 		<tr>
 			<td><code>{{ parameter.name }}</code></td>
-			<td><code>{{ parameter.example }}</code></td>
+			{% if parameter.example contains "%" %}
+         	<td><code>{{ parameter.example | url_decode }}</code></td>
+         	{% else %}
+         	<td><code>{{ parameter.example }}</code></td>
+         	{% endif %}
 			{% if parameter.required %}
 			<td>{{ "Required" }}</td>
 			{% else %}

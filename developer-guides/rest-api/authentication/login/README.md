@@ -76,7 +76,9 @@ http://localhost:3000/api/v1/login \
 
 ## Result
 
-```json
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
+
+<!-- ```json
 {
   "status": "success",
   "data": {
@@ -106,7 +108,7 @@ http://localhost:3000/api/v1/login \
     }
   }
 }
-```
+``` -->
 
 ## Change Log
 

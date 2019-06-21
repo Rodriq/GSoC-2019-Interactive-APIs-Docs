@@ -1,3 +1,14 @@
+---
+method: post
+parameters: true
+endpoint: channels.addLeader
+authentication: true
+category: channels
+permalink: /developer-guides/rest-api/channels/addleader/
+--- 
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Channel Add Leader
 
 Gives the role of Leader for a user in the current channel.
@@ -24,6 +35,8 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 ```
 
 ## Success Example Result
+
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ```json
 {
