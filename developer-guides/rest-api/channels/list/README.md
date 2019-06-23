@@ -1,10 +1,23 @@
+---
+method: get
+parameters: false
+endpoint: channels.list
+authentication: true
+category: channels
+permalink: /developer-guides/rest-api/channels/list/
+--- 
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Channel List
 
-Lists all of the channels on the server. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with [Query and Fields Query Parameters](../../query-and-fields-info/).
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+
+<!-- Lists all of the channels on the server. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with [Query and Fields Query Parameters](../../query-and-fields-info/).
 
 | URL | Requires Auth | HTTP Method |
 | :--- | :--- | :--- |
-| `/api/v1/channels.list` | `yes` | `GET` |
+| `/api/v1/channels.list` | `yes` | `GET` | -->
 
 ## Example Call
 
@@ -16,7 +29,9 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
+
+<!-- ```json
 {
     "channels": [
         {
@@ -59,7 +74,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
     "total": 1,
     "success": true
 }
-```
+``` -->
 
 ## Change Log
 

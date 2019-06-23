@@ -1,10 +1,23 @@
+---
+method: post
+parameters: true
+endpoint: channels.archive
+authentication: true
+category: channels
+permalink: /developer-guides/rest-api/channels/archive/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Channel Archive
 
-Archives a channel.
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+
+<!-- Archives a channel.
 
 | URL | Requires Auth | HTTP Method |
 | :--- | :--- | :--- |
-| `/api/v1/channels.archive` | `yes` | `POST` |
+| `/api/v1/channels.archive` | `yes` | `POST` | -->
 
 ## Payload
 
@@ -24,11 +37,13 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
+
+<!-- ```json
 {
    "success": true
 }
-```
+``` -->
 
 ## Change Log
 

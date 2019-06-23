@@ -44,11 +44,13 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ### Example Result
 
-```json
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
+
+<!-- ```json
 {
     "success": true
 }
-```
+``` -->
 
 ## Change Log
 
