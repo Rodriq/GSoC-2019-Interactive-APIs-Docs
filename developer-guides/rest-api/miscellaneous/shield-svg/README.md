@@ -32,6 +32,8 @@ permalink: /developer-guides/rest-api/miscellaneous/shield-svg/
 
 ## Example Call
 
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
+
 ```bash
 curl http://localhost:3000/api/v1/shield.svg
 ```

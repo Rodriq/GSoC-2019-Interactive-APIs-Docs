@@ -41,9 +41,9 @@ curl -G -H "X-Auth-Token: ijFlJ1yfidXhwEYY284Anoq_iEsOeMMVCupzNhX22tB" \
 
 ## Example Result
 
-{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
-```json
+<!-- ```json
 {
     "result": [
         {
@@ -64,7 +64,7 @@ curl -G -H "X-Auth-Token: ijFlJ1yfidXhwEYY284Anoq_iEsOeMMVCupzNhX22tB" \
     "total": 1,
     "success": true
 }
-```
+``` -->
 
 ## Example Call
 
