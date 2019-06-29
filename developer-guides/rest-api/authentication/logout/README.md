@@ -1,6 +1,6 @@
 ---
 method: post
-parameters: true
+parameters: false
 endpoint: logout
 authentication: true
 category: authentication
@@ -29,11 +29,13 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Result
 
-```json
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
+
+<!-- ```json
 {
    "status": "success",
    "data": {
      "message": "You've been logged out!"
    }
 }
-```
+``` -->

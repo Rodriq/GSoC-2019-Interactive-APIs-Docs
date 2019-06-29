@@ -15,10 +15,10 @@
 		{% for parameter in payload[1].schema.properties %}
 		<tr>
 			<td><code>{{ parameter[0] }}</code></td>
-			{% if parameter.example contains "%" %}
-         	<td><code>{{ parameter.example | url_decode }}</code></td>
+			{% if parameter[1].example contains "%" %}
+         	<td><code>{{ parameter[1].example | url_decode }}</code></td>
          	{% else %}
-         	<td><code>{{ parameter.example }}</code></td>
+         	<td><code>{{ parameter[1].example }}</code></td>
          	{% endif %}
             {% for req in payload[1].schema.required %}
             {% if req == parameter[0] %}

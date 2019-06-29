@@ -1,54 +1,149 @@
+<style>
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1; 
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto;
+  background-color: rgba(3,12,26,0.6); /* $space with opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.7s;
+  animation-name: animatetop;
+  animation-duration: 0.7s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+#close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+#close:hover,
+#close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+}
+
+.modal-body {
+    padding: 2px 16px;
+}
+
+.modal-footer {
+  padding: 2px 16px;
+}
+
+</style>
 <div>
     {% capture path %} {{ "/api/v1/"| append: include.endpoint }}{% endcapture %}
     {% assign endpoint = site.data.api.[include.category].paths[include.fullPath][include.method].responses %}
     {% for res in endpoint.'200'.content %}
-    <div id="response-position">
+    <div>
         {% highlight json %}
         {{ res[1].examples.'0'.value | newline_to_br | replace: '<br />', ' ' }}
         {% endhighlight %}
     </div>
-    {% endfor %}
-    <button id="initiateButton" onclick="showPanels()" class="button--full button--dark" style="
-    position:fixed;
-    width: 20%;
-    /*height:60px;*/
-    bottom: 0%;
-    float: right !important;
-    /*right:40px;*/
-    border-radius:20px;
-    text-align:center;
-    box-shadow: 2px 2px 3px #999;
-    ">
-        Try it
-    </button>
-    <div id="play-ground">
-        <h3>Playground</h3> &nbsp;
-        {% if include.authentication %}
-        <input type="text" id="Auth-Token" class="space" placeholder="Auth-Token">
-        <input type="text" id="UserId" placeholder="UserId">
-        <button class="button--dark" onclick="addHeaders()">Add Auth</button>
-        {% endif %}
-        <br>
-        example <code>{ "key1": "value1", "key2": "value2" }</code> <br>
-        <textarea class="select--theme-light container" name="play-position" id="play-position" cols="65" rows="10">
-    </textarea> &nbsp;
-        <button id="sendParameters" onclick="getParameters()" class="button">Send</button>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header theme_box--space theme_type--dark">
+            <span id="close">&times;</span>
+            <p class="align--center">API Playground</p>
+        </div>
+        <div class="modal-body">
+            <span id="response-position"></span>
+
+        </div>
+        <div class="modal-footer theme_box--white">
+            <h3>Playground</h3> &nbsp;
+            {% if include.authentication %}
+            <input type="text" id="Auth-Token" class="space" placeholder="Enter Auth-Token"> &nbsp;
+            <input type="text" id="UserId" placeholder="Enter UserId">
+            <button class="button--dark" onclick="addHeaders()">Add Auth</button>
+            {% endif %}
+            <br>
+            {% if include.parameters %}
+            example <code>{ "key1": "value1", "key2": "value2" }</code> <br>
+            <textarea class="select--theme-light container" name="play-position" id="play-position" cols="65" rows="10">
+            </textarea> &nbsp;
+            <button id="sendParameters" onclick="getParameters()" class="button">Send API Request</button>
+            {% else %}
+            <textarea id="play-position" style="display: none;"></textarea>
+            <button id="sendParameters" onclick="getParameters()" class="button">Send API Request</button>
+            {% endif %}
+        </div>
     </div>
+
+</div>
+
+{% endfor %}
+<button id="initiateButton" onclick="showPanels()" class="button--full button--dark" style="
+position:fixed;
+width: 20%;
+/*height:60px;*/
+bottom: 0%;
+float: right !important;
+/*right:40px;*/
+border-radius:20px;
+text-align:center;
+box-shadow: 2px 2px 3px #999;
+">
+Try it
+</button>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-$("#play-ground").hide();
-var method = `{{ include.method }}`;
-var url = `https://graphql.rocket.chat{{path}}`.replace(/ /g, '');
-console.log(url)
+    // $("#play-ground").hide();
+    var method = `{{ include.method }}`;
+    var url = `https://graphql.rocket.chat{{path}}`.replace(/ /g, '');
+    console.log(url)
 
-function showPanels() {
-    $("#play-ground").show()
-    $("#play-position").focus()
-    $("#initiateButton").hide(200);
-}
+    // Get the modal
+    var modal = $("#myModal");
 
-function addHeaders() {
+    function showPanels() {
+        modal.css("display","block")
+        // $("#play-ground").show()
+        $("#play-position").focus()
+        // $("#initiateButton").hide(200);
+    }
+
+    function addHeaders() {
     // $("#Auth-Token").attr('disabled', true);
     var authToken = $("#Auth-Token").val();
     var userId = $("#UserId").val();
@@ -56,8 +151,11 @@ function addHeaders() {
     return ({ "X-Auth-Token": authToken, "X-User-Id": userId })
 }
 
+// Get and parse parameters to be sent
 function getParameters() {
-    var parameters = $("#play-position").val().trim();
+    if ($("#play-position")) {
+        var parameters = $("#play-position").val().trim();
+    }
     console.log(parameters);
     if (parameters == '') {
         data = ''
@@ -69,21 +167,27 @@ function getParameters() {
 
 function sendRequest(data = '') {
     axios({
-            method,
-            url,
-            data,
-            headers: addHeaders()
-        })
-        .then((response) => {
-            console.log(response)
-            console.log(response.status);
-            if (response.status == 200) {
-                $('#response-position').html(`<pre> ${JSON.stringify(response.data, undefined, 4)} </pre>`)
-            }
-        })
-        .catch((error) => {
-            $('#response-position').html(`<h3>Something's Wrong</h3>`)
-            console.log(error.status);
-        })
+        method,
+        url,
+        data,
+        headers: addHeaders()
+    })
+    .then((response) => {
+        console.log(response)
+        console.log(response.status);
+        if (response.status == 200) {
+            $('#response-position').html(`<pre> ${JSON.stringify(response.data, undefined, 4)} </pre>`)
+        }
+    })
+    .catch((error) => {
+        $('#response-position').html(`<h3 class="theme_type--light align--center">Something's Wrong</h3>`)
+        console.log(error.status);
+    })
 }
+
+// When the user clicks on <span> (x), close the modal
+$("#close").click(()=> {
+  modal.css("display","none")
+})
+
 </script>

@@ -474,7 +474,7 @@ paths:
             #       }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: ''
           content:
             application/json:
               schema:
