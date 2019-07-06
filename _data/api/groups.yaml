@@ -1,14 +1,14 @@
 openapi: 3.0.1
 info:
-  title: defaultTitle
-  description: defaultDescription
+  title: Group Methods
+  description: ''
   version: "1.0.0"
 servers:
   - url: 'http://localhost:3000'
 paths:
   /api/v1/groups.delete:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Removes a private group.
       parameters:
         - name: X-User-Id
           in: header
@@ -25,15 +25,21 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+              - roomId
+              - roomName
               properties:
-                roomId:
+                roomId: 
                   type: string
-            examples:
-              '0':
-                value: '{"roomId": "YHAt6Lemw47Fxm9tm"}'
+                  example: YHAt6Lemw47Fxm9tm
+                  description: The channel’s id
+                roomName: 
+                  type: string
+                  example: general
+                  description: The channel’s name
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Remove a private channel.
           content:
             application/json:
               schema:
@@ -53,7 +59,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/groups.listAll:
     get:
-      description: Auto generated using Swagger Inspector
+      description: List all the private groups.
       parameters:
         - name: X-User-Id
           in: header
@@ -67,7 +73,7 @@ paths:
           example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Lists all of the private groups of any users. The calling user requires to have 'view-room-administration' right. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with just the [Fields Query Parameters](../../query-and-fields-info/).
           content:
             application/json:
               schema:
@@ -241,7 +247,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/groups.list:
     get:
-      description: Auto generated using Swagger Inspector
+      description: List the private groups the caller is part of.
       parameters:
         - name: X-User-Id
           in: header
@@ -255,7 +261,7 @@ paths:
           example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Lists all of the private groups the calling user has joined. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/).
           content:
             application/json:
               schema:
@@ -429,7 +435,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/groups.create:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Creates a new private group.
       parameters:
         - name: X-User-Id
           in: header
@@ -446,9 +452,21 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - name
               properties:
                 name:
                   type: string
+                  example: testing
+                  description: The name of the new private group.
+                members:
+                  type: object
+                  example: ["rocket.cat"]
+                  description: The users to add to the group when it is created.
+                readOnly:
+                  type: boolean
+                  example: true
+                  description: Set if the group is read only or not.
             examples:
               '0':
                 value: '{"name": "testing"}'
@@ -1159,6 +1177,1283 @@ paths:
         - url: 'http://localhost:3000'
     servers:
       - url: 'http://localhost:3000'
+  /api/v1/groups.setAnnouncement:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roomId:
+                  type: string
+                announcement:
+                  type: string
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "osfdesAPnGondgB7i", "announcement": "Test out
+                  everything"}
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  announcement:
+                    type: string
+              examples:
+                '0':
+                  value: '{"announcement":"Test out everything","success":true}'
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/groups.removeLeader:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "osfdesAPnGondgB7i", "userId":
+                  "qDhZXaidfjFtpXnsN"}
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: '{"success":true}'
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/groups.setReadOnly:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                readOnly:
+                  type: boolean
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: '{ "roomId": "osfdesAPnGondgB7i", "readOnly": true}'
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  group:
+                    type: object
+                    properties:
+                      broadcast:
+                        type: boolean
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      lm:
+                        type: string
+                      customFields:
+                        type: object
+                        properties:
+                          company:
+                            type: string
+                      lastMessage:
+                        type: object
+                        properties:
+                          msg:
+                            type: string
+                          channels:
+                            type: array
+                            items:
+                              type: string
+                          u:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              username:
+                                type: string
+                          mentions:
+                            type: array
+                            items:
+                              type: string
+                          _id:
+                            type: string
+                          rid:
+                            type: string
+                          _updatedAt:
+                            type: string
+                          ts:
+                            type: string
+                      description:
+                        type: string
+                      usersCount:
+                        type: integer
+                      default:
+                        type: boolean
+                      t:
+                        type: string
+                      encrypted:
+                        type: boolean
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+                      announcement:
+                        type: string
+              examples:
+                '0':
+                  value: >-
+                    {"group":{"_id":"osfdesAPnGondgB7i","name":"test-channel","fname":"test-channel","t":"p","msgs":23,"usersCount":3,"u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"customFields":{"company":"sell-and-more"},"broadcast":false,"encrypted":false,"ts":"2019-06-29T22:26:06.172Z","ro":true,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T01:43:40.873Z","lastMessage":{"_id":"QBA8ZNnHiQN6e2FYC","rid":"osfdesAPnGondgB7i","msg":"How
+                    are
+                    you?","ts":"2019-07-04T00:59:16.515Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T00:59:16.538Z","mentions":[],"channels":[]},"lm":"2019-07-04T00:59:16.515Z","announcement":"Test
+                    out everything","description":"Test out
+                    everything"},"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/groups.messages:
+    get:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: roomId
+          in: query
+          schema:
+            type: string
+          example: osfdesAPnGondgB7i
+        - name: roomName
+          in: query
+          schema:
+            type: string
+          example: test.channel
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  success:
+                    type: boolean
+                  count:
+                    type: integer
+                  messages:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                        t:
+                          type: string
+                        u:
+                          type: object
+                          properties:
+                            _id:
+                              type: string
+                            username:
+                              type: string
+                        groupable:
+                          type: boolean
+                        _id:
+                          type: string
+                        rid:
+                          type: string
+                        _updatedAt:
+                          type: string
+                        ts:
+                          type: string
+              examples:
+                '0':
+                  value: >-
+                    {"messages":[{"_id":"iqschmPQ2PZquggBv","t":"ru","rid":"osfdesAPnGondgB7i","ts":"2019-07-04T01:06:06.241Z","msg":"Fongang.Rodrique","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"groupable":false,"_updatedAt":"2019-07-04T01:06:06.241Z"},{"_id":"LPLyPS7zNad5awXcb","t":"subscription-role-removed","rid":"osfdesAPnGondgB7i","ts":"2019-07-04T01:05:35.673Z","msg":"Fongang.Rodrique","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"groupable":false,"role":"owner","_updatedAt":"2019-07-04T01:05:35.673Z"},{"_id":"QBA8ZNnHiQN6e2FYC","rid":"osfdesAPnGondgB7i","msg":"How
+                    are
+                    you?","ts":"2019-07-04T00:59:16.515Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T00:59:16.538Z","mentions":[],"channels":[]},{"_id":"W85mu3zv7a9DZLw6b","rid":"osfdesAPnGondgB7i","msg":"Hey","ts":"2019-07-04T00:58:43.867Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T00:58:43.890Z","mentions":[],"channels":[]},{"_id":"Hh77oNJyEoye8N72G","rid":"osfdesAPnGondgB7i","msg":"Hello","ts":"2019-07-04T00:58:12.104Z","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1","name":"User1"},"_updatedAt":"2019-07-04T00:58:12.132Z","mentions":[],"channels":[]},{"_id":"R8N4Lb47qj2Qj5Hfi","t":"subscription-role-added","rid":"osfdesAPnGondgB7i","ts":"2019-07-04T00:58:04.717Z","msg":"user1","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1"},"groupable":false,"role":"owner","_updatedAt":"2019-07-04T00:58:04.717Z"},{"_id":"Ec3s3qYy5Dq86EtGm","t":"subscription-role-removed","rid":"osfdesAPnGondgB7i","ts":"2019-07-04T00:57:57.034Z","msg":"user2","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1"},"groupable":false,"role":"owner","_updatedAt":"2019-07-04T00:57:57.034Z"},{"_id":"HCB54wQKgKuf4nqKN","t":"subscription-role-added","rid":"osfdesAPnGondgB7i","ts":"2019-07-04T00:57:48.111Z","msg":"user2","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1"},"groupable":false,"role":"owner","_updatedAt":"2019-07-04T00:57:48.111Z"},{"_id":"2YheJqFoTN8NLGE9z","t":"au","rid":"osfdesAPnGondgB7i","ts":"2019-07-04T00:57:19.577Z","msg":"test.user","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1"},"groupable":false,"_updatedAt":"2019-07-04T00:57:19.594Z"},{"_id":"QMo4wcSSNmAdKDp2r","t":"au","rid":"osfdesAPnGondgB7i","ts":"2019-07-02T23:13:03.299Z","msg":"user1","u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"groupable":false,"_updatedAt":"2019-07-02T23:13:03.314Z"},{"_id":"bvcgyAciYZSeepo2s","t":"ul","rid":"osfdesAPnGondgB7i","ts":"2019-07-02T23:11:59.510Z","msg":"user1","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1"},"groupable":false,"_updatedAt":"2019-07-02T23:11:59.510Z"},{"_id":"rAWFSM4TGh6os8Lpn","t":"au","rid":"osfdesAPnGondgB7i","ts":"2019-07-02T22:58:49.932Z","msg":"user2","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"groupable":false,"_updatedAt":"2019-07-02T22:58:49.950Z"},{"_id":"zPE8goQ7WonZwiYk4","t":"au","rid":"osfdesAPnGondgB7i","ts":"2019-07-02T22:17:04.024Z","msg":"user1","u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"groupable":false,"_updatedAt":"2019-07-02T22:17:04.043Z"}],"count":13,"offset":0,"total":13,"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/groups.members:
+    get:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: roomId
+          in: query
+          schema:
+            type: string
+          example: osfdesAPnGondgB7i
+        - name: roomName
+          in: query
+          schema:
+            type: string
+          example: test.channel
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  success:
+                    type: boolean
+                  members:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        utcOffset:
+                          type: integer
+                        name:
+                          type: string
+                        _id:
+                          type: string
+                        username:
+                          type: string
+                        status:
+                          type: string
+                  count:
+                    type: integer
+              examples:
+                '0':
+                  value: >-
+                    {"members":[{"_id":"uunbZHiuEnib8Pawj","username":"test.user","status":"online","name":"Test
+                    User","utcOffset":1},{"_id":"qDhZXaidfjFtpXnsN","username":"user1","status":"online","name":"User1","utcOffset":1},{"_id":"qBXxQKgzj7bWNcH6n","username":"user2","status":"offline","name":"User2"}],"count":3,"offset":0,"total":3,"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/groups.setType:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: '{ "roomId": "osfdesAPnGondgB7i", "type": "c"}'
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  group:
+                    type: object
+                    properties:
+                      broadcast:
+                        type: boolean
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      lm:
+                        type: string
+                      customFields:
+                        type: object
+                        properties:
+                          company:
+                            type: string
+                      lastMessage:
+                        type: object
+                        properties:
+                          msg:
+                            type: string
+                          channels:
+                            type: array
+                            items:
+                              type: string
+                          u:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              username:
+                                type: string
+                          mentions:
+                            type: array
+                            items:
+                              type: string
+                          _id:
+                            type: string
+                          rid:
+                            type: string
+                          _updatedAt:
+                            type: string
+                          ts:
+                            type: string
+                      description:
+                        type: string
+                      usersCount:
+                        type: integer
+                      default:
+                        type: boolean
+                      t:
+                        type: string
+                      encrypted:
+                        type: boolean
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      topic:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+                      announcement:
+                        type: string
+              examples:
+                '0':
+                  value: >-
+                    {"group":{"_id":"osfdesAPnGondgB7i","name":"test-channel","fname":"test-channel","t":"c","msgs":25,"usersCount":3,"u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"customFields":{"company":"sell-and-more"},"broadcast":false,"encrypted":false,"ts":"2019-06-29T22:26:06.172Z","ro":true,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T01:48:06.268Z","lastMessage":{"_id":"QBA8ZNnHiQN6e2FYC","rid":"osfdesAPnGondgB7i","msg":"How
+                    are
+                    you?","ts":"2019-07-04T00:59:16.515Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T00:59:16.538Z","mentions":[],"channels":[]},"lm":"2019-07-04T00:59:16.515Z","announcement":"Test
+                    out everything","description":"Test out
+                    everything","topic":"Discuss all of the
+                    testing."},"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/groups.setCustomFields:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                customFields:
+                  type: object
+                  properties:
+                    company:
+                      type: string
+                roomId:
+                  type: string
+                roomName:
+                  type: string
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "osfdesAPnGondgB7i", "roomName": "test-channel",
+                  "customFields":{"company": "sell-and-more"}}
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  group:
+                    type: object
+                    properties:
+                      broadcast:
+                        type: boolean
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      lm:
+                        type: string
+                      customFields:
+                        type: object
+                        properties:
+                          company:
+                            type: string
+                      lastMessage:
+                        type: object
+                        properties:
+                          msg:
+                            type: string
+                          channels:
+                            type: array
+                            items:
+                              type: string
+                          u:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              username:
+                                type: string
+                          mentions:
+                            type: array
+                            items:
+                              type: string
+                          _id:
+                            type: string
+                          rid:
+                            type: string
+                          _updatedAt:
+                            type: string
+                          ts:
+                            type: string
+                      usersCount:
+                        type: integer
+                      default:
+                        type: boolean
+                      t:
+                        type: string
+                      encrypted:
+                        type: boolean
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+                      announcement:
+                        type: string
+              examples:
+                '0':
+                  value: >-
+                    {"group":{"_id":"osfdesAPnGondgB7i","name":"test-channel","fname":"test-channel","t":"p","msgs":22,"usersCount":3,"u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"customFields":{"company":"sell-and-more"},"broadcast":false,"encrypted":false,"ts":"2019-06-29T22:26:06.172Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T01:37:50.141Z","lastMessage":{"_id":"QBA8ZNnHiQN6e2FYC","rid":"osfdesAPnGondgB7i","msg":"How
+                    are
+                    you?","ts":"2019-07-04T00:59:16.515Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T00:59:16.538Z","mentions":[],"channels":[]},"lm":"2019-07-04T00:59:16.515Z","announcement":"Test
+                    out everything"},"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/groups.rename:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: '{ "roomId": "osfdesAPnGondgB7i", "name": "new-channel"}'
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  group:
+                    type: object
+                    properties:
+                      broadcast:
+                        type: boolean
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      lm:
+                        type: string
+                      customFields:
+                        type: object
+                        properties: {}
+                      lastMessage:
+                        type: object
+                        properties:
+                          msg:
+                            type: string
+                          channels:
+                            type: array
+                            items:
+                              type: string
+                          u:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              username:
+                                type: string
+                          mentions:
+                            type: array
+                            items:
+                              type: string
+                          _id:
+                            type: string
+                          rid:
+                            type: string
+                          _updatedAt:
+                            type: string
+                          ts:
+                            type: string
+                      usersCount:
+                        type: integer
+                      default:
+                        type: boolean
+                      t:
+                        type: string
+                      encrypted:
+                        type: boolean
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+              examples:
+                '0':
+                  value: >-
+                    {"group":{"_id":"osfdesAPnGondgB7i","name":"new-channel","fname":"new-channel","t":"p","msgs":20,"usersCount":3,"u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"customFields":{},"broadcast":false,"encrypted":false,"ts":"2019-06-29T22:26:06.172Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T01:29:15.911Z","lastMessage":{"_id":"QBA8ZNnHiQN6e2FYC","rid":"osfdesAPnGondgB7i","msg":"How
+                    are
+                    you?","ts":"2019-07-04T00:59:16.515Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T00:59:16.538Z","mentions":[],"channels":[]},"lm":"2019-07-04T00:59:16.515Z"},"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/groups.invite:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: oU6bqTIj1otEmvgqlu7W-ODbyJ6l7YFiIoNUR1LLOzA
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "osfdesAPnGondgB7i", "userId": "qBXxQKgzj7bWNcH6n"
+                  }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  group:
+                    type: object
+                    properties:
+                      broadcast:
+                        type: boolean
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      customFields:
+                        type: object
+                        properties: {}
+                      usersCount:
+                        type: integer
+                      default:
+                        type: boolean
+                      t:
+                        type: string
+                      encrypted:
+                        type: boolean
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+              examples:
+                '0':
+                  value: >-
+                    {"group":{"_id":"osfdesAPnGondgB7i","name":"test.channel","fname":"test.channel","t":"p","msgs":2,"usersCount":3,"u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"customFields":{},"broadcast":false,"encrypted":false,"ts":"2019-06-29T22:26:06.172Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-02T22:58:49.954Z"},"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/groups.setPurpose:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                purpose:
+                  type: string
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "osfdesAPnGondgB7i", "purpose": "Test out
+                  everything"}
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  purpose:
+                    type: string
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: '{"purpose":"Test out everything","success":true}'
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/groups.moderators:
+    get:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: roomId
+          in: query
+          schema:
+            type: string
+          example: osfdesAPnGondgB7i
+        - name: roomName
+          in: query
+          schema:
+            type: string
+          example: test.channel
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  moderators:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        _id:
+                          type: string
+                        username:
+                          type: string
+              examples:
+                '0':
+                  value: >-
+                    {"moderators":[{"_id":"qDhZXaidfjFtpXnsN","username":"user1","name":"User1"}],"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/groups.kick:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: b0jniG3kJ50VK_fDK1Lh12SuK2XXAvU7mK0tv49NT3K
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "osfdesAPnGondgB7i", "userId": "qDhZXaidfjFtpXnsN"
+                  }
+      responses:
+        '400':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  errorType:
+                    type: string
+                  error:
+                    type: string
+              examples:
+                '0':
+                  value: >-
+                    {"success":false,"error":"The required \"roomId\" or
+                    \"roomName\" param provided does not match any group
+                    [error-room-not-found]","errorType":"error-room-not-found"}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/groups.roles:
+    get:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: roomId
+          in: query
+          schema:
+            type: string
+          example: osfdesAPnGondgB7i
+        - name: roomName
+          in: query
+          schema:
+            type: string
+          example: test-channel
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  roles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        u:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            _id:
+                              type: string
+                            username:
+                              type: string
+                        roles:
+                          type: array
+                          items:
+                            type: string
+                        _id:
+                          type: string
+                        rid:
+                          type: string
+              examples:
+                '0':
+                  value: >-
+                    {"roles":[{"_id":"c3stE5urxPNg2Qtij","rid":"osfdesAPnGondgB7i","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1","name":"User1"},"roles":["owner","moderator","leader"]}],"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/groups.setTopic:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                topic:
+                  type: string
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "osfdesAPnGondgB7i", "topic": "Discuss all of the
+                  testing."}
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  topic:
+                    type: string
+              examples:
+                '0':
+                  value: '{"topic":"Discuss all of the testing.","success":true}'
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/groups.leave:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: qDhZXaidfjFtpXnsN
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: PhZoltZ46WJdOaZKvzp7Z04bapHk5V7p-MRXxNHjwE0
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: '{ "roomId": "osfdesAPnGondgB7i"}'
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: '{"success":true}'
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/groups.setDescription:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "osfdesAPnGondgB7i", "description": "Test out
+                  everything"}
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  description:
+                    type: string
+              examples:
+                '0':
+                  value: '{"description":"Test out everything","success":true}'
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/groups.removeModerator:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "osfdesAPnGondgB7i", "userId":
+                  "qDhZXaidfjFtpXnsN"}
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: '{"success":true}'
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/groups.open:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: '{ "roomId": "osfdesAPnGondgB7i"}'
+      responses:
+        '400':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  error:
+                    type: string
+              examples:
+                '0':
+                  value: >-
+                    {"success":false,"error":"The private group, test.channel,
+                    is already open for the sender"}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
 components:
   securitySchemes:
     basic:

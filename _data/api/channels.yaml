@@ -494,7 +494,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/channels.addLeader:
     post:
-      description: Gives the role of Leader for a user in the current channe
+      description: Gives the role of Leader for a user in the current channel
       parameters:
         - name: X-User-Id
           in: header
@@ -550,6 +550,3120 @@ paths:
         - url: 'http://localhost:3000'
     servers:
       - url: 'http://localhost:3000'
+  /api/v1/channels.removeLeader:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "PdE9JSjAyLHDw8pwJ", "userId": "qDhZXaidfjFtpXnsN"
+                  }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: '{"success":true}'
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.online:
+    get:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: roomId
+          in: query
+          schema:
+            type: string
+          example: osfdesAPnGondgB7i
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  online:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                '0':
+                  value: '{"online":[],"success":true}'
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.setReadOnly:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                readOnly:
+                  type: boolean
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: '{ "roomId": "PdE9JSjAyLHDw8pwJ", "readOnly": true }'
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  channel:
+                    type: object
+                    properties:
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      lm:
+                        type: string
+                      customFields:
+                        type: object
+                        properties:
+                          organization:
+                            type: string
+                      joinCodeRequired:
+                        type: boolean
+                      lastMessage:
+                        type: object
+                        properties:
+                          msg:
+                            type: string
+                          file:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              type:
+                                type: string
+                          attachments:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                title_link_download:
+                                  type: boolean
+                                image_size:
+                                  type: integer
+                                image_url:
+                                  type: string
+                                title_link:
+                                  type: string
+                                image_dimensions:
+                                  type: object
+                                  properties:
+                                    width:
+                                      type: integer
+                                    height:
+                                      type: integer
+                                image_preview:
+                                  type: string
+                                description:
+                                  type: string
+                                title:
+                                  type: string
+                                type:
+                                  type: string
+                                ts:
+                                  type: string
+                                image_type:
+                                  type: string
+                          channels:
+                            type: array
+                            items:
+                              type: string
+                          u:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              username:
+                                type: string
+                          mentions:
+                            type: array
+                            items:
+                              type: string
+                          groupable:
+                            type: boolean
+                          _id:
+                            type: string
+                          rid:
+                            type: string
+                          _updatedAt:
+                            type: string
+                          ts:
+                            type: string
+                      description:
+                        type: string
+                      usersCount:
+                        type: integer
+                      default:
+                        type: boolean
+                      t:
+                        type: string
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+                      announcement:
+                        type: string
+              examples:
+                '0':
+                  value: >-
+                    {"channel":{"_id":"PdE9JSjAyLHDw8pwJ","name":"channel-name","fname":"channel-name","t":"c","msgs":21,"usersCount":2,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{"organization":"tra-la-la"},"ts":"2019-07-04T02:14:16.527Z","ro":true,"sysMes":true,"default":true,"_updatedAt":"2019-07-05T02:12:01.685Z","lastMessage":{"_id":"cEa5GNXLYSFZPkM7M","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:06:51.080Z","msg":"","file":{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","type":"image/png"},"groupable":false,"attachments":[{"ts":"1970-01-01T00:00:00.000Z","title":"myAvatar.png","title_link":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","title_link_download":true,"image_dimensions":{"width":400,"height":400},"image_preview":"/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgACADASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAABgcCBAj/xAAlEAACAQQBAwQDAAAAAAAAAAABAwIABAURBhIhMRMiUYFBQmH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAwIE/8QAHREAAgIDAQEBAAAAAAAAAAAAAgMAAQQRMSESUf/aAAwDAQACEQMRAD8A5XSstbGEfJOqbWHHmrt4yWsEkUY4+gvySwCOx3VVgl8PTlB0TDpBMfqotbYeVOrHTR+lCN9x5rESkxYBA+6FOWVNlCXmJ1VjYl8vUkx0RDpJEfqpVyBJTkmgkdzuim2fYyFUHozTtLidrcQco6lE7qrYHJLyFjBsSOsDUh8GhOM4dkLxcWTAUs9/d51TmywqsZZrWkkH9pfJrT0WQfWuSGNmADKXvsxzuShj7GbpEdWtRH9qUXdxO6uJuadykd1WrnEpyNq5T/dsdpH8Gg2S4bkLRc2wEWrj37edUQixCi/YycwSZa98n//Z","image_url":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","image_type":"image/png","image_size":58398,"type":"file","description":""}],"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T13:06:51.127Z","mentions":[],"channels":[]},"lm":"2019-07-04T13:06:51.080Z","announcement":"Test
+                    out Everything","description":"Test out
+                    everything","joinCodeRequired":true},"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.delete:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roomId:
+                  type: string
+                roomName:
+                  type: string
+            examples:
+              '0':
+                value: '{ "roomId": "LAH2isR5nqnY7xdLA", "roomName": "testing" }'
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: '{"success":true}'
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.moderators:
+    get:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: roomId
+          in: query
+          schema:
+            type: string
+          example: osfdesAPnGondgB7i
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  moderators:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        _id:
+                          type: string
+                        username:
+                          type: string
+              examples:
+                '0':
+                  value: >-
+                    {"moderators":[{"_id":"qDhZXaidfjFtpXnsN","username":"user1","name":"User1"}],"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.setCustomFields:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                customFields:
+                  type: object
+                  properties:
+                    organization:
+                      type: string
+                roomId:
+                  type: string
+                roomName:
+                  type: string
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "PdE9JSjAyLHDw8pwJ", "roomName": "channel-name",
+                  "customFields": {"organization": "tra-la-la"} }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  channel:
+                    type: object
+                    properties:
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      lm:
+                        type: string
+                      customFields:
+                        type: object
+                        properties:
+                          organization:
+                            type: string
+                      lastMessage:
+                        type: object
+                        properties:
+                          msg:
+                            type: string
+                          file:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              type:
+                                type: string
+                          attachments:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                title_link_download:
+                                  type: boolean
+                                image_size:
+                                  type: integer
+                                image_url:
+                                  type: string
+                                title_link:
+                                  type: string
+                                image_dimensions:
+                                  type: object
+                                  properties:
+                                    width:
+                                      type: integer
+                                    height:
+                                      type: integer
+                                image_preview:
+                                  type: string
+                                description:
+                                  type: string
+                                title:
+                                  type: string
+                                type:
+                                  type: string
+                                ts:
+                                  type: string
+                                image_type:
+                                  type: string
+                          channels:
+                            type: array
+                            items:
+                              type: string
+                          u:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              username:
+                                type: string
+                          mentions:
+                            type: array
+                            items:
+                              type: string
+                          groupable:
+                            type: boolean
+                          _id:
+                            type: string
+                          rid:
+                            type: string
+                          _updatedAt:
+                            type: string
+                          ts:
+                            type: string
+                      usersCount:
+                        type: integer
+                      default:
+                        type: boolean
+                      t:
+                        type: string
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+                      announcement:
+                        type: string
+              examples:
+                '0':
+                  value: >-
+                    {"channel":{"_id":"PdE9JSjAyLHDw8pwJ","name":"channel-name","fname":"channel-name","t":"c","msgs":19,"usersCount":2,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{"organization":"tra-la-la"},"ts":"2019-07-04T02:14:16.527Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-05T01:47:07.785Z","lastMessage":{"_id":"cEa5GNXLYSFZPkM7M","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:06:51.080Z","msg":"","file":{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","type":"image/png"},"groupable":false,"attachments":[{"ts":"1970-01-01T00:00:00.000Z","title":"myAvatar.png","title_link":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","title_link_download":true,"image_dimensions":{"width":400,"height":400},"image_preview":"/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgACADASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAABgcCBAj/xAAlEAACAQQBAwQDAAAAAAAAAAABAwIABAURBhIhMRMiUYFBQmH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAwIE/8QAHREAAgIDAQEBAAAAAAAAAAAAAgMAAQQRMSESUf/aAAwDAQACEQMRAD8A5XSstbGEfJOqbWHHmrt4yWsEkUY4+gvySwCOx3VVgl8PTlB0TDpBMfqotbYeVOrHTR+lCN9x5rESkxYBA+6FOWVNlCXmJ1VjYl8vUkx0RDpJEfqpVyBJTkmgkdzuim2fYyFUHozTtLidrcQco6lE7qrYHJLyFjBsSOsDUh8GhOM4dkLxcWTAUs9/d51TmywqsZZrWkkH9pfJrT0WQfWuSGNmADKXvsxzuShj7GbpEdWtRH9qUXdxO6uJuadykd1WrnEpyNq5T/dsdpH8Gg2S4bkLRc2wEWrj37edUQixCi/YycwSZa98n//Z","image_url":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","image_type":"image/png","image_size":58398,"type":"file","description":""}],"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T13:06:51.127Z","mentions":[],"channels":[]},"lm":"2019-07-04T13:06:51.080Z","announcement":"Test
+                    out Everything"},"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.setDescription:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "PdE9JSjAyLHDw8pwJ", "description": "Try out
+                  everything" }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  description:
+                    type: string
+              examples:
+                '0':
+                  value: '{"description":"Try out everything","success":true}'
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.rename:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: '{ "roomId": "PdE9JSjAyLHDw8pwJ", "name": "new-name" }'
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  channel:
+                    type: object
+                    properties:
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      lm:
+                        type: string
+                      customFields:
+                        type: object
+                        properties: {}
+                      lastMessage:
+                        type: object
+                        properties:
+                          msg:
+                            type: string
+                          file:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              type:
+                                type: string
+                          attachments:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                title_link_download:
+                                  type: boolean
+                                image_size:
+                                  type: integer
+                                image_url:
+                                  type: string
+                                title_link:
+                                  type: string
+                                image_dimensions:
+                                  type: object
+                                  properties:
+                                    width:
+                                      type: integer
+                                    height:
+                                      type: integer
+                                image_preview:
+                                  type: string
+                                description:
+                                  type: string
+                                title:
+                                  type: string
+                                type:
+                                  type: string
+                                ts:
+                                  type: string
+                                image_type:
+                                  type: string
+                          channels:
+                            type: array
+                            items:
+                              type: string
+                          u:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              username:
+                                type: string
+                          mentions:
+                            type: array
+                            items:
+                              type: string
+                          groupable:
+                            type: boolean
+                          _id:
+                            type: string
+                          rid:
+                            type: string
+                          _updatedAt:
+                            type: string
+                          ts:
+                            type: string
+                      usersCount:
+                        type: integer
+                      default:
+                        type: boolean
+                      t:
+                        type: string
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+              examples:
+                '0':
+                  value: >-
+                    {"channel":{"_id":"PdE9JSjAyLHDw8pwJ","name":"new-name","fname":"new-name","t":"c","msgs":16,"usersCount":2,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{},"ts":"2019-07-04T02:14:16.527Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-05T01:40:49.565Z","lastMessage":{"_id":"cEa5GNXLYSFZPkM7M","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:06:51.080Z","msg":"","file":{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","type":"image/png"},"groupable":false,"attachments":[{"ts":"1970-01-01T00:00:00.000Z","title":"myAvatar.png","title_link":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","title_link_download":true,"image_dimensions":{"width":400,"height":400},"image_preview":"/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgACADASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAABgcCBAj/xAAlEAACAQQBAwQDAAAAAAAAAAABAwIABAURBhIhMRMiUYFBQmH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAwIE/8QAHREAAgIDAQEBAAAAAAAAAAAAAgMAAQQRMSESUf/aAAwDAQACEQMRAD8A5XSstbGEfJOqbWHHmrt4yWsEkUY4+gvySwCOx3VVgl8PTlB0TDpBMfqotbYeVOrHTR+lCN9x5rESkxYBA+6FOWVNlCXmJ1VjYl8vUkx0RDpJEfqpVyBJTkmgkdzuim2fYyFUHozTtLidrcQco6lE7qrYHJLyFjBsSOsDUh8GhOM4dkLxcWTAUs9/d51TmywqsZZrWkkH9pfJrT0WQfWuSGNmADKXvsxzuShj7GbpEdWtRH9qUXdxO6uJuadykd1WrnEpyNq5T/dsdpH8Gg2S4bkLRc2wEWrj37edUQixCi/YycwSZa98n//Z","image_url":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","image_type":"image/png","image_size":58398,"type":"file","description":""}],"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T13:06:51.127Z","mentions":[],"channels":[]},"lm":"2019-07-04T13:06:51.080Z"},"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.roles:
+    get:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: roomId
+          in: query
+          schema:
+            type: string
+          example: PdE9JSjAyLHDw8pwJ
+        - name: roomName
+          in: query
+          schema:
+            type: string
+          example: channelname
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  roles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        u:
+                          type: object
+                          properties:
+                            _id:
+                              type: string
+                            username:
+                              type: string
+                        roles:
+                          type: array
+                          items:
+                            type: string
+                        _id:
+                          type: string
+                        rid:
+                          type: string
+              examples:
+                '0':
+                  value: >-
+                    {"roles":[{"_id":"XcJaZJWMHhe6hbTZ7","rid":"PdE9JSjAyLHDw8pwJ","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"roles":["owner"]},{"_id":"JFDErzoeWjGM5hv6c","rid":"PdE9JSjAyLHDw8pwJ","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1","name":"User1"},"roles":["leader","owner"]}],"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.list.joined:
+    get:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  channels:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        fname:
+                          type: string
+                        msgs:
+                          type: integer
+                        lm:
+                          type: string
+                        customFields:
+                          type: object
+                          properties: {}
+                        lastMessage:
+                          type: object
+                          properties:
+                            msg:
+                              type: string
+                            file:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                _id:
+                                  type: string
+                                type:
+                                  type: string
+                            attachments:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  title_link_download:
+                                    type: boolean
+                                  image_size:
+                                    type: integer
+                                  image_url:
+                                    type: string
+                                  title_link:
+                                    type: string
+                                  image_dimensions:
+                                    type: object
+                                    properties:
+                                      width:
+                                        type: integer
+                                      height:
+                                        type: integer
+                                  image_preview:
+                                    type: string
+                                  description:
+                                    type: string
+                                  title:
+                                    type: string
+                                  type:
+                                    type: string
+                                  ts:
+                                    type: string
+                                  image_type:
+                                    type: string
+                            channels:
+                              type: array
+                              items:
+                                type: string
+                            u:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                _id:
+                                  type: string
+                                username:
+                                  type: string
+                            mentions:
+                              type: array
+                              items:
+                                type: string
+                            groupable:
+                              type: boolean
+                            _id:
+                              type: string
+                            rid:
+                              type: string
+                            _updatedAt:
+                              type: string
+                            ts:
+                              type: string
+                        usersCount:
+                          type: integer
+                        default:
+                          type: boolean
+                        t:
+                          type: string
+                        u:
+                          type: object
+                          properties:
+                            _id:
+                              type: string
+                            username:
+                              type: string
+                        sysMes:
+                          type: boolean
+                        name:
+                          type: string
+                        _id:
+                          type: string
+                        ro:
+                          type: boolean
+                        _updatedAt:
+                          type: string
+                        ts:
+                          type: string
+                  offset:
+                    type: integer
+                  success:
+                    type: boolean
+                  count:
+                    type: integer
+              examples:
+                '0':
+                  value: >-
+                    {"channels":[{"_id":"PdE9JSjAyLHDw8pwJ","name":"channelname","fname":"channelname","t":"c","msgs":10,"usersCount":2,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{},"ts":"2019-07-04T02:14:16.527Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T13:27:42.580Z","lastMessage":{"_id":"cEa5GNXLYSFZPkM7M","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:06:51.080Z","msg":"","file":{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","type":"image/png"},"groupable":false,"attachments":[{"ts":"1970-01-01T00:00:00.000Z","title":"myAvatar.png","title_link":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","title_link_download":true,"image_dimensions":{"width":400,"height":400},"image_preview":"/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgACADASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAABgcCBAj/xAAlEAACAQQBAwQDAAAAAAAAAAABAwIABAURBhIhMRMiUYFBQmH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAwIE/8QAHREAAgIDAQEBAAAAAAAAAAAAAgMAAQQRMSESUf/aAAwDAQACEQMRAD8A5XSstbGEfJOqbWHHmrt4yWsEkUY4+gvySwCOx3VVgl8PTlB0TDpBMfqotbYeVOrHTR+lCN9x5rESkxYBA+6FOWVNlCXmJ1VjYl8vUkx0RDpJEfqpVyBJTkmgkdzuim2fYyFUHozTtLidrcQco6lE7qrYHJLyFjBsSOsDUh8GhOM4dkLxcWTAUs9/d51TmywqsZZrWkkH9pfJrT0WQfWuSGNmADKXvsxzuShj7GbpEdWtRH9qUXdxO6uJuadykd1WrnEpyNq5T/dsdpH8Gg2S4bkLRc2wEWrj37edUQixCi/YycwSZa98n//Z","image_url":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","image_type":"image/png","image_size":58398,"type":"file","description":""}],"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T13:06:51.127Z","mentions":[],"channels":[]},"lm":"2019-07-04T13:06:51.080Z"},{"_id":"GENERAL","ts":"2018-08-24T18:17:17.387Z","t":"c","name":"general","usernames":[],"msgs":13,"usersCount":7,"default":true,"_updatedAt":"2019-07-02T10:41:40.659Z","lm":"2019-06-06T12:51:43.672Z","lastMessage":{"_id":"y5hQ4si7Kpe57GYk3","rid":"GENERAL","msg":"Logged
+                    in","ts":"2019-06-06T12:51:43.672Z","u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"mentions":[],"channels":[],"_updatedAt":"2019-06-06T12:51:43.688Z"}},{"_id":"osfdesAPnGondgB7i","name":"test-channel","fname":"test-channel","t":"c","msgs":25,"usersCount":3,"u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"customFields":{"company":"sell-and-more"},"broadcast":false,"encrypted":false,"ts":"2019-06-29T22:26:06.172Z","ro":true,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T01:48:06.268Z","lastMessage":{"_id":"QBA8ZNnHiQN6e2FYC","rid":"osfdesAPnGondgB7i","msg":"How
+                    are
+                    you?","ts":"2019-07-04T00:59:16.515Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T00:59:16.538Z","mentions":[],"channels":[]},"lm":"2019-07-04T00:59:16.515Z","announcement":"Test
+                    out everything","description":"Test out
+                    everything","topic":"Discuss all of the
+                    testing."},{"_id":"LAH2isR5nqnY7xdLA","name":"testing","fname":"testing","t":"c","msgs":5,"usersCount":2,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{},"ts":"2019-07-04T02:23:32.711Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T12:36:16.627Z","lastMessage":{"_id":"yLDFGAuktperaFpjF","rid":"LAH2isR5nqnY7xdLA","msg":"@user1","ts":"2019-07-04T12:36:16.584Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T12:36:16.619Z","mentions":[{"_id":"qDhZXaidfjFtpXnsN","username":"user1","name":"User1"}],"channels":[]},"lm":"2019-07-04T12:36:16.584Z"}],"offset":0,"count":4,"total":4,"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.setType:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: '{ "roomId": "PdE9JSjAyLHDw8pwJ", "type": "p" }'
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  channel:
+                    type: object
+                    properties:
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      lm:
+                        type: string
+                      customFields:
+                        type: object
+                        properties:
+                          organization:
+                            type: string
+                      joinCodeRequired:
+                        type: boolean
+                      lastMessage:
+                        type: object
+                        properties:
+                          msg:
+                            type: string
+                          file:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              type:
+                                type: string
+                          attachments:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                title_link_download:
+                                  type: boolean
+                                image_size:
+                                  type: integer
+                                image_url:
+                                  type: string
+                                title_link:
+                                  type: string
+                                image_dimensions:
+                                  type: object
+                                  properties:
+                                    width:
+                                      type: integer
+                                    height:
+                                      type: integer
+                                image_preview:
+                                  type: string
+                                description:
+                                  type: string
+                                title:
+                                  type: string
+                                type:
+                                  type: string
+                                ts:
+                                  type: string
+                                image_type:
+                                  type: string
+                          channels:
+                            type: array
+                            items:
+                              type: string
+                          u:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              username:
+                                type: string
+                          mentions:
+                            type: array
+                            items:
+                              type: string
+                          groupable:
+                            type: boolean
+                          _id:
+                            type: string
+                          rid:
+                            type: string
+                          _updatedAt:
+                            type: string
+                          ts:
+                            type: string
+                      description:
+                        type: string
+                      usersCount:
+                        type: integer
+                      t:
+                        type: string
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      topic:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+                      announcement:
+                        type: string
+              examples:
+                '0':
+                  value: >-
+                    {"channel":{"_id":"PdE9JSjAyLHDw8pwJ","name":"channel-name","fname":"channel-name","t":"p","msgs":23,"usersCount":2,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{"organization":"tra-la-la"},"ts":"2019-07-04T02:14:16.527Z","ro":false,"sysMes":true,"_updatedAt":"2019-07-05T02:15:56.135Z","lastMessage":{"_id":"cEa5GNXLYSFZPkM7M","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:06:51.080Z","msg":"","file":{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","type":"image/png"},"groupable":false,"attachments":[{"ts":"1970-01-01T00:00:00.000Z","title":"myAvatar.png","title_link":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","title_link_download":true,"image_dimensions":{"width":400,"height":400},"image_preview":"/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgACADASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAABgcCBAj/xAAlEAACAQQBAwQDAAAAAAAAAAABAwIABAURBhIhMRMiUYFBQmH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAwIE/8QAHREAAgIDAQEBAAAAAAAAAAAAAgMAAQQRMSESUf/aAAwDAQACEQMRAD8A5XSstbGEfJOqbWHHmrt4yWsEkUY4+gvySwCOx3VVgl8PTlB0TDpBMfqotbYeVOrHTR+lCN9x5rESkxYBA+6FOWVNlCXmJ1VjYl8vUkx0RDpJEfqpVyBJTkmgkdzuim2fYyFUHozTtLidrcQco6lE7qrYHJLyFjBsSOsDUh8GhOM4dkLxcWTAUs9/d51TmywqsZZrWkkH9pfJrT0WQfWuSGNmADKXvsxzuShj7GbpEdWtRH9qUXdxO6uJuadykd1WrnEpyNq5T/dsdpH8Gg2S4bkLRc2wEWrj37edUQixCi/YycwSZa98n//Z","image_url":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","image_type":"image/png","image_size":58398,"type":"file","description":""}],"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T13:06:51.127Z","mentions":[],"channels":[]},"lm":"2019-07-04T13:06:51.080Z","announcement":"Test
+                    out Everything","description":"Test out
+                    everything","joinCodeRequired":true,"topic":"Discuss all of
+                    the testing"},"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.messages:
+    get:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: roomId
+          in: query
+          schema:
+            type: string
+          example: PdE9JSjAyLHDw8pwJ
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  success:
+                    type: boolean
+                  count:
+                    type: integer
+                  messages:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                        t:
+                          type: string
+                        u:
+                          type: object
+                          properties:
+                            _id:
+                              type: string
+                            username:
+                              type: string
+                        groupable:
+                          type: boolean
+                        _id:
+                          type: string
+                        rid:
+                          type: string
+                        _updatedAt:
+                          type: string
+                        ts:
+                          type: string
+              examples:
+                '0':
+                  value: >-
+                    {"messages":[{"_id":"aQYdHM6XPaorRobqy","t":"ul","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:27:42.556Z","msg":"user2","u":{"_id":"qBXxQKgzj7bWNcH6n","username":"user2"},"groupable":false,"_updatedAt":"2019-07-04T13:27:42.556Z"},{"_id":"joD8azwYnhrEGrPwy","t":"uj","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:24:28.600Z","msg":"user2","u":{"_id":"qBXxQKgzj7bWNcH6n","username":"user2"},"groupable":false,"_updatedAt":"2019-07-04T13:24:28.615Z"},{"_id":"ER25DN5PunfP8yYt2","t":"ul","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:21:52.622Z","msg":"user2","u":{"_id":"qBXxQKgzj7bWNcH6n","username":"user2"},"groupable":false,"_updatedAt":"2019-07-04T13:21:52.622Z"},{"_id":"5vjYF2hHvKys6dzxL","t":"uj","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:21:16.047Z","msg":"user2","u":{"_id":"qBXxQKgzj7bWNcH6n","username":"user2"},"groupable":false,"_updatedAt":"2019-07-04T13:21:16.058Z"},{"_id":"pK6MMYDgwE5sMGhPG","t":"ru","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:19:11.012Z","msg":"user2","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"groupable":false,"_updatedAt":"2019-07-04T13:19:11.012Z"},{"_id":"L5qCd8sRMrWtt4rth","t":"uj","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:16:59.840Z","msg":"user2","u":{"_id":"qBXxQKgzj7bWNcH6n","username":"user2"},"groupable":false,"_updatedAt":"2019-07-04T13:16:59.856Z"},{"_id":"cEa5GNXLYSFZPkM7M","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:06:51.080Z","msg":"","file":{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","type":"image/png"},"groupable":false,"attachments":[{"ts":"1970-01-01T00:00:00.000Z","title":"myAvatar.png","title_link":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","title_link_download":true,"image_dimensions":{"width":400,"height":400},"image_preview":"/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgACADASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAABgcCBAj/xAAlEAACAQQBAwQDAAAAAAAAAAABAwIABAURBhIhMRMiUYFBQmH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAwIE/8QAHREAAgIDAQEBAAAAAAAAAAAAAgMAAQQRMSESUf/aAAwDAQACEQMRAD8A5XSstbGEfJOqbWHHmrt4yWsEkUY4+gvySwCOx3VVgl8PTlB0TDpBMfqotbYeVOrHTR+lCN9x5rESkxYBA+6FOWVNlCXmJ1VjYl8vUkx0RDpJEfqpVyBJTkmgkdzuim2fYyFUHozTtLidrcQco6lE7qrYHJLyFjBsSOsDUh8GhOM4dkLxcWTAUs9/d51TmywqsZZrWkkH9pfJrT0WQfWuSGNmADKXvsxzuShj7GbpEdWtRH9qUXdxO6uJuadykd1WrnEpyNq5T/dsdpH8Gg2S4bkLRc2wEWrj37edUQixCi/YycwSZa98n//Z","image_url":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","image_type":"image/png","image_size":58398,"type":"file","description":""}],"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T13:06:51.127Z","mentions":[],"channels":[]},{"_id":"oeBywmuhffAD8e29y","rid":"PdE9JSjAyLHDw8pwJ","msg":"@user1","ts":"2019-07-04T13:02:46.989Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T13:02:47.018Z","mentions":[{"_id":"qDhZXaidfjFtpXnsN","username":"user1","name":"User1"}],"channels":[]},{"_id":"oEFGkgnBtP6HybkTQ","rid":"PdE9JSjAyLHDw8pwJ","msg":"@test.user","ts":"2019-07-04T12:35:58.854Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T12:35:58.892Z","mentions":[{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"}],"channels":[]},{"_id":"263uDK65bqAxMCxka","t":"au","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T02:18:29.179Z","msg":"user1","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"groupable":false,"_updatedAt":"2019-07-04T02:18:29.228Z"}],"count":10,"offset":0,"total":10,"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.members:
+    get:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: roomId
+          in: query
+          schema:
+            type: string
+          example: PdE9JSjAyLHDw8pwJ
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  success:
+                    type: boolean
+                  members:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        utcOffset:
+                          type: integer
+                        name:
+                          type: string
+                        _id:
+                          type: string
+                        username:
+                          type: string
+                        status:
+                          type: string
+                  count:
+                    type: integer
+              examples:
+                '0':
+                  value: >-
+                    {"members":[{"_id":"uunbZHiuEnib8Pawj","username":"test.user","status":"online","name":"Test
+                    User","utcOffset":1},{"_id":"qDhZXaidfjFtpXnsN","username":"user1","status":"offline","name":"User1","utcOffset":1}],"count":2,"offset":0,"total":2,"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.addOwner:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "PdE9JSjAyLHDw8pwJ", "userId": "qDhZXaidfjFtpXnsN"
+                  }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: '{"success":true}'
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.setPurpose:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                purpose:
+                  type: string
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "PdE9JSjAyLHDw8pwJ", "purpose": "Test out
+                  everything" }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  purpose:
+                    type: string
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: '{"purpose":"Test out everything","success":true}'
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.setDefault:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                default:
+                  type: boolean
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: '{ "roomId": "PdE9JSjAyLHDw8pwJ", "default": true }'
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  channel:
+                    type: object
+                    properties:
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      lm:
+                        type: string
+                      customFields:
+                        type: object
+                        properties:
+                          organization:
+                            type: string
+                      lastMessage:
+                        type: object
+                        properties:
+                          msg:
+                            type: string
+                          file:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              type:
+                                type: string
+                          attachments:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                title_link_download:
+                                  type: boolean
+                                image_size:
+                                  type: integer
+                                image_url:
+                                  type: string
+                                title_link:
+                                  type: string
+                                image_dimensions:
+                                  type: object
+                                  properties:
+                                    width:
+                                      type: integer
+                                    height:
+                                      type: integer
+                                image_preview:
+                                  type: string
+                                description:
+                                  type: string
+                                title:
+                                  type: string
+                                type:
+                                  type: string
+                                ts:
+                                  type: string
+                                image_type:
+                                  type: string
+                          channels:
+                            type: array
+                            items:
+                              type: string
+                          u:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              username:
+                                type: string
+                          mentions:
+                            type: array
+                            items:
+                              type: string
+                          groupable:
+                            type: boolean
+                          _id:
+                            type: string
+                          rid:
+                            type: string
+                          _updatedAt:
+                            type: string
+                          ts:
+                            type: string
+                      usersCount:
+                        type: integer
+                      default:
+                        type: boolean
+                      t:
+                        type: string
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+                      announcement:
+                        type: string
+              examples:
+                '0':
+                  value: >-
+                    {"channel":{"_id":"PdE9JSjAyLHDw8pwJ","name":"channel-name","fname":"channel-name","t":"c","msgs":19,"usersCount":2,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{"organization":"tra-la-la"},"ts":"2019-07-04T02:14:16.527Z","ro":false,"sysMes":true,"default":true,"_updatedAt":"2019-07-05T02:01:53.978Z","lastMessage":{"_id":"cEa5GNXLYSFZPkM7M","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:06:51.080Z","msg":"","file":{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","type":"image/png"},"groupable":false,"attachments":[{"ts":"1970-01-01T00:00:00.000Z","title":"myAvatar.png","title_link":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","title_link_download":true,"image_dimensions":{"width":400,"height":400},"image_preview":"/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgACADASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAABgcCBAj/xAAlEAACAQQBAwQDAAAAAAAAAAABAwIABAURBhIhMRMiUYFBQmH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAwIE/8QAHREAAgIDAQEBAAAAAAAAAAAAAgMAAQQRMSESUf/aAAwDAQACEQMRAD8A5XSstbGEfJOqbWHHmrt4yWsEkUY4+gvySwCOx3VVgl8PTlB0TDpBMfqotbYeVOrHTR+lCN9x5rESkxYBA+6FOWVNlCXmJ1VjYl8vUkx0RDpJEfqpVyBJTkmgkdzuim2fYyFUHozTtLidrcQco6lE7qrYHJLyFjBsSOsDUh8GhOM4dkLxcWTAUs9/d51TmywqsZZrWkkH9pfJrT0WQfWuSGNmADKXvsxzuShj7GbpEdWtRH9qUXdxO6uJuadykd1WrnEpyNq5T/dsdpH8Gg2S4bkLRc2wEWrj37edUQixCi/YycwSZa98n//Z","image_url":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","image_type":"image/png","image_size":58398,"type":"file","description":""}],"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T13:06:51.127Z","mentions":[],"channels":[]},"lm":"2019-07-04T13:06:51.080Z","announcement":"Test
+                    out Everything"},"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.setTopic:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                topic:
+                  type: string
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "PdE9JSjAyLHDw8pwJ", "topic": "Discuss all of the
+                  testing" }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  topic:
+                    type: string
+              examples:
+                '0':
+                  value: '{"topic":"Discuss all of the testing","success":true}'
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.setAnnouncement:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roomId:
+                  type: string
+                announcement:
+                  type: string
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "PdE9JSjAyLHDw8pwJ", "announcement": "Test out
+                  Everything" }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  announcement:
+                    type: string
+              examples:
+                '0':
+                  value: '{"announcement":"Test out Everything","success":true}'
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.setJoinCode:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                joinCode:
+                  type: string
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: '{ "roomId": "PdE9JSjAyLHDw8pwJ", "joinCode": "my-join-code" }'
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  channel:
+                    type: object
+                    properties:
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      lm:
+                        type: string
+                      customFields:
+                        type: object
+                        properties:
+                          organization:
+                            type: string
+                      joinCodeRequired:
+                        type: boolean
+                      lastMessage:
+                        type: object
+                        properties:
+                          msg:
+                            type: string
+                          file:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              type:
+                                type: string
+                          attachments:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                title_link_download:
+                                  type: boolean
+                                image_size:
+                                  type: integer
+                                image_url:
+                                  type: string
+                                title_link:
+                                  type: string
+                                image_dimensions:
+                                  type: object
+                                  properties:
+                                    width:
+                                      type: integer
+                                    height:
+                                      type: integer
+                                image_preview:
+                                  type: string
+                                description:
+                                  type: string
+                                title:
+                                  type: string
+                                type:
+                                  type: string
+                                ts:
+                                  type: string
+                                image_type:
+                                  type: string
+                          channels:
+                            type: array
+                            items:
+                              type: string
+                          u:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              username:
+                                type: string
+                          mentions:
+                            type: array
+                            items:
+                              type: string
+                          groupable:
+                            type: boolean
+                          _id:
+                            type: string
+                          rid:
+                            type: string
+                          _updatedAt:
+                            type: string
+                          ts:
+                            type: string
+                      description:
+                        type: string
+                      usersCount:
+                        type: integer
+                      default:
+                        type: boolean
+                      t:
+                        type: string
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+                      announcement:
+                        type: string
+              examples:
+                '0':
+                  value: >-
+                    {"channel":{"_id":"PdE9JSjAyLHDw8pwJ","name":"channel-name","fname":"channel-name","t":"c","msgs":20,"usersCount":2,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{"organization":"tra-la-la"},"ts":"2019-07-04T02:14:16.527Z","ro":false,"sysMes":true,"default":true,"_updatedAt":"2019-07-05T02:04:51.607Z","lastMessage":{"_id":"cEa5GNXLYSFZPkM7M","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:06:51.080Z","msg":"","file":{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","type":"image/png"},"groupable":false,"attachments":[{"ts":"1970-01-01T00:00:00.000Z","title":"myAvatar.png","title_link":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","title_link_download":true,"image_dimensions":{"width":400,"height":400},"image_preview":"/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgACADASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAABgcCBAj/xAAlEAACAQQBAwQDAAAAAAAAAAABAwIABAURBhIhMRMiUYFBQmH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAwIE/8QAHREAAgIDAQEBAAAAAAAAAAAAAgMAAQQRMSESUf/aAAwDAQACEQMRAD8A5XSstbGEfJOqbWHHmrt4yWsEkUY4+gvySwCOx3VVgl8PTlB0TDpBMfqotbYeVOrHTR+lCN9x5rESkxYBA+6FOWVNlCXmJ1VjYl8vUkx0RDpJEfqpVyBJTkmgkdzuim2fYyFUHozTtLidrcQco6lE7qrYHJLyFjBsSOsDUh8GhOM4dkLxcWTAUs9/d51TmywqsZZrWkkH9pfJrT0WQfWuSGNmADKXvsxzuShj7GbpEdWtRH9qUXdxO6uJuadykd1WrnEpyNq5T/dsdpH8Gg2S4bkLRc2wEWrj37edUQixCi/YycwSZa98n//Z","image_url":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","image_type":"image/png","image_size":58398,"type":"file","description":""}],"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T13:06:51.127Z","mentions":[],"channels":[]},"lm":"2019-07-04T13:06:51.080Z","announcement":"Test
+                    out Everything","description":"Try out
+                    everything","joinCodeRequired":true},"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.removeModerator:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "PdE9JSjAyLHDw8pwJ", "userId": "qDhZXaidfjFtpXnsN"
+                  }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: '{"success":true}'
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.leave:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: qBXxQKgzj7bWNcH6n
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: CpLUxYNHOXG57mOeSSgmwmBumKL8nCohP9yHYGyH_NN
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: '{ "roomId": "PdE9JSjAyLHDw8pwJ" }'
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  channel:
+                    type: object
+                    properties:
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      lm:
+                        type: string
+                      customFields:
+                        type: object
+                        properties: {}
+                      lastMessage:
+                        type: object
+                        properties:
+                          msg:
+                            type: string
+                          file:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              type:
+                                type: string
+                          attachments:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                title_link_download:
+                                  type: boolean
+                                image_size:
+                                  type: integer
+                                image_url:
+                                  type: string
+                                title_link:
+                                  type: string
+                                image_dimensions:
+                                  type: object
+                                  properties:
+                                    width:
+                                      type: integer
+                                    height:
+                                      type: integer
+                                image_preview:
+                                  type: string
+                                description:
+                                  type: string
+                                title:
+                                  type: string
+                                type:
+                                  type: string
+                                ts:
+                                  type: string
+                                image_type:
+                                  type: string
+                          channels:
+                            type: array
+                            items:
+                              type: string
+                          u:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              username:
+                                type: string
+                          mentions:
+                            type: array
+                            items:
+                              type: string
+                          groupable:
+                            type: boolean
+                          _id:
+                            type: string
+                          rid:
+                            type: string
+                          _updatedAt:
+                            type: string
+                          ts:
+                            type: string
+                      usersCount:
+                        type: integer
+                      default:
+                        type: boolean
+                      t:
+                        type: string
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+              examples:
+                '0':
+                  value: >-
+                    {"channel":{"_id":"PdE9JSjAyLHDw8pwJ","name":"channelname","fname":"channelname","t":"c","msgs":10,"usersCount":2,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{},"ts":"2019-07-04T02:14:16.527Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T13:27:42.580Z","lastMessage":{"_id":"cEa5GNXLYSFZPkM7M","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:06:51.080Z","msg":"","file":{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","type":"image/png"},"groupable":false,"attachments":[{"ts":"1970-01-01T00:00:00.000Z","title":"myAvatar.png","title_link":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","title_link_download":true,"image_dimensions":{"width":400,"height":400},"image_preview":"/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgACADASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAABgcCBAj/xAAlEAACAQQBAwQDAAAAAAAAAAABAwIABAURBhIhMRMiUYFBQmH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAwIE/8QAHREAAgIDAQEBAAAAAAAAAAAAAgMAAQQRMSESUf/aAAwDAQACEQMRAD8A5XSstbGEfJOqbWHHmrt4yWsEkUY4+gvySwCOx3VVgl8PTlB0TDpBMfqotbYeVOrHTR+lCN9x5rESkxYBA+6FOWVNlCXmJ1VjYl8vUkx0RDpJEfqpVyBJTkmgkdzuim2fYyFUHozTtLidrcQco6lE7qrYHJLyFjBsSOsDUh8GhOM4dkLxcWTAUs9/d51TmywqsZZrWkkH9pfJrT0WQfWuSGNmADKXvsxzuShj7GbpEdWtRH9qUXdxO6uJuadykd1WrnEpyNq5T/dsdpH8Gg2S4bkLRc2wEWrj37edUQixCi/YycwSZa98n//Z","image_url":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","image_type":"image/png","image_size":58398,"type":"file","description":""}],"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T13:06:51.127Z","mentions":[],"channels":[]},"lm":"2019-07-04T13:06:51.080Z"},"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.addModerator:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "LAH2isR5nqnY7xdLA", "userId": "qDhZXaidfjFtpXnsN"
+                  }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: '{"success":true}'
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.getIntegrations:
+    get:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: roomId
+          in: query
+          schema:
+            type: string
+          example: PdE9JSjAyLHDw8pwJ
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  success:
+                    type: boolean
+                  count:
+                    type: integer
+                  integrations:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                '0':
+                  value: >-
+                    {"integrations":[],"count":0,"offset":0,"total":0,"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.close:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: '{ "roomId": "PdE9JSjAyLHDw8pwJ" }'
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: '{"success":true}'
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.open:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: '{ "roomId": "PdE9JSjAyLHDw8pwJ" }'
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: '{"success":true}'
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.history:
+    get:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: roomId
+          in: query
+          schema:
+            type: string
+          example: PdE9JSjAyLHDw8pwJ
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  messages:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                        file:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            _id:
+                              type: string
+                            type:
+                              type: string
+                        attachments:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              title_link_download:
+                                type: boolean
+                              image_size:
+                                type: integer
+                              image_url:
+                                type: string
+                              title_link:
+                                type: string
+                              image_dimensions:
+                                type: object
+                                properties:
+                                  width:
+                                    type: integer
+                                  height:
+                                    type: integer
+                              image_preview:
+                                type: string
+                              description:
+                                type: string
+                              title:
+                                type: string
+                              type:
+                                type: string
+                              ts:
+                                type: string
+                              image_type:
+                                type: string
+                        channels:
+                          type: array
+                          items:
+                            type: string
+                        u:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            _id:
+                              type: string
+                            username:
+                              type: string
+                        mentions:
+                          type: array
+                          items:
+                            type: string
+                        groupable:
+                          type: boolean
+                        _id:
+                          type: string
+                        rid:
+                          type: string
+                        _updatedAt:
+                          type: string
+                        ts:
+                          type: string
+              examples:
+                '0':
+                  value: >-
+                    {"messages":[{"_id":"cEa5GNXLYSFZPkM7M","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:06:51.080Z","msg":"","file":{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","type":"image/png"},"groupable":false,"attachments":[{"ts":"1970-01-01T00:00:00.000Z","title":"myAvatar.png","title_link":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","title_link_download":true,"image_dimensions":{"width":400,"height":400},"image_preview":"/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgACADASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAABgcCBAj/xAAlEAACAQQBAwQDAAAAAAAAAAABAwIABAURBhIhMRMiUYFBQmH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAwIE/8QAHREAAgIDAQEBAAAAAAAAAAAAAgMAAQQRMSESUf/aAAwDAQACEQMRAD8A5XSstbGEfJOqbWHHmrt4yWsEkUY4+gvySwCOx3VVgl8PTlB0TDpBMfqotbYeVOrHTR+lCN9x5rESkxYBA+6FOWVNlCXmJ1VjYl8vUkx0RDpJEfqpVyBJTkmgkdzuim2fYyFUHozTtLidrcQco6lE7qrYHJLyFjBsSOsDUh8GhOM4dkLxcWTAUs9/d51TmywqsZZrWkkH9pfJrT0WQfWuSGNmADKXvsxzuShj7GbpEdWtRH9qUXdxO6uJuadykd1WrnEpyNq5T/dsdpH8Gg2S4bkLRc2wEWrj37edUQixCi/YycwSZa98n//Z","image_url":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","image_type":"image/png","image_size":58398,"type":"file","description":""}],"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T13:06:51.127Z","mentions":[],"channels":[]},{"_id":"oeBywmuhffAD8e29y","rid":"PdE9JSjAyLHDw8pwJ","msg":"@user1","ts":"2019-07-04T13:02:46.989Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T13:02:47.018Z","mentions":[{"_id":"qDhZXaidfjFtpXnsN","username":"user1","name":"User1"}],"channels":[]},{"_id":"oEFGkgnBtP6HybkTQ","rid":"PdE9JSjAyLHDw8pwJ","msg":"@test.user","ts":"2019-07-04T12:35:58.854Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T12:35:58.892Z","mentions":[{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"}],"channels":[]},{"_id":"263uDK65bqAxMCxka","t":"au","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T02:18:29.179Z","msg":"user1","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"groupable":false,"_updatedAt":"2019-07-04T02:18:29.228Z"}],"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.create:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+            examples:
+              '0':
+                value: '{ "name": "channelname" }'
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  channel:
+                    type: object
+                    properties:
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      customFields:
+                        type: object
+                        properties: {}
+                      usersCount:
+                        type: integer
+                      default:
+                        type: boolean
+                      t:
+                        type: string
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+              examples:
+                '0':
+                  value: >-
+                    {"channel":{"_id":"PdE9JSjAyLHDw8pwJ","name":"channelname","fname":"channelname","t":"c","msgs":0,"usersCount":1,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{},"ts":"2019-07-04T02:14:16.527Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T02:14:16.560Z"},"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.info:
+    get:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: roomId
+          in: query
+          schema:
+            type: string
+          example: PdE9JSjAyLHDw8pwJ
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  channel:
+                    type: object
+                    properties:
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      lm:
+                        type: string
+                      customFields:
+                        type: object
+                        properties: {}
+                      lastMessage:
+                        type: object
+                        properties:
+                          msg:
+                            type: string
+                          file:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              type:
+                                type: string
+                          attachments:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                title_link_download:
+                                  type: boolean
+                                image_size:
+                                  type: integer
+                                image_url:
+                                  type: string
+                                title_link:
+                                  type: string
+                                image_dimensions:
+                                  type: object
+                                  properties:
+                                    width:
+                                      type: integer
+                                    height:
+                                      type: integer
+                                image_preview:
+                                  type: string
+                                description:
+                                  type: string
+                                title:
+                                  type: string
+                                type:
+                                  type: string
+                                ts:
+                                  type: string
+                                image_type:
+                                  type: string
+                          channels:
+                            type: array
+                            items:
+                              type: string
+                          u:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              username:
+                                type: string
+                          mentions:
+                            type: array
+                            items:
+                              type: string
+                          groupable:
+                            type: boolean
+                          _id:
+                            type: string
+                          rid:
+                            type: string
+                          _updatedAt:
+                            type: string
+                          ts:
+                            type: string
+                      usersCount:
+                        type: integer
+                      default:
+                        type: boolean
+                      t:
+                        type: string
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+              examples:
+                '0':
+                  value: >-
+                    {"channel":{"_id":"PdE9JSjAyLHDw8pwJ","name":"channelname","fname":"channelname","t":"c","msgs":4,"usersCount":2,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{},"ts":"2019-07-04T02:14:16.527Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T13:06:51.144Z","lastMessage":{"_id":"cEa5GNXLYSFZPkM7M","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:06:51.080Z","msg":"","file":{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","type":"image/png"},"groupable":false,"attachments":[{"ts":"1970-01-01T00:00:00.000Z","title":"myAvatar.png","title_link":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","title_link_download":true,"image_dimensions":{"width":400,"height":400},"image_preview":"/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgACADASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAABgcCBAj/xAAlEAACAQQBAwQDAAAAAAAAAAABAwIABAURBhIhMRMiUYFBQmH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAwIE/8QAHREAAgIDAQEBAAAAAAAAAAAAAgMAAQQRMSESUf/aAAwDAQACEQMRAD8A5XSstbGEfJOqbWHHmrt4yWsEkUY4+gvySwCOx3VVgl8PTlB0TDpBMfqotbYeVOrHTR+lCN9x5rESkxYBA+6FOWVNlCXmJ1VjYl8vUkx0RDpJEfqpVyBJTkmgkdzuim2fYyFUHozTtLidrcQco6lE7qrYHJLyFjBsSOsDUh8GhOM4dkLxcWTAUs9/d51TmywqsZZrWkkH9pfJrT0WQfWuSGNmADKXvsxzuShj7GbpEdWtRH9qUXdxO6uJuadykd1WrnEpyNq5T/dsdpH8Gg2S4bkLRc2wEWrj37edUQixCi/YycwSZa98n//Z","image_url":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","image_type":"image/png","image_size":58398,"type":"file","description":""}],"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T13:06:51.127Z","mentions":[],"channels":[]},"lm":"2019-07-04T13:06:51.080Z"},"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.counters:
+    get:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: roomId
+          in: query
+          schema:
+            type: string
+          example: PdE9JSjAyLHDw8pwJ
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  unreads:
+                    type: integer
+                  msgs:
+                    type: integer
+                  unreadsFrom:
+                    type: string
+                  joined:
+                    type: boolean
+                  success:
+                    type: boolean
+                  members:
+                    type: integer
+                  userMentions:
+                    type: integer
+                  latest:
+                    type: string
+              examples:
+                '0':
+                  value: >-
+                    {"joined":true,"members":2,"unreads":1,"unreadsFrom":"2019-07-04T02:14:16.527Z","msgs":1,"latest":"2019-07-04T02:18:29.238Z","userMentions":0,"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.join:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: qBXxQKgzj7bWNcH6n
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: CpLUxYNHOXG57mOeSSgmwmBumKL8nCohP9yHYGyH_NN
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: '{ "roomId": "PdE9JSjAyLHDw8pwJ" }'
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  channel:
+                    type: object
+                    properties:
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      lm:
+                        type: string
+                      customFields:
+                        type: object
+                        properties: {}
+                      lastMessage:
+                        type: object
+                        properties:
+                          msg:
+                            type: string
+                          file:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              type:
+                                type: string
+                          attachments:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                title_link_download:
+                                  type: boolean
+                                image_size:
+                                  type: integer
+                                image_url:
+                                  type: string
+                                title_link:
+                                  type: string
+                                image_dimensions:
+                                  type: object
+                                  properties:
+                                    width:
+                                      type: integer
+                                    height:
+                                      type: integer
+                                image_preview:
+                                  type: string
+                                description:
+                                  type: string
+                                title:
+                                  type: string
+                                type:
+                                  type: string
+                                ts:
+                                  type: string
+                                image_type:
+                                  type: string
+                          channels:
+                            type: array
+                            items:
+                              type: string
+                          u:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              username:
+                                type: string
+                          mentions:
+                            type: array
+                            items:
+                              type: string
+                          groupable:
+                            type: boolean
+                          _id:
+                            type: string
+                          rid:
+                            type: string
+                          _updatedAt:
+                            type: string
+                          ts:
+                            type: string
+                      usersCount:
+                        type: integer
+                      default:
+                        type: boolean
+                      t:
+                        type: string
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+              examples:
+                '0':
+                  value: >-
+                    {"channel":{"_id":"PdE9JSjAyLHDw8pwJ","name":"channelname","fname":"channelname","t":"c","msgs":5,"usersCount":3,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{},"ts":"2019-07-04T02:14:16.527Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T13:16:59.866Z","lastMessage":{"_id":"cEa5GNXLYSFZPkM7M","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:06:51.080Z","msg":"","file":{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","type":"image/png"},"groupable":false,"attachments":[{"ts":"1970-01-01T00:00:00.000Z","title":"myAvatar.png","title_link":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","title_link_download":true,"image_dimensions":{"width":400,"height":400},"image_preview":"/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgACADASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAABgcCBAj/xAAlEAACAQQBAwQDAAAAAAAAAAABAwIABAURBhIhMRMiUYFBQmH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAwIE/8QAHREAAgIDAQEBAAAAAAAAAAAAAgMAAQQRMSESUf/aAAwDAQACEQMRAD8A5XSstbGEfJOqbWHHmrt4yWsEkUY4+gvySwCOx3VVgl8PTlB0TDpBMfqotbYeVOrHTR+lCN9x5rESkxYBA+6FOWVNlCXmJ1VjYl8vUkx0RDpJEfqpVyBJTkmgkdzuim2fYyFUHozTtLidrcQco6lE7qrYHJLyFjBsSOsDUh8GhOM4dkLxcWTAUs9/d51TmywqsZZrWkkH9pfJrT0WQfWuSGNmADKXvsxzuShj7GbpEdWtRH9qUXdxO6uJuadykd1WrnEpyNq5T/dsdpH8Gg2S4bkLRc2wEWrj37edUQixCi/YycwSZa98n//Z","image_url":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","image_type":"image/png","image_size":58398,"type":"file","description":""}],"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T13:06:51.127Z","mentions":[],"channels":[]},"lm":"2019-07-04T13:06:51.080Z"},"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.getAllUserMentionsByChannel:
+    get:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: roomId
+          in: query
+          schema:
+            type: string
+          example: PdE9JSjAyLHDw8pwJ
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  success:
+                    type: boolean
+                  mentions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                        channels:
+                          type: array
+                          items:
+                            type: string
+                        u:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            _id:
+                              type: string
+                            username:
+                              type: string
+                        mentions:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              username:
+                                type: string
+                        _id:
+                          type: string
+                        rid:
+                          type: string
+                        _updatedAt:
+                          type: string
+                        ts:
+                          type: string
+                  count:
+                    type: integer
+              examples:
+                '0':
+                  value: >-
+                    {"mentions":[{"_id":"oEFGkgnBtP6HybkTQ","rid":"PdE9JSjAyLHDw8pwJ","msg":"@test.user","ts":"2019-07-04T12:35:58.854Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T12:35:58.892Z","mentions":[{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"}],"channels":[]}],"count":1,"offset":0,"total":1,"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.kick:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "PdE9JSjAyLHDw8pwJ", "userId": "qBXxQKgzj7bWNcH6n"
+                  }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  channel:
+                    type: object
+                    properties:
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      lm:
+                        type: string
+                      customFields:
+                        type: object
+                        properties: {}
+                      lastMessage:
+                        type: object
+                        properties:
+                          msg:
+                            type: string
+                          file:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              type:
+                                type: string
+                          attachments:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                title_link_download:
+                                  type: boolean
+                                image_size:
+                                  type: integer
+                                image_url:
+                                  type: string
+                                title_link:
+                                  type: string
+                                image_dimensions:
+                                  type: object
+                                  properties:
+                                    width:
+                                      type: integer
+                                    height:
+                                      type: integer
+                                image_preview:
+                                  type: string
+                                description:
+                                  type: string
+                                title:
+                                  type: string
+                                type:
+                                  type: string
+                                ts:
+                                  type: string
+                                image_type:
+                                  type: string
+                          channels:
+                            type: array
+                            items:
+                              type: string
+                          u:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              username:
+                                type: string
+                          mentions:
+                            type: array
+                            items:
+                              type: string
+                          groupable:
+                            type: boolean
+                          _id:
+                            type: string
+                          rid:
+                            type: string
+                          _updatedAt:
+                            type: string
+                          ts:
+                            type: string
+                      usersCount:
+                        type: integer
+                      default:
+                        type: boolean
+                      t:
+                        type: string
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+              examples:
+                '0':
+                  value: >-
+                    {"channel":{"_id":"PdE9JSjAyLHDw8pwJ","name":"channelname","fname":"channelname","t":"c","msgs":6,"usersCount":2,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{},"ts":"2019-07-04T02:14:16.527Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T13:19:11.014Z","lastMessage":{"_id":"cEa5GNXLYSFZPkM7M","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:06:51.080Z","msg":"","file":{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","type":"image/png"},"groupable":false,"attachments":[{"ts":"1970-01-01T00:00:00.000Z","title":"myAvatar.png","title_link":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","title_link_download":true,"image_dimensions":{"width":400,"height":400},"image_preview":"/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgACADASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAABgcCBAj/xAAlEAACAQQBAwQDAAAAAAAAAAABAwIABAURBhIhMRMiUYFBQmH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAwIE/8QAHREAAgIDAQEBAAAAAAAAAAAAAgMAAQQRMSESUf/aAAwDAQACEQMRAD8A5XSstbGEfJOqbWHHmrt4yWsEkUY4+gvySwCOx3VVgl8PTlB0TDpBMfqotbYeVOrHTR+lCN9x5rESkxYBA+6FOWVNlCXmJ1VjYl8vUkx0RDpJEfqpVyBJTkmgkdzuim2fYyFUHozTtLidrcQco6lE7qrYHJLyFjBsSOsDUh8GhOM4dkLxcWTAUs9/d51TmywqsZZrWkkH9pfJrT0WQfWuSGNmADKXvsxzuShj7GbpEdWtRH9qUXdxO6uJuadykd1WrnEpyNq5T/dsdpH8Gg2S4bkLRc2wEWrj37edUQixCi/YycwSZa98n//Z","image_url":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","image_type":"image/png","image_size":58398,"type":"file","description":""}],"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T13:06:51.127Z","mentions":[],"channels":[]},"lm":"2019-07-04T13:06:51.080Z"},"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.invite:
+    post:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                userId:
+                  type: string
+                roomId:
+                  type: string
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "LAH2isR5nqnY7xdLA", "userId": "qDhZXaidfjFtpXnsN"
+                  }
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  channel:
+                    type: object
+                    properties:
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      customFields:
+                        type: object
+                        properties: {}
+                      usersCount:
+                        type: integer
+                      default:
+                        type: boolean
+                      t:
+                        type: string
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+              examples:
+                '0':
+                  value: >-
+                    {"channel":{"_id":"LAH2isR5nqnY7xdLA","name":"testing","fname":"testing","t":"c","msgs":1,"usersCount":2,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{},"ts":"2019-07-04T02:23:32.711Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T02:24:01.423Z"},"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/channels.files:
+    get:
+      description: Auto generated using Swagger Inspector
+      parameters:
+        - name: roomId
+          in: query
+          schema:
+            type: string
+          example: PdE9JSjAyLHDw8pwJ
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  success:
+                    type: boolean
+                  count:
+                    type: integer
+                  files:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        AmazonS3:
+                          type: object
+                          properties:
+                            path:
+                              type: string
+                        extension:
+                          type: string
+                        identify:
+                          type: object
+                          properties:
+                            size:
+                              type: object
+                              properties:
+                                width:
+                                  type: integer
+                                height:
+                                  type: integer
+                            format:
+                              type: string
+                        description:
+                          type: string
+                        store:
+                          type: string
+                        type:
+                          type: string
+                        rid:
+                          type: string
+                        userId:
+                          type: string
+                        url:
+                          type: string
+                        token:
+                          type: string
+                        path:
+                          type: string
+                        instanceId:
+                          type: string
+                        size:
+                          type: integer
+                        name:
+                          type: string
+                        progress:
+                          type: integer
+                        uploadedAt:
+                          type: string
+                        uploading:
+                          type: boolean
+                        etag:
+                          type: string
+                        _id:
+                          type: string
+                        complete:
+                          type: boolean
+                        _updatedAt:
+                          type: string
+                        user:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            _id:
+                              type: string
+                            username:
+                              type: string
+              examples:
+                '0':
+                  value: >-
+                    {"files":[{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","size":58398,"type":"image/png","rid":"PdE9JSjAyLHDw8pwJ","description":"","store":"AmazonS3:Uploads","complete":true,"uploading":false,"extension":"png","progress":1,"userId":"uunbZHiuEnib8Pawj","AmazonS3":{"path":"Xd6z5vKgZtHHER8pn/uploads/PdE9JSjAyLHDw8pwJ/uunbZHiuEnib8Pawj/uy8ETbzE72pjfria9"},"_updatedAt":"2019-07-04T13:06:45.603Z","instanceId":"NXNs25pLW9EuNr83Y","identify":{"format":"png","size":{"width":400,"height":400}},"etag":"ZGyGtgedwyeDjsKND","path":"/ufs/AmazonS3:Uploads/uy8ETbzE72pjfria9/myAvatar.png","token":"2A3a98fB79","uploadedAt":"2019-07-04T13:06:50.536Z","url":"/ufs/AmazonS3:Uploads/uy8ETbzE72pjfria9/myAvatar.png","user":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"}}],"count":1,"offset":0,"total":1,"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
 components:
   securitySchemes:
     basic:
