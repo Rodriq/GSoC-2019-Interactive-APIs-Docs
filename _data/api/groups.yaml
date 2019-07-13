@@ -1222,9 +1222,9 @@ paths:
                 '0':
                   value: '{"announcement":"Test out everything","success":true}'
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/groups.removeLeader:
     post:
       description: Auto generated using Swagger Inspector
@@ -1268,9 +1268,9 @@ paths:
                 '0':
                   value: '{"success":true}'
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/groups.setReadOnly:
     post:
       description: Auto generated using Swagger Inspector
@@ -1395,9 +1395,9 @@ paths:
                     out everything","description":"Test out
                     everything"},"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/groups.messages:
     get:
       description: Auto generated using Swagger Inspector
@@ -1473,9 +1473,9 @@ paths:
                     User"},"_updatedAt":"2019-07-04T00:59:16.538Z","mentions":[],"channels":[]},{"_id":"W85mu3zv7a9DZLw6b","rid":"osfdesAPnGondgB7i","msg":"Hey","ts":"2019-07-04T00:58:43.867Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
                     User"},"_updatedAt":"2019-07-04T00:58:43.890Z","mentions":[],"channels":[]},{"_id":"Hh77oNJyEoye8N72G","rid":"osfdesAPnGondgB7i","msg":"Hello","ts":"2019-07-04T00:58:12.104Z","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1","name":"User1"},"_updatedAt":"2019-07-04T00:58:12.132Z","mentions":[],"channels":[]},{"_id":"R8N4Lb47qj2Qj5Hfi","t":"subscription-role-added","rid":"osfdesAPnGondgB7i","ts":"2019-07-04T00:58:04.717Z","msg":"user1","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1"},"groupable":false,"role":"owner","_updatedAt":"2019-07-04T00:58:04.717Z"},{"_id":"Ec3s3qYy5Dq86EtGm","t":"subscription-role-removed","rid":"osfdesAPnGondgB7i","ts":"2019-07-04T00:57:57.034Z","msg":"user2","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1"},"groupable":false,"role":"owner","_updatedAt":"2019-07-04T00:57:57.034Z"},{"_id":"HCB54wQKgKuf4nqKN","t":"subscription-role-added","rid":"osfdesAPnGondgB7i","ts":"2019-07-04T00:57:48.111Z","msg":"user2","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1"},"groupable":false,"role":"owner","_updatedAt":"2019-07-04T00:57:48.111Z"},{"_id":"2YheJqFoTN8NLGE9z","t":"au","rid":"osfdesAPnGondgB7i","ts":"2019-07-04T00:57:19.577Z","msg":"test.user","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1"},"groupable":false,"_updatedAt":"2019-07-04T00:57:19.594Z"},{"_id":"QMo4wcSSNmAdKDp2r","t":"au","rid":"osfdesAPnGondgB7i","ts":"2019-07-02T23:13:03.299Z","msg":"user1","u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"groupable":false,"_updatedAt":"2019-07-02T23:13:03.314Z"},{"_id":"bvcgyAciYZSeepo2s","t":"ul","rid":"osfdesAPnGondgB7i","ts":"2019-07-02T23:11:59.510Z","msg":"user1","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1"},"groupable":false,"_updatedAt":"2019-07-02T23:11:59.510Z"},{"_id":"rAWFSM4TGh6os8Lpn","t":"au","rid":"osfdesAPnGondgB7i","ts":"2019-07-02T22:58:49.932Z","msg":"user2","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"groupable":false,"_updatedAt":"2019-07-02T22:58:49.950Z"},{"_id":"zPE8goQ7WonZwiYk4","t":"au","rid":"osfdesAPnGondgB7i","ts":"2019-07-02T22:17:04.024Z","msg":"user1","u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"groupable":false,"_updatedAt":"2019-07-02T22:17:04.043Z"}],"count":13,"offset":0,"total":13,"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/groups.members:
     get:
       description: Auto generated using Swagger Inspector
@@ -1537,9 +1537,9 @@ paths:
                     {"members":[{"_id":"uunbZHiuEnib8Pawj","username":"test.user","status":"online","name":"Test
                     User","utcOffset":1},{"_id":"qDhZXaidfjFtpXnsN","username":"user1","status":"online","name":"User1","utcOffset":1},{"_id":"qBXxQKgzj7bWNcH6n","username":"user2","status":"offline","name":"User2"}],"count":3,"offset":0,"total":3,"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/groups.setType:
     post:
       description: Auto generated using Swagger Inspector
@@ -1667,9 +1667,9 @@ paths:
                     everything","topic":"Discuss all of the
                     testing."},"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/groups.setCustomFields:
     post:
       description: Auto generated using Swagger Inspector
@@ -1798,9 +1798,9 @@ paths:
                     User"},"_updatedAt":"2019-07-04T00:59:16.538Z","mentions":[],"channels":[]},"lm":"2019-07-04T00:59:16.515Z","announcement":"Test
                     out everything"},"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/groups.rename:
     post:
       description: Auto generated using Swagger Inspector
@@ -1917,9 +1917,9 @@ paths:
                     you?","ts":"2019-07-04T00:59:16.515Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
                     User"},"_updatedAt":"2019-07-04T00:59:16.538Z","mentions":[],"channels":[]},"lm":"2019-07-04T00:59:16.515Z"},"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/groups.invite:
     post:
       description: Auto generated using Swagger Inspector
@@ -2003,9 +2003,9 @@ paths:
                   value: >-
                     {"group":{"_id":"osfdesAPnGondgB7i","name":"test.channel","fname":"test.channel","t":"p","msgs":2,"usersCount":3,"u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"customFields":{},"broadcast":false,"encrypted":false,"ts":"2019-06-29T22:26:06.172Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-02T22:58:49.954Z"},"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/groups.setPurpose:
     post:
       description: Auto generated using Swagger Inspector
@@ -2051,9 +2051,9 @@ paths:
                 '0':
                   value: '{"purpose":"Test out everything","success":true}'
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/groups.moderators:
     get:
       description: Auto generated using Swagger Inspector
@@ -2104,9 +2104,9 @@ paths:
                   value: >-
                     {"moderators":[{"_id":"qDhZXaidfjFtpXnsN","username":"user1","name":"User1"}],"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/groups.kick:
     post:
       description: Auto generated using Swagger Inspector
@@ -2157,9 +2157,9 @@ paths:
                     \"roomName\" param provided does not match any group
                     [error-room-not-found]","errorType":"error-room-not-found"}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/groups.roles:
     get:
       description: Auto generated using Swagger Inspector
@@ -2221,9 +2221,9 @@ paths:
                   value: >-
                     {"roles":[{"_id":"c3stE5urxPNg2Qtij","rid":"osfdesAPnGondgB7i","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1","name":"User1"},"roles":["owner","moderator","leader"]}],"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/groups.setTopic:
     post:
       description: Auto generated using Swagger Inspector
@@ -2269,9 +2269,9 @@ paths:
                 '0':
                   value: '{"topic":"Discuss all of the testing.","success":true}'
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/groups.leave:
     post:
       description: Auto generated using Swagger Inspector
@@ -2311,9 +2311,9 @@ paths:
                 '0':
                   value: '{"success":true}'
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/groups.setDescription:
     post:
       description: Auto generated using Swagger Inspector
@@ -2359,9 +2359,9 @@ paths:
                 '0':
                   value: '{"description":"Test out everything","success":true}'
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/groups.removeModerator:
     post:
       description: Auto generated using Swagger Inspector
@@ -2405,9 +2405,9 @@ paths:
                 '0':
                   value: '{"success":true}'
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/groups.open:
     post:
       description: Auto generated using Swagger Inspector
@@ -2451,9 +2451,9 @@ paths:
                     {"success":false,"error":"The private group, test.channel,
                     is already open for the sender"}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
 components:
   securitySchemes:
     basic:

@@ -522,14 +522,7 @@ paths:
                 roomId:
                   type: string
                   example: 7fA2KwaTMz3ssAT9s
-                  description: The channel’s id
-            # examples:
-            #   '0':
-            #     value: |-
-            #       {
-            #           "roomId": "7fA2KwaTMz3ssAT9s",
-            #           "userId": "umbrXA5KrhaXawT8v"
-            #       }
+                  description: The channel's id
       responses:
         '200':
           description: Gives the role of Leader for a user in the current channel.
@@ -552,7 +545,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/channels.removeLeader:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Removes the role of Leader for a user in the current channel.
       parameters:
         - name: X-User-Id
           in: header
@@ -569,19 +562,21 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - userId
+                - roomId
               properties:
                 userId:
                   type: string
+                  example: umbrXA5KrhaXawT8v
+                  description: The user’s id
                 roomId:
                   type: string
-            examples:
-              '0':
-                value: >-
-                  { "roomId": "PdE9JSjAyLHDw8pwJ", "userId": "qDhZXaidfjFtpXnsN"
-                  }
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The channel’s id
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Removes the role of Leader for a user in the current channel.
           content:
             application/json:
               schema:
@@ -593,18 +588,19 @@ paths:
                 '0':
                   value: '{"success":true}'
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.online:
     get:
-      description: Auto generated using Swagger Inspector
+      description: List all online users of a channel.
       parameters:
-        - name: roomId
+        - name: query
           in: query
           schema:
-            type: string
-          example: osfdesAPnGondgB7i
+            type: object
+          example: {"_id":"5HmCfpoB7jp2uibTC"}
+          description: See [Query Parameter](../../query-and-fields-info/)
         - name: X-User-Id
           in: header
           schema:
@@ -617,7 +613,7 @@ paths:
           example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Lists all online users of a channel if the channel's id is provided, otherwise it gets all online users of all channels. It supports the [Query Parameters only](../../query-and-fields-info/#query-example).
           content:
             application/json:
               schema:
@@ -631,14 +627,26 @@ paths:
                       type: string
               examples:
                 '0':
-                  value: '{"online":[],"success":true}'
+                  value: '{"online":
+                    [
+                      {
+                        "_id": "47cRd58HnWwpqxhaZ",
+                        "username": "test"
+                        },
+                        {
+                          "_id": "BsxzC22xQ43taWdff",
+                          "username": "uniqueusername"
+                          }
+                    ],
+                    "success":true
+                    }'
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.setReadOnly:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Sets whether a channel is read only or not.
       parameters:
         - name: X-User-Id
           in: header
@@ -655,17 +663,21 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                  - roomId
+                  - readOnly
               properties:
                 readOnly:
                   type: boolean
+                  example: true
+                  description: Boolean of whether the room is read only or not.
                 roomId:
                   type: string
-            examples:
-              '0':
-                value: '{ "roomId": "PdE9JSjAyLHDw8pwJ", "readOnly": true }'
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The channel’s id.
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Sets whether the channel is read only or not.
           content:
             application/json:
               schema:
@@ -799,12 +811,12 @@ paths:
                     out Everything","description":"Test out
                     everything","joinCodeRequired":true},"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.delete:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Removes a channel.
       parameters:
         - name: X-User-Id
           in: header
@@ -821,17 +833,21 @@ paths:
           application/json:
             schema:
               type: object
+              required: 
+                  - roomId
+                  - roomName
               properties:
                 roomId:
                   type: string
+                  example: LAH2isR5nqnY7xdLA
+                  description: The channel’s id
                 roomName:
                   type: string
-            examples:
-              '0':
-                value: '{ "roomId": "LAH2isR5nqnY7xdLA", "roomName": "testing" }'
+                  example: channelname
+                  description: The channel’s name
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Remove a public channel.
           content:
             application/json:
               schema:
@@ -843,18 +859,27 @@ paths:
                 '0':
                   value: '{"success":true}'
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.moderators:
     get:
-      description: Auto generated using Swagger Inspector
+      description: List all moderators of a channel.
       parameters:
         - name: roomId
           in: query
           schema:
             type: string
           example: osfdesAPnGondgB7i
+          required: true
+          description: The channel’s id.
+        - name: roomName
+          in: query
+          schema:
+            type: string
+          example: general
+          required: true
+          description: The channel’s name.
         - name: X-User-Id
           in: header
           schema:
@@ -867,7 +892,7 @@ paths:
           example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Lists all channel moderators.
           content:
             application/json:
               schema:
@@ -891,12 +916,12 @@ paths:
                   value: >-
                     {"moderators":[{"_id":"qDhZXaidfjFtpXnsN","username":"user1","name":"User1"}],"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.setCustomFields:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Sets a channel’s custom fields.
       parameters:
         - name: X-User-Id
           in: header
@@ -913,24 +938,26 @@ paths:
           application/json:
             schema:
               type: object
+              required: 
+                - roomId
+                - roomName
+                - customFields
               properties:
                 customFields:
                   type: object
-                  properties:
-                    organization:
-                      type: string
+                  example: {"organization": "tra-la-la"}
+                  description: The custom fields to set for the channel.
                 roomId:
                   type: string
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The channel’s id.
                 roomName:
                   type: string
-            examples:
-              '0':
-                value: >-
-                  { "roomId": "PdE9JSjAyLHDw8pwJ", "roomName": "channel-name",
-                  "customFields": {"organization": "tra-la-la"} }
+                  example: channel-name
+                  description: The channel's name.
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Sets the custom fields for the channel.
           content:
             application/json:
               schema:
@@ -1059,12 +1086,12 @@ paths:
                     User"},"_updatedAt":"2019-07-04T13:06:51.127Z","mentions":[],"channels":[]},"lm":"2019-07-04T13:06:51.080Z","announcement":"Test
                     out Everything"},"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.setDescription:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Sets a channel’s description.
       parameters:
         - name: X-User-Id
           in: header
@@ -1081,11 +1108,18 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - roomId
+                - description
               properties:
                 description:
                   type: string
+                  example: Try out everything
+                  description: The description to set for the channel.
                 roomId:
                   type: string
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The channel's id
             examples:
               '0':
                 value: >-
@@ -1093,7 +1127,7 @@ paths:
                   everything" }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Sets the description for the channel.
           content:
             application/json:
               schema:
@@ -1107,12 +1141,12 @@ paths:
                 '0':
                   value: '{"description":"Try out everything","success":true}'
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.rename:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Changes a channel’s name.
       parameters:
         - name: X-User-Id
           in: header
@@ -1129,17 +1163,24 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - name
+                - roomId
               properties:
-                name:
-                  type: string
                 roomId:
                   type: string
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The channel's id
+                name:
+                  type: string
+                  example: newname
+                  description: The new name the channel will have, it cannot be the same as another or the existing name
             examples:
               '0':
                 value: '{ "roomId": "PdE9JSjAyLHDw8pwJ", "name": "new-name" }'
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Changes the name of the channel.
           content:
             application/json:
               schema:
@@ -1263,23 +1304,27 @@ paths:
                     {"channel":{"_id":"PdE9JSjAyLHDw8pwJ","name":"new-name","fname":"new-name","t":"c","msgs":16,"usersCount":2,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{},"ts":"2019-07-04T02:14:16.527Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-05T01:40:49.565Z","lastMessage":{"_id":"cEa5GNXLYSFZPkM7M","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:06:51.080Z","msg":"","file":{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","type":"image/png"},"groupable":false,"attachments":[{"ts":"1970-01-01T00:00:00.000Z","title":"myAvatar.png","title_link":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","title_link_download":true,"image_dimensions":{"width":400,"height":400},"image_preview":"/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgACADASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAABgcCBAj/xAAlEAACAQQBAwQDAAAAAAAAAAABAwIABAURBhIhMRMiUYFBQmH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAwIE/8QAHREAAgIDAQEBAAAAAAAAAAAAAgMAAQQRMSESUf/aAAwDAQACEQMRAD8A5XSstbGEfJOqbWHHmrt4yWsEkUY4+gvySwCOx3VVgl8PTlB0TDpBMfqotbYeVOrHTR+lCN9x5rESkxYBA+6FOWVNlCXmJ1VjYl8vUkx0RDpJEfqpVyBJTkmgkdzuim2fYyFUHozTtLidrcQco6lE7qrYHJLyFjBsSOsDUh8GhOM4dkLxcWTAUs9/d51TmywqsZZrWkkH9pfJrT0WQfWuSGNmADKXvsxzuShj7GbpEdWtRH9qUXdxO6uJuadykd1WrnEpyNq5T/dsdpH8Gg2S4bkLRc2wEWrj37edUQixCi/YycwSZa98n//Z","image_url":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","image_type":"image/png","image_size":58398,"type":"file","description":""}],"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
                     User"},"_updatedAt":"2019-07-04T13:06:51.127Z","mentions":[],"channels":[]},"lm":"2019-07-04T13:06:51.080Z"},"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.roles:
     get:
-      description: Auto generated using Swagger Inspector
+      description: Gets the user’s roles in the channel.
       parameters:
         - name: roomId
+          required: true
           in: query
           schema:
             type: string
           example: PdE9JSjAyLHDw8pwJ
+          description: The channel's id
         - name: roomName
+          required: true
           in: query
           schema:
             type: string
           example: channelname
+          description: The channel's name
         - name: X-User-Id
           in: header
           schema:
@@ -1292,7 +1337,7 @@ paths:
           example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Lists all user’s roles in the channel.
           content:
             application/json:
               schema:
@@ -1325,12 +1370,12 @@ paths:
                   value: >-
                     {"roles":[{"_id":"XcJaZJWMHhe6hbTZ7","rid":"PdE9JSjAyLHDw8pwJ","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"roles":["owner"]},{"_id":"JFDErzoeWjGM5hv6c","rid":"PdE9JSjAyLHDw8pwJ","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1","name":"User1"},"roles":["leader","owner"]}],"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.list.joined:
     get:
-      description: Auto generated using Swagger Inspector
+      description: Gets only the channels the calling user has joined.
       parameters:
         - name: X-User-Id
           in: header
@@ -1344,7 +1389,7 @@ paths:
           example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Lists all of the channels the calling user has joined. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with just the [Fields Query Parameter](../../query-and-fields-info/).
           content:
             application/json:
               schema:
@@ -1484,12 +1529,12 @@ paths:
                     testing."},{"_id":"LAH2isR5nqnY7xdLA","name":"testing","fname":"testing","t":"c","msgs":5,"usersCount":2,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{},"ts":"2019-07-04T02:23:32.711Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T12:36:16.627Z","lastMessage":{"_id":"yLDFGAuktperaFpjF","rid":"LAH2isR5nqnY7xdLA","msg":"@user1","ts":"2019-07-04T12:36:16.584Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
                     User"},"_updatedAt":"2019-07-04T12:36:16.619Z","mentions":[{"_id":"qDhZXaidfjFtpXnsN","username":"user1","name":"User1"}],"channels":[]},"lm":"2019-07-04T12:36:16.584Z"}],"offset":0,"count":4,"total":4,"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.setType:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Sets the type of room the channel should be.                                                               
       parameters:
         - name: X-User-Id
           in: header
@@ -1506,17 +1551,24 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - roomId
+                - type
               properties:
                 type:
                   type: string
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The channels id.
                 roomId:
                   type: string
+                  example: c 'or' p
+                  description: The type of room this channel should be, either `c` or `p`.
             examples:
               '0':
                 value: '{ "roomId": "PdE9JSjAyLHDw8pwJ", "type": "p" }'
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Sets the type of room this channel should be.
           content:
             application/json:
               schema:
@@ -1651,18 +1703,27 @@ paths:
                     everything","joinCodeRequired":true,"topic":"Discuss all of
                     the testing"},"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.messages:
     get:
-      description: Auto generated using Swagger Inspector
+      description: Retrieves all channel messages.
       parameters:
         - name: roomId
           in: query
+          required: true
           schema:
             type: string
           example: PdE9JSjAyLHDw8pwJ
+          description: The channel’s id
+        - name: roomName
+          in: query
+          required: true
+          schema:
+            type: string
+          example: testChanel
+          description: The channel’s name
         - name: X-User-Id
           in: header
           schema:
@@ -1675,7 +1736,7 @@ paths:
           example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Lists all of the specific channel messages on the server. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with [Query and Fields Query Parameters](../../query-and-fields-info/).
           content:
             application/json:
               schema:
@@ -1724,18 +1785,27 @@ paths:
                     User"},"_updatedAt":"2019-07-04T12:35:58.892Z","mentions":[{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
                     User"}],"channels":[]},{"_id":"263uDK65bqAxMCxka","t":"au","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T02:18:29.179Z","msg":"user1","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"groupable":false,"_updatedAt":"2019-07-04T02:18:29.228Z"}],"count":10,"offset":0,"total":10,"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.members:
     get:
-      description: Auto generated using Swagger Inspector
+      description: Retrieves all channel users.
       parameters:
         - name: roomId
           in: query
+          required: true
           schema:
             type: string
           example: PdE9JSjAyLHDw8pwJ
+          description: The channel's id
+        - name: roomName
+          in: query
+          required: true
+          schema:
+            type: string
+          example: genral
+          description: The channel's name
         - name: X-User-Id
           in: header
           schema:
@@ -1748,7 +1818,7 @@ paths:
           example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Lists all channel users. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with [Query and Fields Query Parameters](../../query-and-fields-info/).
           content:
             application/json:
               schema:
@@ -1783,12 +1853,12 @@ paths:
                     {"members":[{"_id":"uunbZHiuEnib8Pawj","username":"test.user","status":"online","name":"Test
                     User","utcOffset":1},{"_id":"qDhZXaidfjFtpXnsN","username":"user1","status":"offline","name":"User1","utcOffset":1}],"count":2,"offset":0,"total":2,"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.addOwner:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Gives the role of owner to a user in a channel.
       parameters:
         - name: X-User-Id
           in: header
@@ -1805,11 +1875,18 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - userId
+                - roomId
               properties:
                 userId:
                   type: string
+                  example: qDhZXaidfjFtpXnsN
+                  description: The user id
                 roomId:
                   type: string
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The channel's id
             examples:
               '0':
                 value: >-
@@ -1817,7 +1894,7 @@ paths:
                   }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Gives the role of owner for a user in the current channel.
           content:
             application/json:
               schema:
@@ -1829,12 +1906,12 @@ paths:
                 '0':
                   value: '{"success":true}'
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.setPurpose:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Sets a channel’s description.
       parameters:
         - name: X-User-Id
           in: header
@@ -1851,11 +1928,18 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - perpose
+                - roomId
               properties:
-                purpose:
-                  type: string
                 roomId:
                   type: string
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The description to set for the channel.
+                purpose:
+                  type: string
+                  example: "Test out everything"
+                  description: The channel's id
             examples:
               '0':
                 value: >-
@@ -1863,7 +1947,7 @@ paths:
                   everything" }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Sets the description for the channel (the same as channels.setDescription, obsolete).
           content:
             application/json:
               schema:
@@ -1877,12 +1961,12 @@ paths:
                 '0':
                   value: '{"purpose":"Test out everything","success":true}'
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.setDefault:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Sets a channel’s default status.
       parameters:
         - name: X-User-Id
           in: header
@@ -1899,17 +1983,24 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - default
+                - roomId
               properties:
-                default:
-                  type: boolean
                 roomId:
                   type: string
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The channel's id
+                default:
+                  type: boolean
+                  example: true
+                  description: Boolean of whether the room is default or not.
             examples:
               '0':
                 value: '{ "roomId": "PdE9JSjAyLHDw8pwJ", "default": true }'
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Sets whether the channel is a default channel or not.
           content:
             application/json:
               schema:
@@ -2038,12 +2129,12 @@ paths:
                     User"},"_updatedAt":"2019-07-04T13:06:51.127Z","mentions":[],"channels":[]},"lm":"2019-07-04T13:06:51.080Z","announcement":"Test
                     out Everything"},"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.setTopic:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Sets a channel’s topic.
       parameters:
         - name: X-User-Id
           in: header
@@ -2060,11 +2151,18 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - roomId
+                - topic
               properties:
-                topic:
-                  type: string
                 roomId:
                   type: string
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The channel's id
+                topic:
+                  type: string
+                  example: Discuss all of the testing
+                  description: The channel’s topic to set.
             examples:
               '0':
                 value: >-
@@ -2072,7 +2170,7 @@ paths:
                   testing" }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Sets the topic for the channel.
           content:
             application/json:
               schema:
@@ -2086,12 +2184,12 @@ paths:
                 '0':
                   value: '{"topic":"Discuss all of the testing","success":true}'
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.setAnnouncement:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Sets a channel’s announcement.
       parameters:
         - name: X-User-Id
           in: header
@@ -2108,11 +2206,18 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - roomId
+                - announcement
               properties:
                 roomId:
                   type: string
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The channel's id
                 announcement:
                   type: string
+                  example: Test out Everything
+                  description: The announcement to set for the channel.
             examples:
               '0':
                 value: >-
@@ -2120,7 +2225,7 @@ paths:
                   Everything" }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Sets the announcement for the channel.
           content:
             application/json:
               schema:
@@ -2134,12 +2239,12 @@ paths:
                 '0':
                   value: '{"announcement":"Test out Everything","success":true}'
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.setJoinCode:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Sets the channel’s code required to join it.
       parameters:
         - name: X-User-Id
           in: header
@@ -2156,17 +2261,24 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - roomId
+                - joinCode
               properties:
                 joinCode:
                   type: string
+                  example: my-join-code
+                  description: The join code which this channel will require to be joined.
                 roomId:
                   type: string
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The channel's id.
             examples:
               '0':
                 value: '{ "roomId": "PdE9JSjAyLHDw8pwJ", "joinCode": "my-join-code" }'
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Sets the code required to join the channel.
           content:
             application/json:
               schema:
@@ -2300,12 +2412,12 @@ paths:
                     out Everything","description":"Try out
                     everything","joinCodeRequired":true},"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.removeModerator:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Removes the role of moderator from a user in a channel.
       parameters:
         - name: X-User-Id
           in: header
@@ -2322,11 +2434,18 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - roomId
+                - userId
               properties:
                 userId:
                   type: string
+                  example: qDhZXaidfjFtpXnsN
+                  description: The user's id.
                 roomId:
                   type: string
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The channel's id.
             examples:
               '0':
                 value: >-
@@ -2334,7 +2453,7 @@ paths:
                   }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Removes the role of moderator from a user in the current channel.
           content:
             application/json:
               schema:
@@ -2346,12 +2465,12 @@ paths:
                 '0':
                   value: '{"success":true}'
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.leave:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Removes the calling user from a channel.
       parameters:
         - name: X-User-Id
           in: header
@@ -2368,15 +2487,19 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - roomId
               properties:
                 roomId:
                   type: string
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The channel's id
             examples:
               '0':
                 value: '{ "roomId": "PdE9JSjAyLHDw8pwJ" }'
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Causes the callee to be removed from the channel.
           content:
             application/json:
               schema:
@@ -2500,12 +2623,12 @@ paths:
                     {"channel":{"_id":"PdE9JSjAyLHDw8pwJ","name":"channelname","fname":"channelname","t":"c","msgs":10,"usersCount":2,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{},"ts":"2019-07-04T02:14:16.527Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T13:27:42.580Z","lastMessage":{"_id":"cEa5GNXLYSFZPkM7M","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:06:51.080Z","msg":"","file":{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","type":"image/png"},"groupable":false,"attachments":[{"ts":"1970-01-01T00:00:00.000Z","title":"myAvatar.png","title_link":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","title_link_download":true,"image_dimensions":{"width":400,"height":400},"image_preview":"/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgACADASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAABgcCBAj/xAAlEAACAQQBAwQDAAAAAAAAAAABAwIABAURBhIhMRMiUYFBQmH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAwIE/8QAHREAAgIDAQEBAAAAAAAAAAAAAgMAAQQRMSESUf/aAAwDAQACEQMRAD8A5XSstbGEfJOqbWHHmrt4yWsEkUY4+gvySwCOx3VVgl8PTlB0TDpBMfqotbYeVOrHTR+lCN9x5rESkxYBA+6FOWVNlCXmJ1VjYl8vUkx0RDpJEfqpVyBJTkmgkdzuim2fYyFUHozTtLidrcQco6lE7qrYHJLyFjBsSOsDUh8GhOM4dkLxcWTAUs9/d51TmywqsZZrWkkH9pfJrT0WQfWuSGNmADKXvsxzuShj7GbpEdWtRH9qUXdxO6uJuadykd1WrnEpyNq5T/dsdpH8Gg2S4bkLRc2wEWrj37edUQixCi/YycwSZa98n//Z","image_url":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","image_type":"image/png","image_size":58398,"type":"file","description":""}],"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
                     User"},"_updatedAt":"2019-07-04T13:06:51.127Z","mentions":[],"channels":[]},"lm":"2019-07-04T13:06:51.080Z"},"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.addModerator:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Gives the role of moderator to a user in a channel.
       parameters:
         - name: X-User-Id
           in: header
@@ -2522,11 +2645,18 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - roomId
+                - userId
               properties:
                 userId:
                   type: string
+                  example: qDhZXaidfjFtpXnsN
+                  description: The user's id
                 roomId:
                   type: string
+                  example: LAH2isR5nqnY7xdLA
+                  description: The channels id
             examples:
               '0':
                 value: >-
@@ -2534,7 +2664,7 @@ paths:
                   }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Gives the role of moderator for a user in the current channel.
           content:
             application/json:
               schema:
@@ -2546,18 +2676,20 @@ paths:
                 '0':
                   value: '{"success":true}'
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.getIntegrations:
     get:
-      description: Auto generated using Swagger Inspector
+      description: Gets the channel’s integration.
       parameters:
         - name: roomId
           in: query
+          required: true
           schema:
             type: string
           example: PdE9JSjAyLHDw8pwJ
+          description: The channel’s id
         - name: X-User-Id
           in: header
           schema:
@@ -2570,7 +2702,7 @@ paths:
           example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Retrieves the integrations which the channel has, requires the permission `manage-integrations`. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with [Query and Fields Query Parameters](../../query-and-fields-info/).
           content:
             application/json:
               schema:
@@ -2593,12 +2725,12 @@ paths:
                   value: >-
                     {"integrations":[],"count":0,"offset":0,"total":0,"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.close:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Removes a channel from a user’s list of channels.
       parameters:
         - name: X-User-Id
           in: header
@@ -2615,15 +2747,19 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - roomId
               properties:
                 roomId:
                   type: string
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The channel’s id
             examples:
               '0':
                 value: '{ "roomId": "PdE9JSjAyLHDw8pwJ" }'
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Removes the channel from the user’s list of channels.
           content:
             application/json:
               schema:
@@ -2635,12 +2771,12 @@ paths:
                 '0':
                   value: '{"success":true}'
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.open:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Adds the channel back to the user’s list of channels.
       parameters:
         - name: X-User-Id
           in: header
@@ -2657,15 +2793,19 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - roomId
               properties:
                 roomId:
                   type: string
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The channel’s id
             examples:
               '0':
                 value: '{ "roomId": "PdE9JSjAyLHDw8pwJ" }'
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Adds the channel back to the user’s list of channels.
           content:
             application/json:
               schema:
@@ -2677,18 +2817,62 @@ paths:
                 '0':
                   value: '{"success":true}'
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.history:
     get:
-      description: Auto generated using Swagger Inspector
+      description: Retrieves the messages from a channel.
       parameters:
         - name: roomId
           in: query
+          required: true
           schema:
             type: string
           example: PdE9JSjAyLHDw8pwJ
+          description: The channel's id
+        - name: latest
+          in: query
+          required: false
+          schema:
+            type: string
+          example: '2016-09-30T13:42:25.304Z'
+          description: The end of time range of messages to retrieve
+        - name: oldest
+          in: query
+          required: false
+          schema:
+            type: string
+          example: '2016-05-30T13:42:25.304Z'
+          description: The start of the time range of messages to retrieve
+        - name: inclusive
+          in: query
+          required: false
+          schema:
+            type: boolean
+          example: true
+          description: Whether messages which land on latest and oldest should be included
+        - name: offset
+          in: query
+          required: false
+          schema:
+            type: interger
+          example: 10
+          description: The offset of the list messages to retrieve
+        - name: count
+          in: query
+          required: false
+          schema:
+            type: integer
+          example: 100
+          description: The amount of messages to retrieve
+        - name: unreads
+          in: query
+          required: false
+          schema:
+            type: boolean
+          example: false
+          description: The amount of messages to retrieve
         - name: X-User-Id
           in: header
           schema:
@@ -2701,7 +2885,7 @@ paths:
           example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Retrieves the messages from a channel.
           content:
             application/json:
               schema:
@@ -2793,12 +2977,12 @@ paths:
                     User"},"_updatedAt":"2019-07-04T12:35:58.892Z","mentions":[{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
                     User"}],"channels":[]},{"_id":"263uDK65bqAxMCxka","t":"au","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T02:18:29.179Z","msg":"user1","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"groupable":false,"_updatedAt":"2019-07-04T02:18:29.228Z"}],"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.create:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Creates a new channel.
       parameters:
         - name: X-User-Id
           in: header
@@ -2815,15 +2999,27 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - name
               properties:
                 name:
                   type: string
+                  example: channelname
+                  description: The name of the new channel.
+                members:
+                  type: object
+                  example: ["rocket.cat"]
+                  description: The users to add to the channel when it is created.
+                readOnly:
+                  type: boolean
+                  example: true
+                  description: Set if the channel is read only or not.
             examples:
               '0':
                 value: '{ "name": "channelname" }'
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Creates a new public channel, optionally including specified users. The channel creator is always included.
           content:
             application/json:
               schema:
@@ -2871,18 +3067,27 @@ paths:
                   value: >-
                     {"channel":{"_id":"PdE9JSjAyLHDw8pwJ","name":"channelname","fname":"channelname","t":"c","msgs":0,"usersCount":1,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{},"ts":"2019-07-04T02:14:16.527Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T02:14:16.560Z"},"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.info:
     get:
-      description: Auto generated using Swagger Inspector
+      description: Gets a channel’s information.
       parameters:
         - name: roomId
           in: query
+          required: true
           schema:
-            type: string
+            type: string 
           example: PdE9JSjAyLHDw8pwJ
+          description: The channel’s id
+        - name: roomName
+          in: query
+          required: true
+          schema:
+            type: string 
+          example: general
+          description: The channel’s name
         - name: X-User-Id
           in: header
           schema:
@@ -2895,7 +3100,7 @@ paths:
           example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Retrieves the information about the channel.
           content:
             application/json:
               schema:
@@ -3019,18 +3224,34 @@ paths:
                     {"channel":{"_id":"PdE9JSjAyLHDw8pwJ","name":"channelname","fname":"channelname","t":"c","msgs":4,"usersCount":2,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{},"ts":"2019-07-04T02:14:16.527Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T13:06:51.144Z","lastMessage":{"_id":"cEa5GNXLYSFZPkM7M","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:06:51.080Z","msg":"","file":{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","type":"image/png"},"groupable":false,"attachments":[{"ts":"1970-01-01T00:00:00.000Z","title":"myAvatar.png","title_link":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","title_link_download":true,"image_dimensions":{"width":400,"height":400},"image_preview":"/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgACADASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAABgcCBAj/xAAlEAACAQQBAwQDAAAAAAAAAAABAwIABAURBhIhMRMiUYFBQmH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAwIE/8QAHREAAgIDAQEBAAAAAAAAAAAAAgMAAQQRMSESUf/aAAwDAQACEQMRAD8A5XSstbGEfJOqbWHHmrt4yWsEkUY4+gvySwCOx3VVgl8PTlB0TDpBMfqotbYeVOrHTR+lCN9x5rESkxYBA+6FOWVNlCXmJ1VjYl8vUkx0RDpJEfqpVyBJTkmgkdzuim2fYyFUHozTtLidrcQco6lE7qrYHJLyFjBsSOsDUh8GhOM4dkLxcWTAUs9/d51TmywqsZZrWkkH9pfJrT0WQfWuSGNmADKXvsxzuShj7GbpEdWtRH9qUXdxO6uJuadykd1WrnEpyNq5T/dsdpH8Gg2S4bkLRc2wEWrj37edUQixCi/YycwSZa98n//Z","image_url":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","image_type":"image/png","image_size":58398,"type":"file","description":""}],"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
                     User"},"_updatedAt":"2019-07-04T13:06:51.127Z","mentions":[],"channels":[]},"lm":"2019-07-04T13:06:51.080Z"},"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.counters:
     get:
-      description: Auto generated using Swagger Inspector
+      description: Gets channel counters.
       parameters:
         - name: roomId
           in: query
+          required: true
           schema:
             type: string
           example: PdE9JSjAyLHDw8pwJ
+          description: The channel’s id
+        - name: roomName
+          in: query
+          required: true
+          schema:
+            type: string
+          example: general
+          description: The channel’s name
+        - name: userId
+          in: query
+          required: true
+          schema:
+            type: string
+          example: RtycPC29hqLJfT9xj
+          description: Counters for provided user id (need to have a view-room-administration right for calling user)
         - name: X-User-Id
           in: header
           schema:
@@ -3043,7 +3264,7 @@ paths:
           example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Gets channel counters.
           content:
             application/json:
               schema:
@@ -3070,12 +3291,12 @@ paths:
                   value: >-
                     {"joined":true,"members":2,"unreads":1,"unreadsFrom":"2019-07-04T02:14:16.527Z","msgs":1,"latest":"2019-07-04T02:18:29.238Z","userMentions":0,"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.join:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Joins yourself to a channel.
       parameters:
         - name: X-User-Id
           in: header
@@ -3092,15 +3313,24 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - roomId
+                - joinCode
               properties:
                 roomId:
                   type: string
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The channel's id.
+                joinCode:
+                  type: string
+                  example: 1234
+                  description: The join code of the room.
             examples:
               '0':
                 value: '{ "roomId": "PdE9JSjAyLHDw8pwJ" }'
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Joins yourself to the channel.
           content:
             application/json:
               schema:
@@ -3224,18 +3454,20 @@ paths:
                     {"channel":{"_id":"PdE9JSjAyLHDw8pwJ","name":"channelname","fname":"channelname","t":"c","msgs":5,"usersCount":3,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{},"ts":"2019-07-04T02:14:16.527Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T13:16:59.866Z","lastMessage":{"_id":"cEa5GNXLYSFZPkM7M","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:06:51.080Z","msg":"","file":{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","type":"image/png"},"groupable":false,"attachments":[{"ts":"1970-01-01T00:00:00.000Z","title":"myAvatar.png","title_link":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","title_link_download":true,"image_dimensions":{"width":400,"height":400},"image_preview":"/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgACADASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAABgcCBAj/xAAlEAACAQQBAwQDAAAAAAAAAAABAwIABAURBhIhMRMiUYFBQmH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAwIE/8QAHREAAgIDAQEBAAAAAAAAAAAAAgMAAQQRMSESUf/aAAwDAQACEQMRAD8A5XSstbGEfJOqbWHHmrt4yWsEkUY4+gvySwCOx3VVgl8PTlB0TDpBMfqotbYeVOrHTR+lCN9x5rESkxYBA+6FOWVNlCXmJ1VjYl8vUkx0RDpJEfqpVyBJTkmgkdzuim2fYyFUHozTtLidrcQco6lE7qrYHJLyFjBsSOsDUh8GhOM4dkLxcWTAUs9/d51TmywqsZZrWkkH9pfJrT0WQfWuSGNmADKXvsxzuShj7GbpEdWtRH9qUXdxO6uJuadykd1WrnEpyNq5T/dsdpH8Gg2S4bkLRc2wEWrj37edUQixCi/YycwSZa98n//Z","image_url":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","image_type":"image/png","image_size":58398,"type":"file","description":""}],"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
                     User"},"_updatedAt":"2019-07-04T13:06:51.127Z","mentions":[],"channels":[]},"lm":"2019-07-04T13:06:51.080Z"},"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.getAllUserMentionsByChannel:
     get:
-      description: Auto generated using Swagger Inspector
+      description: Gets all the mentions of a channel.
       parameters:
         - name: roomId
           in: query
+          required: true
           schema:
             type: string
           example: PdE9JSjAyLHDw8pwJ
+          description: The channel’s id
         - name: X-User-Id
           in: header
           schema:
@@ -3248,7 +3480,7 @@ paths:
           example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/).
           content:
             application/json:
               schema:
@@ -3308,12 +3540,12 @@ paths:
                     User"},"_updatedAt":"2019-07-04T12:35:58.892Z","mentions":[{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
                     User"}],"channels":[]}],"count":1,"offset":0,"total":1,"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.kick:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Removes a user from a channel.
       parameters:
         - name: X-User-Id
           in: header
@@ -3330,11 +3562,18 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - roomId
+                - userId
               properties:
-                userId:
-                  type: string
                 roomId:
                   type: string
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The channel's id.
+                userId:
+                  type: string
+                  example: qBXxQKgzj7bWNcH6n
+                  description: The user id of who to kick.
             examples:
               '0':
                 value: >-
@@ -3342,7 +3581,7 @@ paths:
                   }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Removes a user from the channel.
           content:
             application/json:
               schema:
@@ -3466,12 +3705,12 @@ paths:
                     {"channel":{"_id":"PdE9JSjAyLHDw8pwJ","name":"channelname","fname":"channelname","t":"c","msgs":6,"usersCount":2,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{},"ts":"2019-07-04T02:14:16.527Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T13:19:11.014Z","lastMessage":{"_id":"cEa5GNXLYSFZPkM7M","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:06:51.080Z","msg":"","file":{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","type":"image/png"},"groupable":false,"attachments":[{"ts":"1970-01-01T00:00:00.000Z","title":"myAvatar.png","title_link":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","title_link_download":true,"image_dimensions":{"width":400,"height":400},"image_preview":"/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgACADASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAABgcCBAj/xAAlEAACAQQBAwQDAAAAAAAAAAABAwIABAURBhIhMRMiUYFBQmH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAwIE/8QAHREAAgIDAQEBAAAAAAAAAAAAAgMAAQQRMSESUf/aAAwDAQACEQMRAD8A5XSstbGEfJOqbWHHmrt4yWsEkUY4+gvySwCOx3VVgl8PTlB0TDpBMfqotbYeVOrHTR+lCN9x5rESkxYBA+6FOWVNlCXmJ1VjYl8vUkx0RDpJEfqpVyBJTkmgkdzuim2fYyFUHozTtLidrcQco6lE7qrYHJLyFjBsSOsDUh8GhOM4dkLxcWTAUs9/d51TmywqsZZrWkkH9pfJrT0WQfWuSGNmADKXvsxzuShj7GbpEdWtRH9qUXdxO6uJuadykd1WrnEpyNq5T/dsdpH8Gg2S4bkLRc2wEWrj37edUQixCi/YycwSZa98n//Z","image_url":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","image_type":"image/png","image_size":58398,"type":"file","description":""}],"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
                     User"},"_updatedAt":"2019-07-04T13:06:51.127Z","mentions":[],"channels":[]},"lm":"2019-07-04T13:06:51.080Z"},"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.invite:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Adds a user to a channel.
       parameters:
         - name: X-User-Id
           in: header
@@ -3488,11 +3727,18 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - userId
+                - roomId
               properties:
-                userId:
-                  type: string
                 roomId:
                   type: string
+                  example: LAH2isR5nqnY7xdLA
+                  description: The channel's id.
+                userId:
+                  type: string
+                  example: qDhZXaidfjFtpXnsN
+                  description: The user id of who to invite.
             examples:
               '0':
                 value: >-
@@ -3500,7 +3746,7 @@ paths:
                   }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Adds a user to the channel.
           content:
             application/json:
               schema:
@@ -3548,18 +3794,27 @@ paths:
                   value: >-
                     {"channel":{"_id":"LAH2isR5nqnY7xdLA","name":"testing","fname":"testing","t":"c","msgs":1,"usersCount":2,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{},"ts":"2019-07-04T02:23:32.711Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T02:24:01.423Z"},"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
   /api/v1/channels.files:
     get:
-      description: Auto generated using Swagger Inspector
+      description: Gets a list of files from a channel.
       parameters:
         - name: roomId
           in: query
+          required: true
           schema:
             type: string
           example: PdE9JSjAyLHDw8pwJ
+          description: The channel's id.
+        - name: roomName
+          in: query
+          required: true
+          schema:
+            type: string
+          example: test
+          description: The room name.
         - name: X-User-Id
           in: header
           schema:
@@ -3661,9 +3916,9 @@ paths:
                     {"files":[{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","size":58398,"type":"image/png","rid":"PdE9JSjAyLHDw8pwJ","description":"","store":"AmazonS3:Uploads","complete":true,"uploading":false,"extension":"png","progress":1,"userId":"uunbZHiuEnib8Pawj","AmazonS3":{"path":"Xd6z5vKgZtHHER8pn/uploads/PdE9JSjAyLHDw8pwJ/uunbZHiuEnib8Pawj/uy8ETbzE72pjfria9"},"_updatedAt":"2019-07-04T13:06:45.603Z","instanceId":"NXNs25pLW9EuNr83Y","identify":{"format":"png","size":{"width":400,"height":400}},"etag":"ZGyGtgedwyeDjsKND","path":"/ufs/AmazonS3:Uploads/uy8ETbzE72pjfria9/myAvatar.png","token":"2A3a98fB79","uploadedAt":"2019-07-04T13:06:50.536Z","url":"/ufs/AmazonS3:Uploads/uy8ETbzE72pjfria9/myAvatar.png","user":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
                     User"}}],"count":1,"offset":0,"total":1,"success":true}
       servers:
-        - url: 'https://graphql.rocket.chat'
+        - url: 'http://localhost:3000'
     servers:
-      - url: 'https://graphql.rocket.chat'
+      - url: 'http://localhost:3000'
 components:
   securitySchemes:
     basic:
