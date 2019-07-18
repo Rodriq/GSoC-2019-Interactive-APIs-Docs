@@ -6,6 +6,387 @@ info:
 servers:
   - url: 'http://localhost:3000'
 paths:
+  /api/v1/groups.addOwner:
+    post:
+      description: Gives the role of owner to a user in a group.
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: '-u-CUjI4dMQFIT1k9p0G6eMCfEELxHpvx8-STIqGSef'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - userId
+                - roomId
+              properties:
+                userId:
+                  type: string
+                  example: qDhZXaidfjFtpXnsN
+                  description: The user id.
+                roomId:
+                  type: string
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The private group's id.
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "PdE9JSjAyLHDw8pwJ", "userId": "qDhZXaidfjFtpXnsN"
+                  }
+      responses:
+        '200':
+          description: Gives the role of owner for a user in the current group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: '{"success":true}'
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/groups.getIntegrations:
+    get:
+      description: Gets the integrations assigned to the group.
+      parameters:
+        - name: roomId
+          in: query
+          required: true
+          schema:
+            type: string
+          example: PdE9JSjAyLHDw8pwJ
+          description: The group's id
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: '-u-CUjI4dMQFIT1k9p0G6eMCfEELxHpvx8-STIqGSef'
+      responses:
+        '200':
+          description: Retrieves the integrations which the group has, requires the permission `manage-integrations`. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with [Query and Fields Query Parameters](../../query-and-fields-info/).
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  success:
+                    type: boolean
+                  count:
+                    type: integer
+                  integrations:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                '0':
+                  value: >-
+                    {"integrations":[{"_id": "WMQDChpnYTRmFre9h","enabled": true,"username": "rocket.cat","alias": "Guggy","avatar": "http://res.guggy.com/logo_128.png","name": "Guggy","triggerWords": [    "!guggy",    "guggy",    "gif+"],"urls": [    "http://text2gif.guggy.com/guggify"],"token": "8DFS89DMKLWEN","script": "const config = {\n    color: '#ffffff'\n};\n\nclass Script {\n    prepare_outgoing_request({ request }) {\n        const trigger = request.data.trigger_word + ' ';\n        const phrase = request.data.text.replace(trigger, '');\n        request.headers['Content-Type']='application/json';\n        request.headers['apiKey']=request.data.token;\n        return {\n            url: request.url,\n            headers: request.headers,\n            data: {format: 'gif', sentence: phrase},\n            method: 'POST'\n        };\n    }\n\n    process_outgoing_response({ request, response }) {\n        if(response.content.gif) {\n            return {\n                content: {\n                    attachments: [\n                        {\n                            image_url: response.content.gif,\n                            color: ((config['color'] != '') ? '#' + config['color'].replace('#', '') : '#ffffff')\n                        }\n                    ]\n                }\n            };\n        } else {\n            return {\n                content: {\n                    text: 'Sorry I don\\'t have a photo for you :disappointed_relieved:'\n                }\n            };\n        }\n    }\n}","scriptEnabled": true,"impersonateUser": false,"scriptCompiled": "function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError('Cannot call a class as a function')}}var config={color:'#ffffff'};var Script=function(){function Script(){_classCallCheck(this,Script)}Script.prototype.prepare_outgoing_request=function prepare_outgoing_request(_ref){var request=_ref.request;var trigger=request.data.trigger_word+' ';var phrase=request.data.text.replace(trigger,'');request.headers['Content-Type']='application/json';request.headers['apiKey']=request.data.token;return{url:request.url,headers:request.headers,data:{format:'gif',sentence:phrase},method:'POST'}};Script.prototype.process_outgoing_response=function process_outgoing_response(_ref2){var request=_ref2.request;var response=_ref2.response;if(response.content.gif){return{content:{attachments:[{image_url:response.content.gif,color:config['color']!=''?'#'+config['color'].replace('#',''):'#ffffff'}]}}}else{return{content:{text:'Sorry I don\\'t have a photo for you :disappointed_relieved:'}}}};return Script}();","scriptError": null,"type": "webhook-outgoing","userId": "rocket.cat","channel": [    "#private-group-name"],"_createdAt": "2017-01-05T17:06:05.660Z","_createdBy": {    "username": "graywolf336",    "_id": "R4jgcQaQhvvK6K3iY"},"_updatedAt": "2019-01-05T17:06:05.660Z"}],"count":0,"offset":0,"total":0,"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/groups.addModerator:
+    post:
+      description: Gives the role of moderator to a user in a group.
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: '-u-CUjI4dMQFIT1k9p0G6eMCfEELxHpvx8-STIqGSef'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - roomId
+                - userId
+              properties:
+                userId:
+                  type: string
+                  example: qDhZXaidfjFtpXnsN
+                  description: The user id
+                roomId:
+                  type: string
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The private group's id
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "PdE9JSjAyLHDw8pwJ", "userId": "qDhZXaidfjFtpXnsN"
+                  }
+      responses:
+        '200':
+          description: Gives the role of moderator for a user in the current group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: '{"success":true}'
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/groups.removeOwner:
+    post:
+      description: Removes the role of owner from a user in a group.
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: '-u-CUjI4dMQFIT1k9p0G6eMCfEELxHpvx8-STIqGSef'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - userId
+                - roomId
+              properties:
+                roomId:
+                  type: string
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The private group's id
+                userId:
+                  type: string
+                  example: qDhZXaidfjFtpXnsN
+                  description: The user id
+            examples:
+              '0':
+                value: >-
+                  { "roomId": "PdE9JSjAyLHDw8pwJ", "userId": "qDhZXaidfjFtpXnsN"
+                  }
+      responses:
+        '200':
+          description: Removes the role of owner from a user in the current Group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: '{"success":true}'
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
+  /api/v1/groups.addAll:
+    post:
+      description: Adds all of the users on the server to a private group.
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: uunbZHiuEnib8Pawj
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: '-u-CUjI4dMQFIT1k9p0G6eMCfEELxHpvx8-STIqGSef'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - roomId
+              properties:
+                roomId:
+                  type: string
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The channel's id
+                activeUsersOnly:
+                  type: boolean
+                  example: false
+                  description: Add active users only
+            examples:
+              '0':
+                value: '{ "roomId": "PdE9JSjAyLHDw8pwJ" }'
+      responses:
+        '200':
+          description: Auto generated using Swagger Inspector
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  group:
+                    type: object
+                    properties:
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      lm:
+                        type: string
+                      customFields:
+                        type: object
+                        properties:
+                          organization:
+                            type: string
+                      joinCodeRequired:
+                        type: boolean
+                      lastMessage:
+                        type: object
+                        properties:
+                          msg:
+                            type: string
+                          file:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              type:
+                                type: string
+                          attachments:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                title_link_download:
+                                  type: boolean
+                                image_size:
+                                  type: integer
+                                image_url:
+                                  type: string
+                                title_link:
+                                  type: string
+                                image_dimensions:
+                                  type: object
+                                  properties:
+                                    width:
+                                      type: integer
+                                    height:
+                                      type: integer
+                                image_preview:
+                                  type: string
+                                description:
+                                  type: string
+                                title:
+                                  type: string
+                                type:
+                                  type: string
+                                ts:
+                                  type: string
+                                image_type:
+                                  type: string
+                          channels:
+                            type: array
+                            items:
+                              type: string
+                          u:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              username:
+                                type: string
+                          mentions:
+                            type: array
+                            items:
+                              type: string
+                          groupable:
+                            type: boolean
+                          _id:
+                            type: string
+                          rid:
+                            type: string
+                          _updatedAt:
+                            type: string
+                          ts:
+                            type: string
+                      description:
+                        type: string
+                      usersCount:
+                        type: integer
+                      t:
+                        type: string
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      topic:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+                      announcement:
+                        type: string
+              examples:
+                '0':
+                  value: >-
+                    {"group":{"_id":"PdE9JSjAyLHDw8pwJ","name":"channel-name","fname":"channel-name","t":"p","msgs":30,"usersCount":9,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{"organization":"tra-la-la"},"ts":"2019-07-04T02:14:16.527Z","ro":false,"sysMes":true,"_updatedAt":"2019-07-18T04:28:32.772Z","lastMessage":{"_id":"cEa5GNXLYSFZPkM7M","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:06:51.080Z","msg":"","file":{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","type":"image/png"},"groupable":false,"attachments":[{"ts":"1970-01-01T00:00:00.000Z","title":"myAvatar.png","title_link":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","title_link_download":true,"image_dimensions":{"width":400,"height":400},"image_preview":"/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgACADASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAABgcCBAj/xAAlEAACAQQBAwQDAAAAAAAAAAABAwIABAURBhIhMRMiUYFBQmH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAwIE/8QAHREAAgIDAQEBAAAAAAAAAAAAAgMAAQQRMSESUf/aAAwDAQACEQMRAD8A5XSstbGEfJOqbWHHmrt4yWsEkUY4+gvySwCOx3VVgl8PTlB0TDpBMfqotbYeVOrHTR+lCN9x5rESkxYBA+6FOWVNlCXmJ1VjYl8vUkx0RDpJEfqpVyBJTkmgkdzuim2fYyFUHozTtLidrcQco6lE7qrYHJLyFjBsSOsDUh8GhOM4dkLxcWTAUs9/d51TmywqsZZrWkkH9pfJrT0WQfWuSGNmADKXvsxzuShj7GbpEdWtRH9qUXdxO6uJuadykd1WrnEpyNq5T/dsdpH8Gg2S4bkLRc2wEWrj37edUQixCi/YycwSZa98n//Z","image_url":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","image_type":"image/png","image_size":58398,"type":"file","description":""}],"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T13:06:51.127Z","mentions":[],"channels":[]},"lm":"2019-07-04T13:06:51.080Z","announcement":"Test
+                    out Everything","description":"Test out
+                    everything","joinCodeRequired":true,"topic":"Discuss all of
+                    the testing"},"success":true}
+      servers:
+        - url: 'https://graphql.rocket.chat'
+    servers:
+      - url: 'https://graphql.rocket.chat'
   /api/v1/groups.delete:
     post:
       description: Removes a private group.
