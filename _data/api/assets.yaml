@@ -36,9 +36,9 @@ paths:
                   type: boolean
                   example: false
                   description: If needs refresh all clients to apply changes immediately.
-            # examples:
-            #   '0':
-            #     value: '"logo=talentals.png"'
+            examples:
+              '0':
+                value: '"logo=talentals.png"'
       responses:
         '200':
           description: Set an asset by name. Requires `manage-assets` permission.
@@ -89,9 +89,9 @@ paths:
                   type: string
                   example: "logo"
                   description: Asset name to unset.
-            # examples:
-            #   '0':
-            #     value: '{ "assetName": "logo", "refreshAllClients": true}'
+            examples:
+              '0':
+                value: '{ "assetName": "logo", "refreshAllClients": true}'
       responses:
         '200':
           description: Unset an asset by name. Requires `manage-assets` permission.

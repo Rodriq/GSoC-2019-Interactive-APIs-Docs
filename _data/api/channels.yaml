@@ -266,12 +266,12 @@ paths:
                   type: boolean
                   example: true
                   description: Add active users only
-            # examples:
-            #   '0':
-            #     value: |-
-            #       {
-            #           "roomId": "7fA2KwaTMz3ssAT9s"
-            #       }
+            examples:
+              '0':
+                value: |-
+                  {
+                      "roomId": "7fA2KwaTMz3ssAT9s"
+                  }
       responses:
         '200':
           description: Adds all of the users of the Rocket.Chat server to the channel.
@@ -414,12 +414,12 @@ paths:
                   type: string
                   example: 7fA2KwaTMz3ssAT9s
                   description: The channel’s id
-            # examples:
-            #   '0':
-            #     value: |-
-            #       {
-            #           "roomId": "7fA2KwaTMz3ssAT9s"
-            #       }
+            examples:
+              '0':
+                value: |-
+                  {
+                      "roomId": "7fA2KwaTMz3ssAT9s"
+                  }
       responses:
         '200':
           description: Unarchives a channel.
@@ -466,12 +466,12 @@ paths:
                   type: string
                   example: 7fA2KwaTMz3ssAT9s
                   description: The channel’s id
-            # examples:
-            #   '0':
-            #     value: |-
-            #       {
-            #           "roomId": "7fA2KwaTMz3ssAT9s"
-            #       }
+            examples:
+              '0':
+                value: |-
+                  {
+                      "roomId": "7fA2KwaTMz3ssAT9s"
+                  }
       responses:
         '200':
           description: ''

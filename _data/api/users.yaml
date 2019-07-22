@@ -32,12 +32,12 @@ paths:
                   type: string
                   example: BsNr28znDkG8aeo7W
                   description: The password of user (encrypted in SHA256).
-            # examples:
-            #   '0':
-            #     value: |-
-            #       {
-            #           "password": "62ad5ff252c9923f316ed035a51df0201c24c239b79a02d2c1e126efbc16e730"
-            #       }
+            examples:
+              '0':
+                value: |-
+                  {
+                      "password": "62ad5ff252c9923f316ed035a51df0201c24c239b79a02d2c1e126efbc16e730"
+                  }
       responses:
         '200':
           description: Deletes your own user. Requires `Allow Users to Delete Own Account` enabled. Accessible from Administration -> Accounts.
@@ -266,12 +266,12 @@ paths:
                   type: string
                   example: "myPersonalToken"
                   description: The name of the token.
-            # examples:
-            #   '0':
-            #     value: |-
-            #       {
-            #           "tokenName": "myPersonalToken"
-            #       }
+            examples:
+              '0':
+                value: |-
+                  {
+                      "tokenName": "myPersonalToken"
+                  }
       responses:
         '200':
           description: Generate Personal Access Token. Requires `create-personal-access-tokens` permission.
