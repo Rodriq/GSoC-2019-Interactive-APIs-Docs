@@ -3,7 +3,7 @@
   display: none;
   position: fixed;
   z-index: 1; 
-  padding-top: 100px;
+  padding-top: 50px;
   left: 0;
   top: 0;
   width: 100%; 
@@ -40,7 +40,7 @@
 
 /* The Close Button */
 #close {
-  color: white;
+  color: #929db3;
   float: right;
   font-size: 28px;
   font-weight: bold;
@@ -48,13 +48,14 @@
 
 #close:hover,
 #close:focus {
-  color: #000;
+  color: #ff5050;
   text-decoration: none;
   cursor: pointer;
 }
 
 .modal-header {
-  padding: 2px 16px;
+  padding: 5px;
+  text-align: center;
 }
 
 .modal-body {
@@ -63,6 +64,30 @@
 
 .modal-footer {
   padding: 2px 16px;
+}
+.error-response {
+  color: #ff5050;
+}
+input {
+  border: 2px solid;
+  padding: 3px;
+}
+hr {
+  border-color: black;
+}
+.response-frame {
+  padding: 7px;
+  overflow: auto;
+  height:400px;
+  border: 2px solid;
+  width: auto;
+}
+.error-response-frame {
+  padding: 7px;
+  overflow: auto;
+  height:200px;
+  border: 2px solid;
+  width: auto;
 }
 
 </style>
@@ -86,24 +111,33 @@
             <p class="align--center">API Playground</p>
         </div>
         <div class="modal-body">
-            <span id="response-position"></span>
+          <br>
+          <span>
+            <p id="urlBarPosition">You are using the test server</p> &nbsp;
+            <button id="useLocalhost" class="button--dark" size="10">Use localhost</button> &nbsp; <button id="editUrl" class="button--dark">Edit url</button>
+          </span>
+          <br>
+          <br>
+          <span id="response-position"></span>
 
         </div>
         <div class="modal-footer theme_box--white">
-            <h3>Playground</h3> &nbsp;
+            <h4>Playground</h4> &nbsp;
             {% if include.authentication %}
-            <input type="text" id="Auth-Token" class="space" placeholder="Enter Auth-Token"> &nbsp;
-            <input type="text" id="UserId" placeholder="Enter UserId">
+            <input type="text" id="Auth-Token" class="space border" placeholder="Enter Auth-Token" size="34"> &nbsp;
+            <input type="text" id="UserId" class="border" placeholder="Enter UserId" size="34">
+            <!-- 
             <button class="button--dark" onclick="addHeaders()">Add Auth</button>
+            -->
             {% endif %}
             <br>
             {% if include.parameters %}
-            example <code>{ "key1": "value1", "key2": "value2" }</code> <br>
+            example <code>{{site.data.api.[include.category].paths[include.fullPath][include.method].requestBody.content["application/json"].examples['0'].value | markdownify}}</code> <br>
             <textarea class="select--theme-light container" name="play-position" id="play-position" cols="65" rows="10">
             </textarea> &nbsp;
             <button id="sendParameters" onclick="getParameters()" class="button">Send API Request</button>
             {% else %}
-            <textarea id="play-position" style="display: none;"></textarea>
+            <textarea id="play-position" style="display: none;"></textarea> <br>
             <button id="sendParameters" onclick="getParameters()" class="button">Send API Request</button>
             {% endif %}
         </div>
@@ -112,15 +146,14 @@
 </div>
 
 {% endfor %}
-<button id="initiateButton" onclick="showPanels()" class="button--full button--dark" style="
-position:fixed;
+<button id="initiateButton" onclick="showPanels()" class="button--full button--dark align--center" style="
+/*position:fixed;*/
 width: 20%;
 /*height:60px;*/
 bottom: 0%;
 float: right !important;
-/*right:40px;*/
-border-radius:20px;
-text-align:center;
+/*border-radius:20px;*/
+/*text-align:center;*/
 box-shadow: 2px 2px 3px #999;
 ">
 Try it
@@ -131,6 +164,9 @@ Try it
     // $("#play-ground").hide();
     var method = `{{ include.method }}`;
     var url = `https://graphql.rocket.chat{{path}}`.replace(/ /g, '');
+    if($("#urlBar").val()) {
+      url = `${$("#urlBar").val()}`
+    }
     console.log(url)
 
     // Get the modal
@@ -162,10 +198,15 @@ function getParameters() {
     } else {
         data = JSON.parse(parameters)
     }
-    sendRequest(data)
+
+    if($("#urlBar").val()) {
+      url = `${$("#urlBar").val()}{{path}}`.replace(/ /g, '');
+    };
+    sendRequest(data, url)
 }
 
-function sendRequest(data = '') {
+function sendRequest(data = '', url = `https://graphql.rocket.chat{{path}}`.replace(/ /g, '')) {
+
     axios({
         method,
         url,
@@ -176,18 +217,59 @@ function sendRequest(data = '') {
         console.log(response)
         console.log(response.status);
         if (response.status == 200) {
-            $('#response-position').html(`<pre> ${JSON.stringify(response.data, undefined, 4)} </pre>`)
+            $('#response-position').html(`<pre class="response-frame"> ${JSON.stringify(response.data, undefined, 4)} </pre>`)
         }
     })
     .catch((error) => {
-        $('#response-position').html(`<h3 class="theme_type--light align--center">Something's Wrong</h3>`)
+        $('#response-position').html(`<h3 class="error-response">Something's Wrong</h3>`)
         console.log(error.status);
+        if (error.response) {
+          let errorMessage = {
+              content: error.response.data,
+              message: ""
+              }
+          console.log(error.response.data, "data");
+          console.log(error.response.status, "status");
+          if(error.response.status == 400){
+              errorMessage.message= "Please imput atleast one correct parameter"
+          } else if(error.response.status == 401) {
+            errorMessage.message = "Please check your parameters and make sure they are in correct format"
+          } else if(error.response.status == 405) {
+            errorMessage.message = "Please make sure Cors is enabled on your server."
+          } else {
+            errorMessage = errorMessage;
+          }
+        displayErrorMessage(errorMessage);
+      }
     })
 }
 
 // When the user clicks on <span> (x), close the modal
 $("#close").click(()=> {
   modal.css("display","none")
-})
+});
+
+$("#editUrl").click(() => {
+  $("#urlBarPosition").html(`<input id="urlBar" autofocus placeholder="Enter your Server's url" size="28">`);
+  // console.log("Button clicked");
+  // $("#urlBar").attr("contenteditable", true);
+  // $("#urlBar").attr("autofocus");
+  console.log($("#urlBarPosition").html())
+  console.log($("#urlBarPosition").text())
+  console.log(`${$("#urlBar").val()}{{path}}`.replace(/ /g, ''), "-----------")
+});
+
+$("#useLocalhost").click(() => {
+  $("#urlBarPosition").html(`<input id="urlBar" readOnly size="28" value="http://localhost:3000">`);
+});
+
+displayErrorMessage = (errorMessage) => {
+  console.log(errorMessage)
+  $('#response-position').html(`
+  <h3 class="error-response">Something's Wrong</h3>
+  <p>${errorMessage.message}</p>
+  <pre class="error-response-frame"> ${JSON.stringify(errorMessage.content, undefined, 4)} </pre>
+  `)
+}
 
 </script>

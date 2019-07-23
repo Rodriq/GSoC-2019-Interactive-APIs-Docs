@@ -83,39 +83,38 @@ paths:
                   type: string
                   example: "{id: '1', name: 'rocket.cat'}"
                   description: Service user identity
-            # examples:
-            #   '0':
-            #     value: |-
-            #       {
-            #           "serviceName": "twitter", 
-            #           "accessToken": "hash",
-            #           "accessTokenSecret": "hash",
-            #             "appSecret": "hash", 
-            #             "appId": "hash",
-            #             "expiresIn": 200
+            examples:
+              '0':
+                value: |-
+                  {
+                      "user": "test.user",
+                      "password": "password1234",
+                      "code": ""
+                  }
+              '1':
+                value: |-
+                  { "serviceName": "google", "accessToken": "hash",
+                        "idToken": "hash", "expiresIn": 200, "scope": "profile" }
+              '2':
+                value: |-
+                  { 
+                      "serviceName": "facebook",
+                      "accessToken": "hash",
+                      "secret": "hash",
+                      "expiresIn": 200 
                       
-            #       }
-            #   '1':
-            #     value: |-
-            #       { "serviceName": "google", "accessToken": "hash",
-            #             "idToken": "hash", "expiresIn": 200, "scope": "profile" }
-            #   '2':
-            #     value: |-
-            #       { 
-            #           "serviceName": "facebook",
-            #           "accessToken": "hash",
-            #           "secret": "hash",
-            #           "expiresIn": 200 
+                  }
+              '3':
+                value: |-
+                  {
+                      "serviceName": "twitter", 
+                      "accessToken": "hash",
+                      "accessTokenSecret": "hash",
+                        "appSecret": "hash", 
+                        "appId": "hash",
+                        "expiresIn": 200
                       
-            #       }
-            #   '3':
-            #     value: |-
-            #       {
-            #           "user": "test.user",
-            #           "password": "password1234",
-            #           "code": ""
-                      
-            #       }
+                  }
       responses:
         '200':
           description: Authenticate with REST API(user and password), two-factor(2FA) authentication, Google, Facebook and Twitter.

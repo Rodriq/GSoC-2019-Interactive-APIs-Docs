@@ -1,17 +1,32 @@
+---
+method: post
+parameters: true
+endpoint: channels.addModerator
+authentication: true
+category: channels
+permalink: /developer-guides/rest-api/channels/addmoderator/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Channel Add Moderator
 
-Gives the role of moderator for a user in the current channel.
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+
+<!-- Gives the role of moderator for a user in the current channel.
 
 | URL | Requires Auth | HTTP Method |
 | :--- | :--- | :--- |
-| `/api/v1/channels.addModerator` | `yes` | `POST` |
+| `/api/v1/channels.addModerator` | `yes` | `POST` | -->
 
 ## Payload
 
-| Argument | Example | Required | Description |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+
+<!-- | Argument | Example | Required | Description |
 | :--- | :--- | :--- | :--- |
 | `roomId` | `ByehQjC44FwMeiLbX` | Required | The channel's id |
-| `userId` | `nSYqWzZ4GsKTX4dyK` | Required | The user id |
+| `userId` | `nSYqWzZ4GsKTX4dyK` | Required | The user id | -->
 
 ## Example Call
 
@@ -25,11 +40,13 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+
+<!-- ```json
 {
    "success": true
 }
-```
+``` -->
 
 ## Change Log
 
