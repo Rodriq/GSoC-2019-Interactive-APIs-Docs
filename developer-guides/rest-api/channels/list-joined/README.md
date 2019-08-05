@@ -1,10 +1,17 @@
+---
+method: get
+parameters: true
+endpoint: channels.list.joined
+authentication: true
+category: channels
+permalink: /developer-guides/rest-api/channels/list-joined/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Channel List Joined
 
-Lists all of the channels the calling user has joined. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with just the [Fields Query Parameter](../../query-and-fields-info/).
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/channels.list.joined` | `yes` | `GET` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call
 
@@ -16,30 +23,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-    "channels": [
-        {
-            "_id": "ByehQjC44FwMeiLbX",
-            "name": "invite-me",
-            "t": "c",
-            "usernames": [
-                "testing1"
-            ],
-            "msgs": 0,
-            "u": {
-                "_id": "aobEdbYhXfu5hkeqG",
-                "username": "testing1"
-            },
-            "ts": "2016-12-09T15:08:58.042Z",
-            "ro": false,
-            "sysMes": true,
-            "_updatedAt": "2016-12-09T15:22:40.656Z"
-        }
-    ],
-    "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Query Example Call
 

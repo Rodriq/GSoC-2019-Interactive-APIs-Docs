@@ -1,16 +1,21 @@
+---
+method: get
+parameters: true
+endpoint: channels.online
+authentication: true
+category: channels
+permalink: /developer-guides/rest-api/channels/online/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Channel Online
 
-Lists all online users of a channel if the channel's id is provided, otherwise it gets all online users of all channels. It supports the [Query Parameters only](../../query-and-fields-info/#query-example).
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/channels.online` | `yes` | `GET` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Query Parameters
 
-| Argument | Example | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `query` | `{"_id":"5HmCfpoB7jp2uibTC"}` | Optional | See [Query Parameter](../../query-and-fields-info/) |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call
 
@@ -22,21 +27,7 @@ http://localhost:3000/api/v1/channels.online
 
 ## Example Result
 
-```json
-{
-  "online": [
-    {
-      "_id": "47cRd58HnWwpqxhaZ",
-      "username": "test"
-    },
-    {
-      "_id": "BsxzC22xQ43taWdff",
-      "username": "uniqueusername"
-    }
-  ],
-  "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Query Example Call
 

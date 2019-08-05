@@ -1,17 +1,21 @@
+---
+method: get
+parameters: true
+endpoint: channels.info
+authentication: true
+category: channels
+permalink: /developer-guides/rest-api/channels/info/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Channel Info
 
-Retrieves the information about the channel.
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/channels.info` | `yes` | `GET` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Query Parameters
 
-| Argument | Example | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `roomId` | `ByehQjC44FwMeiLbX` | Required (if no roomName) | The channel's id |
-| `roomName` | `general` | Required (if no roomId) | The channel's name |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call
 
@@ -23,26 +27,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-  "channel": {
-    "_id": "ByehQjC44FwMeiLbX",
-    "ts": "2016-11-30T21:23:04.737Z",
-    "t": "c",
-    "name": "testing",
-    "usernames": [
-      "testing",
-      "testing1",
-      "testing2"
-    ],
-    "msgs": 1,
-    "default": true,
-    "_updatedAt": "2016-12-09T12:50:51.575Z",
-    "lm": "2016-12-09T12:50:51.555Z"
-  },
-  "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 

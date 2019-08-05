@@ -1,17 +1,21 @@
+---
+method: post
+parameters: true
+endpoint: channels.kick
+authentication: true
+category: channels
+permalink: /developer-guides/rest-api/channels/kick/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Channel Kick
 
-Removes a user from the channel.
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/channels.kick` | `yes` | `POST` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Payload
 
-| Argument | Example | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `roomId` | `ByehQjC44FwMeiLbX` | Required | The channel's id |
-| `userId` | `nSYqWzZ4GsKTX4dyK` | Required | The user id of who to kick |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call
 
@@ -25,28 +29,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-  "channel": {
-    "_id": "ByehQjC44FwMeiLbX",
-    "name": "invite-me",
-    "t": "c",
-    "usernames": [
-      "testing1"
-    ],
-    "msgs": 0,
-    "u": {
-      "_id": "aobEdbYhXfu5hkeqG",
-      "username": "testing1"
-    },
-    "ts": "2016-12-09T15:08:58.042Z",
-    "ro": false,
-    "sysMes": true,
-    "_updatedAt": "2016-12-09T15:22:40.656Z"
-  },
-  "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 

@@ -59,7 +59,7 @@
 }
 
 .modal-body {
-    padding: 2px 16px;
+  padding: 2px 16px;
 }
 
 .modal-footer {
@@ -92,172 +92,166 @@ hr {
 
 </style>
 <div>
-    {% capture path %} {{ "/api/v1/"| append: include.endpoint }}{% endcapture %}
-    {% assign endpoint = site.data.api.[include.category].paths[include.fullPath][include.method].responses %}
-    {% for res in endpoint.'200'.content %}
-    <div>
-        {% highlight json %}
-        {{ res[1].examples.'0'.value | newline_to_br | replace: '<br />', ' ' }}
-        {% endhighlight %}
-    </div>
-
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-
-      <!-- Modal content -->
-      <div class="modal-content">
-        <div class="modal-header theme_box--space theme_type--dark">
-            <span id="close">&times;</span>
-            <p class="align--center">API Playground</p>
-        </div>
-        <div class="modal-body">
-          <br>
-          <span>
-            <p id="urlBarPosition">You are using the test server</p> &nbsp;
-            <button id="useLocalhost" class="button--dark" size="10">Use localhost</button> &nbsp; <button id="editUrl" class="button--dark">Edit url</button>
-          </span>
-          <br>
-          <br>
-          <span id="response-position"></span>
-
-        </div>
-        <div class="modal-footer theme_box--white">
-            <h4>Playground</h4> &nbsp;
-            {% if include.authentication %}
-            <input type="text" id="Auth-Token" class="space border" placeholder="Enter Auth-Token" size="34"> &nbsp;
-            <input type="text" id="UserId" class="border" placeholder="Enter UserId" size="34">
-            <!-- 
+  {% capture path %} {{ "/api/v1/"| append: include.endpoint }}{% endcapture %}
+  {% assign endpoint = site.data.api.[include.category].paths[include.fullPath][include.method].responses %}
+  {% for res in endpoint.'200'.content %}
+  <div>
+    {% highlight json %}
+    {{ res[1].examples.'0'.value | newline_to_br | replace: '<br />', ' ' }}
+  {% endhighlight %} </div>
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header theme_box--space theme_type--dark">
+        <span id="close">&times;</span>
+        <p class="align--center">API Playground</p>
+      </div>
+      <div class="modal-body">
+        <br>
+        <span>
+          <p id="urlBarPosition">You are using the test server</p> &nbsp;
+          <button id="useLocalhost" class="button--dark" size="10">Use localhost</button> &nbsp; <button id="editUrl" class="button--dark">Edit url</button>
+        </span>
+        <br>
+        <br>
+        <span id="response-position"></span>
+      </div>
+      <div class="modal-footer theme_box--white">
+        <h4>Playground</h4> &nbsp;
+        {% if include.authentication %}
+        <input type="text" id="Auth-Token" class="space border" placeholder="Enter Auth-Token" size="34"> &nbsp;
+        <input type="text" id="UserId" class="border" placeholder="Enter UserId" size="34">
+                <!-- 
             <button class="button--dark" onclick="addHeaders()">Add Auth</button>
-            -->
-            {% endif %}
-            <br>
-            {% if include.parameters %}
-            example <code>{{site.data.api.[include.category].paths[include.fullPath][include.method].requestBody.content["application/json"].examples['0'].value | markdownify}}</code> <br>
-            <textarea class="select--theme-light container" name="play-position" id="play-position" cols="65" rows="10">
-            </textarea> &nbsp;
-            <button id="sendParameters" onclick="getParameters()" class="button">Send API Request</button>
-            {% else %}
-            <textarea id="play-position" style="display: none;"></textarea> <br>
-            <button id="sendParameters" onclick="getParameters()" class="button">Send API Request</button>
-            {% endif %}
+          -->
+          {% endif %}
+          <br>
+          {% if include.parameters %}
+          example <code>{{site.data.api.[include.category].paths[include.fullPath][include.method].requestBody.content["application/json"].examples['0'].value | markdownify}}</code> <br>
+          <textarea class="select--theme-light container" name="play-position" id="play-position" cols="65" rows="10">
+          </textarea> &nbsp;
+          <button id="sendParameters" onclick="getParameters()" class="button">Send API Request</button>
+          {% else %}
+          <textarea id="play-position" style="display: none;"></textarea> <br>
+          <button id="sendParameters" onclick="getParameters()" class="button">Send API Request</button>
+          {% endif %}
         </div>
+      </div>
     </div>
-
-</div>
-
-{% endfor %}
-<button id="initiateButton" onclick="showPanels()" class="button--full button--dark align--center" style="
-/*position:fixed;*/
-width: 20%;
-/*height:60px;*/
-bottom: 0%;
-float: right !important;
-/*border-radius:20px;*/
-/*text-align:center;*/
-box-shadow: 2px 2px 3px #999;
-">
-Try it
-</button>
+    {% endfor %}
+    <button id="initiateButton" onclick="showPanels()" class="button--full button--dark align--center" style="
+    /*position:fixed;*/
+    width: 20%;
+    /*height:60px;*/
+    bottom: 0%;
+    float: right !important;
+    /*border-radius:20px;*/
+    /*text-align:center;*/
+    box-shadow: 2px 2px 3px #999;
+    ">
+    Try it
+  </button>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    // $("#play-ground").hide();
-    var method = `{{ include.method }}`;
-    var url = `https://graphql.rocket.chat{{path}}`.replace(/ /g, '');
-    if($("#urlBar").val()) {
-      url = `${$("#urlBar").val()}`
-    }
-    console.log(url)
-
-    // Get the modal
-    var modal = $("#myModal");
-
-    function showPanels() {
-        modal.css("display","block")
-        // $("#play-ground").show()
-        $("#play-position").focus()
-        // $("#initiateButton").hide(200);
-    }
-
-    function addHeaders() {
-    // $("#Auth-Token").attr('disabled', true);
-    var authToken = $("#Auth-Token").val();
-    var userId = $("#UserId").val();
-    // console.log({ "X-Auth-Token": authToken, "X-User-Id": userId })
-    return ({ "X-Auth-Token": authToken, "X-User-Id": userId })
+// $("#play-ground").hide();
+const method = `{{ include.method }}`;
+let url = `https://graphql.rocket.chat{{path}}`.replace(/ /g, '');
+if ($("#urlBar").val()) {
+  url = $("#urlBar").val();
 }
+console.log(url)
+
+// Get the modal
+let modal = $("#myModal");
+
+showPanels = () => {
+  modal.css("display", "block");
+    // $("#play-ground").show()
+    $("#play-position").focus();
+    // $("#initiateButton").hide(200);
+  }
+
+  addHeaders = () => {
+    // $("#Auth-Token").attr('disabled', true);
+    const authToken = $("#Auth-Token").val();
+    const userId = $("#UserId").val();
+    // console.log({ "X-Auth-Token": authToken, "X-User-Id": userId })
+    return ({ "X-Auth-Token": authToken, "X-User-Id": userId });
+  }
 
 // Get and parse parameters to be sent
-function getParameters() {
-    if ($("#play-position")) {
-        var parameters = $("#play-position").val().trim();
-    }
-    console.log(parameters);
-    if (parameters == '') {
-        data = ''
-    } else {
-        data = JSON.parse(parameters)
-    }
+getParameters = () => {
+  let parameters = '';
+  if ($("#play-position")) {
+    parameters = $("#play-position").val().trim();
+  }
+  console.log(parameters);
+  if (parameters == '') {
+    data = '';
+  } else {
+    data = JSON.parse(parameters);
+  }
 
-    if($("#urlBar").val()) {
-      url = `${$("#urlBar").val()}{{path}}`.replace(/ /g, '');
-    };
-    sendRequest(data, url)
+  if ($("#urlBar").val()) {
+    url = `${$("#urlBar").val()}{{path}}`.replace(/ /g, '');
+  };
+  sendRequest(data, url);
 }
 
-function sendRequest(data = '', url = `https://graphql.rocket.chat{{path}}`.replace(/ /g, '')) {
-
-    axios({
-        method,
-        url,
-        data,
-        headers: addHeaders()
-    })
-    .then((response) => {
-        console.log(response)
-        console.log(response.status);
-        if (response.status == 200) {
-            $('#response-position').html(`<pre class="response-frame"> ${JSON.stringify(response.data, undefined, 4)} </pre>`)
-        }
-    })
-    .catch((error) => {
-        $('#response-position').html(`<h3 class="error-response">Something's Wrong</h3>`)
-        console.log(error.status);
-        if (error.response) {
-          let errorMessage = {
-              content: error.response.data,
-              message: ""
-              }
-          console.log(error.response.data, "data");
-          console.log(error.response.status, "status");
-          if(error.response.status == 400){
-              errorMessage.message= "Please imput atleast one correct parameter"
-          } else if(error.response.status == 401) {
-            errorMessage.message = "Please check your parameters and make sure they are in correct format"
-          } else if(error.response.status == 405) {
-            errorMessage.message = "Please make sure Cors is enabled on your server."
-          } else {
-            errorMessage = errorMessage;
-          }
-        displayErrorMessage(errorMessage);
+sendRequest = (data = '', url = `https://graphql.rocket.chat{{path}}`.replace(/ /g, '')) => {
+  axios({
+    method,
+    url,
+    data,
+    headers: addHeaders()
+  })
+  .then((response) => {
+    console.log(response)
+    console.log(response.status);
+    if (response.status == 200) {
+      $('#response-position').html(`<pre class="response-frame"> ${JSON.stringify(response.data, undefined, 4)} </pre>`)
+    }
+  })
+  .catch((error) => {
+    $('#response-position').html(`<h3 class="error-response">Something's Wrong</h3>`);
+    console.log(error.status);
+    if (error.response) {
+      let errorMessage = {
+        content: error.response.data,
+        message: ""
+      };
+      console.log(error.response.data, "data");
+      console.log(error.response.status, "status");
+      if (error.response.status == 400) {
+        errorMessage.message = "Please imput atleast one correct parameter";
+      } else if (error.response.status == 401) {
+        errorMessage.message = "Please check your parameters and make sure they are in correct format";
+      } else if (error.response.status == 405) {
+        errorMessage.message = "Please make sure Cors is enabled on your server.";
+      } else {
+        errorMessage = errorMessage;
       }
-    })
-}
+      displayErrorMessage(errorMessage);
+    };
+  });
+};
 
 // When the user clicks on <span> (x), close the modal
-$("#close").click(()=> {
-  modal.css("display","none")
+$("#close").click(() => {
+  modal.css("display", "none");
 });
 
 $("#editUrl").click(() => {
   $("#urlBarPosition").html(`<input id="urlBar" autofocus placeholder="Enter your Server's url" size="28">`);
-  // console.log("Button clicked");
-  // $("#urlBar").attr("contenteditable", true);
-  // $("#urlBar").attr("autofocus");
-  console.log($("#urlBarPosition").html())
-  console.log($("#urlBarPosition").text())
-  console.log(`${$("#urlBar").val()}{{path}}`.replace(/ /g, ''), "-----------")
-});
+    // console.log("Button clicked");
+    // $("#urlBar").attr("contenteditable", true);
+    // $("#urlBar").attr("autofocus");
+    console.log($("#urlBarPosition").html())
+    console.log($("#urlBarPosition").text())
+    console.log(`${$("#urlBar").val()}{{path}}`.replace(/ /g, ''), "-----------")
+  });
 
 $("#useLocalhost").click(() => {
   $("#urlBarPosition").html(`<input id="urlBar" readOnly size="28" value="http://localhost:3000">`);
@@ -266,10 +260,9 @@ $("#useLocalhost").click(() => {
 displayErrorMessage = (errorMessage) => {
   console.log(errorMessage)
   $('#response-position').html(`
-  <h3 class="error-response">Something's Wrong</h3>
-  <p>${errorMessage.message}</p>
-  <pre class="error-response-frame"> ${JSON.stringify(errorMessage.content, undefined, 4)} </pre>
-  `)
+    <h3 class="error-response">Something's Wrong</h3>
+    <p>${errorMessage.message}</p>
+    <pre class="error-response-frame"> ${JSON.stringify(errorMessage.content, undefined, 4)} </pre>
+    `);
 }
-
 </script>

@@ -1,16 +1,31 @@
+---
+method: get
+parameters: true
+endpoint: channels.files
+authentication: true
+category: channels
+permalink: /developer-guides/rest-api/channels/files/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Channel Files
 
-Retrieves the files from a channel. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with [Query and Fields Query Parameters](../../query-and-fields-info/).
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+
+<!-- Retrieves the files from a channel. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with [Query and Fields Query Parameters](../../query-and-fields-info/).
 
 | URL | Requires Auth | HTTP Method |
 | :--- | :--- | :--- |
-| `/api/v1/channels.files` | `yes` | `GET` |
+| `/api/v1/channels.files` | `yes` | `GET` | -->
 
 ## Query Parameters
 
-| Argument | Example | Required | Description |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+
+<!-- | Argument | Example | Required | Description |
 | :--- | :--- | :--- | :--- |
-| `roomId` <br><br> `roomName` | `ByehQjC44FwMeiLbX` <br><br> `test` | <br> Required | The room id. <br><br> The room name.   |
+| `roomId` <br><br> `roomName` | `ByehQjC44FwMeiLbX` <br><br> `test` | <br> Required | The room id. <br><br> The room name.   | -->
 
 ## Example Call
 
@@ -28,7 +43,9 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
+
+<!-- ```json
 {
     "files": [
         {
@@ -62,7 +79,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
     "total": 1,
     "success": true
 }
-```
+``` -->
 
 ## Change Log
 

@@ -1,17 +1,21 @@
+---
+method: post
+parameters: true
+endpoint: channels.join
+authentication: true
+category: channels
+permalink: /developer-guides/rest-api/channels/join/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Channel Join
 
-Joins yourself to the channel.
-
-| URL                       | Requires Auth | HTTP Method |
-| :------------------------ | :------------ | :---------- |
-| `/api/v1/channels.join`   | `yes`         | `POST`      |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Payload
 
-| Argument | Example             | Required | Description                  |
-| :------- | :------------------ | :------- | :--------------------------- |
-| `roomId` | `ByehQjC44FwMeiLbX` | Required | The channel's id             |
-| `joinCode` | `1234` | Required | The join code of the room |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call
 
@@ -25,32 +29,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-    "channel": {
-        "_id": "nxXKHF2o2nzKYtFMM",
-        "name": "test",
-        "fname": "test",
-        "t": "c",
-        "msgs": 8,
-        "usersCount": 2,
-        "u": {
-            "_id": "rocketchat.internal.admin.test",
-            "username": "rocketchat.internal.admin.test"
-        },
-        "customFields": {},
-        "broadcast": false,
-        "encrypted": false,
-        "ts": "2019-01-16T12:00:04.783Z",
-        "ro": false,
-        "sysMes": true,
-        "default": false,
-        "_updatedAt": "2019-01-16T12:06:30.426Z",
-        "joinCodeRequired": true
-    },
-    "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 
