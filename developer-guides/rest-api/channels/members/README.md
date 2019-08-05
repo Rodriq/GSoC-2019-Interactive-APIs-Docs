@@ -1,17 +1,21 @@
+---
+method: get
+parameters: true
+endpoint: channels.members
+authentication: true
+category: channels
+permalink: /developer-guides/rest-api/channels/members/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Channel Members List
 
-Lists all channel users. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with [Query and Fields Query Parameters](../../query-and-fields-info/).
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/channels.members` | `yes` | `GET` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Query Parameters
 
-| Argument   | Example             | Required                  | Description        |
-| :--------- | :------------------ | :------------------------ | :----------------- |
-| `roomId`   | `ByehQjC44FwMeiLbX` | Required (if no roomName) | The channel's id   |
-| `roomName` | `general`           | Required (if no roomId)   | The channel's name |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call
 
@@ -23,28 +27,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-    "members": [
-        {
-            "_id": "Loz7qh9ChSqHMPymx",
-            "username": "customField_apiuser.test.1529436896005",
-            "name": "customField_apiuser.test.1529436896005",
-            "status": "offline"
-        },
-        {
-            "_id": "Zc3Y3cRW7ZtS7Y8Hk",
-            "username": "customField_apiuser.test.1529436997563",
-            "name": "customField_apiuser.test.1529436997563",
-            "status": "offline"
-        }
-    ],
-    "count": 2,
-    "offset": 0,
-    "total": 35,
-    "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 

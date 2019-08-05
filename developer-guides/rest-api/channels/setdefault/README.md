@@ -1,17 +1,21 @@
+---
+method: post
+parameters: true
+endpoint: channels.setDefault
+authentication: true
+category: channels
+permalink: /developer-guides/rest-api/channels/setdefault/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Channel Set Default
 
-Sets whether the channel is a default channel or not.
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/channels.setDefault` | `yes` | `POST` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Payload
 
-| Argument | Example | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `roomId` | `ByehQjC44FwMeiLbX` | Required | The channel's id |
-| `default` | `true` | Required | Boolean of whether the room is default or not. |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call
 
@@ -25,32 +29,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-    "channel": {
-        "_id": "ByehQjC44FwMeiLbX",
-        "name": "testing0",
-        "t": "c",
-        "msgs": 0,
-        "u": {
-            "_id": "aiPqNoGkjpNDiRx6d",
-            "username": "goose160"
-        },
-        "ts": "2017-01-05T18:02:50.754Z",
-        "ro": true,
-        "sysMes": true,
-        "_updatedAt": "2017-01-05T19:02:24.429Z",
-        "usernames": [
-            "goose160",
-            "graywolf336"
-        ],
-        "joinCodeRequired": true,
-        "muted": [],
-        "default": true
-    },
-    "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 

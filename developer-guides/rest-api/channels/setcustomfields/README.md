@@ -1,20 +1,22 @@
+---
+method: post
+parameters: true
+endpoint: channels.setCustomFields
+authentication: true
+category: channels
+permalink: /developer-guides/rest-api/channels/setcustomfields/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Channel Set Custom Fields
 
-Sets the custom fields for the channel.
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/channels.setCustomFields` | `yes` | `POST` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Payload
 
 One of roomId or roomName is required.
-
-| Argument | Example | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `roomId` | `GENERAL` | Required | The channel's id |
-| `roomName` | `general` | Required | The channel's name |
-| `customFields` | `{"organization": "tra-la-la"}` | Required | The custom fields to set for the channel. |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call
 
@@ -28,25 +30,7 @@ curl -H "X-Auth-Token: 8h2mKAwxB3AQrFSjLVKMooJyjdCFaA7W45sWlHP8IzO" \
 
 ## Example Result
 
-```json
-{
-  "channel":{
-    "_id":"GENERAL",
-    "ts":"2018-02-18T19:41:02.875Z",
-    "t":"c",
-    "name":"general",
-    "msgs":236,
-    "default":true,
-    "_updatedAt":"2018-02-23T11:09:05.973Z",
-    "lm":"2018-02-18T22:18:20.288Z",
-    "customFields":{
-      "organization":"tra-la-la"
-    }
-  },
-  "success":true,
-  "developerWarning":"[WARNING]: The \"usernames\" field has been removed for performance reasons. Please use the \"*.members\" endpoint to get a list of members/users in a room."
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 

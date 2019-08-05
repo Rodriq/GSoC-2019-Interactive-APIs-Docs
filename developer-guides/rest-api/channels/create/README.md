@@ -1,18 +1,33 @@
+---
+method: post
+parameters: true
+endpoint: channels.create
+authentication: true
+category: channels
+permalink: /developer-guides/rest-api/channels/create/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Channel Create
 
-Creates a new public channel, optionally including specified users. The channel creator is always included.
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+
+<!-- Creates a new public channel, optionally including specified users. The channel creator is always included.
 
 | URL | Requires Auth | HTTP Method |
 | :--- | :--- | :--- |
-| `/api/v1/channels.create` | `yes` | `POST` |
+| `/api/v1/channels.create` | `yes` | `POST` | -->
 
 ## Payload
 
-| Argument | Example | Required | Description |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+
+<!-- | Argument | Example | Required | Description |
 | :--- | :--- | :--- | :--- |
 | `name` | `channelname` | Required | The name of the new channel |
 | `members` | `["rocket.cat"]` | Optional <br> Default: `[]` | The users to add to the channel when it is created. |
-| `readOnly` | `true` | Optional <br> Default: `false` | Set if the channel is read only or not. |
+| `readOnly` | `true` | Optional <br> Default: `false` | Set if the channel is read only or not. | -->
 
 ## Example Call
 
@@ -26,7 +41,9 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
+
+<!-- ```json
 {
    "channel": {
       "_id": "ByehQjC44FwMeiLbX",
@@ -44,7 +61,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
    },
    "success": true
 }
-```
+``` -->
 
 ## Change Log
 

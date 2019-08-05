@@ -1,17 +1,21 @@
+---
+method: get
+parameters: true
+endpoint: channels.roles
+authentication: true
+category: channels
+permalink: /developer-guides/rest-api/channels/roles/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Channel Roles
 
-Lists all user's roles in the channel.
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/channels.roles` | `yes` | `GET` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Query Parameters
 
-| Argument | Example | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `roomId`   | `ByehQjC44FwMeiLbX` | Required(if no roomName) | The channel's id   |
-| `roomName` | `general`           | Required(if no roomId)   | The channel's name |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call
 
@@ -23,25 +27,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-    "roles": [
-        {
-            "rid": "BaE62jfDLXK3Xo6BA",
-            "u": {
-               "_id": "BkNkw3iKgNyhMbPyW",
-               "username": "ronnie.dio",
-               "name": "Ronnie James Dio"
-            },
-            "roles": [
-               "moderator"
-            ],
-            "_id": "ehPuGyZBedznJsQHp"
-        }
-    ],
-    "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 

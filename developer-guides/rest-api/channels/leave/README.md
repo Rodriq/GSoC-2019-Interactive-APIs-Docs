@@ -1,16 +1,21 @@
+---
+method: post
+parameters: true
+endpoint: channels.leave
+authentication: true
+category: channels
+permalink: /developer-guides/rest-api/channels/leave/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Channel Leave
 
-Causes the callee to be removed from the channel.
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
-| URL                      | Requires Auth | HTTP Method |
-| :----------------------- | :------------ | :---------- |
-| `/api/v1/channels.leave` | `yes`         | `POST`      |
+## Payload 
 
-## Payload
-
-| Argument | Example             | Required | Description      |
-| :------- | :------------------ | :------- | :--------------- |
-| `roomId` | `ByehQjC44FwMeiLbX` | Required | The channel's id |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call
 
@@ -24,28 +29,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-  "channel": {
-    "_id": "ByehQjC44FwMeiLbX",
-    "name": "invite-me",
-    "t": "c",
-    "usernames": [
-      "testing2"
-    ],
-    "msgs": 0,
-    "u": {
-      "_id": "aobEdbYhXfu5hkeqG",
-      "username": "testing1"
-    },
-    "ts": "2016-12-09T15:08:58.042Z",
-    "ro": false,
-    "sysMes": true,
-    "_updatedAt": "2016-12-09T15:22:40.656Z"
-  },
-  "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 

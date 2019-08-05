@@ -13,12 +13,6 @@ permalink: /developer-guides/rest-api/channels/list/
 
 {% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
-<!-- Lists all of the channels on the server. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with [Query and Fields Query Parameters](../../query-and-fields-info/).
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/channels.list` | `yes` | `GET` | -->
-
 ## Example Call
 
 ```bash
@@ -30,51 +24,6 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 ## Example Result
 
 {% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
-
-<!-- ```json
-{
-    "channels": [
-        {
-            "_id": "ByehQjC44FwMeiLbX",
-            "name": "test-test",
-            "t": "c",
-            "usernames": [
-                "testing1"
-            ],
-            "msgs": 0,
-            "u": {
-                "_id": "aobEdbYhXfu5hkeqG",
-                "username": "testing1"
-            },
-            "ts": "2016-12-09T15:08:58.042Z",
-            "ro": false,
-            "sysMes": true,
-            "_updatedAt": "2016-12-09T15:22:40.656Z"
-        },
-        {
-            "_id": "t7qapfhZjANMRAi5w",
-            "name": "testing",
-            "t": "c",
-            "usernames": [
-                "testing2"
-            ],
-            "msgs": 0,
-            "u": {
-                "_id": "y65tAmHs93aDChMWu",
-                "username": "testing2"
-            },
-            "ts": "2016-12-01T15:08:58.042Z",
-            "ro": false,
-            "sysMes": true,
-            "_updatedAt": "2016-12-09T15:22:40.656Z"
-        }
-    ],
-    "offset": 0,
-    "count": 1,
-    "total": 1,
-    "success": true
-}
-``` -->
 
 ## Change Log
 

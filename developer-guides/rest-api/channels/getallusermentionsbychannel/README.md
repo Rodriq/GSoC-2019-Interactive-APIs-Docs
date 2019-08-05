@@ -1,16 +1,21 @@
+---
+method: get
+parameters: true
+endpoint: channels.getAllUserMentionsByChannel
+authentication: true
+category: channels
+permalink: /developer-guides/rest-api/channels/getallusersmentionsbychannel/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Get all the mentions of a channel
 
-It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/).
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/channels.getAllUserMentionsByChannel` | `yes` | `GET` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Query Parameters
 
-| Argument | Example | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `roomId` | `ByehQjC44FwMeiLbX` | Required | The channel's id |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call
 
@@ -22,54 +27,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-    "mentions": [
-        {
-            "_id": "Gptx3mc6TjSv5tLWb",
-            "rid": "GENERAL",
-            "msg": "@rocket.cat",
-            "ts": "2018-03-12T14:59:14.166Z",
-            "u": {
-                "_id": "47cRd58HnWwpqxhaZ",
-                "username": "test",
-                "name": "test"
-            },
-            "mentions": [
-                {
-                    "_id": "47cRd58HnWwpqxhaZ",
-                    "username": "rocket.cat"
-                }
-            ],
-            "channels": [],
-            "_updatedAt": "2018-03-12T14:59:14.171Z"
-        },
-        {
-            "_id": "rwerwfjuii6TjSv5tLWb",
-            "rid": "GENERAL",
-            "msg": "@rocket.cat",
-            "ts": "2018-03-12T14:59:14.166Z",
-            "u": {
-                "_id": "47cRd58HnWwpqxhaZ",
-                "username": "test",
-                "name": "test"
-            },
-            "mentions": [
-                {
-                    "_id": "47cRd58HnWwpqxhaZ",
-                    "username": "rocket.cat"
-                }
-            ],
-            "channels": [],
-            "_updatedAt": "2018-03-12T14:59:14.171Z"
-        }
-    ],
-    "count": 2,
-    "offset": 10,
-    "total": 2,
-    "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 
