@@ -108,50 +108,57 @@ hr {
         <p class="align--center">API Playground</p>
       </div>
       <div class="modal-body">
-        <br>
+        <h2>Server Selection</h2>
         <span>
-          <p id="urlBarPosition">You are using the test server</p> &nbsp;
+          <p id="urlBarPosition"></p> &nbsp;
           <button id="useLocalhost" class="button--dark" size="10">Use localhost</button> &nbsp; <button id="editUrl" class="button--dark">Edit url</button>
         </span>
         <br>
         <br>
+        <h2>Response</h2>
         <span id="response-position"></span>
       </div>
       <div class="modal-footer theme_box--white">
-        <h4>Playground</h4> &nbsp;
+        <h2>Playground</h2> &nbsp;
         {% if include.authentication %}
-        <input type="text" id="Auth-Token" class="space border" placeholder="Enter Auth-Token" size="34"> &nbsp;
-        <input type="text" id="UserId" class="border" placeholder="Enter UserId" size="34">
+        <div>
+          <input type="text" id="Auth-Token" class="space border" placeholder="Enter Auth-Token" size="34"> &nbsp;
+          <input type="text" id="UserId" class="border" placeholder="Enter UserId" size="34">
                 <!-- 
             <button class="button--dark" onclick="addHeaders()">Add Auth</button>
           -->
-          {% endif %}
-          <br>
-          {% if include.parameters %}
+        </div>
+        {% endif %}
+        <br>
+        {% if include.parameters %}
+        <div>
           example <code>{{site.data.api.[include.category].paths[include.fullPath][include.method].requestBody.content["application/json"].examples['0'].value | markdownify}}</code> <br>
           <textarea class="select--theme-light container" name="play-position" id="play-position" cols="65" rows="10">
           </textarea> &nbsp;
-          <button id="sendParameters" onclick="getParameters()" class="button">Send API Request</button>
-          {% else %}
-          <textarea id="play-position" style="display: none;"></textarea> <br>
-          <button id="sendParameters" onclick="getParameters()" class="button">Send API Request</button>
-          {% endif %}
         </div>
+        <button id="sendParameters" onclick="getParameters()" class="button">Send API Request</button>
+        {% else %}
+        <div>
+          <textarea id="play-position" style="display: none;"></textarea> <br>
+        </div>
+        <button id="sendParameters" onclick="getParameters()" class="button">Send API Request</button>
+        {% endif %}
       </div>
     </div>
-    {% endfor %}
-    <button id="initiateButton" onclick="showPanels()" class="button--full button--dark align--center" style="
-    /*position:fixed;*/
-    width: 20%;
-    /*height:60px;*/
-    bottom: 0%;
-    float: right !important;
-    /*border-radius:20px;*/
-    /*text-align:center;*/
-    box-shadow: 2px 2px 3px #999;
-    ">
-    Try it
-  </button>
+  </div>
+  {% endfor %}
+  <button id="initiateButton" onclick="showPanels()" class="button--full button--dark align--center" style="
+  /*position:fixed;*/
+  width: 20%;
+  /*height:60px;*/
+  bottom: 0%;
+  float: right !important;
+  /*border-radius:20px;*/
+  /*text-align:center;*/
+  box-shadow: 2px 2px 3px #999;
+  ">
+  Try it
+</button>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
