@@ -1795,7 +1795,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/channels.members:
     get:
-      description: Retrieves all channel users.
+      description: 'Lists all channel users. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/).'
       parameters:
         - name: roomId
           in: query
