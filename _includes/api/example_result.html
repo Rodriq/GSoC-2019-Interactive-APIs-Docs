@@ -121,17 +121,12 @@ hr {
       <div class="modal-footer theme_box--white">
         <h2>Playground</h2> &nbsp;
         {% if include.authentication %}
-        <div>
-          <input type="text" id="Auth-Token" class="space border" placeholder="Enter Auth-Token" size="34"> &nbsp;
-          <input type="text" id="UserId" class="border" placeholder="Enter UserId" size="34">
-                <!-- 
+        <input type="text" id="Auth-Token" class="space border" placeholder="Enter Auth-Token" size="34"> &nbsp;
+        <input type="text" id="UserId" class="border" placeholder="Enter UserId" size="34">
             <button class="button--dark" onclick="addHeaders()">Add Auth</button>
-          -->
-        </div>
-        {% endif %}
-        <br>
-        {% if include.parameters %}
-        <div>
+          {% endif %}
+          <br>
+          {% if include.parameters %}
           example <code>{{site.data.api.[include.category].paths[include.fullPath][include.method].requestBody.content["application/json"].examples['0'].value | markdownify}}</code> <br>
           <textarea class="select--theme-light container" name="play-position" id="play-position" cols="65" rows="10">
           </textarea> &nbsp;
@@ -162,34 +157,41 @@ hr {
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-// $("#play-ground").hide();
+const modal = $("#myModal");
 const method = `{{ include.method }}`;
+
 let url = `https://graphql.rocket.chat{{path}}`.replace(/ /g, '');
+
 if ($("#urlBar").val()) {
   url = $("#urlBar").val();
 }
 console.log(url)
 
-// Get the modal
-let modal = $("#myModal");
+if($("#authToken") && $("#UserId")) {
+  if(window.localStorage.getItem('authParameters')) {
+    let authParameters = JSON.parse(window.localStorage.getItem('authParameters'));
+    $("#Auth-Token").val(authParameters.authToken);
+    $("#UserId").val(authParameters.userId);
+  }
+}
 
-showPanels = () => {
+const showPanels = () => {
   modal.css("display", "block");
     // $("#play-ground").show()
     $("#play-position").focus();
     // $("#initiateButton").hide(200);
   }
 
-  addHeaders = () => {
-    // $("#Auth-Token").attr('disabled', true);
+const addHeaders = () => {
     const authToken = $("#Auth-Token").val();
     const userId = $("#UserId").val();
-    // console.log({ "X-Auth-Token": authToken, "X-User-Id": userId })
+    let authParameters = {authToken, userId};
+    window.localStorage.setItem('authParameters', JSON.stringify(authParameters));
     return ({ "X-Auth-Token": authToken, "X-User-Id": userId });
   }
 
 // Get and parse parameters to be sent
-getParameters = () => {
+const getParameters = () => {
   let parameters = '';
   if ($("#play-position")) {
     parameters = $("#play-position").val().trim();
@@ -207,7 +209,7 @@ getParameters = () => {
   sendRequest(data, url);
 }
 
-sendRequest = (data = '', url = `https://graphql.rocket.chat{{path}}`.replace(/ /g, '')) => {
+const sendRequest = (data = '', url = `https://graphql.rocket.chat{{path}}`.replace(/ /g, '')) => {
   axios({
     method,
     url,
@@ -264,7 +266,7 @@ $("#useLocalhost").click(() => {
   $("#urlBarPosition").html(`<input id="urlBar" readOnly size="28" value="http://localhost:3000">`);
 });
 
-displayErrorMessage = (errorMessage) => {
+const displayErrorMessage = (errorMessage) => {
   console.log(errorMessage)
   $('#response-position').html(`
     <h3 class="error-response">Something's Wrong</h3>
