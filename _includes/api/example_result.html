@@ -10,6 +10,7 @@
   height: 100%; 
   overflow: auto;
   background-color: rgba(3,12,26,0.6); /* $space with opacity */
+  padding-top: 104px;
 }
 
 /* Modal Content */
@@ -20,6 +21,7 @@
   padding: 0;
   border: 1px solid #888;
   width: 80%;
+  border-radius: 14px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.7s;
@@ -70,6 +72,7 @@
 
 .modal-footer {
   padding: 2px 16px;
+  margin: 6px;
 }
 .error-response {
   color: #ff5050;
@@ -184,9 +187,9 @@ hr {
 
   let url = `https://graphql.rocket.chat{{path}}`.replace(/ /g, '');
 
-  if ($("#urlBar").val()) {
-    url = $("#urlBar").val();
-  }
+  // if ($("#urlBar").val()) {
+  //   url = $("#urlBar").val();
+  // }
   console.log(url)
 
   if($("#authToken") && $("#UserId")) {
@@ -276,16 +279,18 @@ $("#close").click(() => {
 
 $("#editUrl").click(() => {
   $("#urlBarPosition").html(`<input id="urlBar" autofocus placeholder="Enter your Server's url" size="28">`);
-    // console.log("Button clicked");
-    // $("#urlBar").attr("contenteditable", true);
-    // $("#urlBar").attr("autofocus");
-    console.log($("#urlBarPosition").html())
-    console.log($("#urlBarPosition").text())
-    console.log(`${$("#urlBar").val()}{{path}}`.replace(/ /g, ''), "-----------")
-  });
+  console.log(`${$("#urlBar").val()}{{path}}`.replace(/ /g, ''), "-----------")
+});
 
 $("#useLocalhost").click(() => {
-  $("#urlBarPosition").html(`<input id="urlBar" readOnly size="28" value="http://localhost:3000">`);
+  if($("#urlBarPosition").html() == "") {
+    $("#urlBarPosition").html(`<input id="urlBar" readOnly size="28" value="http://localhost:3000">`);
+    $("#useLocalhost").text("Use Default Server");
+  } else {
+    $("#urlBarPosition").html("");
+    $("#useLocalhost").text("Use localhost");
+    url = `https://graphql.rocket.chat{{path}}`.replace(/ /g, '');
+  }
 });
 
 const displayErrorMessage = (errorMessage) => {
