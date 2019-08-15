@@ -146,6 +146,8 @@ hr {
     <div class="modal-body">
       <h3>Server Selection</h3>
       <div>
+        <p>Choose the server you wish to test the corresponding API.
+        All requests are done to a test server by default.</p>
         <p id="urlBarPosition"></p>
         <p>
           <button id="useLocalhost" class="button--dark" size="10">Use localhost</button>
@@ -153,12 +155,16 @@ hr {
         </p>
       </div>
       <h3>Response</h3>
+      <p>The API Response will be displayed here.</p>
       <span id="response-position"></span>
     </div>
 
     <div class="modal-footer theme_box--white">
       <h3>Playground</h3>
       {% if include.authentication %}
+      <p>
+        For requests that need <code>Auth-Token</code> and <code>User Id</code>, you can <a href="../../authentication/login/" target="_blank">Login Here</a> to get a user's corresponding Auth Parameters.
+      </p>
       <input type="text" id="Auth-Token" class="space border" placeholder="Enter Auth-Token" size="34">
       <input type="text" id="UserId" class="border" placeholder="Enter UserId" size="34">
       <button class="button--dark" onclick="addHeaders()">Add Auth</button>
@@ -166,8 +172,7 @@ hr {
       <br>
       {% if include.parameters %}
       example <code>{{site.data.api.[include.category].paths[include.fullPath][include.method].requestBody.content["application/json"].examples['0'].value | markdownify}}</code> <br>
-      <textarea class="select--theme-light container" name="play-position" id="play-position" cols="65" rows="10">
-      </textarea>
+      <textarea placeholder="" class="select--theme-light container" name="play-position" id="play-position" cols="65" rows="10"></textarea>
     </div>
 
     <button id="sendApiRequest" onclick="getParameters()" class="button">Send API Request</button>
