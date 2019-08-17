@@ -2,8 +2,8 @@
 	{% if include.entry %}
 
 	{% else %}
-		<h1>{{ site.data.api[include.category].info.title }}</h1>
-		<p>{{ site.data.api[include.category].info.description | markdownify }}</p>
+	<h1>{{ site.data.api[include.category].info.title }}</h1>
+	<p>{{ site.data.api[include.category].info.description | markdownify }}</p>
 	{% endif %}
 	<table>
 		<thead>
@@ -13,16 +13,15 @@
 		</thead>
 
 		{% for endpoint in site.data.api[include.category].paths | sort: endpoint %}
-
 			{% if include.entry %}
-				{% capture editedPath %}{{ include.category | append: endpoint[0] | replace: include.category, "" | remove: "api/v1/." | downcase }}{% endcapture %}
+				{% capture editedPath %}{{ include.category | append: endpoint[0] | replace: include.category, "" | remove: "api/v1/" | remove_first: "." | downcase }}{% endcapture %}
 				{% if include.category == "miscellaneous" %}
 					{% capture url %}{{ include.category | append: endpoint[0] | remove: "api/v1/" | replace: ".","-" }}{% endcapture %}
 				{% else %}
 					{% capture url %}{{ include.category | append: editedPath }}{% endcapture %}
 				{% endif %}
 			{% else %}
-				{% capture editedPath %}{{ include.category | append: endpoint[0] | replace: include.category, "" | remove: "/api/v1/." | downcase }}{% endcapture %}
+				{% capture editedPath %}{{ include.category | append: endpoint[0] | replace: include.category, "" | remove: "/api/v1/" | remove_first: "." | downcase }}{% endcapture %}
 				{% if include.category == "miscellaneous" %}
 					{% capture url %}{{ endpoint[0] | remove: "/api/v1/" | replace: ".","-" }}{% endcapture %}
 				{% else %}
@@ -37,13 +36,12 @@
 			{% for props in endpoint[1] %}
 				{% if props[1]description %}
 					<td>{{ props[1]description | markdownify }}</td>
-
 				{% endif %}
 			{% endfor %}
 
 			<td><a href="{{ url }}">Link</a></td>
 		</tr>
 
-			{% endfor %}
-</table>
+		{% endfor %}
+	</table>
 </div>
