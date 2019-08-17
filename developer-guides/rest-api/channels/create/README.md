@@ -13,21 +13,9 @@ permalink: /developer-guides/rest-api/channels/create/
 
 {% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
-<!-- Creates a new public channel, optionally including specified users. The channel creator is always included.
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/channels.create` | `yes` | `POST` | -->
-
 ## Payload
 
 {% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
-
-<!-- | Argument | Example | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `name` | `channelname` | Required | The name of the new channel |
-| `members` | `["rocket.cat"]` | Optional <br> Default: `[]` | The users to add to the channel when it is created. |
-| `readOnly` | `true` | Optional <br> Default: `false` | Set if the channel is read only or not. | -->
 
 ## Example Call
 
@@ -42,26 +30,6 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 ## Example Result
 
 {% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
-
-<!-- ```json
-{
-   "channel": {
-      "_id": "ByehQjC44FwMeiLbX",
-      "name": "channelname",
-      "t": "c",
-      "usernames": [
-         "example"
-      ],
-      "msgs": 0,
-      "u": {
-         "_id": "aobEdbYhXfu5hkeqG",
-         "username": "example"
-      },
-      "ts": "2016-05-30T13:42:25.304Z"
-   },
-   "success": true
-}
-``` -->
 
 ## Change Log
 
