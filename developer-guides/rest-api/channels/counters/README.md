@@ -31,6 +31,7 @@ curl -H "X-Auth-Token: 8h2mKAwxB3AQrFSjLVKMooJyjdCFaA7W45sWlHP8IzO" \
 
 {% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
+```
 where:
 
 joined - boolean flag that shows that user is joined the room or not
@@ -41,6 +42,7 @@ msgs - count of messages in the room
 latest - end date-time of unread interval for specified user (or date-time of last posted message)
 userMentions - count of user mentions in messages
 ```
+
 ## Change Log
 
 | Version | Description |

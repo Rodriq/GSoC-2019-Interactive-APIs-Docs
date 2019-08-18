@@ -16,21 +16,9 @@ redirect_from:
 
 {% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
-<!-- Searches for users or rooms that are visible to the user.
-
-WARNING: It will only return rooms that user didn't join yet.
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/spotlight` | `yes` | `GET` | -->
-
 ## Query Parameters
 
 {% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method fullPath=fullPath %}
-<!-- 
-| Argument | Example | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `query` | `john` | Required | The term to be searched. Supports '#' for channels and '@' for users | -->
 
 ## Example Call
 
@@ -59,21 +47,6 @@ curl -H "X-Auth-Token: 6eWs4ECxUITYYoZ_bAYK5OE2srkxAepQqQA1cGGv3jK" \
 ## Example Result
 
 {% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
-
-```json
-{
-  "users": [
-    {
-      "_id": "rocket.cat",
-      "name": "Rocket.Cat",
-      "username": "rocket.cat",
-      "status": "online"
-    }
-  ],
-  "rooms": [],
-  "success": true
-}
-```
 
 ## Change Log
 

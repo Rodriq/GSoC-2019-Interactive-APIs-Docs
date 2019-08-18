@@ -5,7 +5,7 @@ endpoint: channels.list
 authentication: true
 category: channels
 permalink: /developer-guides/rest-api/channels/list/
---- 
+---
 
 {% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
 
