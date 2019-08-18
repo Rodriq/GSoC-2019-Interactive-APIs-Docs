@@ -21,147 +21,25 @@ When calling a production Rocket.Chat server, ensure it is running via HTTPS and
 
 {% include api/render_endpoints.html category="miscellaneous" entry=true %}
 
-<!-- | Url                       | Short Description                                         | Details Page                           |
-| :------------------------ | :-------------------------------------------------------- | :------------------------------------- |
-| `/api/info`               | Information about the Rocket.Chat server.                 | [Link](miscellaneous/info/)            |
-| `/api/v1/directory`       | Search by users or channels on all server.                | [Link](miscellaneous/directory/)       |
-| `/api/v1/shield.svg`      | Gets the shield svg(badge) to add in your website.        | [Link](miscellaneous/shield-svg/)      |
-| `/api/v1/spotlight`       | Searches for users or rooms that are visible to the user. | [Link](miscellaneous/spotlight/)       |
-| `/api/v1/statistics`      | Statistics about the Rocket.Chat server.                  | [Link](miscellaneous/statistics/)      |
-| `/api/v1/statistics.list` | Selectable statistics about the Rocket.Chat server.       | [Link](miscellaneous/statistics-list/) | -->
-
 ### Assets
 
 {% include api/render_endpoints.html category="assets" entry=true %}
-
-<!-- | Url                         | Short Description                                  | Details Page                               |
-| :-------------------------- | :------------------------------------------------- | :----------------------------------------- |
-| `/api/v1/assets.setAsset`   | Set an asset image by name.                        | [Link](assets/setasset/)                   |
-| `/api/v1/assets.unsetAsset` | Unset an asset by name                             | [Link](assets/unsetasset/)                 | -->
 
 ### Authentication
 
 {% include api/render_endpoints.html category="authentication" entry=true %}
 
-<!-- | Url                       | Short Description                                  | Details Page                               |
-| :------------------------ | :------------------------------------------------- | :----------------------------------------- |
-| `/api/v1/login`           | Authenticate with the REST API.                    | [Link](authentication/login/)              |
-| `/api/v1/login`           | Authenticate with google.                          | [Link](authentication/google/)             |
-| `/api/v1/login`           | Authenticate with facebook.                        | [Link](authentication/facebook/)           |
-| `/api/v1/login`           | Authenticate with twitter.                         | [Link](authentication/twitter/)            |
-| `/api/v1/logout`          | Invalidate your REST API authentication token.     | [Link](authentication/logout/)             |
-| `/api/v1/me`              | Displays information about the authenticated user. | [Link](authentication/me/)                 | -->
-
 ### Users
 
 {% include api/render_endpoints.html category="users" entry=true %}
-
-
-<!-- | Url                                           | Short Description                                               | Details Page                                 |
-| :-------------------------------------------- | :-------------------------------------------------------------- | :------------------------------------------- |
-| `/api/v1/users.presence`                        | Gets all connected users presence.                                          | [Link](users/presence/)                        |
-| `/api/v1/users.create`                        | Create a new user.                                              | [Link](users/create/)                        |
-| `/api/v1/users.createToken`                   | Create a user authentication token.                             | [Link](users/createtoken/)                   |
-| `/api/v1/users.delete`                        | Deletes an existing user.                                       | [Link](users/delete/)                        |
-| `/api/v1/users.deleteOwnAccount`              | Deletes your own user.                                          | [Link](users/deleteownaccount/)              |
-| `/api/v1/users.forgotPassword`                | Send email to reset your password.                              | [Link](users/forgotpassword/)                |
-| `/api/v1/users.generatePersonalAccessToken`   | Generate Personal Access Token.                                 | [Link](users/generatepersonalaccesstoken/)   |
-| `/api/v1/users.getAvatar`                     | Gets the URL for a user's avatar.                               | [Link](users/getavatar/)                     |
-| `/api/v1/users.getPersonalAccessTokens`       | Gets the user's personal access tokens.                         | [Link](users/getpersonalaccesstokens/)       |
-| `/api/v1/users.getPreferences`                | Gets all preferences of user.                                   | [Link](users/get-preferences/)               |
-| `/api/v1/users.getPresence`                   | Gets the online presence of a user.                             | [Link](users/getpresence/)                   |
-| `/api/v1/users.getUsernameSuggestion`         | Gets a suggestion a new username to user.                       | [Link](users/getusernamesuggestion/)         |
-| `/api/v1/users.info`                          | Gets a user's information, limited to the caller's permissions. | [Link](users/info/)                          |
-| `/api/v1/users.list`                          | All of the users and their information, limited to permissions. | [Link](users/list/)                          |
-| `/api/v1/users.regeneratePersonalAccessToken` | Regenerate a user personal access token.                        | [Link](users/regeneratepersonalaccesstoken/) |
-| `/api/v1/users.register`                      | Register a new user.                                            | [Link](users/register/)                      |
-| `/api/v1/users.removePersonalAccessToken`     | Remove a personal access token.                                 | [Link](users/removepersonalaccesstoken/)     |
-| `/api/v1/users.resetAvatar`                   | Reset a user's avatar                                           | [Link](users/resetavatar/)                   |
-| `/api/v1/users.setAvatar`                     | Set a user's avatar                                             | [Link](users/setavatar/)                     |
-| `/api/v1/users.setPreferences`                | Set user's preferences                                          | [Link](users/set-preferences/)               |
-| `/api/v1/users.setActiveStatus`               | Set a user's active status.                                     | [Link](users/setactivestatus/)               |
-| `/api/v1/users.update`                        | Update an existing user.                                        | [Link](users/update/)                        |
-| `/api/v1/users.updateOwnBasicInfo`            | Update basic information of own user.                           | [Link](users/updateownbasicinfo/)            | -->
 
 ### Channels
 
 {% include api/render_endpoints.html category="channels" entry=true %}
 
-<!-- | Url                                           | Short Description                                           | Details Page                                    |
-| :-------------------------------------------- | :---------------------------------------------------------- | :---------------------------------------------- |
-| `/api/v1/channels.addAll`                     | Adds all of the users on the server to a channel.           | [Link](channels/addall/)                        |
-| `/api/v1/channels.addLeader` | Gives the role of Leader for a user in the current channel. | [Link](channels/addleader/) |
-| `/api/v1/channels.archive`                    | Archives a channel.                                         | [Link](channels/archive/)                       |
-| `/api/v1/channels.cleanHistory`               | Cleans up a channel's history, requires special permission. | [Link](channels/cleanhistory/)                  |
-| `/api/v1/channels.close`                      | Removes a channel from a user's list of channels.           | [Link](channels/close/)                         |
-| `/api/v1/channels.counters`                   | Gets channel counters.                                      | [Link](channels/counters/)                      |
-| `/api/v1/channels.create`                     | Creates a new channel.                                      | [Link](channels/create/)                        |
-| `/api/v1/channels.delete`                     | Removes a channel.                                           | [Link](channels/delete/)                       |
-| `/api/v1/channels.files`                      | Gets a list of files from a channel.                        | [Link](channels/files/)                         |
-| `/api/v1/channels.getAllUserMentionsByChannel`| Gets all the mentions of a channel.                         | [Link](channels/getallusermentionsbychannel/)   |
-| `/api/v1/channels.getIntegrations`            | Gets the channel's integration.                             | [Link](channels/getintegrations/)               |
-| `/api/v1/channels.history`                    | Retrieves the messages from a channel.                      | [Link](channels/history/)                       |
-| `/api/v1/channels.info`                       | Gets a channel's information.                               | [Link](channels/info/)                          |
-| `/api/v1/channels.invite`                     | Adds a user to a channel.                                   | [Link](channels/invite/)                        |
-| `/api/v1/channels.join`                       | Joins yourself to a channel.                                | [Link](channels/join/)                          |
-| `/api/v1/channels.kick`                       | Removes a user from a channel.                              | [Link](channels/kick/)                          |
-| `/api/v1/channels.leave`                      | Removes the calling user from a channel.                    | [Link](channels/leave/)                         |
-| `/api/v1/channels.list`                       | Retrieves all of the channels from the server.              | [Link](channels/list/)                          |
-| `/api/v1/channels.list.joined`                | Gets only the channels the calling user has joined.         | [Link](channels/list-joined/)                   |
-| `/api/v1/channels.members`                    | Retrieves all channel users.                                | [Link](channels/members/)                       |
-| `/api/v1/channels.messages`                   | Retrieves all channel messages.                             | [Link](channels/messages/)                      |
-| `/api/v1/channels.moderators`                 | List all moderators of a channel.                           | [Link](channels/moderators/)                    |
-| `/api/v1/channels.online`                     | List all online users of a channel.                         | [Link](channels/online/)                        |
-| `/api/v1/channels.open`                       | Adds the channel back to the user's list of channels.       | [Link](channels/open/)                          |
-| `/api/v1/channels.removeleader` | Removes the role of Leader for a user in the current channel. | [Link](channels/removeleader/) |
-| `/api/v1/channels.rename`                     | Changes a channel's name.                                   | [Link](channels/rename/)                        |
-| `/api/v1/channels.roles`                      | Gets the user's roles in the channel.                       | [Link](channels/roles/)                         |
-| `/api/v1/channels.setCustomFields`            | Sets a channel's custom fields.                             | [Link](channels/setcustomfields/)               |
-| `/api/v1/channels.setAnnouncement`            | Sets a channel's announcement.                              | [Link](channels/setannouncement/)               |
-| `/api/v1/channels.setDefault`                 | Sets whether a channel is a default channel or not.         | [Link](channels/setdefault/)                    |
-| `/api/v1/channels.setDescription`             | Sets a channel's description.                               | [Link](channels/setdescription/)                |
-| `/api/v1/channels.setJoinCode`                | Sets the channel's code required to join it.                | [Link](channels/setjoincode/)                   |
-| `/api/v1/channels.setPurpose`                 | Sets a channel's description.                               | [Link](channels/setpurpose/)                    |
-| `/api/v1/channels.setReadOnly`                | Sets whether a channel is read only or not.                 | [Link](channels/setreadonly/)                   |
-| `/api/v1/channels.setTopic`                   | Sets a channel's topic.                                     | [Link](channels/settopic/)                      |
-| `/api/v1/channels.setType`                    | Sets the type of room the channel should be.                | [Link](channels/settype/)                       |
-| `/api/v1/channels.unarchive`                  | Unarchives a channel.                                       | [Link](channels/unarchive/)                     | -->
-
 ### Groups
 
 {% include api/render_endpoints.html category="groups" entry=true %}
-
-<!-- | Url                              | Short Description                                  | Details Page                   |
-| :------------------------------- | :------------------------------------------------- | :----------------------------- |
-| `/api/v1/groups.archive`         | Archives a private group.                          | [Link](groups/archive/)        |
-| `/api/v1/groups.addLeader`       | Gives the role of Leader for a user in the current group. | [Link](groups/addleader/) |
-| `/api/v1/groups.close`           | Removes a private group from the list of groups.   | [Link](groups/close/)          |
-| `/api/v1/groups.counters`        | Gets group counters.                               | [Link](groups/counters/)       |
-| `/api/v1/groups.create`          | Creates a new private group.                       | [Link](groups/create/)         |
-| `/api/v1/groups.delete`          | Removes a private group.                           | [Link](groups/delete/)         |
-| `/api/v1/groups.files`           | Gets a list of files from a private group.         | [Link](groups/files/)          |
-| `/api/v1/groups.history`         | Retrieves the messages from a private group.       | [Link](groups/history/)        |
-| `/api/v1/groups.info`            | Gets the information about a private group.        | [Link](groups/info/)           |
-| `/api/v1/groups.invite`          | Adds a user to the private group.                  | [Link](groups/invite/)         |
-| `/api/v1/groups.kick`            | Removes a user from a private group.               | [Link](groups/kick/)           |
-| `/api/v1/groups.leave`           | Removes the calling user from the private group.   | [Link](groups/leave/)          |
-| `/api/v1/groups.list`            | List the private groups the caller is part of.     | [Link](groups/list/)           |
-| `/api/v1/groups.listAll`         | List all the private groups.                       | [Link](groups/listall/)        |
-| `/api/v1/groups.members`         | Gets the users of participants of a private group. | [Link](groups/members/)        |
-| `/api/v1/groups.messages`        | Retrieves all group messages.                      | [Link](groups/messages/)       |
-| `/api/v1/groups.moderators`      | List all moderators of a group.                    | [Link](groups/moderators/)     |
-| `/api/v1/groups.open`            | Adds the private group back to the list of groups. | [Link](groups/open/)           |
-| `/api/v1/groups.removeLeader`    | Removes the role of Leader for a user in the current group. | [Link](groups/removeleader/) |
-| `/api/v1/groups.rename`          | Changes the name of the private group.             | [Link](groups/rename/)         |
-| `/api/v1/groups.roles`           | Gets the user's roles in the private group.        | [Link](groups/roles/)          |
-| `/api/v1/groups.setAnnouncement` | Sets a group's announcement.                       | [Link](groups/setannouncement/)|
-| `/api/v1/groups.setCustomFields` | Sets private group's custom fields.                | [Link](groups/setcustomfields/)|
-| `/api/v1/groups.setDescription`  | Sets a private group's description.                | [Link](groups/setdescription/) |
-| `/api/v1/groups.setPurpose`      | Sets a private group's description.                | [Link](groups/setpurpose/)     |
-| `/api/v1/groups.setReadOnly`     | Sets whether the room is read only or not.         | [Link](groups/setreadonly/)    |
-| `/api/v1/groups.setTopic`        | Sets a private group's topic.                      | [Link](groups/settopic/)       |
-| `/api/v1/groups.setType`         | Sets the type of room this group will be.          | [Link](groups/settype/)        |
-| `/api/v1/groups.unarchive`       | Unarchives a private group.                        | [Link](groups/unarchive/)      | -->
 
 ### Chat
 
