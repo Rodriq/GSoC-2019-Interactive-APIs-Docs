@@ -5,7 +5,7 @@ endpoint: shield.svg
 authentication: false
 category: miscellaneous
 permalink: /developer-guides/rest-api/miscellaneous/shield-svg/
---- 
+---
 
 {% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
 
@@ -13,22 +13,9 @@ permalink: /developer-guides/rest-api/miscellaneous/shield-svg/
 
 {% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
-<!-- A simple method, requires no authentication, that returns the shield svg(badge) to add in your website. It must have `API_Enable_Shields` enabled.
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- | :--- |
-| `/api/v1/shield.svg` | `no` | `GET` | -->
-
 ## Query Parameters
 
 {% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method fullPath=fullPath %}
-<!-- 
-| Argument | Example | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `type` | `online` | Optional | Can be one of `online`, `user`, `channel`
-| `icon` | `false` | Optional |
-| `channel` | `general` | Optional | Name of the channel
-| `name` | `Rocket.Chat` | Optional | Name to show -->
 
 ## Example Call
 

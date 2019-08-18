@@ -5,7 +5,7 @@ endpoint: directory
 authentication: true
 category: miscellaneous
 permalink: /developer-guides/rest-api/miscellaneous/directory/
---- 
+---
 
 {% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
 
@@ -13,21 +13,9 @@ permalink: /developer-guides/rest-api/miscellaneous/directory/
 
 {% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
-<!-- A method, that searches by users or channels on all users and channels available on server.
-It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/)
-along with [Query and Fields Query Parameters](../../query-and-fields-info/).
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/directory` | `yes` | `GET` | -->
-
 ## Payload
 
 {% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method fullPath=fullPath %}
-<!-- 
-| Argument | Example | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `query` | `{"text": "rocket", "type": "users", "workspace": "local"}` | Required | When `type` is `users` you can send an additional `workspace` field, that can be `local` (default) or `all`. `workspace=all` will work only if [Federation](../../../../administrator-guides/federation) is enabled. | -->
 
 ## Example Call
 
@@ -42,29 +30,6 @@ curl -G -H "X-Auth-Token: ijFlJ1yfidXhwEYY284Anoq_iEsOeMMVCupzNhX22tB" \
 ## Example Result
 
 {% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
-
-<!-- ```json
-{
-    "result": [
-        {
-            "_id": "jRca8kibJx8NkLJxt",
-            "createdAt": "2018-04-13T12:46:26.517Z",
-            "emails": [
-                {
-                    "address": "user.test.1523623548558@rocket.chat",
-                    "verified": false
-                }
-            ],
-            "name": "EditedRealNameuser.test.1523623548558",
-            "username": "editedusernameuser.test.1523623548558"
-        }
-    ],
-    "count": 1,
-    "offset": 0,
-    "total": 1,
-    "success": true
-}
-``` -->
 
 ## Example Call
 

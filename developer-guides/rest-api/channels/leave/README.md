@@ -13,7 +13,7 @@ permalink: /developer-guides/rest-api/channels/leave/
 
 {% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
-## Payload 
+## Payload
 
 {% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
