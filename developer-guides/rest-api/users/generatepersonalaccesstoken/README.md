@@ -1,16 +1,21 @@
+---
+method: post
+parameters: true
+endpoint: users.generatePersonalAccessToken
+authentication: true
+category: users
+permalink: /developer-guides/rest-api/users/generatepersonalaccesstoken/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Generate Personal Access Token
 
-Generate Personal Access Token. Requires `create-personal-access-tokens` permission.
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/users.generatePersonalAccessToken` | `yes` | `POST` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Payload
 
-| Argument | Example | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `tokenName` | `mypersonaltoken` | Required | The name of the token. |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call
 
@@ -24,12 +29,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-  "token": "2jdk99wuSjXPO201XlAks9sjDjAhSJmskAKW301mSuj9Sk"
-  "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 

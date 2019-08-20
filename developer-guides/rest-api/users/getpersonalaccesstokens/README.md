@@ -1,10 +1,17 @@
+---
+method: get
+parameters: false
+endpoint: users.getPersonalAccessTokens
+authentication: true
+category: users
+permalink: /developer-guides/rest-api/users/getpersonalaccesstokens/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Get Personal Access Tokens
 
-Gets the user’s personal access tokens. Requires `create-personal-access-tokens` permission.
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/users.getPersonalAccessTokens` | `yes` | `GET` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call
 
@@ -17,18 +24,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-  "tokens": [
-        {
-            "name": "myToken",
-            "createdAt": "2018-08-01T17:17:48.068Z",
-            "lastTokenPart": "R8Agh3"
-        }
-   ],
-  "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 

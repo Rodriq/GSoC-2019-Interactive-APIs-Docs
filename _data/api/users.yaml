@@ -60,7 +60,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/users.setPreferences:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Set a user’s preferences.
       parameters:
         - name: X-User-Id
           in: header
@@ -77,12 +77,19 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - data
+                - userId
               properties:
+                userId:
+                  type: string
+                  example: BsNr28znDkG8aeo7W
+                  description: The id of the user.
                 data:
                   type: object
                   properties: {}
-                userId:
-                  type: string
+                  example: {"data": {"newRoomNotification": "test", "useEmojis": true}}
+                  description: Data takes other preference properties as listed bellow.
             examples:
               '0':
                 value: |-
@@ -93,7 +100,7 @@ paths:
                   }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: ''
           content:
             application/json:
               schema:
@@ -347,7 +354,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/users.update:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Update an existing user.
       parameters:
         - name: X-User-Id
           in: header
@@ -364,7 +371,14 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - userId
+                - data
               properties:
+                userId:
+                  type: string
+                  example: bszJr4E8EHAtLqfX4
+                  description: The id of the user to update.
                 data:
                   type: object
                   properties:
@@ -372,8 +386,8 @@ paths:
                       type: string
                     email:
                       type: string
-                userId:
-                  type: string
+                  example: {"data": {"email": "example@mail.com", "password": "passw0rd"}}
+                  description: Data takes other associated user properties.
             examples:
               '0':
                 value: |-
@@ -386,7 +400,7 @@ paths:
                   }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: ''
       servers:
         - url: 'http://localhost:3000'
     servers:
@@ -409,14 +423,13 @@ paths:
             image/svg+xml:
               schema:
                 type: string
-              examples: {}
       servers:
         - url: 'http://localhost:3000'
     servers:
       - url: 'http://localhost:3000'
   /api/v1/users.setAvatar:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Set a user’s avatar.
       parameters:
         - name: X-User-Id
           in: header
@@ -441,8 +454,8 @@ paths:
                       "avatarUrl": "https://css-tricks.com/wp-content/uploads/2013/03/kiwi.png"
                   }
       responses:
-        '400':
-          description: Auto generated using Swagger Inspector
+        '200':
+          description: ''
           content:
             application/json:
               schema:
@@ -465,7 +478,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/users.create:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Create a new user.
       parameters:
         - name: X-User-Id
           in: header
@@ -482,15 +495,56 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - email
+                - name
+                - password
+                - username
               properties:
                 password:
                   type: string
+                  example: pass@w0rd
+                  description: The password for the user.
                 name:
                   type: string
+                  example: Example User
+                  description: The display name of the user
                 email:
                   type: string
+                  example: example@example.com
+                  description: The email address for the user.
                 username:
                   type: string
+                  example: example
+                  description: The username for the user.
+                active:
+                  type: boolean
+                  example: false
+                  description: Whether the user is active, which determines if they can login or not.
+                roles:
+                  type: object
+                  example: ['bot']
+                  description: The roles the user has assigned to them on creation.
+                joinDefaultChannels:
+                  type: boolean
+                  example: false
+                  description: Whether the user should join the default channels when created.
+                requirePasswordChange:
+                  type: boolean
+                  example: true
+                  description: Should the user be required to change their password when they login?
+                sendWelcomeEmail:
+                  type: boolean
+                  example: true
+                  description: Should the user get a welcome email?
+                verified:
+                  type: boolean
+                  example: true
+                  description: Should the user’s email address be verified when created?
+                customFields:
+                  type: object
+                  example: { twitter: '@example' }
+                  description: Any custom fields the user should have on their account.
             examples:
               '0':
                 value: |-
@@ -503,7 +557,7 @@ paths:
                   }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Create a new user. Requires `create-user` permission.
           content:
             application/json:
               schema:
@@ -591,7 +645,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/users.updateOwnBasicInfo:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Update basic information of own user.
       parameters:
         - name: X-User-Id
           in: header
@@ -608,6 +662,8 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - data
               properties:
                 data:
                   type: object
@@ -622,6 +678,8 @@ paths:
                       type: string
                     username:
                       type: string
+                  example: {"data" :{"email": "rocket.cat@rocket.chat", "newPassword": "passw0rd"}}
+                  description: Data takes other user properties as listed below.
             examples:
               '0':
                 value: |-
@@ -636,14 +694,14 @@ paths:
                   }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: ''
       servers:
         - url: 'http://localhost:3000'
     servers:
       - url: 'http://localhost:3000'
   /api/v1/users.getPreferences:
     get:
-      description: Auto generated using Swagger Inspector
+      description: Gets the user’s preferences.
       parameters:
         - name: X-User-Id
           in: header
@@ -657,7 +715,7 @@ paths:
           example: NMgQTRs2pkFlY6vmKXinMwEz8x66OYt91G1JfSj-U4_
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Gets all preferences of the user.
           content:
             application/json:
               schema:
@@ -767,7 +825,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/users.removePersonalAccessToken:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Remove a personal access token.
       parameters:
         - name: X-User-Id
           in: header
@@ -784,9 +842,13 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - tokenName
               properties:
                 tokenName:
                   type: string
+                  example: mypersonaltoken
+                  description: The name of the token.
             examples:
               '0':
                 value: |-
@@ -795,7 +857,7 @@ paths:
                   }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Remove a personal access token. Requires `create-personal-access-tokens` permission.
           content:
             application/json:
               schema:
@@ -815,7 +877,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/users.setActiveStatus:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Set a user’s active status.
       parameters:
         - name: X-User-Id
           in: header
@@ -832,11 +894,18 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - userId
+                - activeStatus
               properties:
                 activeStatus:
                   type: boolean
+                  example: true
+                  description: The value of theactive status.
                 userId:
                   type: string
+                  example: 5HmCfpoB7jp2uibTC
+                  description: The user's id to be changed.
             examples:
               '0':
                 value: |-
@@ -847,7 +916,7 @@ paths:
                   }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: ''
           content:
             application/json:
               schema:
@@ -878,13 +947,15 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/users.info:
     get:
-      description: Auto generated using Swagger Inspector
+      description: Gets a user’s information, limited to the caller’s permissions.
       parameters:
         - name: user
           in: query
+          required: true
           schema:
             type: string
           example: user
+          description: The id or username of the user.
         - name: X-User-Id
           in: header
           schema:
@@ -897,7 +968,7 @@ paths:
           example: NMgQTRs2pkFlY6vmKXinMwEz8x66OYt91G1JfSj-U4_
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: "Retrieves information about a user, the result is only limited to what the callee has access to view. It supports  [Fields Query Parameter](../../query-and-fields-info/) with the `userRooms` field, that returns the rooms that the user is part of."
           content:
             application/json:
               schema:
@@ -1049,7 +1120,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/users.createToken:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Create a user authentication token.
       parameters:
         - name: X-User-Id
           in: header
@@ -1066,9 +1137,18 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - username
+                - userId
               properties:
                 username:
                   type: string
+                  example: uniqueusername
+                  description: The username of the user.
+                userId:
+                  type: string
+                  example: BsNr28znDkG8aeo7W
+                  description: The userId of the user.
             examples:
               '0':
                 value: |-
@@ -1077,7 +1157,7 @@ paths:
                   }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Create a user authentication token. Requires user-generate-access-token permission.
           content:
             application/json:
               schema:
@@ -1108,15 +1188,19 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/users.forgotPassword:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Send email to reset your password.
       requestBody:
         content:
           application/json:
             schema:
               type: object
+              required:
+                - email
               properties:
                 email:
                   type: string
+                  example: email@rocket.cat
+                  description: The email to send password reset link.
             examples:
               '0':
                 value: |-
@@ -1125,7 +1209,7 @@ paths:
                   }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Send email to reset your password.
           content:
             application/json:
               schema:
@@ -1145,7 +1229,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/users.resetAvatar:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Reset a user’s avatar.
       parameters:
         - name: X-User-Id
           in: header
@@ -1162,9 +1246,13 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - username or userId
               properties:
-                username:
+                username or userId:
                   type: string
+                  example: BsNr28znDkG8aeo7W
+                  description: The id or username of the user.
             examples:
               '0':
                 value: |-
@@ -1173,7 +1261,7 @@ paths:
                   }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: ''
           content:
             application/json:
               schema:
@@ -1193,7 +1281,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/users.delete:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Deletes an existing user.
       parameters:
         - name: X-User-Id
           in: header
@@ -1210,9 +1298,13 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - username
               properties:
                 username:
                   type: string
+                  example: thisuser
+                  description: The username of the user.
             examples:
               '0':
                 value: |-
@@ -1221,7 +1313,7 @@ paths:
                   }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Deletes an existing user. Requires `delete-user` permission.
           content:
             application/json:
               schema:
@@ -1241,28 +1333,36 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/users.register:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Register a new user.
       parameters:
         - name: password
           in: query
+          required: true
           schema:
             type: string
-          example: passw0d
+          example: passw0rd
+          description: The password for the user.
         - name: name
           in: query
+          required: true
           schema:
             type: string
           example: CUser
+          description: The name of the user.
         - name: email
           in: query
+          required: true
           schema:
             type: string
           example: createduser@mail.com
+          description: The email for the user.
         - name: username
           in: query
+          required: true
           schema:
             type: string
           example: created.user
+          description: The username for the user.
       requestBody:
         content:
           application/json:
@@ -1284,7 +1384,7 @@ paths:
                   "pass": "passw0rd", "name": "Roger Smith"}
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: ''
           content:
             application/json:
               schema:
@@ -1408,7 +1508,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/users.getPersonalAccessTokens:
     get:
-      description: Auto generated using Swagger Inspector
+      description: Gets the user’s personal access tokens.
       parameters:
         - name: X-User-Id
           in: header
@@ -1422,7 +1522,7 @@ paths:
           example: EjxvxDuP0taoaEPkwmylFpsHTG2WaM1g0nZPIpGc7gy
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Gets the user’s personal access tokens. Requires `create-personal-access-tokens` permission.
           content:
             application/json:
               schema:
@@ -1465,7 +1565,7 @@ paths:
       - url: 'http://localhost:3000'
   /api/v1/users.list:
     get:
-      description: Auto generated using Swagger Inspector
+      description: All of the users and their information, limited to permissions.
       parameters:
         - name: X-User-Id
           in: header
@@ -1477,16 +1577,30 @@ paths:
           schema:
             type: string
           example: ' EjxvxDuP0taoaEPkwmylFpsHTG2WaM1g0nZPIpGc7gy'
+        - name: fields
+          in: query
+          required: false
+          schema:
+            type: object
+          example: { name: 1, email: 0 }
+          description: Field include hash (value of `1` to include, `0` to exclude).
+        - name: query
+          in: query
+          required: false
+          schema:
+            type: object
+          example: { active: true, type: { $in: ['user', 'bot'] } }
+          description: Query filter hash
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Gets all of the users in the system and their information, the result is only limited to what the callee has access to view. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with [Query and Fields Query Parameter](../../query-and-fields-info/).
       servers:
         - url: 'http://localhost:3000'
     servers:
       - url: 'http://localhost:3000'
   /api/v1/users.regeneratePersonalAccessToken:
     post:
-      description: Auto generated using Swagger Inspector
+      description: Regenerate a user personal access token.
       parameters:
         - name: X-User-Id
           in: header
@@ -1503,9 +1617,13 @@ paths:
           application/json:
             schema:
               type: object
+              required:
+                - tokenName
               properties:
                 tokenName:
                   type: string
+                  example: mypersonaltoken
+                  description: The name of the token.
             examples:
               '0':
                 value: |-
@@ -1514,7 +1632,7 @@ paths:
                   }
       responses:
         '200':
-          description: Auto generated using Swagger Inspector
+          description: Regenerate Personal Access Token. Requires `create-personal-access-tokens` permission.
           content:
             application/json:
               schema:

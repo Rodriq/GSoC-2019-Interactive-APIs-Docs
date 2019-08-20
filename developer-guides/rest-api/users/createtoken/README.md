@@ -1,16 +1,21 @@
+---
+method: post
+parameters: true
+endpoint: users.createToken
+authentication: true
+category: users
+permalink: /developer-guides/rest-api/users/createtoken
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint}}{% endcapture %}
+
 # Create Token
 
-Create a user authentication token. Requires `user-generate-access-token` permission.
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/users.createToken` | `yes` | `POST` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Payload
 
-| Argument | Example | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `userId` or `username` | `BsNr28znDkG8aeo7W` | Required | The id or username of the user. |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call - Via userId
 
@@ -24,37 +29,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-  "data": {
-    "userId": "BsNr28znDkG8aeo7W",
-    "authToken": "2jdk99wuSjXPO201XlAks9sjDjAhSJmskAKW301mSuj9Sk",
-  },
-  "success": true
-}
-```
-
-## Example Call - Via username
-
-```bash
-curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
-     -H "X-User-Id: aobEdbYhXfu5hkeqG" \
-     -H "Content-type:application/json" \
-     http://localhost:3000/api/v1/users.createToken \
-     -d '{ "username": "test" }'
-```
-
-## Example Result
-
-```json
-{
-  "data": {
-    "userId": "BsNr28znDkG8aeo7W",
-    "authToken": "2jdk99wuSjXPO201XlAks9sjDjAhSJmskAKW301mSuj9Sk",
-  },
-  "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 

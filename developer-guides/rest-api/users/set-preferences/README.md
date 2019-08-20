@@ -1,12 +1,23 @@
+---
+method: post
+parameters: true
+endpoint: users.setPreferences
+authentication: true
+category: users
+permalink: /developer-guides/rest-api/users/setpreferences/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Set Preferences
 
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/users.setPreferences` | `yes` | `POST` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Payload
 
-| Argument | Example | Required | Description |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+
+<!-- | Argument | Example | Required | Description |
 | :--- | :--- | :--- | :--- |
 | `userId`                          | `BsNr28znDkG8aeo7W` | Required | The id of the user.              |
 | `data.newRoomNotification`        | `test`              | Required | New room notification.           |
@@ -38,7 +49,7 @@
 | `data.sidebarViewMode`            | `test`              | Optional | Show view mode.                  |
 | `data.sidebarHideAvatar`          | `true`              | Optional | Show avatar on hide bar.         |
 | `data.groupByType`                | `true`              | Optional | Group channels by type.          |
-| `data.muteFocusedConversations`   | `true`              | Optional | Mute focused conversations.      |
+| `data.muteFocusedConversations`   | `true`              | Optional | Mute focused conversations.      | -->
 
 ## Example Call
 
@@ -52,39 +63,4 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-    "success": true,
-    "user": {
-        "_id": "rocketchat.internal.admin.test",
-        "settings": {
-            "preferences": {
-                "newRoomNotification": "door",
-                "newMessageNotification": "chime",
-                "muteFocusedConversations": true,
-                "useEmojis": true,
-                "convertAsciiEmoji": true,
-                "saveMobileBandwidth": true,
-                "collapseMediaByDefault": false,
-                "autoImageLoad": true,
-                "emailNotificationMode": "all",
-                "roomsListExhibitionMode": "category",
-                "unreadAlert": true,
-                "notificationsSoundVolume": 100,
-                "desktopNotifications": "default",
-                "mobileNotifications": "default",
-                "enableAutoAway": true,
-                "highlights": [],
-                "desktopNotificationDuration": 0,
-                "viewMode": 0,
-                "hideUsernames": false,
-                "hideRoles": false,
-                "hideAvatars": false,
-                "hideFlexTab": false,
-                "sendOnEnter": "normal",
-                "roomCounterSidebar": false
-            }
-        }
-    }
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}

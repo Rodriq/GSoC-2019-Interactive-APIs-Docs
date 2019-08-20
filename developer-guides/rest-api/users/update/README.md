@@ -1,8 +1,17 @@
+---
+method: post
+parameters: true
+endpoint: users.update
+authentication: true
+category: users
+permalink: /developer-guides/rest-api/users/update/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Update
 
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/users.update` | `yes` | `POST` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 **Note**
 
@@ -11,7 +20,9 @@
 
 ## Payload
 
-| Argument | Example | Required | Description |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
+
+<!-- | Argument | Example | Required | Description |
 | :--- | :--- | :--- | :--- |
 | `userId` | `BsNr28znDkG8aeo7W` | Required | The id of the user to update. |
 | `data.email` | `example@example.com` | Optional | The email address for the user. |
@@ -24,7 +35,7 @@
 | `data.requirePasswordChange` | `true` | Optional <br> Default: `false` | Should the user be required to change their password when they login? |
 | `data.sendWelcomeEmail` | `true` | Optional <br> Default: `false` | Should the user get a welcome email? |
 | `data.verified` | `true` | Optional <br> Default: `false` | Should the user's email address be verified? |
-| `data.customFields` | `{ twitter: '@example' }` | Optional <br> Default: `undefined` | Any custom fields the user should have on their account. |
+| `data.customFields` | `{ twitter: '@example' }` | Optional <br> Default: `undefined` | Any custom fields the user should have on their account. | -->
 
 ## Example Call
 
@@ -38,38 +49,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-   "user":{
-      "_id": "BsNr28znDkG8aeo7W",
-      "createdAt": "2016-09-13T14:57:56.037Z",
-      "services": {
-         "password": {
-            "bcrypt": "$2a$10$5I5nUzqNEs8jKhi7BFS55uFYRf5TE4ErSUH8HymMNAbpMAvsOcl2C"
-         }
-      },
-      "username": "uniqueusername",
-      "emails": [
-         {
-            "address": "newemail@user.tld",
-            "verified": false
-         }
-      ],
-      "type": "user",
-      "status": "offline",
-      "active": true,
-      "roles": [
-         "user"
-      ],
-      "_updatedAt": "2016-09-13T14:57:56.175Z",
-      "name": "new name",
-      "customFields": {
-         "twitter": "userstwitter"
-      }
-   },
-   "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 
