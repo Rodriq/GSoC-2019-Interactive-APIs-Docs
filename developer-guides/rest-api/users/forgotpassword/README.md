@@ -1,10 +1,17 @@
+---
+method: post
+parameters: true
+endpoint: users.forgotPassword
+authentication: true
+category: users
+permalink: /developer-guides/rest-api/users/forgotpassword/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Forgot Password
 
-Send email to reset your password.
-
-| URL                            | Requires Auth | HTTP Method |
-| :----------------------------- | :------------ | :---------- |
-| `/api/v1/users.forgotPassword` | `no`          | `POST`      |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 **Note**
 
@@ -12,9 +19,7 @@ Send email to reset your password.
 
 ## Payload
 
-| Argument      | Example                         | Required | Description                           |
-| :---------    | :------------------------------ | :------- | :------------------------------------ |
-| `email`       | `email@rocket.cat`              | Required | The email to send password reset link |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call - As JSON
 
@@ -26,11 +31,7 @@ curl -H "Content-type:application/json" \
 
 ## Result
 
-```json
-{
-  "status": "success"
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 

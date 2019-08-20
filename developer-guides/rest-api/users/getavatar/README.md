@@ -1,16 +1,21 @@
+---
+method: get
+parameters: true
+endpoint: users.getAvatar
+authentication: false
+category: users
+permalink: /developer-guides/rest-api/users/getavatar/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Get Avatar
 
-Gets the URL for a user’s avatar.
-
-| URL                       | Requires Auth | HTTP Method |
-| :------------------------ | :------------ | :---------- |
-| `/api/v1/users.getAvatar` | `no`          | `GET`       |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Payload
 
-| Argument               | Example             | Required | Description                     |
-| :--------------------- | :------------------ | :------- | :------------------------------ |
-| `userId` or `username` | `BsNr28znDkG8aeo7W` | Required | The id or username of the user. |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call - Via userId
 
@@ -24,17 +29,7 @@ curl http://localhost:3000/api/v1/users.getAvatar?userId=BsNr28znDkG8aeo7W
 http://localhost:3000/avatar/bobsmith
 ```
 
-## Example Call - Via username
-
-```bash
-curl http://localhost:3000/api/v1/users.getAvatar?username=bobsmith
-```
-
-## Example Result
-
-```
-http://localhost:3000/avatar/bobsmith
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 _N.B. the response is a 307 temporary redirect_
 

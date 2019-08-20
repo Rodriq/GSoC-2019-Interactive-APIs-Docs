@@ -1,16 +1,21 @@
+---
+method: get
+parameters: true
+endpoint: users.presence
+authentication: true
+category: users
+permalink: /developer-guides/rest-api/users/presence/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Users Presence
 
-Gets all connected users presence.
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/users.presence` | `yes` | `GET` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Query Parameters
 
-| Argument | Example | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `from` | `2019-05-22T12:11:45.392Z` | Optional | The last date you got a status change |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## All users presence example call
 
@@ -25,28 +30,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-   "users":[
-      {
-         "_id":"rocket.cat",
-         "name":"Rocket.Cat",
-         "username":"rocket.cat",
-         "status":"online",
-         "utcOffset":0
-      },
-      {
-         "_id":"rocketchat.internal.admin.test",
-         "name":"RocketChat Internal Admin Test",
-         "username":"rocketchat.internal.admin.test",
-         "status":"online",
-         "utcOffset":-2
-      }
-   ],
-   "full": true,
-   "success":true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Users presence changed after period example call
 

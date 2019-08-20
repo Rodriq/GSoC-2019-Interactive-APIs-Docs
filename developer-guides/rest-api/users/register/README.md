@@ -1,18 +1,21 @@
+---
+method: post
+parameters: true
+endpoint: users.register
+authentication: false
+category: users
+permalink: /developer-guides/rest-api/users/register/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Register
 
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/users.register` | `no` | `POST` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Payload
 
-| Argument | Example | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `username` | `rogersmith` | Required | The username for the user. |
-| `email` | `roger@example.com` | Required | The email for the user. |
-| `pass` | `passw0rd` | Required | The password for the user. |
-| `name` | `Roger Smith` | Required | The name of the user. |
-| `secretURL` | `Jjwjg6gouWLXhMGKW` | Optional | String appended to secret registration URL (if using). |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call
 
@@ -24,20 +27,7 @@ curl -H "Content-type:application/json" \
 
 ## Example Result
 
-```json
-{
-  "user": {
-    "_id": "nSYqWzZ4GsKTX4dyK",
-    "type": "user",
-    "status": "offline",
-    "active": true,
-    "name": "Example User",
-    "utcOffset": 0,
-    "username": "example"
-  },
-  "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 

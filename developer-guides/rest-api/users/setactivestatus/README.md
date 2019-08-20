@@ -1,15 +1,21 @@
+---
+method: post
+parameters: true
+endpoint: users.setActiveStatus
+authentication: true
+category: users
+permalink: /developer-guides/rest-api/users/setactivestatus/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Set Active Status
 
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/users.setActiveStatus` | `yes` | `POST` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Payload
 
-| Argument | Example | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `activeStatus` | `true` | Required | The value of the active status. |
-| `userId` | `5HmCfpoB7jp2uibTC` | Required | The user's id to be changed. |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example call
 
@@ -23,15 +29,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-    "user": {
-        "_id": "jJNyu4BQFqdgEcqnR",
-        "active": false
-    },
-    "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 

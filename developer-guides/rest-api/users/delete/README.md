@@ -1,34 +1,21 @@
+---
+method: post
+parameters: true
+endpoint: users.delete
+authentication: true
+category: users
+permalink: /developer-guides/rest-api/users/delete/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Delete
 
-Deletes an existing user. Requires `delete-user` permission.
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/users.delete` | `yes` | `POST` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Payload
 
-| Argument | Example | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `userId` or `username` | `BsNr28znDkG8aeo7W` | Required | The id or username of the user. |
-
-## Example Call - Via userId
-
-```bash
-curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
-     -H "X-User-Id: aobEdbYhXfu5hkeqG" \
-     -H "Content-type:application/json" \
-     http://localhost:3000/api/v1/users.delete \
-     -d '{ "userId": "BsNr28znDkG8aeo7W" }'
-```
-
-## Example Result
-
-```json
-{
-  "success": true
-}
-```
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call - Via username
 
@@ -42,11 +29,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-  "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 

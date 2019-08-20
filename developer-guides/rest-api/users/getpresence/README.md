@@ -1,33 +1,21 @@
+---
+method: get
+parameters: true
+endpoint: users.getPresence
+authentication: true
+category: users
+permalink: /developer-guides/rest-api/users/getpresence/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Get Presence
 
-Gets a user's presence if the query string `userId` or `username` is provided, otherwise it gets the callee's.
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/users.getPresence` | `yes` | `GET` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Query Parameters
 
-| Argument | Example | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `userId` or `username` | `BsNr28znDkG8aeo7W` | Optional | The id or username of the user. If not provided, the auth user is updated. |
-
-## Other Users Example Call - Via userId
-
-```bash
-curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
-     -H "X-User-Id: aobEdbYhXfu5hkeqG" \
-     http://localhost:3000/api/v1/users.getPresence?userId=BsNr28znDkG8aeo7W
-```
-
-## Example Result
-
-```json
-{
-  "presence": "offline",
-  "success": true
-}
-```
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Other Users Example Call - Via username
 
@@ -35,15 +23,6 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
      -H "X-User-Id: aobEdbYhXfu5hkeqG" \
      http://localhost:3000/api/v1/users.getPresence?username=test
-```
-
-## Example Result
-
-```json
-{
-  "presence": "offline",
-  "success": true
-}
 ```
 
 ## Self Example Call
@@ -56,14 +35,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-  "presence": "offline",
-  "connectionStatus": "offline",
-  "lastLogin": "2016-12-08T18:26:03.612Z",
-  "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 

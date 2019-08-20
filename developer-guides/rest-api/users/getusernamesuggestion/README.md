@@ -1,10 +1,17 @@
+---
+method: get
+parameters: false
+endpoint: users.getUsernameSuggestion
+authentication: true
+category: users
+permalink: /developer-guides/rest-api/users/getusernamesuggestion/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Get Username Suggestion
 
-Gets a suggestion a new username to user.
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/users.getUsernameSuggestion` | `yes` | `GET` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Other Users Example Call
 
@@ -16,12 +23,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-  "result": "rocket.cat",
-  "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 

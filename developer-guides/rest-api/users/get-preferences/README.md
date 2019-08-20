@@ -1,10 +1,17 @@
+---
+method: get
+parameters: false
+endpoint: users.getPreferences
+authentication: true
+category: users
+permalink: /developer-guides/rest-api/users/getpreferences/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Get Preferences
 
-Gets all preferences of the user.
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/users.getPreferences` | `yes` | `GET` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call
 
@@ -17,34 +24,4 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-    "preferences": {
-        "newRoomNotification": "door",
-        "newMessageNotification": "chime",
-        "muteFocusedConversations": true,
-        "useEmojis": true,
-        "convertAsciiEmoji": true,
-        "saveMobileBandwidth": true,
-        "collapseMediaByDefault": false,
-        "autoImageLoad": true,
-        "emailNotificationMode": "all",
-        "roomsListExhibitionMode": "category",
-        "unreadAlert": true,
-        "notificationsSoundVolume": 100,
-        "desktopNotifications": "default",
-        "mobileNotifications": "default",
-        "enableAutoAway": true,
-        "highlights": [],
-        "desktopNotificationDuration": 0,
-        "viewMode": 0,
-        "hideUsernames": false,
-        "hideRoles": false,
-        "hideAvatars": false,
-        "hideFlexTab": false,
-        "sendOnEnter": "normal",
-        "roomCounterSidebar": false
-    },
-    "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
