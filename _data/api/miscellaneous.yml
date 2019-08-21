@@ -6,31 +6,35 @@ info:
 servers:
   - url: 'http://localhost:3000'
 paths:
-  /api/v1/directory:
+  "/api/v1/directory":
     get:
       description: Search by users or channels on all server.
       parameters:
-        - name: query
-          in: query
-          required: true
-          description: When `type` is `users` you can send an additional `workspace` field, that can be `local` (default) or `all`. `workspace=all` will work only if [Federation](../../../../administrator-guides/federation) is enabled.
-          schema:
-            type: string
-          example: >-
-            %7B%22text%22%3A%20%22rocket%22%2C%20%22type%22%3A%20%22users%22%2C%20%22workspace%22%3A%20%22local%22%7D
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: bszJr4E8EHAtLqfX4
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: ItYC6vCdugENsn2v8roajraPD55VisDDWcjD8Ya5C6t
+      - name: query
+        in: query
+        required: true
+        description: When `type` is `users` you can send an additional `workspace` field,
+          that can be `local` (default) or `all`. `workspace=all` will work only if
+          [Federation](../../../../administrator-guides/federation) is enabled.
+        schema:
+          type: string
+        example: "%7B%22text%22%3A%20%22rocket%22%2C%20%22type%22%3A%20%22users%22%2C%20%22workspace%22%3A%20%22local%22%7D"
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: bszJr4E8EHAtLqfX4
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: ItYC6vCdugENsn2v8roajraPD55VisDDWcjD8Ya5C6t
       responses:
         '200':
-          description: A method, that searches by users or channels on all users and channels available on server. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with [Query and Fields Query Parameters](../../query-and-fields-info/).
+          description: A method, that searches by users or channels on all users and
+            channels available on server. It supports the [Offset, Count, and Sort Query
+            Parameters](../../offset-and-count-and-sort-info/) along with [Query and
+            Fields Query Parameters](../../query-and-fields-info/).
           content:
             application/json:
               schema:
@@ -75,59 +79,16 @@ paths:
                       "success": true
                     }
       servers:
-        - url: 'http://localhost:3000'
+      - url: http://localhost:3000
     servers:
-      - url: 'http://localhost:3000'
-  /api/v1/shield.svg:
-    get:
-      description: Gets the shield svg(badge) to add in your website.
-      parameters:
-        - name: type
-          in: query
-          required: false
-          description: Can be one of `online`, `user`, `channel`
-          schema:
-            type: string
-          example: online
-        - name: icon
-          in: query
-          required: false
-          description: ' '
-          schema:
-            type: boolean
-          example: false
-        - name: channel
-          in: query
-          required: false
-          description: Name of the channel
-          schema:
-            type: string
-          example: general
-        - name: name
-          in: query
-          required: false
-          description: Name to show
-          schema:
-            type: string
-          example: Rocket.Chat
-      responses:
-        '200':
-          description: A simple method, requires no authentication, that returns the shield svg(badge) to add in your website. It must have `API_Enable_Shields` enabled.
-          content:
-            image/svg+xml;charset=utf-8:
-              schema:
-                type: string
-              examples: { }
-      servers:
-        - url: 'http://localhost:3000'
-    servers:
-      - url: 'http://localhost:3000'
-  /api/v1/info:
+    - url: http://localhost:3000
+  "/api/v1/info":
     get:
       description: Information about the Rocket.Chat server.
       responses:
         '200':
-          description: A simple method, requires no authentication, that returns information about the server including version information.
+          description: A simple method, requires no authentication, that returns information
+            about the server including version information.
           content:
             application/json:
               schema:
@@ -145,36 +106,83 @@ paths:
                       "success": true
                     }
       servers:
-        - url: 'http://localhost:3000'
+      - url: http://localhost:3000
     servers:
-      - url: 'http://localhost:3000'
-  /api/v1/spotlight:
+    - url: http://localhost:3000
+  "/api/v1/shield.svg":
+    get:
+      description: Gets the shield svg(badge) to add in your website.
+      parameters:
+      - name: type
+        in: query
+        required: false
+        description: Can be one of `online`, `user`, `channel`
+        schema:
+          type: string
+        example: online
+      - name: icon
+        in: query
+        required: false
+        description: " "
+        schema:
+          type: boolean
+        example: false
+      - name: channel
+        in: query
+        required: false
+        description: Name of the channel
+        schema:
+          type: string
+        example: general
+      - name: name
+        in: query
+        required: false
+        description: Name to show
+        schema:
+          type: string
+        example: Rocket.Chat
+      responses:
+        '200':
+          description: A simple method, requires no authentication, that returns the
+            shield svg(badge) to add in your website. It must have `API_Enable_Shields`
+            enabled.
+          content:
+            image/svg+xml;charset=utf-8:
+              schema:
+                type: string
+              examples: {}
+      servers:
+      - url: http://localhost:3000
+    servers:
+    - url: http://localhost:3000
+  "/api/v1/spotlight":
     get:
       description: Searches for users or rooms that are visible to the user.
       parameters:
-        - name: query
-          in: query
-          required: true
-          description: The term to be searched. Supports '#' for channels and '@' for users
-          schema:
-            type: string
-          example: '%40test.user'
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: bszJr4E8EHAtLqfX4
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: ItYC6vCdugENsn2v8roajraPD55VisDDWcjD8Ya5C6t
+      - name: query
+        in: query
+        required: true
+        description: The term to be searched. Supports '#' for channels and '@' for
+          users
+        schema:
+          type: string
+        example: "%40test.user"
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: bszJr4E8EHAtLqfX4
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: ItYC6vCdugENsn2v8roajraPD55VisDDWcjD8Ya5C6t
       responses:
         '200':
           description: |-
-             Searches for users or rooms that are visible to the user.
+            Searches for users or rooms that are visible to the user.
 
-             'WARNING: It will only return rooms that user didn't join yet.'
+            'WARNING: It will only return rooms that user didn't join yet.'
           content:
             application/json:
               schema:
@@ -215,439 +223,34 @@ paths:
                       "success": true
                     }
       servers:
-        - url: 'http://localhost:3000'
+      - url: http://localhost:3000
     servers:
-      - url: 'http://localhost:3000'
-  /api/v1/statistics.list:
-    get:
-      description: Selectable statistics about the Rocket.Chat server.
-      parameters:
-        - name: query
-          in: query
-          required: true
-          description: See [Query Parameter](../../query-and-fields-info/)
-          schema:
-            type: string
-          example: '%7B%22_id%22%3A%22j3rw9bKLktWtgmmiA%22%7D'
-        - name: offset
-          in: query
-          required: false
-          description: See [Offset Parameter](../../offset-and-count-and-sort-info/)
-          schema:
-            type: integer
-          example: 0
-        - name: count
-          in: query
-          required: false
-          description: See [Count Parameter](../../offset-and-count-and-sort-info/)
-          schema:
-            type: integer
-          example: 1
-        - name: fields
-          in: query
-          required: false
-          description: See [Fields Parameters](../../query-and-fields-info/)
-          schema:
-            type: string
-          example: '{"os":0,"migration":0,"deploy":0,"process":0}'
-        - name: sort
-          in: query
-          required: false
-          description: See [Sort Query Parameters](../../offset-and-count-and-sort-info/)
-          schema:
-            type: string
-          example: '{"_id":1}'
-
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: MERRYtT6iA9ZghsdK
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: uhvKflfBEDN4jDDvIMVK1qVzEwSO2oWRAMAELlY2SeK
-      responses:
-        '200':
-          description: Selectable statistics about the Rocket.Chat server. It supports the [Offset, Count and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with just the [Fields and Query Parameters](../../query-and-fields-info/). Requires `view-statistics` permission.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  total:
-                    type: integer
-                  offset:
-                    type: integer
-                  success:
-                    type: boolean
-                  count:
-                    type: integer
-                  statistics:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        totalDirectMessages:
-                          type: integer
-                        totalLivechatAgents:
-                          type: integer
-                        totalUsers:
-                          type: integer
-                        totalChannels:
-                          type: integer
-                        uploadsTotalSize:
-                          type: integer
-                        installedAt:
-                          type: string
-                        totalLivechatMessages:
-                          type: integer
-                        awayUsers:
-                          type: integer
-                        uniqueDevicesOfYesterday:
-                          type: object
-                          properties:
-                            month:
-                              type: integer
-                            data:
-                              type: array
-                              items:
-                                type: string
-                            year:
-                              type: integer
-                            day:
-                              type: integer
-                        deploy:
-                          type: object
-                          properties:
-                            method:
-                              type: string
-                            platform:
-                              type: string
-                        createdAt:
-                          type: string
-                        totalLivechatVisitors:
-                          type: integer
-                        livechatEnabled:
-                          type: boolean
-                        _updatedAt:
-                          type: string
-                        totalPrivateGroups:
-                          type: integer
-                        process:
-                          type: object
-                          properties:
-                            nodeVersion:
-                              type: string
-                            pid:
-                              type: integer
-                            uptime:
-                              type: number
-                        totalPrivateGroupMessages:
-                          type: integer
-                        oplogEnabled:
-                          type: boolean
-                        os:
-                          type: object
-                          properties:
-                            cpus:
-                              type: array
-                              items:
-                                type: object
-                                properties:
-                                  times:
-                                    type: object
-                                    properties:
-                                      idle:
-                                        type: integer
-                                      irq:
-                                        type: integer
-                                      sys:
-                                        type: integer
-                                      user:
-                                        type: integer
-                                      nice:
-                                        type: integer
-                                  model:
-                                    type: string
-                                  speed:
-                                    type: integer
-                            release:
-                              type: string
-                            totalmem:
-                              type: number
-                            arch:
-                              type: string
-                            freemem:
-                              type: integer
-                            type:
-                              type: string
-                            loadavg:
-                              type: array
-                              items:
-                                type: number
-                            platform:
-                              type: string
-                            uptime:
-                              type: integer
-                        offlineUsers:
-                          type: integer
-                        onlineUsers:
-                          type: integer
-                        activeUsers:
-                          type: integer
-                        uploadsTotal:
-                          type: integer
-                        uniqueUsersOfYesterday:
-                          type: object
-                          properties:
-                            month:
-                              type: integer
-                            data:
-                              type: array
-                              items:
-                                type: string
-                            year:
-                              type: integer
-                            day:
-                              type: integer
-                        version:
-                          type: string
-                        totalRooms:
-                          type: integer
-                        totalChannelMessages:
-                          type: integer
-                        mongoVersion:
-                          type: string
-                        uniqueOSOfYesterday:
-                          type: object
-                          properties:
-                            month:
-                              type: integer
-                            data:
-                              type: array
-                              items:
-                                type: string
-                            year:
-                              type: integer
-                            day:
-                              type: integer
-                        totalLivechat:
-                          type: integer
-                        uniqueUsersOfLastMonth:
-                          type: object
-                          properties:
-                            month:
-                              type: integer
-                            data:
-                              type: array
-                              items:
-                                type: string
-                            year:
-                              type: integer
-                        nonActiveUsers:
-                          type: integer
-                        instanceCount:
-                          type: integer
-                        totalMessages:
-                          type: integer
-                        migration:
-                          type: object
-                          properties:
-                            _id:
-                              type: string
-                            locked:
-                              type: boolean
-                            version:
-                              type: integer
-                        totalDirect:
-                          type: integer
-                        wizard:
-                          type: object
-                          properties:
-                            organizationType:
-                              type: string
-                            country:
-                              type: string
-                            website:
-                              type: string
-                            organizationName:
-                              type: string
-                            size:
-                              type: string
-                            serverType:
-                              type: string
-                            siteName:
-                              type: string
-                            industry:
-                              type: string
-                            language:
-                              type: string
-                            allowMarketingEmails:
-                              type: boolean
-                        _id:
-                          type: string
-                        uniqueId:
-                          type: string
-              examples:
-                '0':
-                  value: |-
-                    {
-                      "statistics": [
-                        {
-                          "_id": "j3rw9bKLktWtgmmiA",
-                          "wizard": {
-                            "organizationType": "",
-                            "organizationName": "",
-                            "industry": "",
-                            "size": "",
-                            "country": "",
-                            "website": "",
-                            "siteName": "Rocket.Chat",
-                            "language": "",
-                            "serverType": "",
-                            "allowMarketingEmails": true
-                          },
-                          "uniqueId": "maWzifv5JWbsCXrum",
-                          "installedAt": "2019-02-22T17:59:58.139Z",
-                          "version": "0.74.0-develop",
-                          "totalUsers": 1,
-                          "activeUsers": 1,
-                          "nonActiveUsers": 0,
-                          "onlineUsers": 0,
-                          "awayUsers": 0,
-                          "offlineUsers": 1,
-                          "totalRooms": 1,
-                          "totalChannels": 1,
-                          "totalPrivateGroups": 0,
-                          "totalDirect": 0,
-                          "totalLivechat": 0,
-                          "totalLivechatVisitors": 0,
-                          "totalLivechatAgents": 0,
-                          "livechatEnabled": false,
-                          "totalMessages": 0,
-                          "totalChannelMessages": 0,
-                          "totalPrivateGroupMessages": 0,
-                          "totalDirectMessages": 0,
-                          "totalLivechatMessages": 0,
-                          "os": {
-                            "type": "Linux",
-                            "platform": "linux",
-                            "arch": "x64",
-                            "release": "4.18.0-15-generic",
-                            "uptime": 145639,
-                            "loadavg": [
-                              9.0751953125,
-                              6.27197265625,
-                              4.82177734375
-                            ],
-                            "totalmem": 3977756672,
-                            "freemem": 120721408,
-                            "cpus": [
-                              {
-                                "model": "Intel(R) Celeron(R) CPU  N3050  @ 1.60GHz",
-                                "speed": 2160,
-                                "times": {
-                                  "user": 79215200,
-                                  "nice": 165300,
-                                  "sys": 23987700,
-                                  "idle": 408054500,
-                                  "irq": 0
-                                }
-                              },
-                              {
-                                "model": "Intel(R) Celeron(R) CPU  N3050  @ 1.60GHz",
-                                "speed": 2160,
-                                "times": {
-                                  "user": 75728600,
-                                  "nice": 196600,
-                                  "sys": 23065000,
-                                  "idle": 179959700,
-                                  "irq": 0
-                                }
-                              }
-                            ]
-                          },
-                          "process": {
-                            "nodeVersion": "v8.11.4",
-                            "pid": 28379,
-                            "uptime": 309.114
-                          },
-                          "deploy": {
-                            "method": "tar",
-                            "platform": "selfinstall"
-                          },
-                          "uploadsTotal": 0,
-                          "uploadsTotalSize": 0,
-                          "migration": {
-                            "_id": "control",
-                            "locked": false,
-                            "version": 137
-                          },
-                          "instanceCount": 1,
-                          "oplogEnabled": true,
-                          "mongoVersion": "4.0.2",
-                          "uniqueUsersOfYesterday": {
-                            "year": 2019,
-                            "month": 2,
-                            "day": 21,
-                            "data": []
-                          },
-                          "uniqueUsersOfLastMonth": {
-                            "year": 2019,
-                            "month": 1,
-                            "data": []
-                          },
-                          "uniqueDevicesOfYesterday": {
-                            "year": 2019,
-                            "month": 2,
-                            "day": 21,
-                            "data": []
-                          },
-                          "uniqueOSOfYesterday": {
-                            "year": 2019,
-                            "month": 2,
-                            "day": 21,
-                            "data": []
-                          },
-                          "createdAt": "2019-02-22T18:02:36.207Z",
-                          "_updatedAt": "2019-02-22T18:02:36.207Z"
-                        }
-                      ],
-                      "count": 1,
-                      "offset": 0,
-                      "total": 1,
-                      "success": true
-                    }
-      servers:
-        - url: 'http://localhost:3000'
-    servers:
-      - url: 'http://localhost:3000'
-  /api/v1/statistics:
+    - url: http://localhost:3000
+  "/api/v1/statistics":
     get:
       description: Statistics about the Rocket.Chat server.
       parameters:
-        - name: refresh
-          in: query
-          required: false
-          description: Need to refresh statistics
-          schema:
-            type: boolean
-          example: true
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: MERRYtT6iA9ZghsdK
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: uhvKflfBEDN4jDDvIMVK1qVzEwSO2oWRAMAELlY2SeK
+      - name: refresh
+        in: query
+        required: false
+        description: Need to refresh statistics
+        schema:
+          type: boolean
+        example: true
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: MERRYtT6iA9ZghsdK
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: uhvKflfBEDN4jDDvIMVK1qVzEwSO2oWRAMAELlY2SeK
       responses:
         '200':
-          description: Statistics about the Rocket.Chat server. Requires `view-statistics` permission.
+          description: Statistics about the Rocket.Chat server. Requires `view-statistics`
+            permission.
           content:
             application/json:
               schema:
@@ -1062,9 +665,417 @@ paths:
                       "success": true
                     }
       servers:
-        - url: 'http://localhost:3000'
+      - url: http://localhost:3000
     servers:
-      - url: 'http://localhost:3000'
+    - url: http://localhost:3000
+  "/api/v1/statistics.list":
+    get:
+      description: Selectable statistics about the Rocket.Chat server.
+      parameters:
+      - name: query
+        in: query
+        required: true
+        description: See [Query Parameter](../../query-and-fields-info/)
+        schema:
+          type: string
+        example: "%7B%22_id%22%3A%22j3rw9bKLktWtgmmiA%22%7D"
+      - name: offset
+        in: query
+        required: false
+        description: See [Offset Parameter](../../offset-and-count-and-sort-info/)
+        schema:
+          type: integer
+        example: 0
+      - name: count
+        in: query
+        required: false
+        description: See [Count Parameter](../../offset-and-count-and-sort-info/)
+        schema:
+          type: integer
+        example: 1
+      - name: fields
+        in: query
+        required: false
+        description: See [Fields Parameters](../../query-and-fields-info/)
+        schema:
+          type: string
+        example: '{"os":0,"migration":0,"deploy":0,"process":0}'
+      - name: sort
+        in: query
+        required: false
+        description: See [Sort Query Parameters](../../offset-and-count-and-sort-info/)
+        schema:
+          type: string
+        example: '{"_id":1}'
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: MERRYtT6iA9ZghsdK
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: uhvKflfBEDN4jDDvIMVK1qVzEwSO2oWRAMAELlY2SeK
+      responses:
+        '200':
+          description: Selectable statistics about the Rocket.Chat server. It supports
+            the [Offset, Count and Sort Query Parameters](../../offset-and-count-and-sort-info/)
+            along with just the [Fields and Query Parameters](../../query-and-fields-info/).
+            Requires `view-statistics` permission.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  success:
+                    type: boolean
+                  count:
+                    type: integer
+                  statistics:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        totalDirectMessages:
+                          type: integer
+                        totalLivechatAgents:
+                          type: integer
+                        totalUsers:
+                          type: integer
+                        totalChannels:
+                          type: integer
+                        uploadsTotalSize:
+                          type: integer
+                        installedAt:
+                          type: string
+                        totalLivechatMessages:
+                          type: integer
+                        awayUsers:
+                          type: integer
+                        uniqueDevicesOfYesterday:
+                          type: object
+                          properties:
+                            month:
+                              type: integer
+                            data:
+                              type: array
+                              items:
+                                type: string
+                            year:
+                              type: integer
+                            day:
+                              type: integer
+                        deploy:
+                          type: object
+                          properties:
+                            method:
+                              type: string
+                            platform:
+                              type: string
+                        createdAt:
+                          type: string
+                        totalLivechatVisitors:
+                          type: integer
+                        livechatEnabled:
+                          type: boolean
+                        _updatedAt:
+                          type: string
+                        totalPrivateGroups:
+                          type: integer
+                        process:
+                          type: object
+                          properties:
+                            nodeVersion:
+                              type: string
+                            pid:
+                              type: integer
+                            uptime:
+                              type: number
+                        totalPrivateGroupMessages:
+                          type: integer
+                        oplogEnabled:
+                          type: boolean
+                        os:
+                          type: object
+                          properties:
+                            cpus:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  times:
+                                    type: object
+                                    properties:
+                                      idle:
+                                        type: integer
+                                      irq:
+                                        type: integer
+                                      sys:
+                                        type: integer
+                                      user:
+                                        type: integer
+                                      nice:
+                                        type: integer
+                                  model:
+                                    type: string
+                                  speed:
+                                    type: integer
+                            release:
+                              type: string
+                            totalmem:
+                              type: number
+                            arch:
+                              type: string
+                            freemem:
+                              type: integer
+                            type:
+                              type: string
+                            loadavg:
+                              type: array
+                              items:
+                                type: number
+                            platform:
+                              type: string
+                            uptime:
+                              type: integer
+                        offlineUsers:
+                          type: integer
+                        onlineUsers:
+                          type: integer
+                        activeUsers:
+                          type: integer
+                        uploadsTotal:
+                          type: integer
+                        uniqueUsersOfYesterday:
+                          type: object
+                          properties:
+                            month:
+                              type: integer
+                            data:
+                              type: array
+                              items:
+                                type: string
+                            year:
+                              type: integer
+                            day:
+                              type: integer
+                        version:
+                          type: string
+                        totalRooms:
+                          type: integer
+                        totalChannelMessages:
+                          type: integer
+                        mongoVersion:
+                          type: string
+                        uniqueOSOfYesterday:
+                          type: object
+                          properties:
+                            month:
+                              type: integer
+                            data:
+                              type: array
+                              items:
+                                type: string
+                            year:
+                              type: integer
+                            day:
+                              type: integer
+                        totalLivechat:
+                          type: integer
+                        uniqueUsersOfLastMonth:
+                          type: object
+                          properties:
+                            month:
+                              type: integer
+                            data:
+                              type: array
+                              items:
+                                type: string
+                            year:
+                              type: integer
+                        nonActiveUsers:
+                          type: integer
+                        instanceCount:
+                          type: integer
+                        totalMessages:
+                          type: integer
+                        migration:
+                          type: object
+                          properties:
+                            _id:
+                              type: string
+                            locked:
+                              type: boolean
+                            version:
+                              type: integer
+                        totalDirect:
+                          type: integer
+                        wizard:
+                          type: object
+                          properties:
+                            organizationType:
+                              type: string
+                            country:
+                              type: string
+                            website:
+                              type: string
+                            organizationName:
+                              type: string
+                            size:
+                              type: string
+                            serverType:
+                              type: string
+                            siteName:
+                              type: string
+                            industry:
+                              type: string
+                            language:
+                              type: string
+                            allowMarketingEmails:
+                              type: boolean
+                        _id:
+                          type: string
+                        uniqueId:
+                          type: string
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "statistics": [
+                        {
+                          "_id": "j3rw9bKLktWtgmmiA",
+                          "wizard": {
+                            "organizationType": "",
+                            "organizationName": "",
+                            "industry": "",
+                            "size": "",
+                            "country": "",
+                            "website": "",
+                            "siteName": "Rocket.Chat",
+                            "language": "",
+                            "serverType": "",
+                            "allowMarketingEmails": true
+                          },
+                          "uniqueId": "maWzifv5JWbsCXrum",
+                          "installedAt": "2019-02-22T17:59:58.139Z",
+                          "version": "0.74.0-develop",
+                          "totalUsers": 1,
+                          "activeUsers": 1,
+                          "nonActiveUsers": 0,
+                          "onlineUsers": 0,
+                          "awayUsers": 0,
+                          "offlineUsers": 1,
+                          "totalRooms": 1,
+                          "totalChannels": 1,
+                          "totalPrivateGroups": 0,
+                          "totalDirect": 0,
+                          "totalLivechat": 0,
+                          "totalLivechatVisitors": 0,
+                          "totalLivechatAgents": 0,
+                          "livechatEnabled": false,
+                          "totalMessages": 0,
+                          "totalChannelMessages": 0,
+                          "totalPrivateGroupMessages": 0,
+                          "totalDirectMessages": 0,
+                          "totalLivechatMessages": 0,
+                          "os": {
+                            "type": "Linux",
+                            "platform": "linux",
+                            "arch": "x64",
+                            "release": "4.18.0-15-generic",
+                            "uptime": 145639,
+                            "loadavg": [
+                              9.0751953125,
+                              6.27197265625,
+                              4.82177734375
+                            ],
+                            "totalmem": 3977756672,
+                            "freemem": 120721408,
+                            "cpus": [
+                              {
+                                "model": "Intel(R) Celeron(R) CPU  N3050  @ 1.60GHz",
+                                "speed": 2160,
+                                "times": {
+                                  "user": 79215200,
+                                  "nice": 165300,
+                                  "sys": 23987700,
+                                  "idle": 408054500,
+                                  "irq": 0
+                                }
+                              },
+                              {
+                                "model": "Intel(R) Celeron(R) CPU  N3050  @ 1.60GHz",
+                                "speed": 2160,
+                                "times": {
+                                  "user": 75728600,
+                                  "nice": 196600,
+                                  "sys": 23065000,
+                                  "idle": 179959700,
+                                  "irq": 0
+                                }
+                              }
+                            ]
+                          },
+                          "process": {
+                            "nodeVersion": "v8.11.4",
+                            "pid": 28379,
+                            "uptime": 309.114
+                          },
+                          "deploy": {
+                            "method": "tar",
+                            "platform": "selfinstall"
+                          },
+                          "uploadsTotal": 0,
+                          "uploadsTotalSize": 0,
+                          "migration": {
+                            "_id": "control",
+                            "locked": false,
+                            "version": 137
+                          },
+                          "instanceCount": 1,
+                          "oplogEnabled": true,
+                          "mongoVersion": "4.0.2",
+                          "uniqueUsersOfYesterday": {
+                            "year": 2019,
+                            "month": 2,
+                            "day": 21,
+                            "data": []
+                          },
+                          "uniqueUsersOfLastMonth": {
+                            "year": 2019,
+                            "month": 1,
+                            "data": []
+                          },
+                          "uniqueDevicesOfYesterday": {
+                            "year": 2019,
+                            "month": 2,
+                            "day": 21,
+                            "data": []
+                          },
+                          "uniqueOSOfYesterday": {
+                            "year": 2019,
+                            "month": 2,
+                            "day": 21,
+                            "data": []
+                          },
+                          "createdAt": "2019-02-22T18:02:36.207Z",
+                          "_updatedAt": "2019-02-22T18:02:36.207Z"
+                        }
+                      ],
+                      "count": 1,
+                      "offset": 0,
+                      "total": 1,
+                      "success": true
+                    }
+      servers:
+      - url: http://localhost:3000
+    servers:
+    - url: http://localhost:3000
 components:
   securitySchemes:
     basic:

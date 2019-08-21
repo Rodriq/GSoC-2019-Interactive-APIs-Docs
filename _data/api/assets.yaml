@@ -6,27 +6,27 @@ info:
 servers:
   - url: 'http://localhost:3000'
 paths:
-  /api/v1/assets.setAsset:
+  "/api/v1/assets.setAsset":
     post:
       description: Set an asset image by name.
       parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: bszJr4E8EHAtLqfX4
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: V7503jm6uI4r7dTD0kHkWK6_NKV4NfgydJagYlfNmNw
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: bszJr4E8EHAtLqfX4
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: V7503jm6uI4r7dTD0kHkWK6_NKV4NfgydJagYlfNmNw
       requestBody:
         content:
           multipart/form-data:
             schema:
               type: string
               required:
-                - assetName
+              - assetName
               properties:
                 assetName:
                   type: string
@@ -56,30 +56,30 @@ paths:
                       "success": true
                     }
       servers:
-        - url: 'http://localhost:3000'
+      - url: http://localhost:3000
     servers:
-      - url: 'http://localhost:3000'
-  /api/v1/assets.unsetAsset:
+    - url: http://localhost:3000
+  "/api/v1/assets.unsetAsset":
     post:
       description: Unset an asset by name.
       parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: bszJr4E8EHAtLqfX4
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: zLK-ryssnND2u8duZTv9Dy9_-6_IJVncpvUPKtzGrvn
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: bszJr4E8EHAtLqfX4
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: zLK-ryssnND2u8duZTv9Dy9_-6_IJVncpvUPKtzGrvn
       requestBody:
         content:
           application/json:
             schema:
               type: object
               required:
-                - assetName
+              - assetName
               properties:
                 refreshAllClients:
                   type: boolean
@@ -87,7 +87,7 @@ paths:
                   description: If needs refresh all clients to apply changes immediately.
                 assetName:
                   type: string
-                  example: "logo"
+                  example: logo
                   description: Asset name to unset.
             examples:
               '0':
@@ -109,9 +109,9 @@ paths:
                       "success": true
                     }
       servers:
-        - url: 'http://localhost:3000'
+      - url: http://localhost:3000
     servers:
-      - url: 'http://localhost:3000'
+    - url: http://localhost:3000
 components:
   securitySchemes:
     basic:
