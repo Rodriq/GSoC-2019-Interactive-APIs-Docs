@@ -6,235 +6,27 @@ info:
 servers:
   - url: 'http://localhost:3000'
 paths:
-  /api/v1/groups.addOwner:
-    post:
-      description: Gives the role of owner to a user in a group.
-      parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: uunbZHiuEnib8Pawj
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: '-u-CUjI4dMQFIT1k9p0G6eMCfEELxHpvx8-STIqGSef'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - userId
-                - roomId
-              properties:
-                userId:
-                  type: string
-                  example: qDhZXaidfjFtpXnsN
-                  description: The user id.
-                roomId:
-                  type: string
-                  example: PdE9JSjAyLHDw8pwJ
-                  description: The private group's id.
-            examples:
-              '0':
-                value: >-
-                  { "roomId": "PdE9JSjAyLHDw8pwJ", "userId": "qDhZXaidfjFtpXnsN"
-                  }
-      responses:
-        '200':
-          description: Gives the role of owner for a user in the current group.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-              examples:
-                '0':
-                  value: '{"success":true}'
-      servers:
-        - url: 'https://graphql.rocket.chat'
-    servers:
-      - url: 'https://graphql.rocket.chat'
-  /api/v1/groups.getIntegrations:
-    get:
-      description: Gets the integrations assigned to the group.
-      parameters:
-        - name: roomId
-          in: query
-          required: true
-          schema:
-            type: string
-          example: PdE9JSjAyLHDw8pwJ
-          description: The group's id
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: uunbZHiuEnib8Pawj
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: '-u-CUjI4dMQFIT1k9p0G6eMCfEELxHpvx8-STIqGSef'
-      responses:
-        '200':
-          description: Retrieves the integrations which the group has, requires the permission `manage-integrations`. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with [Query and Fields Query Parameters](../../query-and-fields-info/).
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  total:
-                    type: integer
-                  offset:
-                    type: integer
-                  success:
-                    type: boolean
-                  count:
-                    type: integer
-                  integrations:
-                    type: array
-                    items:
-                      type: string
-              examples:
-                '0':
-                  value: >-
-                    {"integrations":[{"_id": "WMQDChpnYTRmFre9h","enabled": true,"username": "rocket.cat","alias": "Guggy","avatar": "http://res.guggy.com/logo_128.png","name": "Guggy","triggerWords": [    "!guggy",    "guggy",    "gif+"],"urls": [    "http://text2gif.guggy.com/guggify"],"token": "8DFS89DMKLWEN","script": "const config = {\n    color: '#ffffff'\n};\n\nclass Script {\n    prepare_outgoing_request({ request }) {\n        const trigger = request.data.trigger_word + ' ';\n        const phrase = request.data.text.replace(trigger, '');\n        request.headers['Content-Type']='application/json';\n        request.headers['apiKey']=request.data.token;\n        return {\n            url: request.url,\n            headers: request.headers,\n            data: {format: 'gif', sentence: phrase},\n            method: 'POST'\n        };\n    }\n\n    process_outgoing_response({ request, response }) {\n        if(response.content.gif) {\n            return {\n                content: {\n                    attachments: [\n                        {\n                            image_url: response.content.gif,\n                            color: ((config['color'] != '') ? '#' + config['color'].replace('#', '') : '#ffffff')\n                        }\n                    ]\n                }\n            };\n        } else {\n            return {\n                content: {\n                    text: 'Sorry I don\\'t have a photo for you :disappointed_relieved:'\n                }\n            };\n        }\n    }\n}","scriptEnabled": true,"impersonateUser": false,"scriptCompiled": "function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError('Cannot call a class as a function')}}var config={color:'#ffffff'};var Script=function(){function Script(){_classCallCheck(this,Script)}Script.prototype.prepare_outgoing_request=function prepare_outgoing_request(_ref){var request=_ref.request;var trigger=request.data.trigger_word+' ';var phrase=request.data.text.replace(trigger,'');request.headers['Content-Type']='application/json';request.headers['apiKey']=request.data.token;return{url:request.url,headers:request.headers,data:{format:'gif',sentence:phrase},method:'POST'}};Script.prototype.process_outgoing_response=function process_outgoing_response(_ref2){var request=_ref2.request;var response=_ref2.response;if(response.content.gif){return{content:{attachments:[{image_url:response.content.gif,color:config['color']!=''?'#'+config['color'].replace('#',''):'#ffffff'}]}}}else{return{content:{text:'Sorry I don\\'t have a photo for you :disappointed_relieved:'}}}};return Script}();","scriptError": null,"type": "webhook-outgoing","userId": "rocket.cat","channel": [    "#private-group-name"],"_createdAt": "2017-01-05T17:06:05.660Z","_createdBy": {    "username": "graywolf336",    "_id": "R4jgcQaQhvvK6K3iY"},"_updatedAt": "2019-01-05T17:06:05.660Z"}],"count":0,"offset":0,"total":0,"success":true}
-      servers:
-        - url: 'https://graphql.rocket.chat'
-    servers:
-      - url: 'https://graphql.rocket.chat'
-  /api/v1/groups.addModerator:
-    post:
-      description: Gives the role of moderator to a user in a group.
-      parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: uunbZHiuEnib8Pawj
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: '-u-CUjI4dMQFIT1k9p0G6eMCfEELxHpvx8-STIqGSef'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - roomId
-                - userId
-              properties:
-                userId:
-                  type: string
-                  example: qDhZXaidfjFtpXnsN
-                  description: The user id
-                roomId:
-                  type: string
-                  example: PdE9JSjAyLHDw8pwJ
-                  description: The private group's id
-            examples:
-              '0':
-                value: >-
-                  { "roomId": "PdE9JSjAyLHDw8pwJ", "userId": "qDhZXaidfjFtpXnsN"
-                  }
-      responses:
-        '200':
-          description: Gives the role of moderator for a user in the current group.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-              examples:
-                '0':
-                  value: '{"success":true}'
-      servers:
-        - url: 'https://graphql.rocket.chat'
-    servers:
-      - url: 'https://graphql.rocket.chat'
-  /api/v1/groups.removeOwner:
-    post:
-      description: Removes the role of owner from a user in a group.
-      parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: uunbZHiuEnib8Pawj
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: '-u-CUjI4dMQFIT1k9p0G6eMCfEELxHpvx8-STIqGSef'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - userId
-                - roomId
-              properties:
-                roomId:
-                  type: string
-                  example: PdE9JSjAyLHDw8pwJ
-                  description: The private group's id
-                userId:
-                  type: string
-                  example: qDhZXaidfjFtpXnsN
-                  description: The user id
-            examples:
-              '0':
-                value: >-
-                  { "roomId": "PdE9JSjAyLHDw8pwJ", "userId": "qDhZXaidfjFtpXnsN"
-                  }
-      responses:
-        '200':
-          description: Removes the role of owner from a user in the current Group.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-              examples:
-                '0':
-                  value: '{"success":true}'
-      servers:
-        - url: 'https://graphql.rocket.chat'
-    servers:
-      - url: 'https://graphql.rocket.chat'
-  /api/v1/groups.addAll:
+  "/api/v1/groups.addAll":
     post:
       description: Adds all of the users on the server to a private group.
       parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: uunbZHiuEnib8Pawj
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: '-u-CUjI4dMQFIT1k9p0G6eMCfEELxHpvx8-STIqGSef'
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: uunbZHiuEnib8Pawj
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: "-u-CUjI4dMQFIT1k9p0G6eMCfEELxHpvx8-STIqGSef"
       requestBody:
         content:
           application/json:
             schema:
               type: object
               required:
-                - roomId
+              - roomId
               properties:
                 roomId:
                   type: string
@@ -377,30 +169,82 @@ paths:
                         type: string
               examples:
                 '0':
-                  value: >-
-                    {"group":{"_id":"PdE9JSjAyLHDw8pwJ","name":"channel-name","fname":"channel-name","t":"p","msgs":30,"usersCount":9,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{"organization":"tra-la-la"},"ts":"2019-07-04T02:14:16.527Z","ro":false,"sysMes":true,"_updatedAt":"2019-07-18T04:28:32.772Z","lastMessage":{"_id":"cEa5GNXLYSFZPkM7M","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:06:51.080Z","msg":"","file":{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","type":"image/png"},"groupable":false,"attachments":[{"ts":"1970-01-01T00:00:00.000Z","title":"myAvatar.png","title_link":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","title_link_download":true,"image_dimensions":{"width":400,"height":400},"image_preview":"/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgACADASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAABgcCBAj/xAAlEAACAQQBAwQDAAAAAAAAAAABAwIABAURBhIhMRMiUYFBQmH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAwIE/8QAHREAAgIDAQEBAAAAAAAAAAAAAgMAAQQRMSESUf/aAAwDAQACEQMRAD8A5XSstbGEfJOqbWHHmrt4yWsEkUY4+gvySwCOx3VVgl8PTlB0TDpBMfqotbYeVOrHTR+lCN9x5rESkxYBA+6FOWVNlCXmJ1VjYl8vUkx0RDpJEfqpVyBJTkmgkdzuim2fYyFUHozTtLidrcQco6lE7qrYHJLyFjBsSOsDUh8GhOM4dkLxcWTAUs9/d51TmywqsZZrWkkH9pfJrT0WQfWuSGNmADKXvsxzuShj7GbpEdWtRH9qUXdxO6uJuadykd1WrnEpyNq5T/dsdpH8Gg2S4bkLRc2wEWrj37edUQixCi/YycwSZa98n//Z","image_url":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","image_type":"image/png","image_size":58398,"type":"file","description":""}],"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                  value: '{"group":{"_id":"PdE9JSjAyLHDw8pwJ","name":"channel-name","fname":"channel-name","t":"p","msgs":30,"usersCount":9,"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"customFields":{"organization":"tra-la-la"},"ts":"2019-07-04T02:14:16.527Z","ro":false,"sysMes":true,"_updatedAt":"2019-07-18T04:28:32.772Z","lastMessage":{"_id":"cEa5GNXLYSFZPkM7M","rid":"PdE9JSjAyLHDw8pwJ","ts":"2019-07-04T13:06:51.080Z","msg":"","file":{"_id":"uy8ETbzE72pjfria9","name":"myAvatar.png","type":"image/png"},"groupable":false,"attachments":[{"ts":"1970-01-01T00:00:00.000Z","title":"myAvatar.png","title_link":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","title_link_download":true,"image_dimensions":{"width":400,"height":400},"image_preview":"/9j/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAgACADASIAAhEBAxEB/8QAGAABAQADAAAAAAAAAAAAAAAABgcCBAj/xAAlEAACAQQBAwQDAAAAAAAAAAABAwIABAURBhIhMRMiUYFBQmH/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAwIE/8QAHREAAgIDAQEBAAAAAAAAAAAAAgMAAQQRMSESUf/aAAwDAQACEQMRAD8A5XSstbGEfJOqbWHHmrt4yWsEkUY4+gvySwCOx3VVgl8PTlB0TDpBMfqotbYeVOrHTR+lCN9x5rESkxYBA+6FOWVNlCXmJ1VjYl8vUkx0RDpJEfqpVyBJTkmgkdzuim2fYyFUHozTtLidrcQco6lE7qrYHJLyFjBsSOsDUh8GhOM4dkLxcWTAUs9/d51TmywqsZZrWkkH9pfJrT0WQfWuSGNmADKXvsxzuShj7GbpEdWtRH9qUXdxO6uJuadykd1WrnEpyNq5T/dsdpH8Gg2S4bkLRc2wEWrj37edUQixCi/YycwSZa98n//Z","image_url":"/file-upload/uy8ETbzE72pjfria9/myAvatar.png","image_type":"image/png","image_size":58398,"type":"file","description":""}],"u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
                     User"},"_updatedAt":"2019-07-04T13:06:51.127Z","mentions":[],"channels":[]},"lm":"2019-07-04T13:06:51.080Z","announcement":"Test
-                    out Everything","description":"Test out
-                    everything","joinCodeRequired":true,"topic":"Discuss all of
-                    the testing"},"success":true}
+                    out Everything","description":"Test out everything","joinCodeRequired":true,"topic":"Discuss
+                    all of the testing"},"success":true}'
       servers:
-        - url: 'https://graphql.rocket.chat'
+      - url: https://graphql.rocket.chat
     servers:
-      - url: 'https://graphql.rocket.chat'
-  /api/v1/groups.delete:
+    - url: https://graphql.rocket.chat
+  "/api/v1/groups.addLeader":
     post:
-      description: Removes a private group.
+      description: Gives the role of Leader for a user in the current group.
       parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: MERRYtT6iA9ZghsdK
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: MERRYtT6iA9ZghsdK
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - userId
+              - roomId
+              properties:
+                userId:
+                  type: string
+                  example: MERRYtT6iA9ZghsdK
+                  description: The user's id.
+                roomId:
+                  type: string
+                  example: 3r4Fm8CxzDKCvGQ9W
+                  description: The group's id
+            examples:
+              '0':
+                value: '{"roomId": "3r4Fm8CxzDKCvGQ9W", "userId": "MERRYtT6iA9ZghsdK"}'
+      responses:
+        '200':
+          description: Gives the role of Leader for a user in the current group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "success": true
+                    }
+      servers:
+      - url: http://localhost:3000
+    servers:
+    - url: http://localhost:3000
+  "/api/v1/groups.addModerator":
+    post:
+      description: Gives the role of moderator to a user in a group.
+      parameters:
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: uunbZHiuEnib8Pawj
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: "-u-CUjI4dMQFIT1k9p0G6eMCfEELxHpvx8-STIqGSef"
       requestBody:
         content:
           application/json:
@@ -408,19 +252,23 @@ paths:
               type: object
               required:
               - roomId
-              - roomName
+              - userId
               properties:
-                roomId: 
+                userId:
                   type: string
-                  example: YHAt6Lemw47Fxm9tm
-                  description: The channel’s id
-                roomName: 
+                  example: qDhZXaidfjFtpXnsN
+                  description: The user id
+                roomId:
                   type: string
-                  example: general
-                  description: The channel’s name
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The private group's id
+            examples:
+              '0':
+                value: '{ "roomId": "PdE9JSjAyLHDw8pwJ", "userId": "qDhZXaidfjFtpXnsN"
+                  }'
       responses:
         '200':
-          description: Remove a private channel.
+          description: Gives the role of moderator for a user in the current group.
           content:
             application/json:
               schema:
@@ -430,411 +278,260 @@ paths:
                     type: boolean
               examples:
                 '0':
-                  value: |-
-                    {
-                      "success": true
-                    }
+                  value: '{"success":true}'
       servers:
-        - url: 'http://localhost:3000'
+      - url: https://graphql.rocket.chat
     servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.listAll:
-    get:
-      description: List all the private groups.
-      parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: MERRYtT6iA9ZghsdK
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
-      responses:
-        '200':
-          description: Lists all of the private groups of any users. The calling user requires to have 'view-room-administration' right. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with just the [Fields Query Parameters](../../query-and-fields-info/).
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  total:
-                    type: integer
-                  offset:
-                    type: integer
-                  success:
-                    type: boolean
-                  count:
-                    type: integer
-                  groups:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        broadcast:
-                          type: boolean
-                        fname:
-                          type: string
-                        msgs:
-                          type: integer
-                        lm:
-                          type: string
-                        customFields:
-                          type: object
-                          properties: {}
-                        lastMessage:
-                          type: object
-                          properties:
-                            msg:
-                              type: string
-                            channels:
-                              type: array
-                              items:
-                                type: string
-                            u:
-                              type: object
-                              properties:
-                                name:
-                                  type: string
-                                _id:
-                                  type: string
-                                username:
-                                  type: string
-                            mentions:
-                              type: array
-                              items:
-                                type: string
-                            _id:
-                              type: string
-                            rid:
-                              type: string
-                            _updatedAt:
-                              type: string
-                            ts:
-                              type: string
-                        usersCount:
-                          type: integer
-                        default:
-                          type: boolean
-                        t:
-                          type: string
-                        encrypted:
-                          type: boolean
-                        u:
-                          type: object
-                          properties:
-                            _id:
-                              type: string
-                            username:
-                              type: string
-                        sysMes:
-                          type: boolean
-                        name:
-                          type: string
-                        _id:
-                          type: string
-                        ro:
-                          type: boolean
-                        _updatedAt:
-                          type: string
-                        ts:
-                          type: string
-              examples:
-                '0':
-                  value: |-
-                    {
-                      "groups": [
-                        {
-                          "_id": "agxZmuG3jax7pwcgm",
-                          "name": "talentals",
-                          "fname": "talentals",
-                          "t": "p",
-                          "msgs": 2,
-                          "usersCount": 1,
-                          "u": {
-                            "_id": "MERRYtT6iA9ZghsdK",
-                            "username": "Jaro"
-                          },
-                          "customFields": {},
-                          "broadcast": false,
-                          "encrypted": false,
-                          "ts": "2019-04-12T17:26:27.522Z",
-                          "ro": false,
-                          "sysMes": true,
-                          "default": false,
-                          "_updatedAt": "2019-04-12T17:59:56.120Z",
-                          "lastMessage": {
-                            "_id": "kML8BqYNTPcaTTCMb",
-                            "rid": "agxZmuG3jax7pwcgm",
-                            "msg": "talentals",
-                            "ts": "2019-04-12T17:59:55.920Z",
-                            "u": {
-                              "_id": "MERRYtT6iA9ZghsdK",
-                              "username": "Jaro",
-                              "name": "Jaro"
-                            },
-                            "_updatedAt": "2019-04-12T17:59:56.029Z",
-                            "mentions": [],
-                            "channels": []
-                          },
-                          "lm": "2019-04-12T17:59:55.920Z"
-                        },
-                        {
-                          "_id": "3r4Fm8CxzDKCvGQ9W",
-                          "name": "test",
-                          "fname": "test",
-                          "t": "p",
-                          "msgs": 8,
-                          "usersCount": 1,
-                          "u": {
-                            "_id": "MERRYtT6iA9ZghsdK",
-                            "username": "Jaro"
-                          },
-                          "customFields": {},
-                          "broadcast": false,
-                          "encrypted": false,
-                          "ts": "2019-05-03T08:20:18.975Z",
-                          "ro": false,
-                          "sysMes": true,
-                          "default": false,
-                          "_updatedAt": "2019-05-22T17:18:05.808Z",
-                          "lastMessage": {
-                            "_id": "gjgHZDDXYeXgLQzZG",
-                            "rid": "3r4Fm8CxzDKCvGQ9W",
-                            "msg": "jf",
-                            "ts": "2019-05-22T17:15:24.342Z",
-                            "u": {
-                              "_id": "bszJr4E8EHAtLqfX4",
-                              "username": "test.user",
-                              "name": "Test User"
-                            },
-                            "_updatedAt": "2019-05-22T17:15:25.044Z",
-                            "mentions": [],
-                            "channels": []
-                          },
-                          "lm": "2019-05-22T17:15:24.342Z"
-                        }
-                      ],
-                      "offset": 0,
-                      "count": 2,
-                      "total": 2,
-                      "success": true
-                    }
-      servers:
-        - url: 'http://localhost:3000'
-    servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.list:
-    get:
-      description: List the private groups the caller is part of.
-      parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: MERRYtT6iA9ZghsdK
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
-      responses:
-        '200':
-          description: Lists all of the private groups the calling user has joined. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/).
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  total:
-                    type: integer
-                  offset:
-                    type: integer
-                  success:
-                    type: boolean
-                  count:
-                    type: integer
-                  groups:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        broadcast:
-                          type: boolean
-                        fname:
-                          type: string
-                        msgs:
-                          type: integer
-                        lm:
-                          type: string
-                        customFields:
-                          type: object
-                          properties: {}
-                        lastMessage:
-                          type: object
-                          properties:
-                            msg:
-                              type: string
-                            channels:
-                              type: array
-                              items:
-                                type: string
-                            u:
-                              type: object
-                              properties:
-                                name:
-                                  type: string
-                                _id:
-                                  type: string
-                                username:
-                                  type: string
-                            mentions:
-                              type: array
-                              items:
-                                type: string
-                            _id:
-                              type: string
-                            rid:
-                              type: string
-                            _updatedAt:
-                              type: string
-                            ts:
-                              type: string
-                        usersCount:
-                          type: integer
-                        default:
-                          type: boolean
-                        t:
-                          type: string
-                        encrypted:
-                          type: boolean
-                        u:
-                          type: object
-                          properties:
-                            _id:
-                              type: string
-                            username:
-                              type: string
-                        sysMes:
-                          type: boolean
-                        name:
-                          type: string
-                        _id:
-                          type: string
-                        ro:
-                          type: boolean
-                        _updatedAt:
-                          type: string
-                        ts:
-                          type: string
-              examples:
-                '0':
-                  value: |-
-                    {
-                      "groups": [
-                        {
-                          "_id": "agxZmuG3jax7pwcgm",
-                          "name": "talentals",
-                          "fname": "talentals",
-                          "t": "p",
-                          "msgs": 2,
-                          "usersCount": 1,
-                          "u": {
-                            "_id": "MERRYtT6iA9ZghsdK",
-                            "username": "Jaro"
-                          },
-                          "customFields": {},
-                          "broadcast": false,
-                          "encrypted": false,
-                          "ts": "2019-04-12T17:26:27.522Z",
-                          "ro": false,
-                          "sysMes": true,
-                          "default": false,
-                          "_updatedAt": "2019-04-12T17:59:56.120Z",
-                          "lastMessage": {
-                            "_id": "kML8BqYNTPcaTTCMb",
-                            "rid": "agxZmuG3jax7pwcgm",
-                            "msg": "talentals",
-                            "ts": "2019-04-12T17:59:55.920Z",
-                            "u": {
-                              "_id": "MERRYtT6iA9ZghsdK",
-                              "username": "Jaro",
-                              "name": "Jaro"
-                            },
-                            "_updatedAt": "2019-04-12T17:59:56.029Z",
-                            "mentions": [],
-                            "channels": []
-                          },
-                          "lm": "2019-04-12T17:59:55.920Z"
-                        },
-                        {
-                          "_id": "3r4Fm8CxzDKCvGQ9W",
-                          "name": "test",
-                          "fname": "test",
-                          "t": "p",
-                          "msgs": 8,
-                          "usersCount": 1,
-                          "u": {
-                            "_id": "MERRYtT6iA9ZghsdK",
-                            "username": "Jaro"
-                          },
-                          "customFields": {},
-                          "broadcast": false,
-                          "encrypted": false,
-                          "ts": "2019-05-03T08:20:18.975Z",
-                          "ro": false,
-                          "sysMes": true,
-                          "default": false,
-                          "_updatedAt": "2019-05-22T17:18:05.808Z",
-                          "lastMessage": {
-                            "_id": "gjgHZDDXYeXgLQzZG",
-                            "rid": "3r4Fm8CxzDKCvGQ9W",
-                            "msg": "jf",
-                            "ts": "2019-05-22T17:15:24.342Z",
-                            "u": {
-                              "_id": "bszJr4E8EHAtLqfX4",
-                              "username": "test.user",
-                              "name": "Test User"
-                            },
-                            "_updatedAt": "2019-05-22T17:15:25.044Z",
-                            "mentions": [],
-                            "channels": []
-                          },
-                          "lm": "2019-05-22T17:15:24.342Z"
-                        }
-                      ],
-                      "offset": 0,
-                      "count": 2,
-                      "total": 2,
-                      "success": true
-                    }
-      servers:
-        - url: 'http://localhost:3000'
-    servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.create:
+    - url: https://graphql.rocket.chat
+  "/api/v1/groups.addOwner":
     post:
-      description: Creates a new private group.
+      description: Gives the role of owner to a user in a group.
       parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: MERRYtT6iA9ZghsdK
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: uunbZHiuEnib8Pawj
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: "-u-CUjI4dMQFIT1k9p0G6eMCfEELxHpvx8-STIqGSef"
       requestBody:
         content:
           application/json:
             schema:
               type: object
               required:
-                - name
+              - userId
+              - roomId
+              properties:
+                userId:
+                  type: string
+                  example: qDhZXaidfjFtpXnsN
+                  description: The user id.
+                roomId:
+                  type: string
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The private group's id.
+            examples:
+              '0':
+                value: '{ "roomId": "PdE9JSjAyLHDw8pwJ", "userId": "qDhZXaidfjFtpXnsN"
+                  }'
+      responses:
+        '200':
+          description: Gives the role of owner for a user in the current group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: '{"success":true}'
+      servers:
+      - url: https://graphql.rocket.chat
+    servers:
+    - url: https://graphql.rocket.chat
+  "/api/v1/groups.archive":
+    post:
+      description: Archives a private group.
+      parameters:
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: MERRYtT6iA9ZghsdK
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - roomId
+              properties:
+                roomId:
+                  type: string
+                  example: 3r4Fm8CxzDKCvGQ9W
+                  description: The private groups’s id
+            examples:
+              '0':
+                value: '{"roomId": "3r4Fm8CxzDKCvGQ9W"}'
+      responses:
+        '200':
+          description: Archives a private group, only if you’re part of the group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "success": true
+                    }
+      servers:
+      - url: http://localhost:3000
+    servers:
+    - url: http://localhost:3000
+  "/api/v1/groups.close":
+    post:
+      description: Removes a private group from the list of groups.
+      parameters:
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: MERRYtT6iA9ZghsdK
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - roomId
+              properties:
+                roomId:
+                  type: string
+                  example: YHAt6Lemw47Fxm9tm
+                  description: The groups’s id
+            examples:
+              '0':
+                value: '{"roomId": "YHAt6Lemw47Fxm9tm"}'
+      responses:
+        '200':
+          description: Removes the private group from the user’s list of groups, only
+            if you’re part of the group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "success": true
+                    }
+      servers:
+      - url: http://localhost:3000
+    servers:
+    - url: http://localhost:3000
+  "/api/v1/groups.counters":
+    get:
+      description: Gets group counters.
+      parameters:
+      - name: roomId
+        in: query
+        required: true
+        schema:
+          type: string
+        example: 3r4Fm8CxzDKCvGQ9W
+        description: The group's id.
+      - name: roomName
+        in: query
+        required: true
+        schema:
+          type: string
+        example: channel
+        description: The group's name.
+      - name: userId
+        in: query
+        required: false
+        schema:
+          type: string
+        example: RtycPC29hqLJfT9xj
+        description: Counters for provided user id (need to have a view-room-administration
+          right for calling user).
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: MERRYtT6iA9ZghsdK
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
+      responses:
+        '200':
+          description: Gets group counters.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  unreads:
+                    type: integer
+                  msgs:
+                    type: integer
+                  unreadsFrom:
+                    type: string
+                  joined:
+                    type: boolean
+                  success:
+                    type: boolean
+                  members:
+                    type: integer
+                  userMentions:
+                    type: integer
+                  latest:
+                    type: string
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "joined": true,
+                      "members": 1,
+                      "unreads": 0,
+                      "unreadsFrom": "2019-05-22T17:16:01.661Z",
+                      "msgs": 9,
+                      "latest": "2019-05-22T17:15:24.342Z",
+                      "userMentions": 0,
+                      "success": true
+                    }
+      servers:
+      - url: http://localhost:3000
+    servers:
+    - url: http://localhost:3000
+  "/api/v1/groups.create":
+    post:
+      description: Creates a new private group.
+      parameters:
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: MERRYtT6iA9ZghsdK
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - name
               properties:
                 name:
                   type: string
@@ -842,7 +539,8 @@ paths:
                   description: The name of the new private group.
                 members:
                   type: object
-                  example: ["rocket.cat"]
+                  example:
+                  - rocket.cat
                   description: The users to add to the group when it is created.
                 readOnly:
                   type: boolean
@@ -921,41 +619,43 @@ paths:
                       "success": true
                     }
       servers:
-        - url: 'http://localhost:3000'
+      - url: http://localhost:3000
     servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.archive:
+    - url: http://localhost:3000
+  "/api/v1/groups.delete":
     post:
-      description: Archives a private group.
+      description: Removes a private group.
       parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: MERRYtT6iA9ZghsdK
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: MERRYtT6iA9ZghsdK
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
       requestBody:
         content:
           application/json:
             schema:
               type: object
               required:
-                - roomId
+              - roomId
+              - roomName
               properties:
                 roomId:
                   type: string
-                  example: 3r4Fm8CxzDKCvGQ9W
-                  description: The private groups’s id
-            examples:
-              '0':
-                value: '{"roomId": "3r4Fm8CxzDKCvGQ9W"}'
+                  example: YHAt6Lemw47Fxm9tm
+                  description: The channel’s id
+                roomName:
+                  type: string
+                  example: general
+                  description: The channel’s name
       responses:
         '200':
-          description: Archives a private group, only if you’re part of the group.
+          description: Remove a private channel.
           content:
             application/json:
               schema:
@@ -970,40 +670,42 @@ paths:
                       "success": true
                     }
       servers:
-        - url: 'http://localhost:3000'
+      - url: http://localhost:3000
     servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.files:
+    - url: http://localhost:3000
+  "/api/v1/groups.files":
     get:
       description: Gets a list of files from a private group.
       parameters:
-        - name: roomId
-          in: query
-          required: true
-          schema:
-            type: string
-          example: 3r4Fm8CxzDKCvGQ9W
-          description: The room id.
-        - name: roomName
-          in: query
-          required: true
-          schema:
-            type: string
-          example: test
-          description: The room name.
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: MERRYtT6iA9ZghsdK
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
+      - name: roomId
+        in: query
+        required: true
+        schema:
+          type: string
+        example: 3r4Fm8CxzDKCvGQ9W
+        description: The room id.
+      - name: roomName
+        in: query
+        required: true
+        schema:
+          type: string
+        example: test
+        description: The room name.
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: MERRYtT6iA9ZghsdK
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
       responses:
         '200':
-          description: Retrieves the files from a private group. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with [Query and Fields Query Parameters](../../query-and-fields-info/).
+          description: Retrieves the files from a private group. It supports the [Offset,
+            Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/)
+            along with [Query and Fields Query Parameters](../../query-and-fields-info/).
           content:
             application/json:
               schema:
@@ -1032,254 +734,155 @@ paths:
                       "success": true
                     }
       servers:
-        - url: 'http://localhost:3000'
+      - url: http://localhost:3000
     servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.addLeader:
-    post:
-      description: Gives the role of Leader for a user in the current group.
-      parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: MERRYtT6iA9ZghsdK
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - userId
-                - roomId
-              properties:
-                userId:
-                  type: string
-                  example: MERRYtT6iA9ZghsdK
-                  description: The user's id.
-                roomId:
-                  type: string
-                  example: 3r4Fm8CxzDKCvGQ9W
-                  description: The group's id
-            examples:
-              '0':
-                value: '{"roomId": "3r4Fm8CxzDKCvGQ9W", "userId": "MERRYtT6iA9ZghsdK"}'
-      responses:
-        '200':
-          description: Gives the role of Leader for a user in the current group.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-              examples:
-                '0':
-                  value: |-
-                    {
-                      "success": true
-                    }
-      servers:
-        - url: 'http://localhost:3000'
-    servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.unarchive:
-    post:
-      description: Unarchives a private group.
-      parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: MERRYtT6iA9ZghsdK
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - roomId
-              properties:
-                roomId:
-                  type: string
-                  example: 3r4Fm8CxzDKCvGQ9W
-                  description: The private's group id
-            examples:
-              '0':
-                value: '{"roomId": "3r4Fm8CxzDKCvGQ9W"}'
-      responses:
-        '200':
-          description: Unarchives a private group.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-              examples:
-                '0':
-                  value: |-
-                    {
-                      "success": true
-                    }
-      servers:
-        - url: 'http://localhost:3000'
-    servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.counters:
+    - url: http://localhost:3000
+  "/api/v1/groups.getIntegrations":
     get:
-      description: Gets group counters.
+      description: Gets the integrations assigned to the group.
       parameters:
-        - name: roomId
-          in: query
-          required: true
-          schema:
-            type: string
-          example: 3r4Fm8CxzDKCvGQ9W
-          description: The group's id.
-        - name: roomName
-          in: query
-          required: true
-          schema:
-            type: string
-          example: channel
-          description: The group's name.
-        - name: userId
-          in: query
-          required: false
-          schema:
-            type: string
-          example: RtycPC29hqLJfT9xj
-          description: Counters for provided user id (need to have a view-room-administration right for calling user).
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: MERRYtT6iA9ZghsdK
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
+      - name: roomId
+        in: query
+        required: true
+        schema:
+          type: string
+        example: PdE9JSjAyLHDw8pwJ
+        description: The group's id
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: uunbZHiuEnib8Pawj
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: "-u-CUjI4dMQFIT1k9p0G6eMCfEELxHpvx8-STIqGSef"
       responses:
         '200':
-          description: Gets group counters.
+          description: Retrieves the integrations which the group has, requires the
+            permission `manage-integrations`. It supports the [Offset, Count, and Sort
+            Query Parameters](../../offset-and-count-and-sort-info/) along with [Query
+            and Fields Query Parameters](../../query-and-fields-info/).
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  unreads:
+                  total:
                     type: integer
-                  msgs:
+                  offset:
                     type: integer
-                  unreadsFrom:
-                    type: string
-                  joined:
-                    type: boolean
                   success:
                     type: boolean
-                  members:
+                  count:
                     type: integer
-                  userMentions:
-                    type: integer
-                  latest:
-                    type: string
+                  integrations:
+                    type: array
+                    items:
+                      type: string
               examples:
                 '0':
-                  value: |-
-                    {
-                      "joined": true,
-                      "members": 1,
-                      "unreads": 0,
-                      "unreadsFrom": "2019-05-22T17:16:01.661Z",
-                      "msgs": 9,
-                      "latest": "2019-05-22T17:15:24.342Z",
-                      "userMentions": 0,
-                      "success": true
-                    }
+                  value: '{"integrations":[{"_id": "WMQDChpnYTRmFre9h","enabled": true,"username":
+                    "rocket.cat","alias": "Guggy","avatar": "http://res.guggy.com/logo_128.png","name":
+                    "Guggy","triggerWords": [    "!guggy",    "guggy",    "gif+"],"urls":
+                    [    "http://text2gif.guggy.com/guggify"],"token": "8DFS89DMKLWEN","script":
+                    "const config = {\n    color: ''#ffffff''\n};\n\nclass Script {\n    prepare_outgoing_request({
+                    request }) {\n        const trigger = request.data.trigger_word
+                    + '' '';\n        const phrase = request.data.text.replace(trigger,
+                    '''');\n        request.headers[''Content-Type'']=''application/json'';\n        request.headers[''apiKey'']=request.data.token;\n        return
+                    {\n            url: request.url,\n            headers: request.headers,\n            data:
+                    {format: ''gif'', sentence: phrase},\n            method: ''POST''\n        };\n    }\n\n    process_outgoing_response({
+                    request, response }) {\n        if(response.content.gif) {\n            return
+                    {\n                content: {\n                    attachments:
+                    [\n                        {\n                            image_url:
+                    response.content.gif,\n                            color: ((config[''color'']
+                    != '''') ? ''#'' + config[''color''].replace(''#'', '''') : ''#ffffff'')\n                        }\n                    ]\n                }\n            };\n        }
+                    else {\n            return {\n                content: {\n                    text:
+                    ''Sorry I don\\''t have a photo for you :disappointed_relieved:''\n                }\n            };\n        }\n    }\n}","scriptEnabled":
+                    true,"impersonateUser": false,"scriptCompiled": "function _classCallCheck(instance,Constructor){if(!(instance
+                    instanceof Constructor)){throw new TypeError(''Cannot call a class
+                    as a function'')}}var config={color:''#ffffff''};var Script=function(){function
+                    Script(){_classCallCheck(this,Script)}Script.prototype.prepare_outgoing_request=function
+                    prepare_outgoing_request(_ref){var request=_ref.request;var trigger=request.data.trigger_word+''
+                    '';var phrase=request.data.text.replace(trigger,'''');request.headers[''Content-Type'']=''application/json'';request.headers[''apiKey'']=request.data.token;return{url:request.url,headers:request.headers,data:{format:''gif'',sentence:phrase},method:''POST''}};Script.prototype.process_outgoing_response=function
+                    process_outgoing_response(_ref2){var request=_ref2.request;var response=_ref2.response;if(response.content.gif){return{content:{attachments:[{image_url:response.content.gif,color:config[''color'']!=''''?''#''+config[''color''].replace(''#'',''''):''#ffffff''}]}}}else{return{content:{text:''Sorry
+                    I don\\''t have a photo for you :disappointed_relieved:''}}}};return
+                    Script}();","scriptError": null,"type": "webhook-outgoing","userId":
+                    "rocket.cat","channel": [    "#private-group-name"],"_createdAt":
+                    "2017-01-05T17:06:05.660Z","_createdBy": {    "username": "graywolf336",    "_id":
+                    "R4jgcQaQhvvK6K3iY"},"_updatedAt": "2019-01-05T17:06:05.660Z"}],"count":0,"offset":0,"total":0,"success":true}'
       servers:
-        - url: 'http://localhost:3000'
+      - url: https://graphql.rocket.chat
     servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.history:
+    - url: https://graphql.rocket.chat
+  "/api/v1/groups.history":
     get:
       description: Retrieves the messages from a private group.
       parameters:
-        - name: roomId
-          in: query
-          required: true
-          schema:
-            type: string
-          example: 3r4Fm8CxzDKCvGQ9W
-          description: The private groups’s id
-        - name: latest
-          in: query
-          required: false
-          schema:
-            type: string
-          example: '2019-09-30T13:42:25.304Z'
-          description: The end of time range of messages to retrieve
-        - name: oldest
-          in: query
-          required: false
-          schema:
-            type: string
-          example: '2019-05-30T13:42:25.304Z'
-          description: The start of the time range of messages to retrieve
-        - name: inclusive
-          in: query
-          required: false
-          schema:
-            type: boolean
-          example: true
-          description: Whether messages which land on latest and oldest should be included
-        - name: offset
-          in: query
-          required: false
-          schema:
-            type: integer
-          example: 10
-          description: The offset of the list messages to retrieve
-        - name: count
-          in: query
-          required: false
-          schema:
-            type: integer
-          example: 100
-          description: The amount of messages to retrieve
-        - name: unreads
-          in: query
-          required: false
-          schema:
-            type: boolean
-          example: false
-          description: Whether the amount of unreads should be included.
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: MERRYtT6iA9ZghsdK
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
+      - name: roomId
+        in: query
+        required: true
+        schema:
+          type: string
+        example: 3r4Fm8CxzDKCvGQ9W
+        description: The private groups’s id
+      - name: latest
+        in: query
+        required: false
+        schema:
+          type: string
+        example: '2019-09-30T13:42:25.304Z'
+        description: The end of time range of messages to retrieve
+      - name: oldest
+        in: query
+        required: false
+        schema:
+          type: string
+        example: '2019-05-30T13:42:25.304Z'
+        description: The start of the time range of messages to retrieve
+      - name: inclusive
+        in: query
+        required: false
+        schema:
+          type: boolean
+        example: true
+        description: Whether messages which land on latest and oldest should be included
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+        example: 10
+        description: The offset of the list messages to retrieve
+      - name: count
+        in: query
+        required: false
+        schema:
+          type: integer
+        example: 100
+        description: The amount of messages to retrieve
+      - name: unreads
+        in: query
+        required: false
+        schema:
+          type: boolean
+        example: false
+        description: Whether the amount of unreads should be included.
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: MERRYtT6iA9ZghsdK
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
       responses:
         '200':
-          description: Retrieves the messages from a private group, only if you’re part of the group.
+          description: Retrieves the messages from a private group, only if you’re part
+            of the group.
           content:
             application/json:
               schema:
@@ -1446,89 +1049,41 @@ paths:
                       "success": true
                     }
       servers:
-        - url: 'http://localhost:3000'
+      - url: http://localhost:3000
     servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.close:
-    post:
-      description: Removes a private group from the list of groups.
-      parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: MERRYtT6iA9ZghsdK
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - roomId
-              properties:
-                roomId:
-                  type: string
-                  example: YHAt6Lemw47Fxm9tm
-                  description: The groups’s id
-            examples:
-              '0':
-                value: '{"roomId": "YHAt6Lemw47Fxm9tm"}'
-      responses:
-        '200':
-          description: Removes the private group from the user’s list of groups, only if you’re part of the group.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-              examples:
-                '0':
-                  value: |-
-                    {
-                      "success": true
-                    }
-      servers:
-        - url: 'http://localhost:3000'
-    servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.info:
+    - url: http://localhost:3000
+  "/api/v1/groups.info":
     get:
       description: Gets the information about a private group.
       parameters:
-        - name: roomId
-          in: query
-          required: true
-          schema:
-            type: string
-          example: 3r4Fm8CxzDKCvGQ9W
-          description: The group's id.
-        - name: roomName
-          in: query
-          required: true
-          schema:
-            type: string
-          example: Exclusive.Chat
-          description: The private's group name.
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: MERRYtT6iA9ZghsdK
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
+      - name: roomId
+        in: query
+        required: true
+        schema:
+          type: string
+        example: 3r4Fm8CxzDKCvGQ9W
+        description: The group's id.
+      - name: roomName
+        in: query
+        required: true
+        schema:
+          type: string
+        example: Exclusive.Chat
+        description: The private's group name.
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: MERRYtT6iA9ZghsdK
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
       responses:
         '200':
-          description: Retrieves the information about the private group, only if you’re part of the group.
+          description: Retrieves the information about the private group, only if you’re
+            part of the group.
           content:
             application/json:
               schema:
@@ -1652,31 +1207,1207 @@ paths:
                       "success": true
                     }
       servers:
-        - url: 'http://localhost:3000'
+      - url: http://localhost:3000
     servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.setAnnouncement:
+    - url: http://localhost:3000
+  "/api/v1/groups.invite":
     post:
-      description: Sets a group’s announcement.
+      description: Adds a user to the private group.
       parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: uunbZHiuEnib8Pawj
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: uunbZHiuEnib8Pawj
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: oU6bqTIj1otEmvgqlu7W-ODbyJ6l7YFiIoNUR1LLOzA
       requestBody:
         content:
           application/json:
             schema:
               type: object
               required:
-                - roomId
-                - announcement
+              - userId
+              - roomId
+              properties:
+                userId:
+                  type: string
+                  example: qBXxQKgzj7bWNcH6n
+                  description: The user id of who to invite.
+                roomId:
+                  type: string
+                  example: osfdesAPnGondgB7i
+                  description: The private group’s id
+            examples:
+              '0':
+                value: '{ "roomId": "osfdesAPnGondgB7i", "userId": "qBXxQKgzj7bWNcH6n"
+                  }'
+      responses:
+        '200':
+          description: Adds a user to the private group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  group:
+                    type: object
+                    properties:
+                      broadcast:
+                        type: boolean
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      customFields:
+                        type: object
+                        properties: {}
+                      usersCount:
+                        type: integer
+                      default:
+                        type: boolean
+                      t:
+                        type: string
+                      encrypted:
+                        type: boolean
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+              examples:
+                '0':
+                  value: '{"group":{"_id":"osfdesAPnGondgB7i","name":"test.channel","fname":"test.channel","t":"p","msgs":2,"usersCount":3,"u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"customFields":{},"broadcast":false,"encrypted":false,"ts":"2019-06-29T22:26:06.172Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-02T22:58:49.954Z"},"success":true}'
+      servers:
+      - url: http://localhost:3000
+    servers:
+    - url: http://localhost:3000
+  "/api/v1/groups.kick":
+    post:
+      description: Removes a user from a private group.
+      parameters:
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: uunbZHiuEnib8Pawj
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: b0jniG3kJ50VK_fDK1Lh12SuK2XXAvU7mK0tv49NT3K
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - userId
+              - roomId
+              properties:
+                userId:
+                  type: string
+                  example: qDhZXaidfjFtpXnsN
+                  description: The user id of who to invite.
+                roomId:
+                  type: string
+                  example: osfdesAPnGondgB7i
+                  description: The private group's id.
+            examples:
+              '0':
+                value: '{ "roomId": "osfdesAPnGondgB7i", "userId": "qDhZXaidfjFtpXnsN"
+                  }'
+      responses:
+        '400':
+          description: Removes a user from the private group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  errorType:
+                    type: string
+                  error:
+                    type: string
+              examples:
+                '0':
+                  value: '{"success":false,"error":"The required \"roomId\" or \"roomName\"
+                    param provided does not match any group [error-room-not-found]","errorType":"error-room-not-found"}'
+      servers:
+      - url: http://localhost:3000
+    servers:
+    - url: http://localhost:3000
+  "/api/v1/groups.leave":
+    post:
+      description: Removes the calling user from the private group.
+      parameters:
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: qDhZXaidfjFtpXnsN
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: PhZoltZ46WJdOaZKvzp7Z04bapHk5V7p-MRXxNHjwE0
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - roomId
+              properties:
+                roomId:
+                  type: string
+                  example: osfdesAPnGondgB7i
+                  description: The private group’s id
+            examples:
+              '0':
+                value: '{ "roomId": "osfdesAPnGondgB7i"}'
+      responses:
+        '200':
+          description: Causes the callee to be removed from the private group, if they’re
+            part of it and are not the last owner.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: '{"success":true}'
+      servers:
+      - url: http://localhost:3000
+    servers:
+    - url: http://localhost:3000
+  "/api/v1/groups.list":
+    get:
+      description: List the private groups the caller is part of.
+      parameters:
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: MERRYtT6iA9ZghsdK
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
+      responses:
+        '200':
+          description: Lists all of the private groups the calling user has joined.
+            It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/).
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  success:
+                    type: boolean
+                  count:
+                    type: integer
+                  groups:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        broadcast:
+                          type: boolean
+                        fname:
+                          type: string
+                        msgs:
+                          type: integer
+                        lm:
+                          type: string
+                        customFields:
+                          type: object
+                          properties: {}
+                        lastMessage:
+                          type: object
+                          properties:
+                            msg:
+                              type: string
+                            channels:
+                              type: array
+                              items:
+                                type: string
+                            u:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                _id:
+                                  type: string
+                                username:
+                                  type: string
+                            mentions:
+                              type: array
+                              items:
+                                type: string
+                            _id:
+                              type: string
+                            rid:
+                              type: string
+                            _updatedAt:
+                              type: string
+                            ts:
+                              type: string
+                        usersCount:
+                          type: integer
+                        default:
+                          type: boolean
+                        t:
+                          type: string
+                        encrypted:
+                          type: boolean
+                        u:
+                          type: object
+                          properties:
+                            _id:
+                              type: string
+                            username:
+                              type: string
+                        sysMes:
+                          type: boolean
+                        name:
+                          type: string
+                        _id:
+                          type: string
+                        ro:
+                          type: boolean
+                        _updatedAt:
+                          type: string
+                        ts:
+                          type: string
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "groups": [
+                        {
+                          "_id": "agxZmuG3jax7pwcgm",
+                          "name": "talentals",
+                          "fname": "talentals",
+                          "t": "p",
+                          "msgs": 2,
+                          "usersCount": 1,
+                          "u": {
+                            "_id": "MERRYtT6iA9ZghsdK",
+                            "username": "Jaro"
+                          },
+                          "customFields": {},
+                          "broadcast": false,
+                          "encrypted": false,
+                          "ts": "2019-04-12T17:26:27.522Z",
+                          "ro": false,
+                          "sysMes": true,
+                          "default": false,
+                          "_updatedAt": "2019-04-12T17:59:56.120Z",
+                          "lastMessage": {
+                            "_id": "kML8BqYNTPcaTTCMb",
+                            "rid": "agxZmuG3jax7pwcgm",
+                            "msg": "talentals",
+                            "ts": "2019-04-12T17:59:55.920Z",
+                            "u": {
+                              "_id": "MERRYtT6iA9ZghsdK",
+                              "username": "Jaro",
+                              "name": "Jaro"
+                            },
+                            "_updatedAt": "2019-04-12T17:59:56.029Z",
+                            "mentions": [],
+                            "channels": []
+                          },
+                          "lm": "2019-04-12T17:59:55.920Z"
+                        },
+                        {
+                          "_id": "3r4Fm8CxzDKCvGQ9W",
+                          "name": "test",
+                          "fname": "test",
+                          "t": "p",
+                          "msgs": 8,
+                          "usersCount": 1,
+                          "u": {
+                            "_id": "MERRYtT6iA9ZghsdK",
+                            "username": "Jaro"
+                          },
+                          "customFields": {},
+                          "broadcast": false,
+                          "encrypted": false,
+                          "ts": "2019-05-03T08:20:18.975Z",
+                          "ro": false,
+                          "sysMes": true,
+                          "default": false,
+                          "_updatedAt": "2019-05-22T17:18:05.808Z",
+                          "lastMessage": {
+                            "_id": "gjgHZDDXYeXgLQzZG",
+                            "rid": "3r4Fm8CxzDKCvGQ9W",
+                            "msg": "jf",
+                            "ts": "2019-05-22T17:15:24.342Z",
+                            "u": {
+                              "_id": "bszJr4E8EHAtLqfX4",
+                              "username": "test.user",
+                              "name": "Test User"
+                            },
+                            "_updatedAt": "2019-05-22T17:15:25.044Z",
+                            "mentions": [],
+                            "channels": []
+                          },
+                          "lm": "2019-05-22T17:15:24.342Z"
+                        }
+                      ],
+                      "offset": 0,
+                      "count": 2,
+                      "total": 2,
+                      "success": true
+                    }
+      servers:
+      - url: http://localhost:3000
+    servers:
+    - url: http://localhost:3000
+  "/api/v1/groups.listAll":
+    get:
+      description: List all the private groups.
+      parameters:
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: MERRYtT6iA9ZghsdK
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
+      responses:
+        '200':
+          description: Lists all of the private groups of any users. The calling user
+            requires to have 'view-room-administration' right. It supports the [Offset,
+            Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/)
+            along with just the [Fields Query Parameters](../../query-and-fields-info/).
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  success:
+                    type: boolean
+                  count:
+                    type: integer
+                  groups:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        broadcast:
+                          type: boolean
+                        fname:
+                          type: string
+                        msgs:
+                          type: integer
+                        lm:
+                          type: string
+                        customFields:
+                          type: object
+                          properties: {}
+                        lastMessage:
+                          type: object
+                          properties:
+                            msg:
+                              type: string
+                            channels:
+                              type: array
+                              items:
+                                type: string
+                            u:
+                              type: object
+                              properties:
+                                name:
+                                  type: string
+                                _id:
+                                  type: string
+                                username:
+                                  type: string
+                            mentions:
+                              type: array
+                              items:
+                                type: string
+                            _id:
+                              type: string
+                            rid:
+                              type: string
+                            _updatedAt:
+                              type: string
+                            ts:
+                              type: string
+                        usersCount:
+                          type: integer
+                        default:
+                          type: boolean
+                        t:
+                          type: string
+                        encrypted:
+                          type: boolean
+                        u:
+                          type: object
+                          properties:
+                            _id:
+                              type: string
+                            username:
+                              type: string
+                        sysMes:
+                          type: boolean
+                        name:
+                          type: string
+                        _id:
+                          type: string
+                        ro:
+                          type: boolean
+                        _updatedAt:
+                          type: string
+                        ts:
+                          type: string
+              examples:
+                '0':
+                  value: |-
+                    {
+                      "groups": [
+                        {
+                          "_id": "agxZmuG3jax7pwcgm",
+                          "name": "talentals",
+                          "fname": "talentals",
+                          "t": "p",
+                          "msgs": 2,
+                          "usersCount": 1,
+                          "u": {
+                            "_id": "MERRYtT6iA9ZghsdK",
+                            "username": "Jaro"
+                          },
+                          "customFields": {},
+                          "broadcast": false,
+                          "encrypted": false,
+                          "ts": "2019-04-12T17:26:27.522Z",
+                          "ro": false,
+                          "sysMes": true,
+                          "default": false,
+                          "_updatedAt": "2019-04-12T17:59:56.120Z",
+                          "lastMessage": {
+                            "_id": "kML8BqYNTPcaTTCMb",
+                            "rid": "agxZmuG3jax7pwcgm",
+                            "msg": "talentals",
+                            "ts": "2019-04-12T17:59:55.920Z",
+                            "u": {
+                              "_id": "MERRYtT6iA9ZghsdK",
+                              "username": "Jaro",
+                              "name": "Jaro"
+                            },
+                            "_updatedAt": "2019-04-12T17:59:56.029Z",
+                            "mentions": [],
+                            "channels": []
+                          },
+                          "lm": "2019-04-12T17:59:55.920Z"
+                        },
+                        {
+                          "_id": "3r4Fm8CxzDKCvGQ9W",
+                          "name": "test",
+                          "fname": "test",
+                          "t": "p",
+                          "msgs": 8,
+                          "usersCount": 1,
+                          "u": {
+                            "_id": "MERRYtT6iA9ZghsdK",
+                            "username": "Jaro"
+                          },
+                          "customFields": {},
+                          "broadcast": false,
+                          "encrypted": false,
+                          "ts": "2019-05-03T08:20:18.975Z",
+                          "ro": false,
+                          "sysMes": true,
+                          "default": false,
+                          "_updatedAt": "2019-05-22T17:18:05.808Z",
+                          "lastMessage": {
+                            "_id": "gjgHZDDXYeXgLQzZG",
+                            "rid": "3r4Fm8CxzDKCvGQ9W",
+                            "msg": "jf",
+                            "ts": "2019-05-22T17:15:24.342Z",
+                            "u": {
+                              "_id": "bszJr4E8EHAtLqfX4",
+                              "username": "test.user",
+                              "name": "Test User"
+                            },
+                            "_updatedAt": "2019-05-22T17:15:25.044Z",
+                            "mentions": [],
+                            "channels": []
+                          },
+                          "lm": "2019-05-22T17:15:24.342Z"
+                        }
+                      ],
+                      "offset": 0,
+                      "count": 2,
+                      "total": 2,
+                      "success": true
+                    }
+      servers:
+      - url: http://localhost:3000
+    servers:
+    - url: http://localhost:3000
+  "/api/v1/groups.members":
+    get:
+      description: Gets the users of participants of a private group.
+      parameters:
+      - name: roomId
+        in: query
+        required: true
+        schema:
+          type: string
+        example: osfdesAPnGondgB7i
+        description: The room id.
+      - name: roomName
+        in: query
+        required: true
+        schema:
+          type: string
+        example: test.channel
+        description: The room name.
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: uunbZHiuEnib8Pawj
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      responses:
+        '200':
+          description: Lists the users of participants of a private group. It supports
+            the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/).
+            Requires `view-broadcast-member-list` if room is a broadcast.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  success:
+                    type: boolean
+                  members:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        utcOffset:
+                          type: integer
+                        name:
+                          type: string
+                        _id:
+                          type: string
+                        username:
+                          type: string
+                        status:
+                          type: string
+                  count:
+                    type: integer
+              examples:
+                '0':
+                  value: '{"members":[{"_id":"uunbZHiuEnib8Pawj","username":"test.user","status":"online","name":"Test
+                    User","utcOffset":1},{"_id":"qDhZXaidfjFtpXnsN","username":"user1","status":"online","name":"User1","utcOffset":1},{"_id":"qBXxQKgzj7bWNcH6n","username":"user2","status":"offline","name":"User2"}],"count":3,"offset":0,"total":3,"success":true}'
+      servers:
+      - url: http://localhost:3000
+    servers:
+    - url: http://localhost:3000
+  "/api/v1/groups.messages":
+    get:
+      description: Retrieves all group messages.
+      parameters:
+      - name: roomId
+        in: query
+        required: true
+        schema:
+          type: string
+        example: osfdesAPnGondgB7i
+        description: The private group's id.
+      - name: roomName
+        in: query
+        required: true
+        schema:
+          type: string
+        example: test.channel
+        description: The private group's name.
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: uunbZHiuEnib8Pawj
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      responses:
+        '200':
+          description: Lists all of the specific group messages on the server. It supports
+            the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/)
+            along with [Query and Fields Query Parameters](../../query-and-fields-info/).
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  success:
+                    type: boolean
+                  count:
+                    type: integer
+                  messages:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        msg:
+                          type: string
+                        t:
+                          type: string
+                        u:
+                          type: object
+                          properties:
+                            _id:
+                              type: string
+                            username:
+                              type: string
+                        groupable:
+                          type: boolean
+                        _id:
+                          type: string
+                        rid:
+                          type: string
+                        _updatedAt:
+                          type: string
+                        ts:
+                          type: string
+              examples:
+                '0':
+                  value: '{"messages":[{"_id":"iqschmPQ2PZquggBv","t":"ru","rid":"osfdesAPnGondgB7i","ts":"2019-07-04T01:06:06.241Z","msg":"Fongang.Rodrique","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"groupable":false,"_updatedAt":"2019-07-04T01:06:06.241Z"},{"_id":"LPLyPS7zNad5awXcb","t":"subscription-role-removed","rid":"osfdesAPnGondgB7i","ts":"2019-07-04T01:05:35.673Z","msg":"Fongang.Rodrique","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"groupable":false,"role":"owner","_updatedAt":"2019-07-04T01:05:35.673Z"},{"_id":"QBA8ZNnHiQN6e2FYC","rid":"osfdesAPnGondgB7i","msg":"How
+                    are you?","ts":"2019-07-04T00:59:16.515Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T00:59:16.538Z","mentions":[],"channels":[]},{"_id":"W85mu3zv7a9DZLw6b","rid":"osfdesAPnGondgB7i","msg":"Hey","ts":"2019-07-04T00:58:43.867Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T00:58:43.890Z","mentions":[],"channels":[]},{"_id":"Hh77oNJyEoye8N72G","rid":"osfdesAPnGondgB7i","msg":"Hello","ts":"2019-07-04T00:58:12.104Z","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1","name":"User1"},"_updatedAt":"2019-07-04T00:58:12.132Z","mentions":[],"channels":[]},{"_id":"R8N4Lb47qj2Qj5Hfi","t":"subscription-role-added","rid":"osfdesAPnGondgB7i","ts":"2019-07-04T00:58:04.717Z","msg":"user1","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1"},"groupable":false,"role":"owner","_updatedAt":"2019-07-04T00:58:04.717Z"},{"_id":"Ec3s3qYy5Dq86EtGm","t":"subscription-role-removed","rid":"osfdesAPnGondgB7i","ts":"2019-07-04T00:57:57.034Z","msg":"user2","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1"},"groupable":false,"role":"owner","_updatedAt":"2019-07-04T00:57:57.034Z"},{"_id":"HCB54wQKgKuf4nqKN","t":"subscription-role-added","rid":"osfdesAPnGondgB7i","ts":"2019-07-04T00:57:48.111Z","msg":"user2","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1"},"groupable":false,"role":"owner","_updatedAt":"2019-07-04T00:57:48.111Z"},{"_id":"2YheJqFoTN8NLGE9z","t":"au","rid":"osfdesAPnGondgB7i","ts":"2019-07-04T00:57:19.577Z","msg":"test.user","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1"},"groupable":false,"_updatedAt":"2019-07-04T00:57:19.594Z"},{"_id":"QMo4wcSSNmAdKDp2r","t":"au","rid":"osfdesAPnGondgB7i","ts":"2019-07-02T23:13:03.299Z","msg":"user1","u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"groupable":false,"_updatedAt":"2019-07-02T23:13:03.314Z"},{"_id":"bvcgyAciYZSeepo2s","t":"ul","rid":"osfdesAPnGondgB7i","ts":"2019-07-02T23:11:59.510Z","msg":"user1","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1"},"groupable":false,"_updatedAt":"2019-07-02T23:11:59.510Z"},{"_id":"rAWFSM4TGh6os8Lpn","t":"au","rid":"osfdesAPnGondgB7i","ts":"2019-07-02T22:58:49.932Z","msg":"user2","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"groupable":false,"_updatedAt":"2019-07-02T22:58:49.950Z"},{"_id":"zPE8goQ7WonZwiYk4","t":"au","rid":"osfdesAPnGondgB7i","ts":"2019-07-02T22:17:04.024Z","msg":"user1","u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"groupable":false,"_updatedAt":"2019-07-02T22:17:04.043Z"}],"count":13,"offset":0,"total":13,"success":true}'
+      servers:
+      - url: http://localhost:3000
+    servers:
+    - url: http://localhost:3000
+  "/api/v1/groups.moderators":
+    get:
+      description: List all moderators of a group.
+      parameters:
+      - name: roomId
+        in: query
+        required: true
+        schema:
+          type: string
+        example: osfdesAPnGondgB7i
+        description: The group's id.
+      - name: roomName
+        in: query
+        required: true
+        schema:
+          type: string
+        example: test.channel
+        description: The group's name.
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: uunbZHiuEnib8Pawj
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      responses:
+        '200':
+          description: Lists all group moderators.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  moderators:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        _id:
+                          type: string
+                        username:
+                          type: string
+              examples:
+                '0':
+                  value: '{"moderators":[{"_id":"qDhZXaidfjFtpXnsN","username":"user1","name":"User1"}],"success":true}'
+      servers:
+      - url: http://localhost:3000
+    servers:
+    - url: http://localhost:3000
+  "/api/v1/groups.open":
+    post:
+      description: Adds the private group back to the list of groups.
+      parameters:
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: uunbZHiuEnib8Pawj
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - roomId
+              properties:
+                roomId:
+                  type: string
+                  example: osfdesAPnGondgB7i
+                  description: The private group's id.
+            examples:
+              '0':
+                value: '{ "roomId": "osfdesAPnGondgB7i"}'
+      responses:
+        '200':
+          description: Adds the private group back to the user’s list of private groups.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  error:
+                    type: string
+              examples:
+                '0':
+                  value: '{"success":true}'
+      servers:
+      - url: http://localhost:3000
+    servers:
+    - url: http://localhost:3000
+  "/api/v1/groups.removeLeader":
+    post:
+      description: Removes the role of Leader for a user in the current group.
+      parameters:
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: uunbZHiuEnib8Pawj
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - userId
+              - roomId
+              properties:
+                userId:
+                  type: string
+                  example: qDhZXaidfjFtpXnsN
+                  description: The user's id.
+                roomId:
+                  type: string
+                  example: osfdesAPnGondgB7i
+                  description: The group's id.
+            examples:
+              '0':
+                value: '{ "roomId": "osfdesAPnGondgB7i", "userId": "qDhZXaidfjFtpXnsN"}'
+      responses:
+        '200':
+          description: Removes the role of Leader for a user in the current group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: '{"success":true}'
+      servers:
+      - url: http://localhost:3000
+    servers:
+    - url: http://localhost:3000
+  "/api/v1/groups.removeModerator":
+    post:
+      description: Removes the role of moderator from a user in a group.
+      parameters:
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: uunbZHiuEnib8Pawj
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - userId
+              - roomId
+              properties:
+                roomId:
+                  type: string
+                  example: osfdesAPnGondgB7i
+                  description: The private group's id
+                userId:
+                  type: string
+                  example: qDhZXaidfjFtpXnsN
+                  description: The user's id
+            examples:
+              '0':
+                value: '{ "roomId": "osfdesAPnGondgB7i", "userId": "qDhZXaidfjFtpXnsN"}'
+      responses:
+        '200':
+          description: Removes the role of moderator from a user in the current group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: '{"success":true}'
+      servers:
+      - url: http://localhost:3000
+    servers:
+    - url: http://localhost:3000
+  "/api/v1/groups.removeOwner":
+    post:
+      description: Removes the role of owner from a user in a group.
+      parameters:
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: uunbZHiuEnib8Pawj
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: "-u-CUjI4dMQFIT1k9p0G6eMCfEELxHpvx8-STIqGSef"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - userId
+              - roomId
+              properties:
+                roomId:
+                  type: string
+                  example: PdE9JSjAyLHDw8pwJ
+                  description: The private group's id
+                userId:
+                  type: string
+                  example: qDhZXaidfjFtpXnsN
+                  description: The user id
+            examples:
+              '0':
+                value: '{ "roomId": "PdE9JSjAyLHDw8pwJ", "userId": "qDhZXaidfjFtpXnsN"
+                  }'
+      responses:
+        '200':
+          description: Removes the role of owner from a user in the current Group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: '{"success":true}'
+      servers:
+      - url: https://graphql.rocket.chat
+    servers:
+    - url: https://graphql.rocket.chat
+  "/api/v1/groups.rename":
+    post:
+      description: Changes the name of the private group.
+      parameters:
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: uunbZHiuEnib8Pawj
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - roomId
+              - type
+              properties:
+                name:
+                  type: string
+                  example: new-channel
+                  description: The new name the private group will have, it can not
+                    be the same as another or the existing name.
+                roomId:
+                  type: string
+                  example: osfdesAPnGondgB7i
+                  description: The private group's id.
+            examples:
+              '0':
+                value: '{ "roomId": "osfdesAPnGondgB7i", "name": "new-channel"}'
+      responses:
+        '200':
+          description: Changes the name of the private group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  group:
+                    type: object
+                    properties:
+                      broadcast:
+                        type: boolean
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      lm:
+                        type: string
+                      customFields:
+                        type: object
+                        properties: {}
+                      lastMessage:
+                        type: object
+                        properties:
+                          msg:
+                            type: string
+                          channels:
+                            type: array
+                            items:
+                              type: string
+                          u:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              username:
+                                type: string
+                          mentions:
+                            type: array
+                            items:
+                              type: string
+                          _id:
+                            type: string
+                          rid:
+                            type: string
+                          _updatedAt:
+                            type: string
+                          ts:
+                            type: string
+                      usersCount:
+                        type: integer
+                      default:
+                        type: boolean
+                      t:
+                        type: string
+                      encrypted:
+                        type: boolean
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+              examples:
+                '0':
+                  value: '{"group":{"_id":"osfdesAPnGondgB7i","name":"new-channel","fname":"new-channel","t":"p","msgs":20,"usersCount":3,"u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"customFields":{},"broadcast":false,"encrypted":false,"ts":"2019-06-29T22:26:06.172Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T01:29:15.911Z","lastMessage":{"_id":"QBA8ZNnHiQN6e2FYC","rid":"osfdesAPnGondgB7i","msg":"How
+                    are you?","ts":"2019-07-04T00:59:16.515Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T00:59:16.538Z","mentions":[],"channels":[]},"lm":"2019-07-04T00:59:16.515Z"},"success":true}'
+      servers:
+      - url: http://localhost:3000
+    servers:
+    - url: http://localhost:3000
+  "/api/v1/groups.roles":
+    get:
+      description: Gets the user’s roles in the private group.
+      parameters:
+      - name: roomId
+        in: query
+        required: true
+        schema:
+          type: string
+        example: osfdesAPnGondgB7i
+        description: The group's id.
+      - name: roomName
+        in: query
+        required: true
+        schema:
+          type: string
+        example: test-channel
+        description: The group's name.
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: uunbZHiuEnib8Pawj
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      responses:
+        '200':
+          description: Lists all user’s roles in the private group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  roles:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        u:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                            _id:
+                              type: string
+                            username:
+                              type: string
+                        roles:
+                          type: array
+                          items:
+                            type: string
+                        _id:
+                          type: string
+                        rid:
+                          type: string
+              examples:
+                '0':
+                  value: '{"roles":[{"_id":"c3stE5urxPNg2Qtij","rid":"osfdesAPnGondgB7i","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1","name":"User1"},"roles":["owner","moderator","leader"]}],"success":true}'
+      servers:
+      - url: http://localhost:3000
+    servers:
+    - url: http://localhost:3000
+  "/api/v1/groups.setAnnouncement":
+    post:
+      description: Sets a group’s announcement.
+      parameters:
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: uunbZHiuEnib8Pawj
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - roomId
+              - announcement
               properties:
                 roomId:
                   type: string
@@ -1688,9 +2419,7 @@ paths:
                   description: The announcement to set for the group.
             examples:
               '0':
-                value: >-
-                  { "roomId": "osfdesAPnGondgB7i", "announcement": "Test out
-                  everything"}
+                value: '{ "roomId": "osfdesAPnGondgB7i", "announcement": "Test out everything"}'
       responses:
         '200':
           description: Sets the announcement for the group.
@@ -1707,48 +2436,56 @@ paths:
                 '0':
                   value: '{"announcement":"Test out everything","success":true}'
       servers:
-        - url: 'http://localhost:3000'
+      - url: http://localhost:3000
     servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.removeLeader:
+    - url: http://localhost:3000
+  "/api/v1/groups.setCustomFields":
     post:
-      description: Removes the role of Leader for a user in the current group.
+      description: Sets private group’s custom fields.
       parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: uunbZHiuEnib8Pawj
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: uunbZHiuEnib8Pawj
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
       requestBody:
         content:
           application/json:
             schema:
               type: object
               required:
-                - userId
-                - roomId
+              - roomId
+              - roomName
+              - customFields
               properties:
-                userId:
-                  type: string
-                  example: qDhZXaidfjFtpXnsN
-                  description: The user's id.
                 roomId:
                   type: string
                   example: osfdesAPnGondgB7i
-                  description: The group's id.
+                  description: The private group's id.
+                roomName:
+                  type: string
+                  example: test-channel
+                  description: The private group's name.
+                customFields:
+                  type: object
+                  properties:
+                    company:
+                      type: string
+                  example:
+                    company: sell-and-more
+                  description: The custom fields to set for the private group.
             examples:
               '0':
-                value: >-
-                  { "roomId": "osfdesAPnGondgB7i", "userId":
-                  "qDhZXaidfjFtpXnsN"}
+                value: '{ "roomId": "osfdesAPnGondgB7i", "roomName": "test-channel",
+                  "customFields":{"company": "sell-and-more"}}'
       responses:
         '200':
-          description: Removes the role of Leader for a user in the current group.
+          description: Sets the custom fields for the private group.
           content:
             application/json:
               schema:
@@ -1756,35 +2493,220 @@ paths:
                 properties:
                   success:
                     type: boolean
+                  group:
+                    type: object
+                    properties:
+                      broadcast:
+                        type: boolean
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      lm:
+                        type: string
+                      customFields:
+                        type: object
+                        properties:
+                          company:
+                            type: string
+                      lastMessage:
+                        type: object
+                        properties:
+                          msg:
+                            type: string
+                          channels:
+                            type: array
+                            items:
+                              type: string
+                          u:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              username:
+                                type: string
+                          mentions:
+                            type: array
+                            items:
+                              type: string
+                          _id:
+                            type: string
+                          rid:
+                            type: string
+                          _updatedAt:
+                            type: string
+                          ts:
+                            type: string
+                      usersCount:
+                        type: integer
+                      default:
+                        type: boolean
+                      t:
+                        type: string
+                      encrypted:
+                        type: boolean
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+                      announcement:
+                        type: string
               examples:
                 '0':
-                  value: '{"success":true}'
+                  value: '{"group":{"_id":"osfdesAPnGondgB7i","name":"test-channel","fname":"test-channel","t":"p","msgs":22,"usersCount":3,"u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"customFields":{"company":"sell-and-more"},"broadcast":false,"encrypted":false,"ts":"2019-06-29T22:26:06.172Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T01:37:50.141Z","lastMessage":{"_id":"QBA8ZNnHiQN6e2FYC","rid":"osfdesAPnGondgB7i","msg":"How
+                    are you?","ts":"2019-07-04T00:59:16.515Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                    User"},"_updatedAt":"2019-07-04T00:59:16.538Z","mentions":[],"channels":[]},"lm":"2019-07-04T00:59:16.515Z","announcement":"Test
+                    out everything"},"success":true}'
       servers:
-        - url: 'http://localhost:3000'
+      - url: http://localhost:3000
     servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.setReadOnly:
+    - url: http://localhost:3000
+  "/api/v1/groups.setDescription":
     post:
-      description: Sets whether the room is read only or not.
+      description: Sets a private group’s description.
       parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: uunbZHiuEnib8Pawj
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: uunbZHiuEnib8Pawj
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
       requestBody:
         content:
           application/json:
             schema:
               type: object
               required:
-                - roomId
-                - readOnly
+              - roomId
+              - description
+              properties:
+                description:
+                  type: string
+                  example: Test out everything.
+                  description: The description to set for the private group.
+                roomId:
+                  type: string
+                  example: osfdesAPnGondgB7i
+                  description: The private group's id.
+            examples:
+              '0':
+                value: '{ "roomId": "osfdesAPnGondgB7i", "description": "Test out everything"}'
+      responses:
+        '200':
+          description: Sets the description for the private group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  description:
+                    type: string
+              examples:
+                '0':
+                  value: '{"description":"Test out everything","success":true}'
+      servers:
+      - url: http://localhost:3000
+    servers:
+    - url: http://localhost:3000
+  "/api/v1/groups.setPurpose":
+    post:
+      description: Sets a private group’s description.
+      parameters:
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: uunbZHiuEnib8Pawj
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - roomId
+              - purpose
+              properties:
+                purpose:
+                  type: string
+                  example: Test out everything.
+                  description: The description to set for the private group.
+                roomId:
+                  type: string
+                  example: osfdesAPnGondgB7i
+                  description: The private group’s id
+            examples:
+              '0':
+                value: '{ "roomId": "osfdesAPnGondgB7i", "purpose": "Test out everything"}'
+      responses:
+        '200':
+          description: Sets the description for the private group (the same as groups.setDescription,
+            obsolete).
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  purpose:
+                    type: string
+                  success:
+                    type: boolean
+              examples:
+                '0':
+                  value: '{"purpose":"Test out everything","success":true}'
+      servers:
+      - url: http://localhost:3000
+    servers:
+    - url: http://localhost:3000
+  "/api/v1/groups.setReadOnly":
+    post:
+      description: Sets whether the room is read only or not.
+      parameters:
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: uunbZHiuEnib8Pawj
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - roomId
+              - readOnly
               properties:
                 roomId:
                   type: string
@@ -1886,195 +2808,96 @@ paths:
                         type: string
               examples:
                 '0':
-                  value: >-
-                    {"group":{"_id":"osfdesAPnGondgB7i","name":"test-channel","fname":"test-channel","t":"p","msgs":23,"usersCount":3,"u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"customFields":{"company":"sell-and-more"},"broadcast":false,"encrypted":false,"ts":"2019-06-29T22:26:06.172Z","ro":true,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T01:43:40.873Z","lastMessage":{"_id":"QBA8ZNnHiQN6e2FYC","rid":"osfdesAPnGondgB7i","msg":"How
-                    are
-                    you?","ts":"2019-07-04T00:59:16.515Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                  value: '{"group":{"_id":"osfdesAPnGondgB7i","name":"test-channel","fname":"test-channel","t":"p","msgs":23,"usersCount":3,"u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"customFields":{"company":"sell-and-more"},"broadcast":false,"encrypted":false,"ts":"2019-06-29T22:26:06.172Z","ro":true,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T01:43:40.873Z","lastMessage":{"_id":"QBA8ZNnHiQN6e2FYC","rid":"osfdesAPnGondgB7i","msg":"How
+                    are you?","ts":"2019-07-04T00:59:16.515Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
                     User"},"_updatedAt":"2019-07-04T00:59:16.538Z","mentions":[],"channels":[]},"lm":"2019-07-04T00:59:16.515Z","announcement":"Test
-                    out everything","description":"Test out
-                    everything"},"success":true}
+                    out everything","description":"Test out everything"},"success":true}'
       servers:
-        - url: 'http://localhost:3000'
+      - url: http://localhost:3000
     servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.messages:
-    get:
-      description: Retrieves all group messages.
-      parameters:
-        - name: roomId
-          in: query
-          required: true
-          schema:
-            type: string
-          example: osfdesAPnGondgB7i
-          description: The private group's id.
-        - name: roomName
-          in: query
-          required: true
-          schema:
-            type: string
-          example: test.channel
-          description: The private group's name.
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: uunbZHiuEnib8Pawj
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
-      responses:
-        '200':
-          description: Lists all of the specific group messages on the server. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/) along with [Query and Fields Query Parameters](../../query-and-fields-info/).
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  total:
-                    type: integer
-                  offset:
-                    type: integer
-                  success:
-                    type: boolean
-                  count:
-                    type: integer
-                  messages:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        msg:
-                          type: string
-                        t:
-                          type: string
-                        u:
-                          type: object
-                          properties:
-                            _id:
-                              type: string
-                            username:
-                              type: string
-                        groupable:
-                          type: boolean
-                        _id:
-                          type: string
-                        rid:
-                          type: string
-                        _updatedAt:
-                          type: string
-                        ts:
-                          type: string
-              examples:
-                '0':
-                  value: >-
-                    {"messages":[{"_id":"iqschmPQ2PZquggBv","t":"ru","rid":"osfdesAPnGondgB7i","ts":"2019-07-04T01:06:06.241Z","msg":"Fongang.Rodrique","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"groupable":false,"_updatedAt":"2019-07-04T01:06:06.241Z"},{"_id":"LPLyPS7zNad5awXcb","t":"subscription-role-removed","rid":"osfdesAPnGondgB7i","ts":"2019-07-04T01:05:35.673Z","msg":"Fongang.Rodrique","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"groupable":false,"role":"owner","_updatedAt":"2019-07-04T01:05:35.673Z"},{"_id":"QBA8ZNnHiQN6e2FYC","rid":"osfdesAPnGondgB7i","msg":"How
-                    are
-                    you?","ts":"2019-07-04T00:59:16.515Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
-                    User"},"_updatedAt":"2019-07-04T00:59:16.538Z","mentions":[],"channels":[]},{"_id":"W85mu3zv7a9DZLw6b","rid":"osfdesAPnGondgB7i","msg":"Hey","ts":"2019-07-04T00:58:43.867Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
-                    User"},"_updatedAt":"2019-07-04T00:58:43.890Z","mentions":[],"channels":[]},{"_id":"Hh77oNJyEoye8N72G","rid":"osfdesAPnGondgB7i","msg":"Hello","ts":"2019-07-04T00:58:12.104Z","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1","name":"User1"},"_updatedAt":"2019-07-04T00:58:12.132Z","mentions":[],"channels":[]},{"_id":"R8N4Lb47qj2Qj5Hfi","t":"subscription-role-added","rid":"osfdesAPnGondgB7i","ts":"2019-07-04T00:58:04.717Z","msg":"user1","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1"},"groupable":false,"role":"owner","_updatedAt":"2019-07-04T00:58:04.717Z"},{"_id":"Ec3s3qYy5Dq86EtGm","t":"subscription-role-removed","rid":"osfdesAPnGondgB7i","ts":"2019-07-04T00:57:57.034Z","msg":"user2","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1"},"groupable":false,"role":"owner","_updatedAt":"2019-07-04T00:57:57.034Z"},{"_id":"HCB54wQKgKuf4nqKN","t":"subscription-role-added","rid":"osfdesAPnGondgB7i","ts":"2019-07-04T00:57:48.111Z","msg":"user2","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1"},"groupable":false,"role":"owner","_updatedAt":"2019-07-04T00:57:48.111Z"},{"_id":"2YheJqFoTN8NLGE9z","t":"au","rid":"osfdesAPnGondgB7i","ts":"2019-07-04T00:57:19.577Z","msg":"test.user","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1"},"groupable":false,"_updatedAt":"2019-07-04T00:57:19.594Z"},{"_id":"QMo4wcSSNmAdKDp2r","t":"au","rid":"osfdesAPnGondgB7i","ts":"2019-07-02T23:13:03.299Z","msg":"user1","u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"groupable":false,"_updatedAt":"2019-07-02T23:13:03.314Z"},{"_id":"bvcgyAciYZSeepo2s","t":"ul","rid":"osfdesAPnGondgB7i","ts":"2019-07-02T23:11:59.510Z","msg":"user1","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1"},"groupable":false,"_updatedAt":"2019-07-02T23:11:59.510Z"},{"_id":"rAWFSM4TGh6os8Lpn","t":"au","rid":"osfdesAPnGondgB7i","ts":"2019-07-02T22:58:49.932Z","msg":"user2","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user"},"groupable":false,"_updatedAt":"2019-07-02T22:58:49.950Z"},{"_id":"zPE8goQ7WonZwiYk4","t":"au","rid":"osfdesAPnGondgB7i","ts":"2019-07-02T22:17:04.024Z","msg":"user1","u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"groupable":false,"_updatedAt":"2019-07-02T22:17:04.043Z"}],"count":13,"offset":0,"total":13,"success":true}
-      servers:
-        - url: 'http://localhost:3000'
-    servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.members:
-    get:
-      description: Gets the users of participants of a private group.
-      parameters:
-        - name: roomId
-          in: query
-          required: true
-          schema:
-            type: string
-          example: osfdesAPnGondgB7i
-          description: The room id.
-        - name: roomName
-          in: query
-          required: true
-          schema:
-            type: string
-          example: test.channel
-          description: The room name.
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: uunbZHiuEnib8Pawj
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
-      responses:
-        '200':
-          description: "Lists the users of participants of a private group. It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/). 
-          Requires `view-broadcast-member-list` if room is a broadcast."
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  total:
-                    type: integer
-                  offset:
-                    type: integer
-                  success:
-                    type: boolean
-                  members:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        utcOffset:
-                          type: integer
-                        name:
-                          type: string
-                        _id:
-                          type: string
-                        username:
-                          type: string
-                        status:
-                          type: string
-                  count:
-                    type: integer
-              examples:
-                '0':
-                  value: >-
-                    {"members":[{"_id":"uunbZHiuEnib8Pawj","username":"test.user","status":"online","name":"Test
-                    User","utcOffset":1},{"_id":"qDhZXaidfjFtpXnsN","username":"user1","status":"online","name":"User1","utcOffset":1},{"_id":"qBXxQKgzj7bWNcH6n","username":"user2","status":"offline","name":"User2"}],"count":3,"offset":0,"total":3,"success":true}
-      servers:
-        - url: 'http://localhost:3000'
-    servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.setType:
+    - url: http://localhost:3000
+  "/api/v1/groups.setTopic":
     post:
-      description: Sets the type of room this group will be.
+      description: Sets a private group’s topic.
       parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: uunbZHiuEnib8Pawj
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: uunbZHiuEnib8Pawj
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
       requestBody:
         content:
           application/json:
             schema:
               type: object
               required:
-                - roomId
-                - type
+              - topic
+              - roomId
+              properties:
+                roomId:
+                  type: string
+                  example: osfdesAPnGondgB7i
+                  description: The private group's id.
+                topic:
+                  type: string
+                  example: Discuss all of the testing.
+                  description: The private group’s topic to set.
+            examples:
+              '0':
+                value: '{ "roomId": "osfdesAPnGondgB7i", "topic": "Discuss all of the
+                  testing."}'
+      responses:
+        '200':
+          description: Sets the topic for the private group.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  topic:
+                    type: string
+              examples:
+                '0':
+                  value: '{"topic":"Discuss all of the testing.","success":true}'
+      servers:
+      - url: http://localhost:3000
+    servers:
+    - url: http://localhost:3000
+  "/api/v1/groups.setType":
+    post:
+      description: Sets the type of room this group will be.
+      parameters:
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: uunbZHiuEnib8Pawj
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - roomId
+              - type
               properties:
                 type:
                   type: string
                   example: "`c` or `p`"
-                  description: The type of room this group should be, either `c` or `p`.
+                  description: The type of room this group should be, either `c` or
+                    `p`.
                 roomId:
                   type: string
                   example: osfdesAPnGondgB7i
@@ -2173,705 +2996,47 @@ paths:
                         type: string
               examples:
                 '0':
-                  value: >-
-                    {"group":{"_id":"osfdesAPnGondgB7i","name":"test-channel","fname":"test-channel","t":"c","msgs":25,"usersCount":3,"u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"customFields":{"company":"sell-and-more"},"broadcast":false,"encrypted":false,"ts":"2019-06-29T22:26:06.172Z","ro":true,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T01:48:06.268Z","lastMessage":{"_id":"QBA8ZNnHiQN6e2FYC","rid":"osfdesAPnGondgB7i","msg":"How
-                    are
-                    you?","ts":"2019-07-04T00:59:16.515Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
+                  value: '{"group":{"_id":"osfdesAPnGondgB7i","name":"test-channel","fname":"test-channel","t":"c","msgs":25,"usersCount":3,"u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"customFields":{"company":"sell-and-more"},"broadcast":false,"encrypted":false,"ts":"2019-06-29T22:26:06.172Z","ro":true,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T01:48:06.268Z","lastMessage":{"_id":"QBA8ZNnHiQN6e2FYC","rid":"osfdesAPnGondgB7i","msg":"How
+                    are you?","ts":"2019-07-04T00:59:16.515Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
                     User"},"_updatedAt":"2019-07-04T00:59:16.538Z","mentions":[],"channels":[]},"lm":"2019-07-04T00:59:16.515Z","announcement":"Test
-                    out everything","description":"Test out
-                    everything","topic":"Discuss all of the
-                    testing."},"success":true}
+                    out everything","description":"Test out everything","topic":"Discuss
+                    all of the testing."},"success":true}'
       servers:
-        - url: 'http://localhost:3000'
+      - url: http://localhost:3000
     servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.setCustomFields:
+    - url: http://localhost:3000
+  "/api/v1/groups.unarchive":
     post:
-      description: Sets private group’s custom fields.
+      description: Unarchives a private group.
       parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: uunbZHiuEnib8Pawj
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: MERRYtT6iA9ZghsdK
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: kqcX9jghhTr3h8tMtXXx6wmgWeXTebfInE18Cqv7hcg
       requestBody:
         content:
           application/json:
             schema:
               type: object
               required:
-                - roomId
-                - roomName
-                - customFields
+              - roomId
               properties:
                 roomId:
                   type: string
-                  example: osfdesAPnGondgB7i
-                  description: The private group's id.
-                roomName:
-                  type: string
-                  example: test-channel
-                  description: The private group's name.
-                customFields:
-                  type: object
-                  properties:
-                    company:
-                      type: string
-                  example: {"company": "sell-and-more"}
-                  description: The custom fields to set for the private group.
+                  example: 3r4Fm8CxzDKCvGQ9W
+                  description: The private's group id
             examples:
               '0':
-                value: >-
-                  { "roomId": "osfdesAPnGondgB7i", "roomName": "test-channel",
-                  "customFields":{"company": "sell-and-more"}}
+                value: '{"roomId": "3r4Fm8CxzDKCvGQ9W"}'
       responses:
         '200':
-          description: Sets the custom fields for the private group.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  group:
-                    type: object
-                    properties:
-                      broadcast:
-                        type: boolean
-                      fname:
-                        type: string
-                      msgs:
-                        type: integer
-                      lm:
-                        type: string
-                      customFields:
-                        type: object
-                        properties:
-                          company:
-                            type: string
-                      lastMessage:
-                        type: object
-                        properties:
-                          msg:
-                            type: string
-                          channels:
-                            type: array
-                            items:
-                              type: string
-                          u:
-                            type: object
-                            properties:
-                              name:
-                                type: string
-                              _id:
-                                type: string
-                              username:
-                                type: string
-                          mentions:
-                            type: array
-                            items:
-                              type: string
-                          _id:
-                            type: string
-                          rid:
-                            type: string
-                          _updatedAt:
-                            type: string
-                          ts:
-                            type: string
-                      usersCount:
-                        type: integer
-                      default:
-                        type: boolean
-                      t:
-                        type: string
-                      encrypted:
-                        type: boolean
-                      u:
-                        type: object
-                        properties:
-                          _id:
-                            type: string
-                          username:
-                            type: string
-                      sysMes:
-                        type: boolean
-                      name:
-                        type: string
-                      _id:
-                        type: string
-                      ro:
-                        type: boolean
-                      _updatedAt:
-                        type: string
-                      ts:
-                        type: string
-                      announcement:
-                        type: string
-              examples:
-                '0':
-                  value: >-
-                    {"group":{"_id":"osfdesAPnGondgB7i","name":"test-channel","fname":"test-channel","t":"p","msgs":22,"usersCount":3,"u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"customFields":{"company":"sell-and-more"},"broadcast":false,"encrypted":false,"ts":"2019-06-29T22:26:06.172Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T01:37:50.141Z","lastMessage":{"_id":"QBA8ZNnHiQN6e2FYC","rid":"osfdesAPnGondgB7i","msg":"How
-                    are
-                    you?","ts":"2019-07-04T00:59:16.515Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
-                    User"},"_updatedAt":"2019-07-04T00:59:16.538Z","mentions":[],"channels":[]},"lm":"2019-07-04T00:59:16.515Z","announcement":"Test
-                    out everything"},"success":true}
-      servers:
-        - url: 'http://localhost:3000'
-    servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.rename:
-    post:
-      description: Changes the name of the private group.
-      parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: uunbZHiuEnib8Pawj
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - roomId
-                - type
-              properties:
-                name:
-                  type: string
-                  example: new-channel
-                  description: The new name the private group will have, it can not be the same as another or the existing name.
-                roomId:
-                  type: string
-                  example: osfdesAPnGondgB7i
-                  description: The private group's id.
-            examples:
-              '0':
-                value: '{ "roomId": "osfdesAPnGondgB7i", "name": "new-channel"}'
-      responses:
-        '200':
-          description: Changes the name of the private group.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  group:
-                    type: object
-                    properties:
-                      broadcast:
-                        type: boolean
-                      fname:
-                        type: string
-                      msgs:
-                        type: integer
-                      lm:
-                        type: string
-                      customFields:
-                        type: object
-                        properties: {}
-                      lastMessage:
-                        type: object
-                        properties:
-                          msg:
-                            type: string
-                          channels:
-                            type: array
-                            items:
-                              type: string
-                          u:
-                            type: object
-                            properties:
-                              name:
-                                type: string
-                              _id:
-                                type: string
-                              username:
-                                type: string
-                          mentions:
-                            type: array
-                            items:
-                              type: string
-                          _id:
-                            type: string
-                          rid:
-                            type: string
-                          _updatedAt:
-                            type: string
-                          ts:
-                            type: string
-                      usersCount:
-                        type: integer
-                      default:
-                        type: boolean
-                      t:
-                        type: string
-                      encrypted:
-                        type: boolean
-                      u:
-                        type: object
-                        properties:
-                          _id:
-                            type: string
-                          username:
-                            type: string
-                      sysMes:
-                        type: boolean
-                      name:
-                        type: string
-                      _id:
-                        type: string
-                      ro:
-                        type: boolean
-                      _updatedAt:
-                        type: string
-                      ts:
-                        type: string
-              examples:
-                '0':
-                  value: >-
-                    {"group":{"_id":"osfdesAPnGondgB7i","name":"new-channel","fname":"new-channel","t":"p","msgs":20,"usersCount":3,"u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"customFields":{},"broadcast":false,"encrypted":false,"ts":"2019-06-29T22:26:06.172Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-04T01:29:15.911Z","lastMessage":{"_id":"QBA8ZNnHiQN6e2FYC","rid":"osfdesAPnGondgB7i","msg":"How
-                    are
-                    you?","ts":"2019-07-04T00:59:16.515Z","u":{"_id":"uunbZHiuEnib8Pawj","username":"test.user","name":"Test
-                    User"},"_updatedAt":"2019-07-04T00:59:16.538Z","mentions":[],"channels":[]},"lm":"2019-07-04T00:59:16.515Z"},"success":true}
-      servers:
-        - url: 'http://localhost:3000'
-    servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.invite:
-    post:
-      description: Adds a user to the private group.
-      parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: uunbZHiuEnib8Pawj
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: oU6bqTIj1otEmvgqlu7W-ODbyJ6l7YFiIoNUR1LLOzA
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - userId
-                - roomId
-              properties:
-                userId:
-                  type: string
-                  example: qBXxQKgzj7bWNcH6n
-                  description: The user id of who to invite.
-                roomId:
-                  type: string
-                  example: osfdesAPnGondgB7i
-                  description: The private group’s id
-            examples:
-              '0':
-                value: >-
-                  { "roomId": "osfdesAPnGondgB7i", "userId": "qBXxQKgzj7bWNcH6n"
-                  }
-      responses:
-        '200':
-          description: Adds a user to the private group.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  group:
-                    type: object
-                    properties:
-                      broadcast:
-                        type: boolean
-                      fname:
-                        type: string
-                      msgs:
-                        type: integer
-                      customFields:
-                        type: object
-                        properties: {}
-                      usersCount:
-                        type: integer
-                      default:
-                        type: boolean
-                      t:
-                        type: string
-                      encrypted:
-                        type: boolean
-                      u:
-                        type: object
-                        properties:
-                          _id:
-                            type: string
-                          username:
-                            type: string
-                      sysMes:
-                        type: boolean
-                      name:
-                        type: string
-                      _id:
-                        type: string
-                      ro:
-                        type: boolean
-                      _updatedAt:
-                        type: string
-                      ts:
-                        type: string
-              examples:
-                '0':
-                  value: >-
-                    {"group":{"_id":"osfdesAPnGondgB7i","name":"test.channel","fname":"test.channel","t":"p","msgs":2,"usersCount":3,"u":{"_id":"vZqbkMaPukc35Mi3x","username":"Fongang.Rodrique"},"customFields":{},"broadcast":false,"encrypted":false,"ts":"2019-06-29T22:26:06.172Z","ro":false,"sysMes":true,"default":false,"_updatedAt":"2019-07-02T22:58:49.954Z"},"success":true}
-      servers:
-        - url: 'http://localhost:3000'
-    servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.setPurpose:
-    post:
-      description: Sets a private group’s description.
-      parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: uunbZHiuEnib8Pawj
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - roomId
-                - purpose
-              properties:
-                purpose:
-                  type: string
-                  example: Test out everything.
-                  description: The description to set for the private group.
-                roomId:
-                  type: string
-                  example: osfdesAPnGondgB7i
-                  description: The private group’s id
-            examples:
-              '0':
-                value: >-
-                  { "roomId": "osfdesAPnGondgB7i", "purpose": "Test out
-                  everything"}
-      responses:
-        '200':
-          description: Sets the description for the private group (the same as groups.setDescription, obsolete).
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  purpose:
-                    type: string
-                  success:
-                    type: boolean
-              examples:
-                '0':
-                  value: '{"purpose":"Test out everything","success":true}'
-      servers:
-        - url: 'http://localhost:3000'
-    servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.moderators:
-    get:
-      description: List all moderators of a group.
-      parameters:
-        - name: roomId
-          in: query
-          required: true
-          schema:
-            type: string
-          example: osfdesAPnGondgB7i
-          description: The group's id.
-        - name: roomName
-          in: query
-          required: true
-          schema:
-            type: string
-          example: test.channel
-          description: The group's name.
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: uunbZHiuEnib8Pawj
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
-      responses:
-        '200':
-          description: Lists all group moderators.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  moderators:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        name:
-                          type: string
-                        _id:
-                          type: string
-                        username:
-                          type: string
-              examples:
-                '0':
-                  value: >-
-                    {"moderators":[{"_id":"qDhZXaidfjFtpXnsN","username":"user1","name":"User1"}],"success":true}
-      servers:
-        - url: 'http://localhost:3000'
-    servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.kick:
-    post:
-      description: Removes a user from a private group.
-      parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: uunbZHiuEnib8Pawj
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: b0jniG3kJ50VK_fDK1Lh12SuK2XXAvU7mK0tv49NT3K
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - userId
-                - roomId
-              properties:
-                userId:
-                  type: string
-                  example: qDhZXaidfjFtpXnsN
-                  description: The user id of who to invite.
-                roomId:
-                  type: string
-                  example: osfdesAPnGondgB7i
-                  description: The private group's id.
-            examples:
-              '0':
-                value: >-
-                  { "roomId": "osfdesAPnGondgB7i", "userId": "qDhZXaidfjFtpXnsN"
-                  }
-      responses:
-        '400':
-          description: Removes a user from the private group.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  errorType:
-                    type: string
-                  error:
-                    type: string
-              examples:
-                '0':
-                  value: >-
-                    {"success":false,"error":"The required \"roomId\" or
-                    \"roomName\" param provided does not match any group
-                    [error-room-not-found]","errorType":"error-room-not-found"}
-      servers:
-        - url: 'http://localhost:3000'
-    servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.roles:
-    get:
-      description: Gets the user’s roles in the private group.
-      parameters:
-        - name: roomId
-          in: query
-          required: true
-          schema:
-            type: string
-          example: osfdesAPnGondgB7i
-          description: The group's id.
-        - name: roomName
-          in: query
-          required: true
-          schema:
-            type: string
-          example: test-channel
-          description: The group's name.
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: uunbZHiuEnib8Pawj
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
-      responses:
-        '200':
-          description: Lists all user’s roles in the private group.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  roles:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        u:
-                          type: object
-                          properties:
-                            name:
-                              type: string
-                            _id:
-                              type: string
-                            username:
-                              type: string
-                        roles:
-                          type: array
-                          items:
-                            type: string
-                        _id:
-                          type: string
-                        rid:
-                          type: string
-              examples:
-                '0':
-                  value: >-
-                    {"roles":[{"_id":"c3stE5urxPNg2Qtij","rid":"osfdesAPnGondgB7i","u":{"_id":"qDhZXaidfjFtpXnsN","username":"user1","name":"User1"},"roles":["owner","moderator","leader"]}],"success":true}
-      servers:
-        - url: 'http://localhost:3000'
-    servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.setTopic:
-    post:
-      description: Sets a private group’s topic.
-      parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: uunbZHiuEnib8Pawj
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - topic
-                - roomId
-              properties:
-                roomId:
-                  type: string
-                  example: osfdesAPnGondgB7i
-                  description: The private group's id.
-                topic:
-                  type: string
-                  example: Discuss all of the testing.
-                  description: The private group’s topic to set.
-            examples:
-              '0':
-                value: >-
-                  { "roomId": "osfdesAPnGondgB7i", "topic": "Discuss all of the
-                  testing."}
-      responses:
-        '200':
-          description: Sets the topic for the private group.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  topic:
-                    type: string
-              examples:
-                '0':
-                  value: '{"topic":"Discuss all of the testing.","success":true}'
-      servers:
-        - url: 'http://localhost:3000'
-    servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.leave:
-    post:
-      description: Removes the calling user from the private group.
-      parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: qDhZXaidfjFtpXnsN
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: PhZoltZ46WJdOaZKvzp7Z04bapHk5V7p-MRXxNHjwE0
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - roomId
-              properties:
-                roomId:
-                  type: string
-                  example: osfdesAPnGondgB7i
-                  description: The private group’s id
-            examples:
-              '0':
-                value: '{ "roomId": "osfdesAPnGondgB7i"}'
-      responses:
-        '200':
-          description: Causes the callee to be removed from the private group, if they’re part of it and are not the last owner.
+          description: Unarchives a private group.
           content:
             application/json:
               schema:
@@ -2881,168 +3046,14 @@ paths:
                     type: boolean
               examples:
                 '0':
-                  value: '{"success":true}'
+                  value: |-
+                    {
+                      "success": true
+                    }
       servers:
-        - url: 'http://localhost:3000'
+      - url: http://localhost:3000
     servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.setDescription:
-    post:
-      description: Sets a private group’s description.
-      parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: uunbZHiuEnib8Pawj
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - roomId
-                - description
-              properties:
-                description:
-                  type: string
-                  example: Test out everything.
-                  description: The description to set for the private group.
-                roomId:
-                  type: string
-                  example: osfdesAPnGondgB7i
-                  description: The private group's id.
-            examples:
-              '0':
-                value: >-
-                  { "roomId": "osfdesAPnGondgB7i", "description": "Test out
-                  everything"}
-      responses:
-        '200':
-          description: Sets the description for the private group.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  description:
-                    type: string
-              examples:
-                '0':
-                  value: '{"description":"Test out everything","success":true}'
-      servers:
-        - url: 'http://localhost:3000'
-    servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.removeModerator:
-    post:
-      description: Removes the role of moderator from a user in a group.
-      parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: uunbZHiuEnib8Pawj
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - userId
-                - roomId
-              properties:
-                roomId:
-                  type: string
-                  example: osfdesAPnGondgB7i
-                  description: The private group's id
-                userId:
-                  type: string
-                  example: qDhZXaidfjFtpXnsN
-                  description: The user's id
-            examples:
-              '0':
-                value: >-
-                  { "roomId": "osfdesAPnGondgB7i", "userId":
-                  "qDhZXaidfjFtpXnsN"}
-      responses:
-        '200':
-          description: Removes the role of moderator from a user in the current group.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-              examples:
-                '0':
-                  value: '{"success":true}'
-      servers:
-        - url: 'http://localhost:3000'
-    servers:
-      - url: 'http://localhost:3000'
-  /api/v1/groups.open:
-    post:
-      description: Adds the private group back to the list of groups.
-      parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: uunbZHiuEnib8Pawj
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: HxsnO0B-l6g9w8aSOBUmTPhUo2vsieMVxy5CvFmG7wY
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - roomId
-              properties:
-                roomId:
-                  type: string
-                  example: osfdesAPnGondgB7i
-                  description: The private group's id.
-            examples:
-              '0':
-                value: '{ "roomId": "osfdesAPnGondgB7i"}'
-      responses:
-        '200':
-          description: Adds the private group back to the user’s list of private groups.
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                  error:
-                    type: string
-              examples:
-                '0':
-                  value: >-
-                    {"success":true}
-      servers:
-        - url: 'http://localhost:3000'
-    servers:
-      - url: 'http://localhost:3000'
+    - url: http://localhost:3000
 components:
   securitySchemes:
     basic:

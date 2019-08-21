@@ -10,7 +10,7 @@ info:
 servers:
   - url: 'http://localhost:3000'
 paths:
-  /api/v1/login:
+  "/api/v1/login":
     post:
       description: Authenticate with the REST API and other services.
       requestBody:
@@ -19,17 +19,17 @@ paths:
             schema:
               type: object
               required:
-                - user
-                - password
-                - serviceName
-                - accessToken
-                - secret
-                - idToken
-                - scope
-                - expiresIn
-                - accessTokenSecret
-                - appSecret
-                - appId
+              - user
+              - password
+              - serviceName
+              - accessToken
+              - secret
+              - idToken
+              - scope
+              - expiresIn
+              - accessTokenSecret
+              - appSecret
+              - appId
               properties:
                 user:
                   type: string
@@ -96,28 +96,17 @@ paths:
                   { "serviceName": "google", "accessToken": "hash",
                         "idToken": "hash", "expiresIn": 200, "scope": "profile" }
               '2':
-                value: |-
-                  { 
-                      "serviceName": "facebook",
-                      "accessToken": "hash",
-                      "secret": "hash",
-                      "expiresIn": 200 
-                      
-                  }
+                value: "{ \n    \"serviceName\": \"facebook\",\n    \"accessToken\":
+                  \"hash\",\n    \"secret\": \"hash\",\n    \"expiresIn\": 200 \n    \n}"
               '3':
-                value: |-
-                  {
-                      "serviceName": "twitter", 
-                      "accessToken": "hash",
-                      "accessTokenSecret": "hash",
-                        "appSecret": "hash", 
-                        "appId": "hash",
-                        "expiresIn": 200
-                      
-                  }
+                value: "{\n    \"serviceName\": \"twitter\", \n    \"accessToken\":
+                  \"hash\",\n    \"accessTokenSecret\": \"hash\",\n      \"appSecret\":
+                  \"hash\", \n      \"appId\": \"hash\",\n      \"expiresIn\": 200\n
+                  \   \n}"
       responses:
         '200':
-          description: Authenticate with REST API(user and password), two-factor(2FA) authentication, Google, Facebook and Twitter.
+          description: Authenticate with REST API(user and password), two-factor(2FA)
+            authentication, Google, Facebook and Twitter.
           content:
             application/json:
               schema:
@@ -298,23 +287,23 @@ paths:
                       }
                     }
       servers:
-        - url: 'http://localhost:3000'
+      - url: http://localhost:3000
     servers:
-      - url: 'http://localhost:3000'
-  /api/v1/logout:
+    - url: http://localhost:3000
+  "/api/v1/logout":
     post:
       description: Invalidate your REST API authentication token.
       parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: bszJr4E8EHAtLqfX4
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: Ge9erAk9_E83RRaYti2WT-6-lbxVu_Ll9iV0AdMtGI6
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: bszJr4E8EHAtLqfX4
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: Ge9erAk9_E83RRaYti2WT-6-lbxVu_Ll9iV0AdMtGI6
       responses:
         '200':
           description: Invalidate your REST API authentication token.
@@ -340,23 +329,23 @@ paths:
                       }
                     }
       servers:
-        - url: 'http://localhost:3000'
+      - url: http://localhost:3000
     servers:
-      - url: 'http://localhost:3000'
-  /api/v1/me:
+    - url: http://localhost:3000
+  "/api/v1/me":
     get:
       description: Displays information about the authenticated user.
       parameters:
-        - name: X-User-Id
-          in: header
-          schema:
-            type: string
-          example: bszJr4E8EHAtLqfX4
-        - name: X-Auth-Token
-          in: header
-          schema:
-            type: string
-          example: TdYcM_4SP8R1no0-pytKAfyiKUih24DswM6AMoYeqS7
+      - name: X-User-Id
+        in: header
+        schema:
+          type: string
+        example: bszJr4E8EHAtLqfX4
+      - name: X-Auth-Token
+        in: header
+        schema:
+          type: string
+        example: TdYcM_4SP8R1no0-pytKAfyiKUih24DswM6AMoYeqS7
       responses:
         '200':
           description: Quick information about the authenticated user.
@@ -524,9 +513,9 @@ paths:
                       "success": true
                     }
       servers:
-        - url: 'http://localhost:3000'
+      - url: http://localhost:3000
     servers:
-      - url: 'http://localhost:3000'
+    - url: http://localhost:3000
 components:
   securitySchemes:
     basic:
