@@ -2,8 +2,7 @@ title: "Rocket.Chat Documentation"
 description: Rocket.Chat user, admin, API, integration, plugin and contributing documentation.
 
 # leave trailing slash off
-# url: https://rocket.chat/docs
-url: ""
+url: https://rocket.chat/docs
 
 baseurl: ""
 
