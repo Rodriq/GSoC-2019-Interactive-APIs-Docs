@@ -3,7 +3,6 @@ description: Rocket.Chat user, admin, API, integration, plugin and contributing 
 
 # leave trailing slash off
 # url: https://rocket.chat/docs
-
 url: ""
 
 baseurl: ""
