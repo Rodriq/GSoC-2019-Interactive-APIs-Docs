@@ -311,7 +311,7 @@ paths:
           example: wcLFIfekujvWv_GNFSIQuD1sHcQTbcQ46akyFQunXKw
       responses:
         "200":
-          description: Retrieves the information about the room. It supports Fields Query Parameters](../../query-and-fields-info/) only.
+          description: Retrieves the information about the room. It supports [Fields Query Parameters](../../query-and-fields-info/) only.
           content:
             application/json:
               schema:
@@ -725,9 +725,9 @@ paths:
                   example: discussion name
                   description: Discussion name.
                 users:
-                  type: string
-                  example: user
-                  description: "Array of users to join in the discussion, if not provide will be an empry array(Note: if provided, it must be an array)".
+                  type: array
+                  example: ['rocke.cat']
+                  description: "Array of users to join in the discussion, if not provide will be an empry array(Note: if provided, it must be an array)"
                 pmid:
                   type: string
                   example: aobEgbghXfe543keqG
@@ -741,7 +741,8 @@ paths:
                 value: '{ "prid": "GENERAL", "t_name": "Discussion Name"}'
       responses:
         "200":
-          description: "Creates a new discussion for room. It requires at least one of the following permissions: `start-discussion` OR `start-discussion-other-user`, AND must be with the following setting enabled: `Discussion_enabled`."          content:
+          description: "Creates a new discussion for room. It requires at least one of the following permissions: `start-discussion` OR `start-discussion-other-user`, AND must be with the following setting enabled: `Discussion_enabled`."
+          content:
             application/json:
               schema:
                 type: object

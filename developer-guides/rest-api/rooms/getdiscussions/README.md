@@ -1,10 +1,17 @@
+---
+method: get
+parameters: false
+endpoint: rooms.getDiscussions
+authentication: true
+category: rooms
+permalink: /developer-guides/rest-api/rooms/getdiscussions/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Rooms Get Discussions
 
-Get all the discussions of room.  It supports the [Offset, Count, and Sort Query Parameters](../../offset-and-count-and-sort-info/).
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/rooms.getDiscussions` | `yes` | `GET` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call
 
@@ -17,50 +24,7 @@ curl -H "X-Auth-Token: ijFlJ1yfidXhwEYY284Anoq_iEsOeMMVCupzNhX22tB" \
 
 ## Example Result
 
-```json
-{
-    "discussions": [
-        {
-            "_id": "hthLkno5RqTyNna4H",
-            "name": "8BRnQEJQM8MjJWxkJ",
-            "fname": "general discussion",
-            "t": "p",
-            "msgs": 1,
-            "usersCount": 1,
-            "u": {
-                "_id": "rocketchat.internal.admin.test",
-                "username": "rocketchat.internal.admin.test"
-            },
-            "topic": "general",
-            "prid": "GENERAL",
-            "ts": "2019-04-03T01:01:36.286Z",
-            "ro": false,
-            "sysMes": true,
-            "default": false,
-            "_updatedAt": "2019-04-03T01:01:36.402Z",
-            "lastMessage": {
-                "msg": "test",
-                "ts": "2019-04-03T01:01:36.339Z",
-                "u": {
-                    "_id": "rocketchat.internal.admin.test",
-                    "username": "rocketchat.internal.admin.test",
-                    "name": "RocketChat Internal Admin Test"
-                },
-                "rid": "hthLkno5RqTyNna4H",
-                "_id": "LLoaxBR8A7M24Qiji",
-                "_updatedAt": "2019-04-03T01:01:36.368Z",
-                "mentions": [],
-                "channels": []
-            },
-            "lm": "2019-04-03T01:01:36.339Z"
-        }
-    ],
-    "count": 1,
-    "offset": 0,
-    "total": 1,
-    "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 

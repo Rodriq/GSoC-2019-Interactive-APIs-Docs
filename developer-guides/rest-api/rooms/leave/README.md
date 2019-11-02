@@ -1,16 +1,21 @@
+---
+method: post
+parameters: true
+endpoint: rooms.leave
+authentication: true
+category: rooms
+permalink: /developer-guides/rest-api/rooms/leave/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Rooms Leave
 
-Causes the callee to be removed from the room.
-
-| URL                      | Requires Auth | HTTP Method |
-| :----------------------- | :------------ | :---------- |
-| `/api/v1/rooms.leave` | `yes`         | `POST`      |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Payload
 
-| Argument | Example             | Required | Description      |
-| :------- | :------------------ | :------- | :--------------- |
-| `roomId` | `ByehQjC44FwMeiLbX` | Required | The room's id |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call
 
@@ -24,11 +29,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-  "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 

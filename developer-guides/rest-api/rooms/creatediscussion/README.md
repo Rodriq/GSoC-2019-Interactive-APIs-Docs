@@ -1,19 +1,21 @@
+---
+method: post
+parameters: true
+endpoint: rooms.createDiscussion
+authentication: true
+category: rooms
+permalink: /developer-guides/rest-api/rooms/creatediscussion/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Rooms create discussion
 
-Creates a new discussion for room. It requires at least one of the following permissions: `start-discussion` OR `start-discussion-other-user`, AND must be with the following
-setting enabled: `Discussion_enabled`.
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/rooms.createDiscussion` | `yes` | `POST` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Payload
 
-| `prid`  | `GENERAL`  | Required | Parent room id of the discussion. |
-| `t_name` | `discussion name`  | Required | Discussion name.  |
-| `users` | `['rocket.cat']` | Optional| Array of users to join in the discussion, if not provide will be an empry array(Note: if provided, it must be an array). |
-| `pmid` | `aobEgbghXfe543keqG` | Optional | Parent message id(if the discussion comes from a message). |
-| `reply` | `reply of this discussion` | Optional | The reply of the discussion. |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call
 
@@ -27,31 +29,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-    "discussion": {
-        "rid": "cgk88DHLHexwMaFWh",
-        "name": "WJNEAM7W45wRYitHo",
-        "fname": "Discussion Name",
-        "t": "p",
-        "msgs": 0,
-        "usersCount": 0,
-        "u": {
-            "_id": "rocketchat.internal.admin.test",
-            "username": "rocketchat.internal.admin.test"
-        },
-        "topic": "general",
-        "prid": "GENERAL",
-        "ts": "2019-04-03T01:35:32.271Z",
-        "ro": false,
-        "sysMes": true,
-        "default": false,
-        "_updatedAt": "2019-04-03T01:35:32.280Z",
-        "_id": "cgk88DHLHexwMaFWh"
-    },
-    "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 

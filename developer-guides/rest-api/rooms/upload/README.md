@@ -1,10 +1,17 @@
+---
+method: post
+parameters: true
+endpoint: rooms.upload
+authentication: true
+category: rooms
+permalink: /developer-guides/rest-api/rooms/upload/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Rooms Upload
 
-Post a message with attached file to a dedicated room.
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/rooms.upload/:rid` | `yes` | `POST` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Payload
 
@@ -37,6 +44,7 @@ With some file types, curl will upload the file as `application/octet-stream`. Y
    "success": true
 }
 ```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ![A picture with a message](example.png)
 
