@@ -1,0 +1,823 @@
+openapi: 3.0.1
+info:
+  title: Rooms Methods
+  description: ""
+  version: "1.0.0"
+servers:
+  - url: "http://localhost:3000"
+paths:
+  /api/v1/rooms.leave:
+    post:
+      description: Leaves a room.
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: 5y4TaMMr9zBMjxuzr
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: wcLFIfekujvWv_GNFSIQuD1sHcQTbcQ46akyFQunXKw
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required: 
+              - roomId
+              properties:
+                roomId:
+                  type: string
+                  example: ByehQjC44FwMeiLbX
+                  description: The room’s id
+            examples:
+              "0":
+                value: |-
+                  {
+                      "roomId": "ec7YCwktr4aPCdviv"
+                  }
+      responses:
+        "200":
+          description: Causes the callee to be removed from the room.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                "0":
+                  value: |-
+                    {
+                      "success": true
+                    }
+      servers:
+        - url: "http://localhost:3000"
+    servers:
+      - url: "http://localhost:3000"
+  /api/v1/rooms.cleanHistory:
+    post:
+      description: Cleans up a room’s history, requires special permission.
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: 5y4TaMMr9zBMjxuzr
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: lTh_ukVMfRlKSE7i6YfMPO_1tj47xDF5BOZr9F56Csw
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - roomId
+              - latest
+              - oldest
+              properties:
+                roomId:
+                  type: string
+                  example: ByehQjC44FwMeiLbX
+                  description: The room’s id
+                oldest:
+                  type: string
+                  example: 2019-11-02T00:42:25.304Z
+                  description: The start of the time range of messages to clean
+                latest:
+                  type: string
+                  example: 2019-11-02T13:42:25.304Z
+                  description: The end of time range of messages to clean
+                inclusive:
+                  type: boolean
+                  example: true
+                  description: Whether messages which land on latest and oldest should be included
+                limit:
+                  type: integer
+                  example: 250
+                  description: How many messages to delete at most
+                excludePinned:
+                  type: boolean
+                  example: true
+                  description: Whether pinned messages should be deleted
+                filesOnly:
+                  type: boolean
+                  example: true
+                  description: Whether to only delete files and keep messages intact
+                users:
+                  type: object
+                  example: ["vynmera", "ggazzo"]
+                  description: Specific set of users whose content to delete
+            examples:
+              "0":
+                value: >-
+                  { "roomId": "GENERAL", "latest": "2019-11-02T13:42:25.304Z",
+                  "oldest": "2019-11-02T00:42:25.304Z" }
+      responses:
+        "200":
+          description: Cleans up a room, removing messages from the provided time range.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                "0":
+                  value: |-
+                    {
+                      "success": true
+                    }
+      servers:
+        - url: "http://localhost:3000"
+    servers:
+      - url: "http://localhost:3000"
+  /api/v1/rooms.saveNotification:
+    post:
+      description: Sets the notification settings of specific channel.
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: 5y4TaMMr9zBMjxuzr
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: wcLFIfekujvWv_GNFSIQuD1sHcQTbcQ46akyFQunXKw
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - roomId
+              properties:
+                roomId:
+                  type: string
+                  example: 5of4weEXaH7yncxz9
+                  description: The channel’s id
+                notifications:
+                  type: object
+                  properties:
+                    emailNotifications:
+                      type: string
+                    audioNotifications:
+                      type: string
+                    desktopNotificationDuration:
+                      type: string
+                    unreadAlert:
+                      type: string
+                    mobilePushNotifications:
+                      type: string
+                    audioNotificationValue:
+                      type: string
+                    disableNotifications:
+                      type: string
+                    desktopNotifications:
+                      type: string
+                    hideUnreadStatus:
+                      type: string
+            examples:
+              "0":
+                value: |-
+                  {
+                      "roomId": "ec7YCwktr4aPCdviv",
+                      "notifications" :{
+                          "desktopNotifications": "all",
+                          "disableNotifications": "0",
+                          "emailNotifications": "nothing",
+                          "audioNotificationValue": "beep",
+                          "desktopNotificationDuration": "2",
+                          "audioNotifications": "all",
+                          "unreadAlert": "nothing",
+                          "hideUnreadStatus": "all",
+                          "mobilePushNotifications": "mentions"
+                      }
+                  }
+      responses:
+        "200":
+          description: Sets the notifications settings of specific channel.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                "0":
+                  value: |-
+                    {
+                      "success": true
+                    }
+      servers:
+        - url: "http://localhost:3000"
+    servers:
+      - url: "http://localhost:3000"
+  /api/v1/rooms.favorite:
+    post:
+      description: Favorite/Unfavorite room.
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: 5y4TaMMr9zBMjxuzr
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: wcLFIfekujvWv_GNFSIQuD1sHcQTbcQ46akyFQunXKw
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - roomId
+              - favorite
+              properties:
+                roomId:
+                  type: string
+                  example: GENERAL
+                  description: Room Id where to favorite or unfavorite.
+                roomName:
+                  type: string
+                  example: general
+                  description: Room Name where to favorite or unfavorite.
+                favorite:
+                  type: boolean
+                  example: true
+                  description: The value to favorite(true)/unfavorite(false) room.
+            examples:
+              "0":
+                value: '{ "roomId": "GENERAL", "favorite": true }'
+      responses:
+        "200":
+          description: Favorite or unfavorite room.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+              examples:
+                "0":
+                  value: |-
+                    {
+                      "success": true
+                    }
+      servers:
+        - url: "http://localhost:3000"
+    servers:
+      - url: "http://localhost:3000"
+  /api/v1/rooms.info:
+    get:
+      description: Gets info from a room.
+      parameters:
+        - name: roomId
+          in: query
+          required: true
+          schema:
+            type: string
+          example: ByehQjC44FwMeiLbX
+          description: The rooms’s id
+        - name: roomName
+          in: query
+          required: true
+          schema:
+            type: string
+          example: general
+          description: The rooms’s name
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: 5y4TaMMr9zBMjxuzr
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: wcLFIfekujvWv_GNFSIQuD1sHcQTbcQ46akyFQunXKw
+      responses:
+        "200":
+          description: Retrieves the information about the room. It supports Fields Query Parameters](../../query-and-fields-info/) only.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  room:
+                    type: object
+                    properties:
+                      msgs:
+                        type: integer
+                      lm:
+                        type: string
+                      default:
+                        type: boolean
+                      t:
+                        type: string
+                      name:
+                        type: string
+                      lastMessage:
+                        type: object
+                        properties:
+                          msg:
+                            type: string
+                          channels:
+                            type: array
+                            items:
+                              type: string
+                          u:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              _id:
+                                type: string
+                              username:
+                                type: string
+                          mentions:
+                            type: array
+                            items:
+                              type: string
+                          _id:
+                            type: string
+                          rid:
+                            type: string
+                          _updatedAt:
+                            type: string
+                          ts:
+                            type: string
+                      usernames:
+                        type: array
+                        items:
+                          type: string
+                      usersCount:
+                        type: integer
+                      _id:
+                        type: string
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+              examples:
+                "0":
+                  value: |-
+                    {
+                      "room": {
+                        "_id": "GENERAL",
+                        "ts": "2019-09-09T04:51:01.094Z",
+                        "t": "c",
+                        "name": "general",
+                        "usernames": [],
+                        "msgs": 6,
+                        "usersCount": 3,
+                        "default": true,
+                        "_updatedAt": "2019-11-02T09:51:19.019Z",
+                        "lastMessage": {
+                          "_id": "K70oPruG1V6zIm8gU",
+                          "rid": "GENERAL",
+                          "msg": "Kf",
+                          "ts": "2019-11-02T09:05:57.510Z",
+                          "u": {
+                            "_id": "ehaPK7ywiNcEHA9Kc",
+                            "username": "mobile.user",
+                            "name": "Mobile User"
+                          },
+                          "_updatedAt": "2019-11-02T09:05:57.594Z",
+                          "mentions": [],
+                          "channels": []
+                        },
+                        "lm": "2019-11-02T09:05:57.510Z"
+                      },
+                      "success": true
+                    }
+      servers:
+        - url: "http://localhost:3000"
+    servers:
+      - url: "http://localhost:3000"
+  /api/v1/rooms.getDiscussions:
+    get:
+      description: Gets room’s discussions.
+      parameters:
+        - name: roomName
+          in: query
+          required: true
+          schema:
+            type: string
+          example: general
+          description: The room's name
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: 5y4TaMMr9zBMjxuzr
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: wcLFIfekujvWv_GNFSIQuD1sHcQTbcQ46akyFQunXKw
+      responses:
+        "200":
+          description: Get all the discussions of room. It supports the [Offset, Count, and Sort
+            Query Parameters](../../offset-and-count-and-sort-info/).
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                  offset:
+                    type: integer
+                  success:
+                    type: boolean
+                  discussions:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        fname:
+                          type: string
+                        msgs:
+                          type: integer
+                        prid:
+                          type: string
+                        usersCount:
+                          type: integer
+                        default:
+                          type: boolean
+                        t:
+                          type: string
+                        u:
+                          type: object
+                          properties:
+                            _id:
+                              type: string
+                            username:
+                              type: string
+                        sysMes:
+                          type: boolean
+                        name:
+                          type: string
+                        topic:
+                          type: string
+                        _id:
+                          type: string
+                        ro:
+                          type: boolean
+                        _updatedAt:
+                          type: string
+                        ts:
+                          type: string
+                  count:
+                    type: integer
+              examples:
+                "0":
+                  value: |-
+                    {
+                      "discussions": [
+                        {
+                          "_id": "KjmyJAzy4aDb7yM5Z",
+                          "name": "5x6d7yo3GWzEaYGWB",
+                          "fname": "test-channel",
+                          "t": "p",
+                          "msgs": 0,
+                          "usersCount": 3,
+                          "u": {
+                            "_id": "G3HvnKcqzZwbZXhe3",
+                            "username": "Talentals"
+                          },
+                          "topic": "general",
+                          "prid": "GENERAL",
+                          "ts": "2019-11-02T09:51:18.952Z",
+                          "ro": false,
+                          "sysMes": true,
+                          "default": false,
+                          "_updatedAt": "2019-11-02T09:51:18.976Z"
+                        }
+                      ],
+                      "count": 1,
+                      "offset": 0,
+                      "total": 1,
+                      "success": true
+                    }
+      servers:
+        - url: "http://localhost:3000"
+    servers:
+      - url: "http://localhost:3000"
+  /api/v1/rooms.get:
+    get:
+      description: Gets rooms.
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: 5y4TaMMr9zBMjxuzr
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: wcLFIfekujvWv_GNFSIQuD1sHcQTbcQ46akyFQunXKw
+      responses:
+        "200":
+          description: Get all opened rooms for this user.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  update:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        t:
+                          type: string
+                        _id:
+                          type: string
+                        _updatedAt:
+                          type: string
+                  remove:
+                    type: array
+                    items:
+                      type: string
+              examples:
+                "0":
+                  value: |-
+                    {
+                      "update": [
+                        {
+                          "_id": "5y4TaMMr9zBMjxuzrG3HvnKcqzZwbZXhe3",
+                          "_updatedAt": "2019-11-02T09:56:39.652Z",
+                          "t": "d"
+                        },
+                        {
+                          "_id": "GENERAL",
+                          "t": "c",
+                          "name": "general",
+                          "default": true,
+                          "_updatedAt": "2019-11-02T09:51:19.019Z",
+                          "lastMessage": {
+                            "_id": "K70oPruG1V6zIm8gU",
+                            "rid": "GENERAL",
+                            "msg": "Kf",
+                            "ts": "2019-11-02T09:05:57.510Z",
+                            "u": {
+                              "_id": "ehaPK7ywiNcEHA9Kc",
+                              "username": "mobile.user",
+                              "name": "Mobile User"
+                            },
+                            "_updatedAt": "2019-11-02T09:05:57.594Z",
+                            "mentions": [],
+                            "channels": []
+                          }
+                        },
+                        {
+                          "_id": "KjmyJAzy4aDb7yM5Z",
+                          "name": "5x6d7yo3GWzEaYGWB",
+                          "fname": "test-channel",
+                          "t": "p",
+                          "u": {
+                            "_id": "G3HvnKcqzZwbZXhe3",
+                            "username": "Talentals"
+                          },
+                          "topic": "general",
+                          "prid": "GENERAL",
+                          "ro": false,
+                          "sysMes": true,
+                          "default": false,
+                          "_updatedAt": "2019-11-02T09:51:18.976Z"
+                        },
+                        {
+                          "_id": "ec7YCwktr4aPCdviv",
+                          "name": "channel1",
+                          "fname": "channel1",
+                          "t": "p",
+                          "u": {
+                            "_id": "G3HvnKcqzZwbZXhe3",
+                            "username": "Talentals"
+                          },
+                          "customFields": {},
+                          "broadcast": false,
+                          "encrypted": false,
+                          "ro": false,
+                          "sysMes": true,
+                          "default": false,
+                          "_updatedAt": "2019-11-02T09:49:37.286Z"
+                        },
+                        {
+                          "_id": "xtk6XCQ8P9pXGk4Ju",
+                          "name": "channel2",
+                          "fname": "channel2",
+                          "t": "p",
+                          "u": {
+                            "_id": "G3HvnKcqzZwbZXhe3",
+                            "username": "Talentals"
+                          },
+                          "customFields": {},
+                          "broadcast": false,
+                          "encrypted": false,
+                          "ro": false,
+                          "sysMes": true,
+                          "default": false,
+                          "_updatedAt": "2019-11-02T09:50:06.655Z"
+                        }
+                      ],
+                      "remove": [],
+                      "success": true
+                    }
+      servers:
+        - url: "http://localhost:3000"
+    servers:
+      - url: "http://localhost:3000"
+  /api/v1/rooms.upload:
+    post:
+      description: Upload a message with attached file.
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: 5y4TaMMr9zBMjxuzr
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: lTh_ukVMfRlKSE7i6YfMPO_1tj47xDF5BOZr9F56Csw
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: string
+            examples:
+              "0":
+                value: '{"msg": "This is a message with a file" }'
+      responses:
+        "200":
+          description: Post a message with attached file to a dedicated room.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  status:
+                    type: string
+              examples:
+                "0":
+                  value: |-
+                    {
+                      "status": "error",
+                      "message": "You must be logged in to do this."
+                    }
+      servers:
+        - url: "http://localhost:3000"
+    servers:
+      - url: "http://localhost:3000"
+  /api/v1/rooms.createDiscussion:
+    post:
+      description: Creates a new discussion.
+      parameters:
+        - name: X-User-Id
+          in: header
+          schema:
+            type: string
+          example: 5y4TaMMr9zBMjxuzr
+        - name: X-Auth-Token
+          in: header
+          schema:
+            type: string
+          example: wcLFIfekujvWv_GNFSIQuD1sHcQTbcQ46akyFQunXKw
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - prid
+              - t_name
+              properties:
+                prid:
+                  type: string
+                  example: GENERAL
+                  description: Parent room id of the discussion.
+                t_name:
+                  type: string
+                  example: discussion name
+                  description: Discussion name.
+                users:
+                  type: string
+                  example: user
+                  description: "Array of users to join in the discussion, if not provide will be an empry array(Note: if provided, it must be an array)".
+                pmid:
+                  type: string
+                  example: aobEgbghXfe543keqG
+                  description: Parent message id(if the discussion comes from a message).
+                reply:
+                  type: string
+                  example: reply of this discussion
+                  description: The reply of the discussion.
+            examples:
+              "0":
+                value: '{ "prid": "GENERAL", "t_name": "Discussion Name"}'
+      responses:
+        "200":
+          description: "Creates a new discussion for room. It requires at least one of the following permissions: `start-discussion` OR `start-discussion-other-user`, AND must be with the following setting enabled: `Discussion_enabled`."          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  discussion:
+                    type: object
+                    properties:
+                      fname:
+                        type: string
+                      msgs:
+                        type: integer
+                      prid:
+                        type: string
+                      usersCount:
+                        type: integer
+                      rid:
+                        type: string
+                      default:
+                        type: boolean
+                      t:
+                        type: string
+                      u:
+                        type: object
+                        properties:
+                          _id:
+                            type: string
+                          username:
+                            type: string
+                      sysMes:
+                        type: boolean
+                      name:
+                        type: string
+                      topic:
+                        type: string
+                      _id:
+                        type: string
+                      ro:
+                        type: boolean
+                      _updatedAt:
+                        type: string
+                      ts:
+                        type: string
+              examples:
+                "0":
+                  value: |-
+                    {
+                      "discussion": {
+                        "rid": "N3bnbYxt3SjXxhp3R",
+                        "name": "hhqirtHad4xyJ9zpQ",
+                        "fname": "Discussion Name",
+                        "t": "p",
+                        "msgs": 0,
+                        "usersCount": 0,
+                        "u": {
+                          "_id": "5y4TaMMr9zBMjxuzr",
+                          "username": "test.user"
+                        },
+                        "topic": "general",
+                        "prid": "GENERAL",
+                        "ts": "2019-11-02T10:13:21.650Z",
+                        "ro": false,
+                        "sysMes": true,
+                        "default": false,
+                        "_updatedAt": "2019-11-02T10:13:21.665Z",
+                        "_id": "N3bnbYxt3SjXxhp3R"
+                      },
+                      "success": true
+                    }
+      servers:
+        - url: "http://localhost:3000"
+    servers:
+      - url: "http://localhost:3000"
+components:
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
