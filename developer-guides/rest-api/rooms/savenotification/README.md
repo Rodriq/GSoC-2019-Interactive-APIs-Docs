@@ -1,10 +1,17 @@
+---
+method: post
+parameters: true
+endpoint: rooms.saveNotification
+authentication: true
+category: rooms
+permalink: /developer-guides/rest-api/rooms/savenotification/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Rooms save notification POST
 
-Sets the notifications settings of specific channel.
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/rooms.saveNotification` | `yes` | `POST` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Payload
 
@@ -54,11 +61,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-   "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 

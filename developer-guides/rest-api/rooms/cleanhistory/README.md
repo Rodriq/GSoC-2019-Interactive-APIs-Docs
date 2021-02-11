@@ -1,30 +1,25 @@
 ---
-    permalink: /developer-guides/rest-api/rooms/cleanhistory/
-    redirect_from:
-      - /developer-guides/rest-api/channels/cleanhistory
-      - /developer-guides/rest-api/channels/cleanhistory/
+method: post
+parameters: true
+endpoint: rooms.cleanHistory
+authentication: true
+category: rooms
+permalink: /developer-guides/rest-api/rooms/cleanhistory/
+redirect_from:
+   - /developer-guides/rest-api/channels/cleanhistory
+   - /developer-guides/rest-api/channels/cleanhistory/
 ---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 
 # Rooms Clean History
 
-Cleans up a room, removing messages from the provided time range.
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/rooms.cleanHistory` | `yes` | `POST` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Payload
 
-| Argument | Example | Required | Description |
-| :--- | :--- | :--- | :--- |
-| `roomId` | `ByehQjC44FwMeiLbX` | Required | The room's id |
-| `latest` | `2016-09-30T13:42:25.304Z` | Required | The end of time range of messages to clean |
-| `oldest` | `2016-05-30T13:42:25.304Z` | Required | The start of the time range of messages to clean |
-| `inclusive` | `true` | Optional <br> Default: `false` | Whether messages which land on latest and oldest should be included |
-| `limit` | `250` | Optional <br> Default: `0` (no limit) | How many messages to delete at most |
-| `excludePinned` | `true` | Optional <br> Default: `false` | Whether pinned messages should be deleted |
-| `filesOnly` | `true` | Optional <br> Default: `false` | Whether to only delete files and keep messages intact |
-| `users` | `["vynmera", "ggazzo"]` | Optional <br> Default: `[]` (everyone) | Specific set of users whose content to delete |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call
 
@@ -38,11 +33,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-   "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 

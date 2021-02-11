@@ -1,16 +1,21 @@
+---
+method: post
+parameters: true
+endpoint: rooms.favorite
+authentication: true
+category: rooms
+permalink: /developer-guides/rest-api/rooms/favorite/
+---
+
+{% capture fullPath %}{{ "/api/v1/" | append: page.endpoint }}{% endcapture %}
+
 # Rooms Favorite/Unfavorite
 
-Favorite or unfavorite room.
-
-| URL | Requires Auth | HTTP Method |
-| :--- | :--- | :--- |
-| `/api/v1/rooms.favorite` | `yes` | `POST` |
+{% include api/specific_endpoint.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Payload
 
-| `roomId`   | `GENERAL`    | Required | Room Id where to favorite or unfavorite.            |
-| `roomName` | `general`    | Optional | Room Name where to favorite or unfavorite.            |
-| `favorite` | `true/false` | Required | The value to favorite(true)/unfavorite(false) room. |
+{% include api/list_parameters.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath %}
 
 ## Example Call
 
@@ -24,11 +29,7 @@ curl -H "X-Auth-Token: 9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq" \
 
 ## Example Result
 
-```json
-{
-  "success": true
-}
-```
+{% include api/example_result.html category=page.category endpoint=page.endpoint method=page.method authentication=page.authentication fullPath=fullPath parameters=page.parameters%}
 
 ## Change Log
 

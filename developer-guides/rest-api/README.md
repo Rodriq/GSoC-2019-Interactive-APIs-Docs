@@ -124,17 +124,7 @@ When calling a production Rocket.Chat server, ensure it is running via HTTPS and
 
 ### Rooms
 
-| Url                              | Short Description                                        | Details Page                    |
-| :------------------------------- | :------------------------------------------------------- | :------------------------------ |
-| `/api/v1/rooms.cleanHistory`     | Cleans up a room's history, requires special permission. | [Link](rooms/cleanhistory/)     |
-| `/api/v1/rooms.createDiscussion` | Creates a new discussion.                                | [Link](rooms/creatediscussion/) |
-| `/api/v1/rooms.favorite`         | Favorite/Unfavorite room.                                | [Link](rooms/favorite/)         |
-| `/api/v1/rooms.get`              | Gets rooms.                                              | [Link](rooms/get/)              |
-| `/api/v1/rooms.getDiscussions`   | Gets room's discussions.                                 | [Link](rooms/getdiscussions/)   |
-| `/api/v1/rooms.info`             | Gets info from a room.                                   | [Link](rooms/info/)             |
-| `/api/v1/rooms.leave`            | Leaves a room.                                           | [Link](rooms/leave/)            |
-| `/api/v1/rooms.saveNotification` | Sets the notifications settings of specific channel.     | [Link](rooms/savenotification/) |
-| `/api/v1/rooms.upload/:rid`      | Upload a message with attached file.                     | [Link](rooms/upload/)           |
+{% include api/render_endpoints.html category="rooms" entry=true %}
 
 ### Command Methods
 
